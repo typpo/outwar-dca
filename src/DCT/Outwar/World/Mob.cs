@@ -270,7 +270,7 @@ namespace DCT.Outwar.World
 
         private void SendAttack()
         {
-            if (mQuit || !IsInRoom || !(Globals.AttackOn || Globals.AttackMode))
+            if (mQuit || !IsInRoom || !(Globals.AttackOn || Globals.AttackMode) || mRoom.Mover.Account.Ret != mRoom.Mover.Account.Name)
             {
                 return;
             }
@@ -278,12 +278,6 @@ namespace DCT.Outwar.World
             mAttacking = true;
 
             CoreUI.Instance.Log("Attacking " + mName + " (" + mId + ") in rm. " + mRoom.Id);
-
-            if (mRoom.Mover.Account.Ret != mRoom.Mover.Account.Name)
-            {
-                mQuit = true;
-                return;
-            }
 
             if (!mSkipLoad)
             {
@@ -348,7 +342,8 @@ namespace DCT.Outwar.World
         {
             // RESEND REQUEST
             if (src == "ERROR: Timeout"
-                || src.Contains("operation has timed out"))
+                || src.Contains("operation has timed out")
+                || mRoom.Mover.Account.Ret != mRoom.Mover.Account.Name)
             {
                 CoreUI.Instance.Log("Attack on " + mName + " failed - timed out by server");
                 SendAttack();
