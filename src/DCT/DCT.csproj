@@ -1,0 +1,184 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AC24DB62-B169-4418-9029-A49308BAD649}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DCT</RootNamespace>
+    <AssemblyName>DCT</AssemblyName>
+    <ApplicationIcon>Misc\Bad.ico</ApplicationIcon>
+    <StartupObject>DCT.Program</StartupObject>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>DCT.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Outwar\World\Occupier.cs" />
+    <Compile Include="Protocols\IRC\ChatUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\ChatUI.Designer.cs">
+      <DependentUpon>ChatUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\Consts.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\EventArgs.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\Exceptions.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\Channel.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\ChannelUser.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\Delegates.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\EventArgs.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcClient.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcMessageData.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcUser.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\NonRfcChannel.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\NonRfcChannelUser.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcCommands\IrcCommands.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcCommands\Rfc2812.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\Delegates.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\EventArgs.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcConnection.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcProperties.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcTcpClient.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\Logger.cs" />
+    <Compile Include="Security\Version.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Settings\Globals.cs" />
+    <Compile Include="UI\AsyncCalls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Outwar\World\AttackHandler.cs" />
+    <Compile Include="Outwar\World\AttackingType.cs" />
+    <Compile Include="UI\ListViewComparers.cs" />
+    <Compile Include="Util\CountdownTimer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Protocols\HTTP\OutwarHttpSocket.cs" />
+    <Compile Include="Outwar\World\Raider.cs" />
+    <Compile Include="Outwar\World\RaidsEngine.cs" />
+    <Compile Include="Outwar\Server.cs" />
+    <Compile Include="Pathfinding\ReturnToStartHandler.cs" />
+    <Compile Include="Outwar\AccountsEngine.cs" />
+    <Compile Include="Outwar\World\Mover.cs" />
+    <Compile Include="UI\CoreUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CoreUI.Designer.cs">
+      <DependentUpon>CoreUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\StartDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\StartDialog.Designer.cs">
+      <DependentUpon>StartDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\UserEditable.cs" />
+    <Compile Include="Outwar\ItemManager.cs" />
+    <Compile Include="Parsing\Parser.cs" />
+    <Compile Include="Pathfinding\MappedMob.cs" />
+    <Compile Include="Pathfinding\MappedRoom.cs" />
+    <Compile Include="Outwar\World\Mob.cs" />
+    <Compile Include="Protocols\HTTP\HttpSocket.cs" />
+    <Compile Include="Outwar\Account.cs" />
+    <Compile Include="Pathfinding\Pathfinder.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Protocols\IRC\ChatUI.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChatUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CoreUI.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CoreUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\StartDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>StartDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Util\InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="DCT.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Security\Auth.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Security\Crypt.cs" />
+    <Compile Include="Outwar\World\Room.cs" />
+    <Compile Include="Outwar\World\RoomHashRecord.cs" />
+    <Compile Include="Settings\SettingsSerializer.cs" />
+    <Compile Include="Threading\ThreadEngine.cs" />
+    <Compile Include="Util\FileIO.cs" />
+    <Compile Include="Util\InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Util\InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util\Randomizer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Misc\Bad.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

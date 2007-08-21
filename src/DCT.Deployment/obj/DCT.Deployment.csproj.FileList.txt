@@ -1,0 +1,14 @@
+bin\Release\DCT.Deployment.exe
+bin\Release\DCT.Deployment.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\DCT.Deployment.Properties.Resources.resources
+obj\Release\DCT.Deployment.csproj.GenerateResource.Cache
+obj\Release\DCT.Deployment.exe
+obj\Release\DCT.Deployment.pdb
+bin\Debug\DCT.Deployment.exe
+bin\Debug\DCT.Deployment.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\DCT.Deployment.Properties.Resources.resources
+obj\Debug\DCT.Deployment.csproj.GenerateResource.Cache
+obj\Debug\DCT.Deployment.exe
+obj\Debug\DCT.Deployment.pdb

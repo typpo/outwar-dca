@@ -1,0 +1,16 @@
+bin\Release\DCT.TScript.exe
+bin\Release\DCT.TScript.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\DCT.TScript.Main.resources
+obj\Release\DCT.TScript.Properties.Resources.resources
+obj\Release\DCT.TScript.csproj.GenerateResource.Cache
+obj\Release\DCT.TScript.exe
+obj\Release\DCT.TScript.pdb
+bin\Debug\DCT.TScript.exe
+bin\Debug\DCT.TScript.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\DCT.TScript.Main.resources
+obj\Debug\DCT.TScript.Properties.Resources.resources
+obj\Debug\DCT.TScript.csproj.GenerateResource.Cache
+obj\Debug\DCT.TScript.exe
+obj\Debug\DCT.TScript.pdb
