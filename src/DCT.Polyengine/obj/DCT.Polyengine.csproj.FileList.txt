@@ -8,5 +8,3 @@ bin\Debug\DCT.Polyengine.pdb
 obj\Debug\ResolveAssemblyReference.cache
 obj\Debug\DCT.Polyengine.exe
 obj\Debug\DCT.Polyengine.pdb
-bin\Debug\DCT.exe
-bin\Debug\DCT.pdb
