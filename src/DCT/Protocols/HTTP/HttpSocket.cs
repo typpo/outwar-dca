@@ -7,12 +7,12 @@ using DCT.Util;
 
 namespace DCT.Protocols.Http
 {
-    public class HttpSocket
+    internal class HttpSocket
     {
         private const int DEFAULT_TIMEOUT = 40000;
 
         private static HttpSocket mDefaultInstance;
-        public static HttpSocket DefaultInstance
+        internal static HttpSocket DefaultInstance
         {
             get
             {
@@ -26,7 +26,7 @@ namespace DCT.Protocols.Http
         }
 
         private static string mIP;
-        public static string IP
+        internal static string IP
         {
             get
             {
@@ -38,47 +38,47 @@ namespace DCT.Protocols.Http
         }
 
         private string mStatus;
-        public string Status
+        internal string Status
         {
             get { return mStatus; }
             set { mStatus = value; }
         }
 
         private bool mRedirect;
-        public bool Redirect
+        internal bool Redirect
         {
             get { return mRedirect; }
             set { mRedirect = value; }
         }
 
         private bool mKeepAlive;
-        public bool KeepAlive
+        internal bool KeepAlive
         {
             get { return mKeepAlive; }
             set { mKeepAlive = value; }
         }
 
         private int mTimeout;
-        public int Timeout
+        internal int Timeout
         {
             get { return mTimeout; }
             set { mTimeout = value; }
         }
 
         private string mUserAgent;
-        public string UserAgent
+        internal string UserAgent
         {
             get { return mUserAgent; }
             set { mUserAgent = value; }
         }
 
         private string mCookie;
-        public string Cookie
+        internal string Cookie
         {
             get { return mCookie; }
             set { mCookie = value; }
         }
-        public bool HasCookie
+        internal bool HasCookie
         {
             get { return !string.IsNullOrEmpty(mCookie); }
         }
@@ -106,7 +106,7 @@ namespace DCT.Protocols.Http
             mIP = string.Empty;
         }
 
-        public HttpSocket()
+        internal HttpSocket()
         {
             mTimeout = DEFAULT_TIMEOUT;
 
@@ -117,22 +117,22 @@ namespace DCT.Protocols.Http
             Status = "Created";
         }
 
-        public string Get(string url)
+        internal string Get(string url)
         {
             return Get(url, string.Empty);
         }
 
-        public string Get(string url, string referer)
+        internal string Get(string url, string referer)
         {
             return Request(url, string.Empty, referer);
         }
 
-        public string Post(string url, string postData)
+        internal string Post(string url, string postData)
         {
             return Post(url, postData, string.Empty);
         }
 
-        public string Post(string url, string postData, string referer)
+        internal string Post(string url, string postData, string referer)
         {
             return Request(url, postData, referer);
         }

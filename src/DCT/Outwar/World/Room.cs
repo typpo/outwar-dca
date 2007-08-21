@@ -7,23 +7,23 @@ using DCT.Util;
 
 namespace DCT.Outwar.World
 {
-    public class Room
+    internal class Room
     {
         private Mover mMover;
-        public Mover Mover
+        internal Mover Mover
         {
             get { return mMover; }
         }
-        public int Id
+        internal int Id
         {
             get { return mId; }
         }
-        public string Name
+        internal string Name
         {
             get { return mName; }
             set { mName = value; }
         }
-        public bool Trained
+        internal bool Trained
         {
             get { return mTrained; }
         }
@@ -36,7 +36,7 @@ namespace DCT.Outwar.World
         private List<string> mLinks;
         private List<Mob> mMobs;
 
-        public Room(Mover mover, string url)
+        internal Room(Mover mover, string url)
         {
             if (url != "world.php")
             {
@@ -57,7 +57,7 @@ namespace DCT.Outwar.World
             mLinks = new List<string>();
         }
 
-        public bool Load()
+        internal bool Load()
         {
             // load source from url
             mSource = mMover.Socket.Get(mUrl);
@@ -105,7 +105,7 @@ namespace DCT.Outwar.World
         /// </summary>
         /// <param name="id">Room id to get connecting link to</param>
         /// <returns>A URL; null if no such link exists</returns>
-        public string this[int id]
+        internal string this[int id]
         {
             get
             {
@@ -121,7 +121,7 @@ namespace DCT.Outwar.World
             }
         }
 
-        public void EnumItems()
+        internal void EnumItems()
         {
             //if (SettingsContainer.AttackOn || SettingsContainer.AttackMode)
             //{
@@ -131,7 +131,7 @@ namespace DCT.Outwar.World
             //}
         }
 
-        public void EnumMobs()
+        internal void EnumMobs()
         {
             // TODO this should really just throw an exception
             if (string.IsNullOrEmpty(mSource))
@@ -174,7 +174,7 @@ namespace DCT.Outwar.World
             }
         }
 
-        public void EnumRooms()
+        internal void EnumRooms()
         {
             // TODO just parse all world links...
             string[] tokens = Parser.MultiParse(mSource, "<a href=\"", "\"");
@@ -188,7 +188,7 @@ namespace DCT.Outwar.World
             }
         }
 
-        public void Attack()
+        internal void Attack()
         {
             if (mMobs == null)
             {
@@ -232,7 +232,7 @@ namespace DCT.Outwar.World
             }
         }
 
-        public void AttackMob(int id)
+        internal void AttackMob(int id)
         {
             foreach (Mob mb in mMobs)
             {
@@ -243,7 +243,7 @@ namespace DCT.Outwar.World
             }
         }
 
-        public bool Train()
+        internal bool Train()
         {
             mMover.Socket.Status = "Looking up trainers";
             foreach (Mob mb in mMobs)
@@ -259,7 +259,7 @@ namespace DCT.Outwar.World
             return false;
         }
 
-        public void Quest()
+        internal void Quest()
         {
             mMover.Socket.Status = "Looking up quests";
             foreach (Mob mb in mMobs)

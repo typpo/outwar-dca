@@ -12,16 +12,16 @@
  * Full LGPL License: <http://www.gnu.org/licenses/lgpl.txt>
  * 
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
+ * modify it under the terms of the GNU Lesser General internal
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+ * Lesser General internal License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
+ * You should have received a copy of the GNU Lesser General internal
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
@@ -35,7 +35,7 @@ namespace Meebey.SmartIrc4net
     /// only used with channel sync
     /// </remarks>
     /// <threadsafety static="true" instance="true" />
-    public class ChannelUser
+    internal class ChannelUser
     {
         private string    _Channel;
         private IrcUser   _IrcUser;
@@ -63,7 +63,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the channel name
         /// </summary>
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
@@ -72,7 +72,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the server operator status of the user
         /// </summary>
-        public bool IsIrcOp {
+        internal bool IsIrcOp {
             get {
                 return _IrcUser.IsIrcOp;
             }
@@ -84,7 +84,7 @@ namespace Meebey.SmartIrc4net
         /// <remarks>
         /// only used with channel sync
         /// </remarks>
-        public bool IsOp {
+        internal bool IsOp {
             get {
                 return _IsOp;
             }
@@ -99,7 +99,7 @@ namespace Meebey.SmartIrc4net
         /// <remarks>
         /// only used with channel sync
         /// </remarks>
-        public bool IsVoice {
+        internal bool IsVoice {
             get {
                 return _IsVoice;
             }
@@ -111,7 +111,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the away status of the user
         /// </summary>
-        public bool IsAway {
+        internal bool IsAway {
             get {
                 return _IrcUser.IsAway;
             }
@@ -120,7 +120,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the underlaying IrcUser object
         /// </summary>
-        public IrcUser IrcUser {
+        internal IrcUser IrcUser {
             get {
                 return _IrcUser;
             }
@@ -129,7 +129,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the nickname of the user
         /// </summary>
-        public string Nick {
+        internal string Nick {
             get {
                 return _IrcUser.Nick;
             }
@@ -138,7 +138,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the identity (username) of the user, which is used by some IRC networks for authentication.
         /// </summary>
-        public string Ident {
+        internal string Ident {
             get {
                 return _IrcUser.Ident;
             }
@@ -147,7 +147,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the hostname of the user,
         /// </summary>
-        public string Host {
+        internal string Host {
             get {
                 return _IrcUser.Host;
             }
@@ -156,7 +156,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the supposed real name of the user.
         /// </summary>
-        public string Realname {
+        internal string Realname {
             get {
                 return _IrcUser.Realname;
             }
@@ -166,7 +166,7 @@ namespace Meebey.SmartIrc4net
         /// Gets the server the user is connected to.
         /// </summary>
         /// <value> </value>
-        public string Server {
+        internal string Server {
             get {
                 return _IrcUser.Server;
             }
@@ -175,7 +175,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets or sets the count of hops between you and the user's server
         /// </summary>
-        public int HopCount {
+        internal int HopCount {
             get {
                 return _IrcUser.HopCount;
             }
@@ -184,7 +184,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the list of channels the user has joined
         /// </summary>
-        public string[] JoinedChannels {
+        internal string[] JoinedChannels {
             get {
                 return _IrcUser.JoinedChannels;
             }

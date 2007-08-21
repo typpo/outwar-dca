@@ -9,37 +9,37 @@ namespace DCT.Settings
         private static long mExpGainedTotal;
         private static long mSecRight;
         private static long mSecWrong;
-        public static bool AttackOn
+        internal static bool AttackOn
         {
             get { return mAttackOn; }
             set { mAttackOn = value; }
         }
-        public static bool AttackMode
+        internal static bool AttackMode
         {
             get { return mAttackMode; }
             set { mAttackMode = value; }
         }
-        public static bool Terminate
+        internal static bool Terminate
         {
             get { return mTerminate; }
             set { mTerminate = value; }
         }
-        public static long ExpGained
+        internal static long ExpGained
         {
             get { return mExpGained; }
             set { mExpGained = value; }
         }
-        public static long ExpGainedTotal
+        internal static long ExpGainedTotal
         {
             get { return mExpGainedTotal; }
             set { mExpGainedTotal = value; }
         }
-        public static long SecRight
+        internal static long SecRight
         {
             get { return mSecRight; }
             set { mSecRight = value; }
         }
-        public static long SecWrong
+        internal static long SecWrong
         {
             get { return mSecWrong; }
             set { mSecWrong = value; }

@@ -5,25 +5,25 @@ using DCT.UI;
 
 namespace DCT.Outwar.World
 {
-    public class Raider
+    internal class Raider
     {
         private Account mAccount;
         private OutwarHttpSocket mSocket;
 
         private SortedList<string, string> mRaids;
-        public SortedList<string, string> Raids
+        internal SortedList<string, string> Raids
         {
             get { return mRaids; }
             set { mRaids = value; }
         }
 
-        public Raider(Account a)
+        internal Raider(Account a)
         {
             mAccount = a;
             mSocket = a.Socket;
         }
 
-        public bool Check(List<string> raidnames)
+        internal bool Check(List<string> raidnames)
         {
             CoreUI.Instance.Log(mAccount.Name + " checking for raids...");
 
@@ -51,7 +51,7 @@ namespace DCT.Outwar.World
             return found;
         }
 
-        public void Join()
+        internal void Join()
         {
             if (mAccount.Mover.Location == null)
             {

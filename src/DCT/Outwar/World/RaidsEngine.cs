@@ -7,18 +7,18 @@ using DCT.Util;
 
 namespace DCT.Outwar.World
 {
-    public class RaidsEngine : IDisposable
+    internal class RaidsEngine : IDisposable
     {
         private CountDownTimer mCountdownTimer;
 
         private AccountsEngine mAccounts;
 
-        public RaidsEngine(AccountsEngine e)
+        internal RaidsEngine(AccountsEngine e)
         {
             mAccounts = e;
         }
 
-        public void Process(List<string> r)
+        internal void Process(List<string> r)
         {
             // form the raid...
             Account mainAccount = CoreUI.Instance.Accounts.MainAccount;

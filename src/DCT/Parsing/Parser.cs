@@ -4,26 +4,26 @@ namespace DCT.Parsing
 {
     internal class Parser
     {
-        public const string ERR_CONST = "ERROR";
+        internal const string ERR_CONST = "ERROR";
 
         private string mStr;
-        public string String
+        internal string String
         {
             get { return mStr; }
             set { mStr = value; }
         }
 
-        public Parser(string whole)
+        internal Parser(string whole)
         {
             mStr = whole;
         }
 
-        public int Count(string sub)
+        internal int Count(string sub)
         {
             return Count(mStr, sub);
         }
 
-        public static int Count(string whole, string sub)
+        internal static int Count(string whole, string sub)
         {
             int ret = 0;
             while (whole.IndexOf(sub) != -1)
@@ -34,12 +34,12 @@ namespace DCT.Parsing
             return ret;
         }
 
-        public void CutLeading(string sub)
+        internal void CutLeading(string sub)
         {
             mStr = CutLeading(mStr, sub);
         }
 
-        public static string CutLeading(string whole, string cutoff)
+        internal static string CutLeading(string whole, string cutoff)
         {
             try
             {
@@ -51,12 +51,12 @@ namespace DCT.Parsing
             }
         }
 
-        public void CutTrailing(string cutoff)
+        internal void CutTrailing(string cutoff)
         {
             mStr = CutTrailing(mStr, cutoff);
         }
 
-        public static string CutTrailing(string whole, string cutoff)
+        internal static string CutTrailing(string whole, string cutoff)
         {
             try
             {
@@ -68,12 +68,12 @@ namespace DCT.Parsing
             }
         }
 
-        public void RemoveRange(string start, string end)
+        internal void RemoveRange(string start, string end)
         {
             mStr = RemoveRange(mStr, start, end);
         }
 
-        public static string RemoveRange(string whole, string start, string end)
+        internal static string RemoveRange(string whole, string start, string end)
         {
             try
             {
@@ -89,12 +89,12 @@ namespace DCT.Parsing
             }
         }
 
-        public string Parse(string start, string end)
+        internal string Parse(string start, string end)
         {
             return Parse(mStr, start, end);
         }
 
-        public static string Parse(string whole, string start, string end)
+        internal static string Parse(string whole, string start, string end)
         {
             try
             {
@@ -106,12 +106,12 @@ namespace DCT.Parsing
             }
         }
 
-        public string[] MultiParse(string start, string end)
+        internal string[] MultiParse(string start, string end)
         {
             return MultiParse(mStr, start, end);
         }
 
-        public static string[] MultiParse(string whole, string start, string end)
+        internal static string[] MultiParse(string whole, string start, string end)
         {
             try
             {

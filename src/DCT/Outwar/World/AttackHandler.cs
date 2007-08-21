@@ -20,24 +20,24 @@ namespace DCT.Outwar.World
             mMobs = new Dictionary<int, int>();
         }
 
-        public static void Set(List<Account> accounts, AttackingType type)
+        internal static void Set(List<Account> accounts, AttackingType type)
         {
             mAccounts = accounts;
             mType = type;
         }
 
-        public static void BeginArea()
+        internal static void BeginArea()
         {
             StartRun();
         }
 
-        public static void BeginMultiArea(Dictionary<int, string> rooms)
+        internal static void BeginMultiArea(Dictionary<int, string> rooms)
         {
             mRooms = rooms;
             StartRun();
         }
 
-        public static void BeginMobs(Dictionary<int, int> mobs)
+        internal static void BeginMobs(Dictionary<int, int> mobs)
         {
             mMobs = mobs;
             StartRun();

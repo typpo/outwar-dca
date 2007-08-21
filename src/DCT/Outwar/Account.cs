@@ -4,83 +4,83 @@ using DCT.Protocols.Http;
 
 namespace DCT.Outwar
 {
-    public class Account
+    internal class Account
     {
         private string mRet;
-        public string Ret
+        internal string Ret
         {
             get { return mRet; }
             set { mRet = value; }
         }
 
         private OutwarHttpSocket mSocket;
-        public OutwarHttpSocket Socket
+        internal OutwarHttpSocket Socket
         {
             get { return mSocket; }
         }
 
         private Mover mMover;
-        public Mover Mover
+        internal Mover Mover
         {
             get { return mMover; }
         }
 
         private Raider mRaider;
-        public Raider Raider
+        internal Raider Raider
         {
             get { return mRaider; }
         }
 
         private ItemManager mItemManager;
-        public ItemManager ItemManager
+        internal ItemManager ItemManager
         {
             get { return mItemManager; }
         }
 
         private ServerName mServer;
-        public ServerName Server
+        internal ServerName Server
         {
             get { return mServer; }
         }
 
         private string mName;
-        public string Name
+        internal string Name
         {
             get { return mName; }
         }
 
         private int mRage;
-        public int Rage
+        internal int Rage
         {
             get { return mRage; }
         }
 
         private int mLevel;
-        public int Level
+        internal int Level
         {
             get { return mLevel; }
         }
 
         private long mId;
-        public long Id
+        internal long Id
         {
             get { return mId; }
         }
 
         private long mExp;
-        public long Exp
+        internal long Exp
         {
             get { return mExp; }
         }
 
         private bool mNeedsLevel;
-        public bool NeedsLevel
+        internal bool NeedsLevel
         {
             get { return mNeedsLevel; }
         }
 
 
-        public Account(OutwarHttpSocket socket, string name, int id, ServerName server)
+        internal Account(OutwarHttpSocket socket, string name, int id, ServerName server)
         {
             mSocket = socket;
             mSocket.Account = this;
@@ -99,7 +99,7 @@ namespace DCT.Outwar
             mRaider = new Raider(this);
         }
 
-        public void GetStats(string source)
+        internal void GetStats(string source)
         {
             Parser mm = new Parser(source);
 

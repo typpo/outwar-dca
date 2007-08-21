@@ -4,18 +4,18 @@ using System.Windows.Forms;
 
 namespace DCT.UI
 {
-    public abstract class ListViewItemComparer : IComparer
+    internal abstract class ListViewItemComparer : IComparer
     {
         protected int col;
         protected SortOrder order;
 
-        public ListViewItemComparer()
+        protected ListViewItemComparer()
         {
             col = 0;
             order = SortOrder.Ascending;
         }
 
-        public ListViewItemComparer(int column, SortOrder order)
+        internal ListViewItemComparer(int column, SortOrder order)
         {
             col = column;
             this.order = order;
@@ -26,7 +26,7 @@ namespace DCT.UI
 
     internal class RoomsViewItemComparer : ListViewItemComparer
     {
-        public RoomsViewItemComparer(int column, SortOrder order)
+        internal RoomsViewItemComparer(int column, SortOrder order)
             : base(column, order)
         {
         }
@@ -64,7 +64,7 @@ namespace DCT.UI
 
     internal class MobViewItemComparer : ListViewItemComparer
     {
-        public MobViewItemComparer(int column, SortOrder order)
+        internal MobViewItemComparer(int column, SortOrder order)
             : base(column, order)
         {
         }

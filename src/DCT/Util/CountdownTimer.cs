@@ -3,35 +3,35 @@ using System.Windows.Forms;
 
 namespace DCT.Util
 {
-    public class CountDownTimer : Timer
+    internal class CountDownTimer : Timer
     {
-        public event EventHandler Started; // event that occurs when Timer started
-        public event EventHandler Stopped; // event that occurs when Timer stopped
+        internal event EventHandler Started; // event that occurs when Timer started
+        internal event EventHandler Stopped; // event that occurs when Timer stopped
 
         private int downCounter = -1; // variable will keep information about initial count down value
         private int currentDownCounter = 0; // will keep the current count down value
 
         private bool stopped = false; // indicates if timer is stopped, helper variable for sleep mode
 
-        public int Countdown // property, gives access to downCounter
+        internal int Countdown // property, gives access to downCounter
         {
             get { return this.downCounter; }
             set { this.downCounter = value; }
         }
 
-        public int CurrentCountdown // property, gives access to currentCountDown
+        internal int CurrentCountdown // property, gives access to currentCountDown
         {
             get { return this.currentDownCounter; }
             set { this.currentDownCounter = value; }
         }
 
         // default constructor
-        public CountDownTimer()
+        internal CountDownTimer()
         {
         }
 
         // constructor to initialize the countdown timer
-        public CountDownTimer(int countDown)
+        internal CountDownTimer(int countDown)
         {
             this.downCounter = countDown;
             this.currentDownCounter = countDown;
@@ -57,17 +57,17 @@ namespace DCT.Util
             }
         }
 
-        public new void Start() // will start the timer, overwrites the base Start method
+        internal new void Start() // will start the timer, overwrites the base Start method
         {
             this.Enabled = true;
         }
 
-        public new void Stop() // will stop the timer, overwrites the base Stop method
+        internal new void Stop() // will stop the timer, overwrites the base Stop method
         {
             this.Enabled = false;
         }
 
-        public bool Sleep // will set the countDownTimer to sleep mode
+        internal bool Sleep // will set the countDownTimer to sleep mode
         {
             set
             {

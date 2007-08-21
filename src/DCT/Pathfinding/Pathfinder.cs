@@ -27,26 +27,26 @@ namespace DCT.Pathfinding
         private const string KEY_RAIDS = "0QR3PT58t0";
 
         private static List<MappedRoom> mRooms;
-        public static List<MappedRoom> Rooms
+        internal static List<MappedRoom> Rooms
         {
             get { return mRooms; }
         }
 
         private static List<MappedMob> mMobs;
-        public static List<MappedMob> Mobs
+        internal static List<MappedMob> Mobs
         {
             get { return mMobs; }
         }
 
         private static SortedList<string, int> mAdventures;
-        public static SortedList<string, int> Adventures
+        internal static SortedList<string, int> Adventures
         {
             get { return mAdventures; }
         }
 
         private static List<List<int>> mAllPaths;
 
-        public static void BuildMap()
+        internal static void BuildMap()
         {
             //f5b57b6c048faa5bdc468e8caef8e0b3becc046212ae840dbadd4f30556b8a9337f2856bc94275ff7bee5d
             //12cafa06a6d89aa2b3cce105d6febe6ea6c136ad6170168eda59f13ade129148c4faa510f56a95973980
@@ -306,7 +306,7 @@ namespace DCT.Pathfinding
             }
         }
 
-        public static string BadLinks()
+        internal static string BadLinks()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -332,7 +332,7 @@ namespace DCT.Pathfinding
             return sb.ToString();
         }
 
-        public static List<int> CoverArea(int start)
+        internal static List<int> CoverArea(int start)
         {
             List<int> ret = new List<int>();
 
@@ -348,7 +348,7 @@ namespace DCT.Pathfinding
             return ret;
         }
 
-        public static List<int> GetSolution(int start, int finish, RoomHashRecord savedRooms)
+        internal static List<int> GetSolution(int start, int finish, RoomHashRecord savedRooms)
         {
             mAllPaths = new List<List<int>>();
 
@@ -478,12 +478,12 @@ namespace DCT.Pathfinding
             mAllPaths.Add(ret);
         }
 
-        public static int FindRoom(int find)
+        internal static int FindRoom(int find)
         {
             return new ArrayList(mRooms).BinarySearch(find);
         }
 
-        public static bool Exists(int id)
+        internal static bool Exists(int id)
         {
             int i = FindRoom(id);
             return i > -1 && i < mRooms.Count;

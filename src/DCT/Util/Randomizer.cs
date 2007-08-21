@@ -5,7 +5,7 @@ namespace DCT.Util
     internal class Randomizer
     {
         private static Random mRandom;
-        public static Random Random
+        internal static Random Random
         {
             get { return mRandom; }
         }
@@ -15,7 +15,7 @@ namespace DCT.Util
             mRandom = new Random();
         }
 
-        public static int RandomPosNeg()
+        internal static int RandomPosNeg()
         {
             return mRandom.NextDouble() > .5 ? 1 : -1;
         }

@@ -1661,7 +1661,7 @@ namespace DCT.UI
         private System.Windows.Forms.RadioButton optPathfindID;
         private System.Windows.Forms.ListView lvPathfind;
 
-        public System.Windows.Forms.ListView RoomsView
+        internal System.Windows.Forms.ListView RoomsView
         {
             get { return lvPathfind; }
             set { lvPathfind = value; }
@@ -1696,7 +1696,7 @@ namespace DCT.UI
         private System.Windows.Forms.TabPage tabChat;
         private System.Windows.Forms.ListView lvMobs;
 
-        public System.Windows.Forms.ListView MobsView
+        internal System.Windows.Forms.ListView MobsView
         {
             get { return lvMobs; }
             set { lvMobs = value; }
@@ -1712,7 +1712,7 @@ namespace DCT.UI
         private System.Windows.Forms.CheckBox chkAutoJoin;
         private System.Windows.Forms.ListView lvAdventures;
 
-        public System.Windows.Forms.ListView AdventuresView
+        internal System.Windows.Forms.ListView AdventuresView
         {
             get { return lvAdventures; }
             set { lvAdventures = value; }
@@ -1735,7 +1735,7 @@ namespace DCT.UI
         private System.Windows.Forms.LinkLabel lnkAccountsInvert;
         private System.Windows.Forms.LinkLabel lnkAccountsCheckNone;
         private System.Windows.Forms.LinkLabel lnkAccountsCheckAll;
-        public System.Windows.Forms.ListView lvAccounts;
+        internal System.Windows.Forms.ListView lvAccounts;
         private System.Windows.Forms.ColumnHeader clmCharName;
         private System.Windows.Forms.ColumnHeader clmStatus;
         private System.Windows.Forms.ColumnHeader clmInRoom;

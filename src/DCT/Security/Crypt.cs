@@ -5,9 +5,9 @@ using DCT.Util;
 
 namespace DCT.Security
 {
-    public static class Crypt
+    internal static class Crypt
     {
-        public static int StackDecrypt(int bCrypt, int iOpCode, int iSalt)
+        internal static int StackDecrypt(int bCrypt, int iOpCode, int iSalt)
         {
             switch (iOpCode)
             {
@@ -81,11 +81,11 @@ namespace DCT.Security
          * Convert Binary to Hex (bin2hex)
          *
          * @param string bindata Binary data
-         * @access public
+         * @access internal
          * @return string
          */
 
-        public static string BinToHex(string bindata)
+        internal static string BinToHex(string bindata)
         {
             byte[] bytes = Encoding.GetEncoding(1252).GetBytes(bindata);
 
@@ -97,7 +97,7 @@ namespace DCT.Security
             return hex.ToString();
         }
 
-        public static string HexToBin(string hexdata)
+        internal static string HexToBin(string hexdata)
         {
             if (hexdata == null)
                 throw new ArgumentNullException("hexdata");
@@ -129,11 +129,11 @@ namespace DCT.Security
          * @param string pwd Key to encrypt with (can be binary of hex)
          * @param string data Content to be encrypted
          * @param bool ispwdHex Key passed is in hexadecimal or not
-         * @access public
+         * @access internal
          * @return string
          */
 
-        public static string Get(string data, string pwd, bool ispwdHex)
+        internal static string Get(string data, string pwd, bool ispwdHex)
         {
             int a, i, j;
             int tmp, pwd_length, data_length;
@@ -183,7 +183,7 @@ namespace DCT.Security
         /// <param name="size">Size of the string</param>
         /// <param name="lowerCase">If true, generate lowercase string</param>
         /// <returns>Random string</returns>
-        public static string RandomString(int size, bool lowerCase)
+        internal static string RandomString(int size, bool lowerCase)
         {
             StringBuilder builder = new StringBuilder();
 

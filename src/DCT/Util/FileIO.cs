@@ -7,12 +7,12 @@ namespace DCT.Util
 {
     internal class FileIO
     {
-        public static string LoadFileToString(string title)
+        internal static string LoadFileToString(string title)
         {
             return LoadFileToString(title, "All Files|*.*");
         }
 
-        public static string LoadFileToString(string title, string browsemask)
+        internal static string LoadFileToString(string title, string browsemask)
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Title = title;
@@ -37,7 +37,7 @@ namespace DCT.Util
             return null;
         }
 
-        public static void SaveFileFromString(string title, string browsemask, string suggestedFileName, string s)
+        internal static void SaveFileFromString(string title, string browsemask, string suggestedFileName, string s)
         {
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.FileName = suggestedFileName;

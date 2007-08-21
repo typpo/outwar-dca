@@ -16,33 +16,33 @@ using Version=DCT.Security.Version;
 
 namespace DCT.UI
 {
-    public partial class CoreUI : Form
+    internal partial class CoreUI : Form
     {
         private static CoreUI mInstance;
-        public static CoreUI Instance
+        internal static CoreUI Instance
         {
             get { return mInstance; }
         }
 
         private string mChanges;
-        public string Changes
+        internal string Changes
         {
             set { mChanges = value; }
         }
 
-        public ChatUI Irc
+        internal ChatUI Irc
         {
             get { return irc; }
         }
 
         private AccountsEngine mAccounts;
-        public AccountsEngine Accounts
+        internal AccountsEngine Accounts
         {
             get { return mAccounts; }
         }
 
         private RaidsEngine mRaidsEngine;
-        public RaidsEngine RaidsEngine
+        internal RaidsEngine RaidsEngine
         {
             get { return mRaidsEngine; }
         }
@@ -52,7 +52,7 @@ namespace DCT.UI
 
         private delegate void ButtonClickHandler(object sender, EventArgs e);
 
-        public CoreUI()
+        internal CoreUI()
         {
             if (!ScanDirectory())
             {
@@ -223,7 +223,7 @@ namespace DCT.UI
 
         private delegate void CountdownHandler(AttackingType type);
 
-        public void Countdown(AttackingType type)
+        internal void Countdown(AttackingType type)
         {
             // pass to UI thread
             if (InvokeRequired)
@@ -503,7 +503,7 @@ namespace DCT.UI
 
         private delegate void StopAttackingHandler(bool timeroff);
 
-        public void StopAttacking(bool timeroff)
+        internal void StopAttacking(bool timeroff)
         {
             if (InvokeRequired)
             {
@@ -779,9 +779,9 @@ namespace DCT.UI
             }
         }
 
-        public delegate void UpdateProgressbarHandler(int val, int max);
+        internal delegate void UpdateProgressbarHandler(int val, int max);
 
-        public void UpdateProgressbar(int val, int max)
+        internal void UpdateProgressbar(int val, int max)
         {
             if (InvokeRequired)
             {
@@ -800,7 +800,7 @@ namespace DCT.UI
         }
 
         private delegate void ToggleHandler(bool on);
-        public void Toggle(bool on)
+        internal void Toggle(bool on)
         {
             if (irc.StatusLabel.Text.StartsWith("Not"))
             {
@@ -833,7 +833,7 @@ namespace DCT.UI
             chkTrainReturn.Enabled = on;
         }
 
-        public void ToggleAttack(bool on)
+        internal void ToggleAttack(bool on)
         {
             if (InvokeRequired)
             {
@@ -860,9 +860,9 @@ namespace DCT.UI
             }
         }
 
-        public delegate void LogHandler(string txt);
+        internal delegate void LogHandler(string txt);
 
-        public void Log(string txt)
+        internal void Log(string txt)
         {
             if (InvokeRequired)
             {
@@ -886,7 +886,7 @@ namespace DCT.UI
             }
         }
 
-        public void LogAttack(string txt)
+        internal void LogAttack(string txt)
         {
             if (InvokeRequired)
             {
@@ -1076,7 +1076,7 @@ namespace DCT.UI
                 Login();
         }
 
-        public void btnRefresh_Click(object sender, EventArgs e)
+        internal void btnRefresh_Click(object sender, EventArgs e)
         {
             if (InvokeRequired)
             {
@@ -1108,7 +1108,7 @@ namespace DCT.UI
             }
         }
 
-        public void ProcessRaidsThreaded()
+        internal void ProcessRaidsThreaded()
         {
             ThreadEngine.DefaultInstance.Do(ProcessRaids);
         }

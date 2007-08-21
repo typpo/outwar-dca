@@ -12,16 +12,16 @@
  * Full LGPL License: <http://www.gnu.org/licenses/lgpl.txt>
  * 
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
+ * modify it under the terms of the GNU Lesser General internal
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+ * Lesser General internal License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
+ * You should have received a copy of the GNU Lesser General internal
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
@@ -34,11 +34,11 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class ActionEventArgs : CtcpEventArgs
+    internal class ActionEventArgs : CtcpEventArgs
     {
         private string _ActionMessage;
         
-        public string ActionMessage {
+        internal string ActionMessage {
             get {
                 return _ActionMessage;
             }
@@ -53,18 +53,18 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class CtcpEventArgs : IrcEventArgs
+    internal class CtcpEventArgs : IrcEventArgs
     {
         private string _CtcpCommand;
         private string _CtcpParameter;
         
-        public string CtcpCommand {
+        internal string CtcpCommand {
             get {
                 return _CtcpCommand;
             }
         }
          
-        public string CtcpParameter {
+        internal string CtcpParameter {
             get {
                 return _CtcpParameter;
             }
@@ -80,11 +80,11 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class ErrorEventArgs : IrcEventArgs
+    internal class ErrorEventArgs : IrcEventArgs
     {
         private string _ErrorMessage;
         
-        public string ErrorMessage {
+        internal string ErrorMessage {
             get {
                 return _ErrorMessage;
             }
@@ -99,11 +99,11 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class MotdEventArgs : IrcEventArgs
+    internal class MotdEventArgs : IrcEventArgs
     {
         private string _MotdMessage;
         
-        public string MotdMessage {
+        internal string MotdMessage {
             get {
                 return _MotdMessage;
             }
@@ -118,11 +118,11 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class PingEventArgs : IrcEventArgs
+    internal class PingEventArgs : IrcEventArgs
     {
         private string _PingData;
         
-        public string PingData {
+        internal string PingData {
             get {
                 return _PingData;
             }
@@ -137,11 +137,11 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class PongEventArgs : IrcEventArgs
+    internal class PongEventArgs : IrcEventArgs
     {
         private TimeSpan _Lag;
         
-        public TimeSpan Lag {
+        internal TimeSpan Lag {
             get {
                 return _Lag;
             }
@@ -156,32 +156,32 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class KickEventArgs : IrcEventArgs
+    internal class KickEventArgs : IrcEventArgs
     {
         private string _Channel;
         private string _Who;
         private string _Whom;
         private string _KickReason;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
          
-        public string Whom {
+        internal string Whom {
             get {
                 return _Whom;
             }
         }
          
-        public string KickReason {
+        internal string KickReason {
             get {
                 return _KickReason;
             }
@@ -199,18 +199,18 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class JoinEventArgs : IrcEventArgs
+    internal class JoinEventArgs : IrcEventArgs
     {
         private string _Channel;
         private string _Who;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
@@ -226,18 +226,18 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class NamesEventArgs : IrcEventArgs
+    internal class NamesEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string[] _UserList;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string[] UserList {
+        internal string[] UserList {
             get {
                 return _UserList;
             }
@@ -253,18 +253,18 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class InviteEventArgs : IrcEventArgs
+    internal class InviteEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Who;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
@@ -280,25 +280,25 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class PartEventArgs : IrcEventArgs
+    internal class PartEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Who;
         private string   _PartMessage;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
          
-        public string PartMessage {
+        internal string PartMessage {
             get {
                 return _PartMessage;
             }
@@ -314,7 +314,7 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class WhoEventArgs : IrcEventArgs
+    internal class WhoEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Nick;
@@ -328,67 +328,67 @@ namespace Meebey.SmartIrc4net
         private string   _Server;
         private int      _HopCount;
 
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Nick {
+        internal string Nick {
             get {
                 return _Nick;
             }
         }
          
-        public string Ident {
+        internal string Ident {
             get {
                 return _Ident;
             }
         }
         
-        public string Host {
+        internal string Host {
             get {
                 return _Host;
             }
         }
         
-        public string Realname {
+        internal string Realname {
             get {
                 return _Realname;
             }
         }
         
-        public bool IsAway {
+        internal bool IsAway {
             get {
                 return _IsAway;
             }
         }
         
-        public bool IsOp {
+        internal bool IsOp {
             get {
                 return _IsOp;
             }
         }
         
-        public bool IsVoice {
+        internal bool IsVoice {
             get {
                 return _IsVoice;
             }
         }
         
-        public bool IsIrcOp {
+        internal bool IsIrcOp {
             get {
                 return _IsIrcOp;
             }
         }
         
-        public string Server {
+        internal string Server {
             get {
                 return _Server;
             }
         }
 
-        public int HopCount {
+        internal int HopCount {
             get {
                 return _HopCount;
             }
@@ -413,18 +413,18 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class QuitEventArgs : IrcEventArgs
+    internal class QuitEventArgs : IrcEventArgs
     {
         private string   _Who;
         private string   _QuitMessage;
         
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
 
-        public string QuitMessage {
+        internal string QuitMessage {
             get {
                 return _QuitMessage;
             }
@@ -441,18 +441,18 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class AwayEventArgs : IrcEventArgs
+    internal class AwayEventArgs : IrcEventArgs
     {
         private string   _Who;
         private string   _AwayMessage;
         
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
 
-        public string AwayMessage{
+        internal string AwayMessage{
             get {
                 return _AwayMessage;
             }
@@ -467,18 +467,18 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class NickChangeEventArgs : IrcEventArgs
+    internal class NickChangeEventArgs : IrcEventArgs
     {
         private string   _OldNickname;
         private string   _NewNickname;
         
-        public string OldNickname {
+        internal string OldNickname {
             get {
                 return _OldNickname;
             }
         }
 
-        public string NewNickname {
+        internal string NewNickname {
             get {
                 return _NewNickname;
             }
@@ -494,18 +494,18 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class TopicEventArgs : IrcEventArgs
+    internal class TopicEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Topic;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Topic {
+        internal string Topic {
             get {
                 return _Topic;
             }
@@ -521,25 +521,25 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class TopicChangeEventArgs : IrcEventArgs
+    internal class TopicChangeEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Who;
         private string   _NewTopic;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
 
-        public string NewTopic {
+        internal string NewTopic {
             get {
                 return _NewTopic;
             }
@@ -556,25 +556,25 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class BanEventArgs : IrcEventArgs
+    internal class BanEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Who;
         private string   _Hostmask;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
 
-        public string Hostmask {
+        internal string Hostmask {
             get {
                 return _Hostmask;
             }
@@ -591,25 +591,25 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class UnbanEventArgs : IrcEventArgs
+    internal class UnbanEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Who;
         private string   _Hostmask;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
 
-        public string Hostmask {
+        internal string Hostmask {
             get {
                 return _Hostmask;
             }
@@ -626,25 +626,25 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class OpEventArgs : IrcEventArgs
+    internal class OpEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Who;
         private string   _Whom;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
 
-        public string Whom {
+        internal string Whom {
             get {
                 return _Whom;
             }
@@ -661,25 +661,25 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class DeopEventArgs : IrcEventArgs
+    internal class DeopEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Who;
         private string   _Whom;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
 
-        public string Whom {
+        internal string Whom {
             get {
                 return _Whom;
             }
@@ -696,25 +696,25 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class HalfopEventArgs : IrcEventArgs
+    internal class HalfopEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Who;
         private string   _Whom;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
 
-        public string Whom {
+        internal string Whom {
             get {
                 return _Whom;
             }
@@ -731,25 +731,25 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class DehalfopEventArgs : IrcEventArgs
+    internal class DehalfopEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Who;
         private string   _Whom;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
 
-        public string Whom {
+        internal string Whom {
             get {
                 return _Whom;
             }
@@ -766,25 +766,25 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class VoiceEventArgs : IrcEventArgs
+    internal class VoiceEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Who;
         private string   _Whom;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
 
-        public string Whom {
+        internal string Whom {
             get {
                 return _Whom;
             }
@@ -801,25 +801,25 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    public class DevoiceEventArgs : IrcEventArgs
+    internal class DevoiceEventArgs : IrcEventArgs
     {
         private string   _Channel;
         private string   _Who;
         private string   _Whom;
         
-        public string Channel {
+        internal string Channel {
             get {
                 return _Channel;
             }
         }
 
-        public string Who {
+        internal string Who {
             get {
                 return _Who;
             }
         }
 
-        public string Whom {
+        internal string Whom {
             get {
                 return _Whom;
             }

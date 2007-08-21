@@ -12,16 +12,16 @@
  * Full LGPL License: <http://www.gnu.org/licenses/lgpl.txt>
  * 
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
+ * modify it under the terms of the GNU Lesser General internal
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+ * Lesser General internal License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
+ * You should have received a copy of the GNU Lesser General internal
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
@@ -36,7 +36,7 @@ namespace Meebey.SmartIrc4net
     ///
     /// </summary>
     /// <threadsafety static="true" instance="true" />
-    public sealed class Rfc2812
+    internal sealed class Rfc2812
     {
         // nickname   =  ( letter / special ) *8( letter / digit / special / "-" )
         // letter     =  %x41-5A / %x61-7A       ; A-Z / a-z
@@ -54,7 +54,7 @@ namespace Meebey.SmartIrc4net
         ///
         /// Use with caution, many IRC servers are not conform with this!
         /// </summary>
-        public static bool IsValidNickname(string nickname)
+        internal static bool IsValidNickname(string nickname)
         {
             if ((nickname != null) &&
                 (nickname.Length > 0) &&
@@ -65,359 +65,359 @@ namespace Meebey.SmartIrc4net
             return false;
         }
         
-        public static string Pass(string password)
+        internal static string Pass(string password)
         {
             return "PASS "+password;
         }
         
-        public static string Nick(string nickname)
+        internal static string Nick(string nickname)
         {
             return "NICK "+nickname;
         }
         
-        public static string User(string username, int usermode, string realname)
+        internal static string User(string username, int usermode, string realname)
         {
             return "USER "+username+" "+usermode.ToString()+" * :"+realname;
         }
 
-        public static string Oper(string name, string password)
+        internal static string Oper(string name, string password)
         {
             return "OPER "+name+" "+password;
         }
         
-        public static string Privmsg(string destination, string message)
+        internal static string Privmsg(string destination, string message)
         {
             return "PRIVMSG "+destination+" :"+message;
         }
 
-        public static string Notice(string destination, string message)
+        internal static string Notice(string destination, string message)
         {
             return "NOTICE "+destination+" :"+message;
         }
 
-        public static string Join(string channel)
+        internal static string Join(string channel)
         {
             return "JOIN "+channel;
         }
         
-        public static string Join(string[] channels)
+        internal static string Join(string[] channels)
         {
             string channellist = String.Join(",", channels);
             return "JOIN "+channellist;
         }
         
-        public static string Join(string channel, string key)
+        internal static string Join(string channel, string key)
         {
             return "JOIN "+channel+" "+key;
         }
 
-        public static string Join(string[] channels, string[] keys)
+        internal static string Join(string[] channels, string[] keys)
         {
             string channellist = String.Join(",", channels);
             string keylist = String.Join(",", keys);
             return "JOIN "+channellist+" "+keylist;
         }
         
-        public static string Part(string channel)
+        internal static string Part(string channel)
         {
             return "PART "+channel;
         }
 
-        public static string Part(string[] channels)
+        internal static string Part(string[] channels)
         {
             string channellist = String.Join(",", channels);
             return "PART "+channellist;
         }
         
-        public static string Part(string channel, string partmessage)
+        internal static string Part(string channel, string partmessage)
         {
             return "PART "+channel+" :"+partmessage;
         }
 
-        public static string Part(string[] channels, string partmessage)
+        internal static string Part(string[] channels, string partmessage)
         {
             string channellist = String.Join(",", channels);
             return "PART "+channellist+" :"+partmessage;
         }
 
-        public static string Kick(string channel, string nickname)
+        internal static string Kick(string channel, string nickname)
         {
             return "KICK "+channel+" "+nickname;
         }
 
-        public static string Kick(string channel, string nickname, string comment)
+        internal static string Kick(string channel, string nickname, string comment)
         {
             return "KICK "+channel+" "+nickname+" :"+comment;
         }
         
-        public static string Kick(string[] channels, string nickname)
+        internal static string Kick(string[] channels, string nickname)
         {
             string channellist = String.Join(",", channels);
             return "KICK "+channellist+" "+nickname;
         }
 
-        public static string Kick(string[] channels, string nickname, string comment)
+        internal static string Kick(string[] channels, string nickname, string comment)
         {
             string channellist = String.Join(",", channels);
             return "KICK "+channellist+" "+nickname+" :"+comment;
         }
 
-        public static string Kick(string channel, string[] nicknames)
+        internal static string Kick(string channel, string[] nicknames)
         {
             string nicknamelist = String.Join(",", nicknames);
             return "KICK "+channel+" "+nicknamelist;
         }
 
-        public static string Kick(string channel, string[] nicknames, string comment)
+        internal static string Kick(string channel, string[] nicknames, string comment)
         {
             string nicknamelist = String.Join(",", nicknames);
             return "KICK "+channel+" "+nicknamelist+" :"+comment;
         }
 
-        public static string Kick(string[] channels, string[] nicknames)
+        internal static string Kick(string[] channels, string[] nicknames)
         {
             string channellist = String.Join(",", channels);
             string nicknamelist = String.Join(",", nicknames);
             return "KICK "+channellist+" "+nicknamelist;
         }
 
-        public static string Kick(string[] channels, string[] nicknames, string comment)
+        internal static string Kick(string[] channels, string[] nicknames, string comment)
         {
             string channellist = String.Join(",", channels);
             string nicknamelist = String.Join(",", nicknames);
             return "KICK "+channellist+" "+nicknamelist+" :"+comment;
         }
         
-        public static string Motd()
+        internal static string Motd()
         {
             return "MOTD";
         }
 
-        public static string Motd(string target)
+        internal static string Motd(string target)
         {
             return "MOTD "+target;
         }
 
-        public static string Luser()
+        internal static string Luser()
         {
             return "LUSER";
         }
 
-        public static string Luser(string mask)
+        internal static string Luser(string mask)
         {
             return "LUSER "+mask;
         }
 
-        public static string Luser(string mask, string target)
+        internal static string Luser(string mask, string target)
         {
             return "LUSER "+mask+" "+target;
         }
         
-        public static string Version()
+        internal static string Version()
         {
             return "VERSION";
         }
 
-        public static string Version(string target)
+        internal static string Version(string target)
         {
             return "VERSION "+target;
         }
 
-        public static string Stats()
+        internal static string Stats()
         {
             return "STATS";
         }
 
-        public static string Stats(string query)
+        internal static string Stats(string query)
         {
             return "STATS "+query;
         }
 
-        public static string Stats(string query, string target)
+        internal static string Stats(string query, string target)
         {
             return "STATS "+query+" "+target;
         }
 
-        public static string Links()
+        internal static string Links()
         {
             return "LINKS";
         }
         
-        public static string Links(string servermask)
+        internal static string Links(string servermask)
         {
             return "LINKS "+servermask;
         }
         
-        public static string Links(string remoteserver, string servermask)
+        internal static string Links(string remoteserver, string servermask)
         {
             return "LINKS "+remoteserver+" "+servermask;
         }
         
-        public static string Time()
+        internal static string Time()
         {
             return "TIME";
         }
         
-        public static string Time(string target)
+        internal static string Time(string target)
         {
             return "TIME "+target;
         }
         
-        public static string Connect(string targetserver, string port)
+        internal static string Connect(string targetserver, string port)
         {
             return "CONNECT "+targetserver+" "+port;
         }
         
-        public static string Connect(string targetserver, string port, string remoteserver)
+        internal static string Connect(string targetserver, string port, string remoteserver)
         {
             return "CONNECT "+targetserver+" "+port+" "+remoteserver;
         }
         
-        public static string Trace()
+        internal static string Trace()
         {
             return "TRACE";
         }
         
-        public static string Trace(string target)
+        internal static string Trace(string target)
         {
             return "TRACE "+target;
         }
         
-        public static string Admin()
+        internal static string Admin()
         {
             return "ADMIN";
         }
         
-        public static string Admin(string target)
+        internal static string Admin(string target)
         {
             return "ADMIN "+target;
         }
         
-        public static string Info()
+        internal static string Info()
         {
             return "INFO";
         }
         
-        public static string Info(string target)
+        internal static string Info(string target)
         {
             return "INFO "+target;
         }
         
-        public static string Servlist()
+        internal static string Servlist()
         {
             return "SERVLIST";
         }
         
-        public static string Servlist(string mask)
+        internal static string Servlist(string mask)
         {
             return "SERVLIST "+mask;
         }
         
-        public static string Servlist(string mask, string type)
+        internal static string Servlist(string mask, string type)
         {
             return "SERVLIST "+mask+" "+type;
         }
         
-        public static string Squery(string servicename, string servicetext)
+        internal static string Squery(string servicename, string servicetext)
         {
             return "SQUERY "+servicename+" :"+servicetext;
         }
         
-        public static string List()
+        internal static string List()
         {
             return "LIST";
         }
 
-        public static string List(string channel)
+        internal static string List(string channel)
         {
             return "LIST "+channel;
         }
 
-        public static string List(string[] channels)
+        internal static string List(string[] channels)
         {
             string channellist = String.Join(",", channels);
             return "LIST "+channellist;
         }
         
-        public static string List(string channel, string target)
+        internal static string List(string channel, string target)
         {
             return "LIST "+channel+" "+target;
         }
 
-        public static string List(string[] channels, string target)
+        internal static string List(string[] channels, string target)
         {
             string channellist = String.Join(",", channels);
             return "LIST "+channellist+" "+target;
         }
         
-        public static string Names()
+        internal static string Names()
         {
             return "NAMES";
         }
 
-        public static string Names(string channel)
+        internal static string Names(string channel)
         {
             return "NAMES "+channel;
         }
 
-        public static string Names(string[] channels)
+        internal static string Names(string[] channels)
         {
             string channellist = String.Join(",", channels);
             return "NAMES "+channellist;
         }
         
-        public static string Names(string channel, string target)
+        internal static string Names(string channel, string target)
         {
             return "NAMES "+channel+" "+target;
         }
         
-        public static string Names(string[] channels, string target)
+        internal static string Names(string[] channels, string target)
         {
             string channellist = String.Join(",", channels);
             return "NAMES "+channellist+" "+target;
         }
         
-        public static string Topic(string channel)
+        internal static string Topic(string channel)
         {
             return "TOPIC "+channel;
         }
 
-        public static string Topic(string channel, string newtopic)
+        internal static string Topic(string channel, string newtopic)
         {
             return "TOPIC "+channel+" :"+newtopic;
         }
 
-        public static string Mode(string target)
+        internal static string Mode(string target)
         {
             return "MODE "+target;
         }
 
-        public static string Mode(string target, string newmode)
+        internal static string Mode(string target, string newmode)
         {
             return "MODE "+target+" "+newmode;
         }
 
-        public static string Service(string nickname, string distribution, string info)
+        internal static string Service(string nickname, string distribution, string info)
         {
             return "SERVICE "+nickname+" * "+distribution+" * * :"+info;
         }
         
-        public static string Invite(string nickname, string channel)
+        internal static string Invite(string nickname, string channel)
         {
             return "INVITE "+nickname+" "+channel;
         }
 
-        public static string Who()
+        internal static string Who()
         {
             return "WHO";
         }
         
-        public static string Who(string mask)
+        internal static string Who(string mask)
         {
             return "WHO "+mask;
         }
         
-        public static string Who(string mask, bool ircop)
+        internal static string Who(string mask, bool ircop)
         {
             if (ircop) {
                 return "WHO "+mask+" o";
@@ -426,179 +426,179 @@ namespace Meebey.SmartIrc4net
             }
         }
         
-        public static string Whois(string mask)
+        internal static string Whois(string mask)
         {
             return "WHOIS "+mask;
         }
         
-        public static string Whois(string[] masks)
+        internal static string Whois(string[] masks)
         {
             string masklist = String.Join(",", masks);
             return "WHOIS "+masklist;
         }
         
-        public static string Whois(string target, string mask)
+        internal static string Whois(string target, string mask)
         {
             return "WHOIS "+target+" "+mask;
         }
         
-        public static string Whois(string target, string[] masks)
+        internal static string Whois(string target, string[] masks)
         {
             string masklist = String.Join(",", masks);
             return "WHOIS "+target+" "+masklist;
         }
         
-        public static string Whowas(string nickname)
+        internal static string Whowas(string nickname)
         {
             return "WHOWAS "+nickname;
         }
         
-        public static string Whowas(string[] nicknames)
+        internal static string Whowas(string[] nicknames)
         {
             string nicknamelist = String.Join(",", nicknames);
             return "WHOWAS "+nicknamelist;
         }
 
-        public static string Whowas(string nickname, string count)
+        internal static string Whowas(string nickname, string count)
         {
             return "WHOWAS "+nickname+" "+count+" ";
         }
         
-        public static string Whowas(string[] nicknames, string count)
+        internal static string Whowas(string[] nicknames, string count)
         {
             string nicknamelist = String.Join(",", nicknames);
             return "WHOWAS "+nicknamelist+" "+count+" ";
         }
         
-        public static string Whowas(string nickname, string count, string target)
+        internal static string Whowas(string nickname, string count, string target)
         {
             return "WHOWAS "+nickname+" "+count+" "+target;
         }
         
-        public static string Whowas(string[] nicknames, string count, string target)
+        internal static string Whowas(string[] nicknames, string count, string target)
         {
             string nicknamelist = String.Join(",", nicknames);
             return "WHOWAS "+nicknamelist+" "+count+" "+target;
         }
         
-        public static string Kill(string nickname, string comment)
+        internal static string Kill(string nickname, string comment)
         {
             return "KILL "+nickname+" :"+comment;
         }
         
-        public static string Ping(string server)
+        internal static string Ping(string server)
         {
             return "PING "+server;
         }
         
-        public static string Ping(string server, string server2)
+        internal static string Ping(string server, string server2)
         {
             return "PING "+server+" "+server2;
         }
         
-        public static string Pong(string server)
+        internal static string Pong(string server)
         {
             return "PONG "+server;
         }
         
-        public static string Pong(string server, string server2)
+        internal static string Pong(string server, string server2)
         {
             return "PONG "+server+" "+server2;
         }
 
-        public static string Error(string errormessage)
+        internal static string Error(string errormessage)
         {
             return "ERROR :"+errormessage;
         }
         
-        public static string Away()
+        internal static string Away()
         {
             return "AWAY";
         }
         
-        public static string Away(string awaytext)
+        internal static string Away(string awaytext)
         {
             return "AWAY :"+awaytext;
         }
         
-        public static string Rehash()
+        internal static string Rehash()
         {
             return "REHASH";
         }
         
-        public static string Die()
+        internal static string Die()
         {
             return "DIE";
         }
         
-        public static string Restart()
+        internal static string Restart()
         {
             return "RESTART";
         }
         
-        public static string Summon(string user)
+        internal static string Summon(string user)
         {
             return "SUMMON "+user;
         }
         
-        public static string Summon(string user, string target)
+        internal static string Summon(string user, string target)
         {
             return "SUMMON "+user+" "+target;
         }
         
-        public static string Summon(string user, string target, string channel)
+        internal static string Summon(string user, string target, string channel)
         {
             return "SUMMON "+user+" "+target+" "+channel;
         }
         
-        public static string Users()
+        internal static string Users()
         {
             return "USERS";
         }
         
-        public static string Users(string target)
+        internal static string Users(string target)
         {
             return "USERS "+target;
         }
         
-        public static string Wallops(string wallopstext)
+        internal static string Wallops(string wallopstext)
         {
             return "WALLOPS :"+wallopstext;
         }
         
-        public static string Userhost(string nickname)
+        internal static string Userhost(string nickname)
         {
             return "USERHOST "+nickname;
         }
         
-        public static string Userhost(string[] nicknames)
+        internal static string Userhost(string[] nicknames)
         {
             string nicknamelist = String.Join(" ", nicknames);
             return "USERHOST "+nicknamelist;
         }
         
-        public static string Ison(string nickname)
+        internal static string Ison(string nickname)
         {
             return "ISON "+nickname;
         }
         
-        public static string Ison(string[] nicknames)
+        internal static string Ison(string[] nicknames)
         {
             string nicknamelist = String.Join(" ", nicknames);
             return "ISON "+nicknamelist;
         }
         
-        public static string Quit()
+        internal static string Quit()
         {
             return "QUIT";
         }
         
-        public static string Quit(string quitmessage)
+        internal static string Quit(string quitmessage)
         {
             return "QUIT :"+quitmessage;
         }
         
-        public static string Squit(string server, string comment)
+        internal static string Squit(string server, string comment)
         {
             return "SQUIT "+server+" :"+comment;
         }

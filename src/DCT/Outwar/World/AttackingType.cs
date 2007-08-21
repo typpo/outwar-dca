@@ -1,6 +1,6 @@
 namespace DCT.Outwar.World
 {
-    public enum AttackingType
+    internal enum AttackingType
     {
         Multi,
         Single,

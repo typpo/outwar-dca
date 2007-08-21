@@ -20,7 +20,7 @@ namespace DCT.Properties
     {
         private static Settings defaultInstance = ((Settings) (Synchronized(new Settings())));
 
-        public static Settings Default
+        internal static Settings Default
         {
             get { return defaultInstance; }
         }

@@ -12,9 +12,9 @@ using Version=DCT.Security.Version;
 
 namespace DCT.UI
 {
-    public partial class StartDialog : Form
+    internal partial class StartDialog : Form
     {
-        public StartDialog()
+        internal StartDialog()
         {
             InitializeComponent();
 

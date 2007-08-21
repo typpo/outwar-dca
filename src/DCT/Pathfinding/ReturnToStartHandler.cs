@@ -5,23 +5,23 @@ using DCT.UI;
 
 namespace DCT.Pathfinding
 {
-    public class ReturnToStartHandler
+    internal class ReturnToStartHandler
     {
         private int mOriginalRoom;
         private Account mAccount;
 
-        public ReturnToStartHandler(Account a)
+        internal ReturnToStartHandler(Account a)
         {
             mAccount = a;
             mOriginalRoom = 0;
         }
 
-        public void SetOriginal()
+        internal void SetOriginal()
         {
             mOriginalRoom = mAccount.Mover.Location.Id;
         }
 
-        public void Return()
+        internal void Return()
         {
             if (mOriginalRoom == 0)
             {

@@ -2,29 +2,29 @@ using System.Collections.Generic;
 
 namespace DCT.Outwar.World
 {
-    public class RoomHashRecord
+    internal class RoomHashRecord
     {
         private Dictionary<int, string> mRooms;
 
-        public int Count
+        internal int Count
         {
             get { return mRooms.Count; }
         }
 
-        public void Clear()
+        internal void Clear()
         {
             mRooms.Clear();
         }
 
         private Account mAccount;
 
-        public RoomHashRecord(Account a)
+        internal RoomHashRecord(Account a)
         {
             mAccount = a;
             mRooms = new Dictionary<int, string>();
         }
 
-        public void Save(int id, string url)
+        internal void Save(int id, string url)
         {
             if (!mRooms.ContainsKey(id))
             {
@@ -32,7 +32,7 @@ namespace DCT.Outwar.World
             }
         }
 
-        public string GetRoom(int id)
+        internal string GetRoom(int id)
         {
             if (mRooms.ContainsKey(id) && mAccount.Ret == mAccount.Name)
             {
@@ -47,7 +47,7 @@ namespace DCT.Outwar.World
             return null;
         }
 
-        public List<int> Optimize(List<int> nodes)
+        internal List<int> Optimize(List<int> nodes)
         {
             if (nodes == null || mAccount.Ret != mAccount.Name)
             {

@@ -4,17 +4,17 @@ using DCT.Protocols.Http;
 
 namespace DCT.Outwar
 {
-    public class AccountsEngine
+    internal class AccountsEngine
     {
         private List<Account> mAccounts;
-        public List<Account> Accounts
+        internal List<Account> Accounts
         {
             get { return mAccounts; }
         }
 
         private int mMainIndex;
 
-        public Account MainAccount
+        internal Account MainAccount
         {
             get
             {
@@ -29,38 +29,38 @@ namespace DCT.Outwar
             }
         }
 
-        public AccountsEngine()
+        internal AccountsEngine()
         {
             mAccounts = new List<Account>();
             mMainIndex = 0;
         }
 
-        public Account this[int i]
+        internal Account this[int i]
         {
             get { return mAccounts[i]; }
         }
 
-        public int Count
+        internal int Count
         {
             get { return mAccounts.Count; }
         }
 
-        public void SetMain(Account a)
+        internal void SetMain(Account a)
         {
             mMainIndex = mAccounts.IndexOf(a);
         }
 
-        public void SetMain(int index)
+        internal void SetMain(int index)
         {
             mMainIndex = index;
         }
 
-        public Account Last
+        internal Account Last
         {
             get { return mAccounts[mAccounts.Count - 1]; }
         }
 
-        public Account Add(string name, int id, ServerName server)
+        internal Account Add(string name, int id, ServerName server)
         {
             OutwarHttpSocket socket = new OutwarHttpSocket();
             Account a = new Account(socket, name, id, server);
@@ -68,17 +68,17 @@ namespace DCT.Outwar
             return a;
         }
 
-        public void Remove(Account a)
+        internal void Remove(Account a)
         {
             mAccounts.Remove(a);
         }
 
-        public void Remove(int index)
+        internal void Remove(int index)
         {
             mAccounts.RemoveAt(index);
         }
 
-        public void Login(string user, string pass, bool remember)
+        internal void Login(string user, string pass, bool remember)
         {
             HttpSocket.DefaultInstance.Get("http://outwar.com/myaccount.php?login_username=" + user
                                            + "&login_password=" + pass

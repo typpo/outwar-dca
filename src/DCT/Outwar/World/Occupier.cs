@@ -2,7 +2,7 @@ using DCT.Parsing;
 
 namespace DCT.Outwar.World
 {
-    public abstract class Occupier
+    internal abstract class Occupier
     {
         protected string mName;
         protected string mURL;
@@ -13,12 +13,12 @@ namespace DCT.Outwar.World
         protected Room mRoom;
         protected string mLoadSrc;
         protected long mId;
-        public long Id
+        internal long Id
         {
             get { return mId; }
         }
 
-        public Occupier(string name, string url, Room room)
+        internal Occupier(string name, string url, Room room)
         {
             mName = name;
             mURL = url;

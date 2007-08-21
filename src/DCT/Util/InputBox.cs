@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DCT.Util
 {
-    public partial class InputBox : Form
+    internal partial class InputBox : Form
     {
         private static string mInput;
         private static bool mRelease;
@@ -20,12 +20,12 @@ namespace DCT.Util
             mInputBox = new InputBox();
         }
 
-        public static string Prompt(string title, string prompt)
+        internal static string Prompt(string title, string prompt)
         {
             return Prompt(title, prompt, string.Empty);
         }
 
-        public static string Prompt(string title, string prompt, string defaultText)
+        internal static string Prompt(string title, string prompt, string defaultText)
         {
             mInput = string.Empty;
             mRelease = false;
@@ -38,7 +38,7 @@ namespace DCT.Util
             return mInput;
         }
 
-        public InputBox()
+        internal InputBox()
         {
             InitializeComponent();
         }

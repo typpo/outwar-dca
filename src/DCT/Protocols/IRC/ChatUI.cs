@@ -10,9 +10,9 @@ using Version=DCT.Security.Version;
 
 namespace DCT.Protocols.IRC
 {
-    public partial class ChatUI : UserControl
+    internal partial class ChatUI : UserControl
     {
-        public Label StatusLabel
+        internal Label StatusLabel
         {
             get { return lblChatOnline; }
             set { lblChatOnline = value; }
@@ -20,7 +20,7 @@ namespace DCT.Protocols.IRC
 
         private IrcClient mClient;
 
-        public ChatUI()
+        internal ChatUI()
         {
             InitializeComponent();
         }
@@ -33,17 +33,17 @@ namespace DCT.Protocols.IRC
 
         private string mChannel = "#typpo", mServer = "irc.utonet.org";
 
-        public string Server
+        internal string Server
         {
             set { mServer = value; }
         }
 
-        public string Channel
+        internal string Channel
         {
             set { mChannel = value; }
         }
 
-        public void Init()
+        internal void Init()
         {
             if (String.IsNullOrEmpty(mChannel) || String.IsNullOrEmpty(mServer))
             {

@@ -5,36 +5,36 @@ namespace DCT.Pathfinding
     internal class MappedMob : IComparable
     {
         private string mName;
-        public string Name
+        internal string Name
         {
             get { return mName; }
         }
 
         private int mRoom;
-        public int Room
+        internal int Room
         {
             get { return mRoom; }
         }
 
         private long mId;
-        public long Id
+        internal long Id
         {
             get { return mId; }
         }
 
         private long mLevel;
-        public long Level
+        internal long Level
         {
             get { return mLevel; }
         }
 
         private long mRage;
-        public long Rage
+        internal long Rage
         {
             get { return mRage; }
         }
 
-        public MappedMob(string token)
+        internal MappedMob(string token)
         {
             string[] parts = token.Split(new char[] {';'});
 

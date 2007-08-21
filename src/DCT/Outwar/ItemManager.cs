@@ -8,11 +8,11 @@ using DCT.UI;
 
 namespace DCT.Outwar
 {
-    public class ItemManager
+    internal class ItemManager
     {
         #region DECLARATIONS
 
-        public int qBackpack, numBackpack;
+        internal int qBackpack, numBackpack;
         private HttpSocket Connection;
         private Account mAccount;
         private bool tested, OK, vaultFull;
@@ -23,7 +23,7 @@ namespace DCT.Outwar
 
         #region CONSTRUCTOR
 
-        public ItemManager(Account pOW, HttpSocket pConnection)
+        internal ItemManager(Account pOW, HttpSocket pConnection)
         {
             qBackpack = 0;
             numBackpack = 0;
@@ -41,7 +41,7 @@ namespace DCT.Outwar
 
         #region GENERAL
 
-        public void initQuota()
+        internal void initQuota()
         {
             try
             {
@@ -54,7 +54,7 @@ namespace DCT.Outwar
             }
         }
 
-        public void numItems(string source)
+        internal void numItems(string source)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace DCT.Outwar
             numBackpack = iBackpack.Count;
         }
 
-        public void manage()
+        internal void manage()
         {
             if (numBackpack >= qBackpack && qBackpack != 0) // pack is full
             {
@@ -132,7 +132,7 @@ namespace DCT.Outwar
             return OK;
         }
 
-        public void moveToVault(int num)
+        internal void moveToVault(int num)
         {
             if (OK)
             {
@@ -147,7 +147,7 @@ namespace DCT.Outwar
             }
         }
 
-        public void moveToVault(object id)
+        internal void moveToVault(object id)
         {
             if (unmoveables.Contains(id))
                 return;
@@ -196,7 +196,7 @@ namespace DCT.Outwar
 
         #region SELL
 
-        public void sell(int num)
+        internal void sell(int num)
         {
             foreach (string str in
                 new Parser(Connection.Get("specialtysell.php")).MultiParse("sell\" value=\"", "\""))
@@ -205,7 +205,7 @@ namespace DCT.Outwar
             }
         }
 
-        public void sell(object id)
+        internal void sell(object id)
         {
             // TODO: ?
             /*

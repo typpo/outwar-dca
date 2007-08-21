@@ -13,48 +13,48 @@ using Version=DCT.Security.Version;
 
 namespace DCT.Outwar.World
 {
-    public class Mover
+    internal class Mover
     {
         private RoomHashRecord mSavedRooms;
-        public RoomHashRecord SavedRooms
+        internal RoomHashRecord SavedRooms
         {
             get { return mSavedRooms; }
         }
 
         private Room mLocation;
-        public Room Location
+        internal Room Location
         {
             get { return mLocation; }
         }
 
         private int mMobsAttacked;
-        public int MobsAttacked
+        internal int MobsAttacked
         {
             get { return mMobsAttacked; }
             set { mMobsAttacked = value; }
         }
 
         private long mExpGained;
-        public long ExpGained
+        internal long ExpGained
         {
             get { return mExpGained; }
             set { mExpGained = value; }
         }
 
         private OutwarHttpSocket mSocket;
-        public OutwarHttpSocket Socket
+        internal OutwarHttpSocket Socket
         {
             get { return mSocket; }
         }
 
         private Account mAccount;
-        public Account Account
+        internal Account Account
         {
             get { return mAccount; }
         }
 
         private ReturnToStartHandler mReturnToStartHandler;
-        public ReturnToStartHandler ReturnToStartHandler
+        internal ReturnToStartHandler ReturnToStartHandler
         {
             get { return mReturnToStartHandler; }
         }
@@ -62,7 +62,7 @@ namespace DCT.Outwar.World
         private int mTrainRoomStart;
         private List<int> mVisited;
 
-        public Mover(Account account, OutwarHttpSocket socket)
+        internal Mover(Account account, OutwarHttpSocket socket)
         {
             mSocket = socket;
             mAccount = account;
@@ -76,7 +76,7 @@ namespace DCT.Outwar.World
             mReturnToStartHandler = new ReturnToStartHandler(mAccount);
         }
 
-        public void RefreshRoom()
+        internal void RefreshRoom()
         {
             try
             {
@@ -339,8 +339,8 @@ namespace DCT.Outwar.World
             return true;
         }
 
-        public delegate void PathfindHandler(int roomid);
-        public void PathfindTo(int roomid)
+        internal delegate void PathfindHandler(int roomid);
+        internal void PathfindTo(int roomid)
         {
             if (roomid == mLocation.Id || roomid < 0)
             {
@@ -354,7 +354,7 @@ namespace DCT.Outwar.World
             FollowPath(nodes);
         }
 
-        public void CoverArea()
+        internal void CoverArea()
         {
             mSocket.Status = "Calculating path";
 
@@ -462,7 +462,7 @@ namespace DCT.Outwar.World
             }
         }
 
-        public void Train()
+        internal void Train()
         {
             if (!mAccount.NeedsLevel)
             {
@@ -512,7 +512,7 @@ namespace DCT.Outwar.World
             mSocket.Status = "Idle";
         }
 
-        public void TrainReturn()
+        internal void TrainReturn()
         {
             PathfindTo(mTrainRoomStart);
             mTrainRoomStart = -1;

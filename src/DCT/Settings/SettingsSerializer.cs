@@ -9,7 +9,7 @@ namespace DCT.Settings
 {
     internal class SettingsSerializer
     {
-        public static void Save()
+        internal static void Save()
         {
             FileStream fs = new FileStream("prefs.dat", FileMode.OpenOrCreate, FileAccess.Write);
 
@@ -71,7 +71,7 @@ namespace DCT.Settings
             }
         }
 
-        public static void Get()
+        internal static void Get()
         {
             if (!File.Exists("prefs.dat"))
             {

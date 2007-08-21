@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DCT.Outwar
 {
-    public enum ServerName
+    internal enum ServerName
     {
         sigil,
         torax,
@@ -11,11 +11,11 @@ namespace DCT.Outwar
         zimbob
     }
 
-    public class Server
+    internal class Server
     {
-        public const int NUM_SERVERS = 4;
+        internal const int NUM_SERVERS = 4;
 
-        public static List<string> NamesList
+        internal static List<string> NamesList
         {
             get
             {
@@ -28,7 +28,7 @@ namespace DCT.Outwar
             }
         }
 
-        public static int NameToId(ServerName n)
+        internal static int NameToId(ServerName n)
         {
             switch (n)
             {
@@ -44,7 +44,7 @@ namespace DCT.Outwar
             throw new ArgumentException("No server id correlates with " + n);
         }
 
-        public static ServerName IdToName(int id)
+        internal static ServerName IdToName(int id)
         {
             switch (id)
             {

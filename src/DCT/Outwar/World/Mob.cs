@@ -7,25 +7,25 @@ using DCT.UI;
 
 namespace DCT.Outwar.World
 {
-    public class Mob : Occupier
+    internal class Mob : Occupier
     {
         private bool mAttacked;
         private bool mInitialized;
 
         private bool mTrainer;
-        public bool IsTrainer
+        internal bool IsTrainer
         {
             get { return mTrainer; }
         }
         private bool mTalkable;
-        public bool IsTalkable
+        internal bool IsTalkable
         {
             get { return mTalkable; }
         }
         private bool mQuit;
 
         private bool mAttacking;
-        public bool Attacking
+        internal bool Attacking
         {
             get { return mAttacking; }
         }
@@ -54,14 +54,14 @@ namespace DCT.Outwar.World
         private bool mSkipLoad;
         private string mAttackUrl;
 
-        public Mob(string name, string url, string attackurl, bool isQuest, bool isTrainer, Room room) : base(name, url, room)
+        internal Mob(string name, string url, string attackurl, bool isQuest, bool isTrainer, Room room) : base(name, url, room)
         {
             mAttackUrl = attackurl;
             mTalkable = isQuest;
             mTrainer = isTrainer;
         }
 
-        public void Initialize()
+        internal void Initialize()
         {
             if (mInitialized || mRoom.Mover.Account.Ret != mRoom.Mover.Account.Name)
             {
@@ -118,7 +118,7 @@ namespace DCT.Outwar.World
             return m.Name.Equals(mName);
         }
 
-        public void Talk()
+        internal void Talk()
         {
             if (mTalkable && (UserEditable.AutoQuest || UserEditable.AlertQuests))
             {
@@ -155,7 +155,7 @@ namespace DCT.Outwar.World
             }
         }
 
-        public void Train()
+        internal void Train()
         {
             if (mTrainer && UserEditable.AutoTrain)
             {
@@ -215,12 +215,12 @@ namespace DCT.Outwar.World
         }
 
 
-        public bool Attack()
+        internal bool Attack()
         {
             return Attack(true);
         }
 
-        public bool Attack(bool test)
+        internal bool Attack(bool test)
         {
             if (mAttacked || (!FilterOK && test) || !IsInRoom
                 || (!Globals.AttackOn || !Globals.AttackMode))

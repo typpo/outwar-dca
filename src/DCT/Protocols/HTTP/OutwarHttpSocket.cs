@@ -4,10 +4,10 @@ using DCT.Parsing;
 
 namespace DCT.Protocols.Http
 {
-    public class OutwarHttpSocket : HttpSocket
+    internal class OutwarHttpSocket : HttpSocket
     {
         private Account mAccount;
-        public Account Account
+        internal Account Account
         {
             get { return mAccount; }
             set { mAccount = value; }

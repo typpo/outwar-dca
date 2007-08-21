@@ -6,24 +6,24 @@ namespace DCT.Pathfinding
     internal class MappedRoom : IComparable
     {
         private int mId;
-        public int Id
+        internal int Id
         {
             get { return mId; }
         }
 
         private string mName;
-        public string Name
+        internal string Name
         {
             get { return mName; }
         }
 
         private List<int> mNeighbors;
-        public List<int> Neighbors
+        internal List<int> Neighbors
         {
             get { return mNeighbors; }
         }
 
-        public MappedRoom(string token)
+        internal MappedRoom(string token)
         {
             mNeighbors = new List<int>();
 
