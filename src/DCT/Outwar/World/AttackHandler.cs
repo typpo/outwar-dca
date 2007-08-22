@@ -53,6 +53,8 @@ namespace DCT.Outwar.World
         /// </summary>
         private static void Run()
         {
+            SettingsSerializer.Save();
+
             lock (mAccounts)
             {
                 foreach (Account a in mAccounts)

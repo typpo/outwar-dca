@@ -282,7 +282,7 @@ namespace DCT.Outwar.World
                     throw new Exception();
                 }
             }
-            catch 
+            catch
             {
                 CoreUI.Instance.Log("E: " + mAccount.Name + " can't explore DC because the account is not authorized");
                 Application.Exit();
@@ -421,17 +421,17 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.Log(mAccount.Name + " flying to room 1");
                 url = "world.php?room=1";
             }
+            else if (!string.IsNullOrEmpty(url = mLocation[id]))
+            {
+                CoreUI.Instance.Log(mAccount.Name + " moving to room " + id);
+            }
             else if (!string.IsNullOrEmpty(url = mSavedRooms.GetRoom(id)))
             {
                 CoreUI.Instance.Log(mAccount.Name + " flying to room " + id);
             }
             else
             {
-                url = mLocation[id];
-                if (string.IsNullOrEmpty(url))
-                {
-                    return;
-                }
+                return;
             }
 
             mMoveTries = 0;
