@@ -360,22 +360,6 @@ namespace DCT.Outwar.World
             mSocket.Status = "Calculating path";
 
             mVisited = new List<int>();
-            //foreach (int nbr in Pathfinder.CoverArea(mLocation.Id))
-            //{
-            //    if (!Globals.AttackOn || !Globals.AttackMode)
-            //    {
-            //        break;
-            //    }
-            //    else if (Globals.Terminate)
-            //    {
-            //        mVisited.Clear();
-            //        return;
-            //    }
-            //    else if (!mVisited.Contains(nbr))
-            //    {
-            //        PathfindTo(nbr);
-            //    }
-            //}
 
             FollowPath(Pathfinder.CoverArea(mLocation.Id, mSavedRooms));
 

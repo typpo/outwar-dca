@@ -347,7 +347,6 @@ namespace DCT.Pathfinding
                 }
             }
 
-            //return ret;
             List<int> ret = new List<int>();
             ret = GetSolution(start, idList[0], savedRooms);
 
@@ -362,28 +361,6 @@ namespace DCT.Pathfinding
         internal static List<int> GetSolution(int start, int finish, RoomHashRecord savedRooms)
         {
             mAllPaths = new List<List<int>>();
-
-            //PathfindHandler
-            //    room1forward = new PathfindHandler(GetPath),
-            //    forward = new PathfindHandler(GetPath);
-
-            //room1forward.BeginInvoke(1, finish, new AsyncCallback(PathfindCallback), room1forward);
-
-            //forward.BeginInvoke(start, finish, new AsyncCallback(PathfindCallback), forward);
-
-            //while (mAllPaths.Count < 2)
-            //{
-            //    ThreadEngine.Sleep(10);
-            //}
-
-            //try
-            //{
-            //    room1forward.EndInvoke(null);
-            //    forward.EndInvoke(null);
-            //}
-            //catch
-            //{
-            //}
 
             mAllPaths.Add(GetPath(1, finish));
             mAllPaths.Add(GetPath(start, finish));
@@ -404,8 +381,8 @@ namespace DCT.Pathfinding
             return savedRooms.Optimize(bestPath);
         }
 
-        private delegate List<int> PathfindHandler(int from, int to);
         private static Hashtable mShortest;
+        private delegate List<int> PathfindHandler(int from, int to);
         private static List<int> GetPath(int start, int finish)
         {
             List<int> roomList = new List<int>();
@@ -421,7 +398,6 @@ namespace DCT.Pathfinding
             }
 
             Queue<List<int>> paths = new Queue<List<int>>();
-            List<int> tmpList;
 
             roomList.Add(start);
             paths.Enqueue(roomList);
@@ -440,7 +416,7 @@ namespace DCT.Pathfinding
                         continue;
                     }
 
-                    tmpList = new List<int>(roomList);
+                    List<int> tmpList = new List<int>(roomList);
                     tmpList.Add(nbr);
 
                     if (nbr == finish)

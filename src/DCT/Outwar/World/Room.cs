@@ -169,7 +169,7 @@ namespace DCT.Outwar.World
                     name = Parser.Parse(name, "\"#00FF00\">*", " (");
                 }
 
-                if (s.Contains("raidz") || (attackurl == string.Empty && !quest && !trainer))
+                if (s.Contains("raidz") || (string.IsNullOrEmpty(attackurl) && !quest && !trainer))
                 {
                     continue;
                 }

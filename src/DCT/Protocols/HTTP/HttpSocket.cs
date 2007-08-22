@@ -101,11 +101,6 @@ namespace DCT.Protocols.Http
         private static readonly RequestCachePolicy CACHE_POLICY =
             new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
 
-        static HttpSocket()
-        {
-            mIP = string.Empty;
-        }
-
         internal HttpSocket()
         {
             mTimeout = DEFAULT_TIMEOUT;
@@ -262,7 +257,7 @@ namespace DCT.Protocols.Http
         private HttpWebRequest GenerateRequest(string url)
         {
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
-            request.CachePolicy =  CACHE_POLICY;
+            request.CachePolicy = CACHE_POLICY;
             request.Timeout = mTimeout; // (int)Globals.Timeout; 
 
             if (!String.IsNullOrEmpty(mCookie))

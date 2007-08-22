@@ -4,15 +4,10 @@ namespace DCT.Util
 {
     internal class Randomizer
     {
-        private static Random mRandom;
+        private static Random mRandom = new Random();
         internal static Random Random
         {
             get { return mRandom; }
-        }
-
-        static Randomizer()
-        {
-            mRandom = new Random();
         }
 
         internal static int RandomPosNeg()

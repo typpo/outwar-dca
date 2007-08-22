@@ -11,14 +11,8 @@ namespace DCT.Outwar.World
         private static List<Account> mAccounts;
         private static AttackingType mType;
 
-        private static Dictionary<int, string> mRooms;
-        private static Dictionary<int, int> mMobs;
-
-        static AttackHandler()
-        {
-            mRooms = new Dictionary<int, string>();
-            mMobs = new Dictionary<int, int>();
-        }
+        private static Dictionary<int, string> mRooms = new Dictionary<int, string>();
+        private static Dictionary<int, int> mMobs = new Dictionary<int, int>();
 
         internal static void Set(List<Account> accounts, AttackingType type)
         {
