@@ -332,17 +332,28 @@ namespace DCT.Pathfinding
             return sb.ToString();
         }
 
-        internal static List<int> CoverArea(int start)
+        internal static List<int> CoverArea(int start, RoomHashRecord savedRooms)
         {
-            List<int> ret = new List<int>();
+            List<int> idList = new List<int>();
 
             MappedRoom startRoom = mRooms[FindRoom(start)];
-            ret.Add(start);
+            idList.Add(start);
 
             foreach (MappedRoom rm in mRooms)
             {
-                if (rm != null && rm.Name == startRoom.Name)
-                    ret.Insert(Randomizer.Random.Next(ret.Count), rm.Id);
+                if (rm != null && rm.Name.Equals(startRoom.Name))
+                {
+                    idList.Insert(Randomizer.Random.Next(idList.Count), rm.Id);
+                }
+            }
+
+            //return ret;
+            List<int> ret = new List<int>();
+            ret = GetSolution(start, idList[0], savedRooms);
+
+            for(int i = 1; i < idList.Count; i++)
+            {
+                ret.AddRange(savedRooms.Optimize(GetPath(idList[i - 1], idList[i])));
             }
 
             return ret;
@@ -352,34 +363,30 @@ namespace DCT.Pathfinding
         {
             mAllPaths = new List<List<int>>();
 
-            PathfindHandler
-                room1forward = new PathfindHandler(GetPath),
-                forward = new PathfindHandler(GetPath);
+            //PathfindHandler
+            //    room1forward = new PathfindHandler(GetPath),
+            //    forward = new PathfindHandler(GetPath);
 
-            if (UserEditable.Optimize)
-            {
-                room1forward.BeginInvoke(1, finish, new AsyncCallback(PathfindCallback), room1forward);
-            }
-            else
-            {
-                mAllPaths.Add(null);
-            }
+            //room1forward.BeginInvoke(1, finish, new AsyncCallback(PathfindCallback), room1forward);
 
-            forward.BeginInvoke(start, finish, new AsyncCallback(PathfindCallback), forward);
+            //forward.BeginInvoke(start, finish, new AsyncCallback(PathfindCallback), forward);
 
-            while (mAllPaths.Count < 2)
-            {
-                ThreadEngine.Sleep(10);
-            }
+            //while (mAllPaths.Count < 2)
+            //{
+            //    ThreadEngine.Sleep(10);
+            //}
 
-            try
-            {
-                room1forward.EndInvoke(null);
-                forward.EndInvoke(null);
-            }
-            catch
-            {
-            }
+            //try
+            //{
+            //    room1forward.EndInvoke(null);
+            //    forward.EndInvoke(null);
+            //}
+            //catch
+            //{
+            //}
+
+            mAllPaths.Add(GetPath(1, finish));
+            mAllPaths.Add(GetPath(start, finish));
 
             List<int> bestPath = mAllPaths[0];
             for (int i = 0; i < mAllPaths.Count; i++)
@@ -398,6 +405,7 @@ namespace DCT.Pathfinding
         }
 
         private delegate List<int> PathfindHandler(int from, int to);
+        private static Hashtable mShortest;
         private static List<int> GetPath(int start, int finish)
         {
             List<int> roomList = new List<int>();
@@ -418,6 +426,8 @@ namespace DCT.Pathfinding
             roomList.Add(start);
             paths.Enqueue(roomList);
 
+            mShortest = new Hashtable();
+
             do
             {
                 roomList = paths.Dequeue();
@@ -425,26 +435,43 @@ namespace DCT.Pathfinding
 
                 foreach (int nbr in GetNeighbors(rm))
                 {
-                    if (!roomList.Contains(nbr))
+                    if (roomList.Contains(nbr))
                     {
-                        tmpList = new List<int>(roomList);
+                        continue;
+                    }
 
-                        tmpList.Add(nbr);
+                    tmpList = new List<int>(roomList);
+                    tmpList.Add(nbr);
 
-                        if (nbr == finish)
-                        {
-                            return tmpList;
-                        }
-                        else if (Shortest(tmpList.Count, nbr, paths))
-                        {
-                            paths.Enqueue(tmpList);
-                        }
+                    if (nbr == finish)
+                    {
+                        return tmpList;
+                    }
+                    else if(Shortest(tmpList))
+                    {
+                        paths.Enqueue(tmpList);
                     }
                 }
             }
             while (paths.Count > 0);
 
             return null;
+        }
+
+        private static bool Shortest(List<int> path)
+        {
+            int last = path[path.Count - 1];
+            if (!mShortest.Contains(last))
+            {
+                mShortest.Add(last, path.Count);
+                return true;
+            }
+            if ((int)mShortest[last] > path.Count)
+            {
+                mShortest[last] = path.Count;
+                return true;
+            }
+            return false;
         }
 
         private static List<int> GetNeighbors(int id)
@@ -458,17 +485,6 @@ namespace DCT.Pathfinding
             {
                 return new List<int>();
             }
-        }
-
-        private static bool Shortest(int count, int endid, IEnumerable<List<int>> paths)
-        {
-            foreach (List<int> path in paths)
-            {
-                if (path[path.Count - 1] == endid && path.Count <= count)
-                    return false;
-            }
-
-            return true;
         }
 
         private static void PathfindCallback(IAsyncResult ar)

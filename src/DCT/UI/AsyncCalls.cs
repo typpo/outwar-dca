@@ -120,7 +120,6 @@ namespace DCT.UI
 
                 Globals.AttackOn = true;
 
-                mAccount.Mover.CoverArea();
 
                 if (!Globals.AttackOn || !Globals.AttackMode)
                     goto quit;

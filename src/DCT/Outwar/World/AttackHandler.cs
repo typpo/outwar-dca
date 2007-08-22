@@ -63,6 +63,7 @@ namespace DCT.Outwar.World
             {
                 foreach (Account a in mAccounts)
                 {
+                    CoreUI.Instance.Log("Refreshing " + a.Name + "'s position...");
                     a.Mover.RefreshRoom();
                     a.Mover.ReturnToStartHandler.SetOriginal();
 

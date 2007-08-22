@@ -397,11 +397,6 @@ namespace DCT.UI
             UserEditable.Timeout = (int)numTimeout.Value;
         }
 
-        private void numThreadBatch_ValueChanged(object sender, EventArgs e)
-        {
-            UserEditable.MaxThreads = ThreadEngine.DefaultInstance.Max = (int)numThreadBatch.Value;
-        }
-
         private void numThreadDelay_ValueChanged(object sender, EventArgs e)
         {
             UserEditable.Delay = (int)numThreadDelay.Value;
@@ -410,11 +405,6 @@ namespace DCT.UI
         private void chkVariance_CheckedChanged(object sender, EventArgs e)
         {
             UserEditable.Variance = chkVariance.Checked;
-        }
-
-        private void chkHashes_CheckedChanged(object sender, EventArgs e)
-        {
-            UserEditable.Optimize = chkHashes.Checked;
         }
 
         private void chkFilter_CheckedChanged(object sender, EventArgs e)
@@ -728,8 +718,14 @@ namespace DCT.UI
             lvMobs.Sort();
         }
 
-        private void UpdateDisplay()
+        internal void UpdateDisplay()
         {
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(UpdateDisplay));
+                return;
+            }
+
             lblStatus.Text = Globals.AttackMode ? "Attacking" : string.Empty;
             lblMisc.Text = "Experience gained: " + Globals.ExpGained;
             pgr.Width = ss.Width - lblStatus.Width - lblMisc.Width - 10;
@@ -740,18 +736,14 @@ namespace DCT.UI
                     string.Format("Exp: {0:n0}      Rage: {1:n0}", mAccounts.MainAccount.Exp,
                                   mAccounts.MainAccount.Rage);
                 lblExpRage.Left = ((pnlAttack.Right - pnlAttack.Left) / 2) - (lblExpRage.Width / 2);
-            }
 
-            int i = 0;
-            foreach (Account a in mAccounts.Accounts)
-            {
-                lvAccounts.Items[i].SubItems[0].Text = a.Name;
-                lvAccounts.Items[i].SubItems[1].Text = a.Socket.Status;
-                lvAccounts.Items[i].SubItems[2].Text = a.Mover.Location == null ? "-" : a.Mover.Location.Id.ToString();
-                lvAccounts.Items[i].SubItems[3].Text = a.Mover.SavedRooms.Count.ToString();
-                lvAccounts.Items[i].SubItems[4].Text = a.Mover.MobsAttacked.ToString();
-                lvAccounts.Items[i].SubItems[5].Text = a.Mover.ExpGained.ToString();
-                i++;
+                int i = mAccounts.Accounts.IndexOf(mAccounts.MainAccount);
+                lvAccounts.Items[i].SubItems[0].Text = mAccounts.MainAccount.Name;
+                lvAccounts.Items[i].SubItems[1].Text = mAccounts.MainAccount.Socket.Status;
+                lvAccounts.Items[i].SubItems[2].Text = mAccounts.MainAccount.Mover.Location == null ? "-" : mAccounts.MainAccount.Mover.Location.Id.ToString();
+                lvAccounts.Items[i].SubItems[3].Text = mAccounts.MainAccount.Mover.SavedRooms.Count.ToString();
+                lvAccounts.Items[i].SubItems[4].Text = mAccounts.MainAccount.Mover.MobsAttacked.ToString();
+                lvAccounts.Items[i].SubItems[5].Text = mAccounts.MainAccount.Mover.ExpGained.ToString();
             }
         }
 
@@ -790,7 +782,10 @@ namespace DCT.UI
             }
             try
             {
-                pgr.Maximum = max;
+                if (pgr.Maximum != max)
+                {
+                    pgr.Maximum = max;
+                }
                 pgr.Value = val;
             }
             catch (ObjectDisposedException)
@@ -842,6 +837,7 @@ namespace DCT.UI
             }
 
             Toggle(!on);
+
             btnAttackStart.Enabled = !on;
             btnAttackStop.Enabled = on;
             Globals.AttackMode = on;
@@ -877,8 +873,6 @@ namespace DCT.UI
                 {
                     MessageBox.Show(txt.Substring(2), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                UpdateDisplay();
             }
             catch (ObjectDisposedException)
             {
@@ -947,7 +941,6 @@ namespace DCT.UI
 
             numLevel.Value = UserEditable.LvlLimit;
             numLevelMin.Value = UserEditable.LvlLimitMin;
-            numThreadBatch.Value = ThreadEngine.DefaultInstance.Max = UserEditable.MaxThreads;
             numRageStop.Value = UserEditable.StopAtRage;
 
             try
@@ -961,7 +954,6 @@ namespace DCT.UI
             }
 
             chkVariance.Checked = UserEditable.Variance;
-            chkHashes.Checked = UserEditable.Optimize;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

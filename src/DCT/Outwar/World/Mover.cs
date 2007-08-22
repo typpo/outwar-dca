@@ -336,6 +336,7 @@ namespace DCT.Outwar.World
             CoreUI.Instance.Log(mAccount.Name + " now in room "
                                 + (mLocation.Id == 0 ? "world.php" : mLocation.Id.ToString()));
 
+            CoreUI.Instance.UpdateDisplay();
             return true;
         }
 
@@ -359,22 +360,24 @@ namespace DCT.Outwar.World
             mSocket.Status = "Calculating path";
 
             mVisited = new List<int>();
-            foreach (int nbr in Pathfinder.CoverArea(mLocation.Id))
-            {
-                if (!Globals.AttackOn || !Globals.AttackMode)
-                {
-                    break;
-                }
-                else if (Globals.Terminate)
-                {
-                    mVisited.Clear();
-                    return;
-                }
-                else if (!mVisited.Contains(nbr))
-                {
-                    PathfindTo(nbr);
-                }
-            }
+            //foreach (int nbr in Pathfinder.CoverArea(mLocation.Id))
+            //{
+            //    if (!Globals.AttackOn || !Globals.AttackMode)
+            //    {
+            //        break;
+            //    }
+            //    else if (Globals.Terminate)
+            //    {
+            //        mVisited.Clear();
+            //        return;
+            //    }
+            //    else if (!mVisited.Contains(nbr))
+            //    {
+            //        PathfindTo(nbr);
+            //    }
+            //}
+
+            FollowPath(Pathfinder.CoverArea(mLocation.Id, mSavedRooms));
 
             CoreUI.Instance.Log("Area '" + mLocation.Name + "' coverage ended");
             mVisited.Clear();
@@ -390,26 +393,26 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.UpdateProgressbar(0, 0);
                 return;
             }
-            else
+
+            for (int i = 0; i < nodes.Count; i++)
             {
-                foreach (int node in nodes)
+                int node = nodes[i];
+                if (Globals.Terminate || mAccount.Ret != mAccount.Name)
                 {
-                    if (Globals.Terminate || mAccount.Ret != mAccount.Name)
-                    {
-                        return;
-                    }
+                    goto end;
+                }
 
-                    mSocket.Status = "Step " + (nodes.IndexOf(node) + 1) + " of " + nodes.Count;
-                    LoadRoom(node);
-                    CoreUI.Instance.UpdateProgressbar(nodes.IndexOf(node) + 1, nodes.Count);
+                mSocket.Status = "Step " + (i + 1) + " of " + nodes.Count;
+                LoadRoom(node);
+                CoreUI.Instance.UpdateProgressbar(i + 1, nodes.Count);
 
-                    if (mVisited != null)
-                    {
-                        mVisited.Add(node);
-                    }
+                if (mVisited != null)
+                {
+                    mVisited.Add(node);
                 }
             }
 
+        end:
             CoreUI.Instance.UpdateProgressbar(0, 0);
             mSocket.Status = "Idle";
             CoreUI.Instance.Log(mAccount.Name + " movement ended");

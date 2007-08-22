@@ -208,7 +208,7 @@ namespace DCT.Outwar.World
                 {
                     return;
                 }
-                mMover.Socket.Status = "Attacking " + i + "/" + mMobs.Count;
+                mMover.Socket.Status = "Attacking " + (i + 1) + "/" + mMobs.Count;
 
                 if (mob.Attack() && UserEditable.Delay != 0)
                 {

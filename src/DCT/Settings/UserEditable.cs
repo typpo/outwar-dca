@@ -70,12 +70,6 @@ namespace DCT.Settings
             get { return mVariance; }
             set { mVariance = value; }
         }
-        private static bool mOptimize;
-        internal static bool Optimize
-        {
-            get { return mOptimize; }
-            set { mOptimize = value; }
-        }
         private static bool mReturnToStart;
         internal static bool ReturnToStart
         {
@@ -168,7 +162,6 @@ namespace DCT.Settings
             mUseVault = false;
             mAutoTrain = true;
             mVariance = true;
-            mOptimize = true;
 
             mAlertQuests = false;
             mAutoQuest = false;

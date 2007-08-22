@@ -32,7 +32,6 @@ namespace DCT.Settings
             ht.Add("useHourTimer", UserEditable.UseHourTimer);
             ht.Add("totalEXPG", (Globals.ExpGainedTotal + Globals.ExpGained));
             ht.Add("variance", UserEditable.Variance);
-            ht.Add("optimize", UserEditable.Optimize);
             ht.Add("returnToStart", UserEditable.ReturnToStart);
             ht.Add("raidInterval", UserEditable.RaidInterval);
             ht.Add("cycleInterval", UserEditable.CycleInterval);
@@ -144,9 +143,6 @@ namespace DCT.Settings
                             break;
                         case "variance":
                             UserEditable.Variance = (bool) de.Value;
-                            break;
-                        case "optimize":
-                            UserEditable.Optimize = (bool) de.Value;
                             break;
                         case "returnToStart":
                             UserEditable.ReturnToStart = (bool) de.Value;

@@ -402,7 +402,9 @@ namespace DCT.Outwar.World
             {
                 string tmp;
                 if (src.StartsWith("ERROR"))
+                {
                     CoreUI.Instance.LogAttack("Attack E occurred in Connection: " + src);
+                }
                 else if ((tmp = Parser.Parse(src, "ERROR:</b></font> ", "<br>")) == "ERROR")
                 {
                     CoreUI.Instance.LogAttack("Attack E: An unknown error occurred");
@@ -414,6 +416,7 @@ namespace DCT.Outwar.World
             }
 
             mQuit = true;
+            CoreUI.Instance.UpdateDisplay();
         }
     }
 }

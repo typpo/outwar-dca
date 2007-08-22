@@ -30,6 +30,7 @@ namespace DCT.UI
         /// </summary>
         private void InitializeComponent()
         {
+            irc = new ChatUI();
             this.ss = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblMisc = new System.Windows.Forms.ToolStripStatusLabel();
@@ -47,13 +48,10 @@ namespace DCT.UI
             this.viewWorldphpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabAttack = new System.Windows.Forms.TabPage();
             this.grpSettings = new System.Windows.Forms.GroupBox();
-            this.chkHashes = new System.Windows.Forms.CheckBox();
             this.chkVariance = new System.Windows.Forms.CheckBox();
             this.numThreadDelay = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.numThreadBatch = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
             this.numTimeout = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.chkReturnToStart = new System.Windows.Forms.CheckBox();
@@ -117,7 +115,6 @@ namespace DCT.UI
             this.optQuestsAlert = new System.Windows.Forms.RadioButton();
             this.optQuestsAuto = new System.Windows.Forms.RadioButton();
             this.tabChat = new System.Windows.Forms.TabPage();
-            this.irc = new DCT.Protocols.IRC.ChatUI();
             this.lstLog = new System.Windows.Forms.ListBox();
             this.lstAttacks = new System.Windows.Forms.ListBox();
             this.pnlRight = new System.Windows.Forms.Panel();
@@ -159,7 +156,6 @@ namespace DCT.UI
             this.tabAttack.SuspendLayout();
             this.grpSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numThreadDelay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numThreadBatch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRageLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLevelMin)).BeginInit();
@@ -181,6 +177,14 @@ namespace DCT.UI
             this.pnlAttack.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCountdown)).BeginInit();
             this.SuspendLayout();
+            // 
+            // irc
+            // 
+            this.irc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.irc.Location = new System.Drawing.Point(0, 0);
+            this.irc.Name = "irc";
+            this.irc.Size = new System.Drawing.Size(426, 229);
+            this.irc.TabIndex = 0;
             // 
             // ss
             // 
@@ -315,13 +319,10 @@ namespace DCT.UI
             // 
             // grpSettings
             // 
-            this.grpSettings.Controls.Add(this.chkHashes);
             this.grpSettings.Controls.Add(this.chkVariance);
             this.grpSettings.Controls.Add(this.numThreadDelay);
             this.grpSettings.Controls.Add(this.label9);
             this.grpSettings.Controls.Add(this.label8);
-            this.grpSettings.Controls.Add(this.numThreadBatch);
-            this.grpSettings.Controls.Add(this.label7);
             this.grpSettings.Controls.Add(this.numTimeout);
             this.grpSettings.Controls.Add(this.label5);
             this.grpSettings.Controls.Add(this.chkReturnToStart);
@@ -344,25 +345,12 @@ namespace DCT.UI
             this.grpSettings.TabStop = false;
             this.grpSettings.Text = "Settings";
             // 
-            // chkHashes
-            // 
-            this.chkHashes.AutoSize = true;
-            this.chkHashes.Checked = true;
-            this.chkHashes.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkHashes.Location = new System.Drawing.Point(197, 163);
-            this.chkHashes.Name = "chkHashes";
-            this.chkHashes.Size = new System.Drawing.Size(142, 17);
-            this.chkHashes.TabIndex = 37;
-            this.chkHashes.Text = "Hash optimization (flying)";
-            this.chkHashes.UseVisualStyleBackColor = true;
-            this.chkHashes.CheckedChanged += new System.EventHandler(this.chkHashes_CheckedChanged);
-            // 
             // chkVariance
             // 
             this.chkVariance.AutoSize = true;
             this.chkVariance.Checked = true;
             this.chkVariance.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkVariance.Location = new System.Drawing.Point(197, 140);
+            this.chkVariance.Location = new System.Drawing.Point(198, 104);
             this.chkVariance.Name = "chkVariance";
             this.chkVariance.Size = new System.Drawing.Size(130, 17);
             this.chkVariance.TabIndex = 36;
@@ -372,7 +360,7 @@ namespace DCT.UI
             // 
             // numThreadDelay
             // 
-            this.numThreadDelay.Location = new System.Drawing.Point(272, 80);
+            this.numThreadDelay.Location = new System.Drawing.Point(273, 44);
             this.numThreadDelay.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -387,7 +375,7 @@ namespace DCT.UI
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(194, 82);
+            this.label9.Location = new System.Drawing.Point(195, 46);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(72, 13);
             this.label9.TabIndex = 35;
@@ -403,35 +391,6 @@ namespace DCT.UI
             this.label8.TabIndex = 33;
             this.label8.Text = "Advanced:";
             // 
-            // numThreadBatch
-            // 
-            this.numThreadBatch.Enabled = false;
-            this.numThreadBatch.Location = new System.Drawing.Point(278, 50);
-            this.numThreadBatch.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numThreadBatch.Name = "numThreadBatch";
-            this.numThreadBatch.Size = new System.Drawing.Size(41, 20);
-            this.numThreadBatch.TabIndex = 32;
-            this.numThreadBatch.ThousandsSeparator = true;
-            this.numThreadBatch.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numThreadBatch.ValueChanged += new System.EventHandler(this.numThreadBatch_ValueChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(194, 52);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(78, 13);
-            this.label7.TabIndex = 30;
-            this.label7.Text = "Max # threads:";
-            // 
             // numTimeout
             // 
             this.numTimeout.Increment = new decimal(new int[] {
@@ -439,7 +398,7 @@ namespace DCT.UI
             0,
             0,
             0});
-            this.numTimeout.Location = new System.Drawing.Point(287, 109);
+            this.numTimeout.Location = new System.Drawing.Point(288, 73);
             this.numTimeout.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -464,7 +423,7 @@ namespace DCT.UI
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(194, 111);
+            this.label5.Location = new System.Drawing.Point(195, 75);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(87, 13);
             this.label5.TabIndex = 29;
@@ -1160,14 +1119,6 @@ namespace DCT.UI
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
             // 
-            // irc
-            // 
-            this.irc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.irc.Location = new System.Drawing.Point(0, 0);
-            this.irc.Name = "irc";
-            this.irc.Size = new System.Drawing.Size(426, 229);
-            this.irc.TabIndex = 0;
-            // 
             // lstLog
             // 
             this.lstLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1588,7 +1539,6 @@ namespace DCT.UI
             this.grpSettings.ResumeLayout(false);
             this.grpSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numThreadDelay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numThreadBatch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRageLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLevelMin)).EndInit();
@@ -1752,13 +1702,10 @@ namespace DCT.UI
         private System.Windows.Forms.Label lblTimeLeft;
         private System.Windows.Forms.NumericUpDown numCountdown;
         private System.Windows.Forms.Label lblTimer;
-        private System.Windows.Forms.CheckBox chkHashes;
         private System.Windows.Forms.CheckBox chkVariance;
         private System.Windows.Forms.NumericUpDown numThreadDelay;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown numThreadBatch;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown numTimeout;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label10;
