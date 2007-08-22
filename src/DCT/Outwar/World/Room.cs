@@ -163,7 +163,12 @@ namespace DCT.Outwar.World
                     trainer = true;
                 }
 
-                // TODO spawn mobs
+                if (s.Contains("rareicon.jpg"))
+                {   
+                    // spawn mob
+                    name = Parser.Parse(name, "\"#00FF00\">*", " (");
+                }
+
                 if (s.Contains("raidz") || (attackurl == string.Empty && !quest && !trainer))
                 {
                     continue;

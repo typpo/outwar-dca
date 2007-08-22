@@ -908,7 +908,9 @@ namespace DCT.UI
             txtPassword.Text = UserEditable.LastPassword;
 
             foreach (string str in UserEditable.MobFilters)
+            {
                 txtFilters.Text = str + "\r\n";
+            }
 
             chkAttackPause.Checked = UserEditable.AttackPause;
             chkVault.Checked = UserEditable.UseVault;
