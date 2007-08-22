@@ -394,10 +394,16 @@ namespace DCT.Outwar.World
                 return;
             }
 
+            bool attackmode = Globals.AttackMode;
+
             for (int i = 0; i < nodes.Count; i++)
             {
                 int node = nodes[i];
                 if (Globals.Terminate || mAccount.Ret != mAccount.Name)
+                {
+                    return;
+                }
+                if (attackmode != Globals.AttackMode)
                 {
                     goto end;
                 }
@@ -482,21 +488,17 @@ namespace DCT.Outwar.World
             List<List<int>> paths = new List<List<int>>();
             paths.Add(Pathfinder.GetSolution(mLocation.Id, 258, mSavedRooms)); // dustglass
             paths.Add(Pathfinder.GetSolution(mLocation.Id, 241, mSavedRooms)); // drunkenclam
-                      paths.Add(Pathfinder.GetSolution(mLocation.Id, 403, mSavedRooms)); //hardiron
-                      paths.Add(Pathfinder.GetSolution(mLocation.Id, 299, mSavedRooms)); //chuggers
+            paths.Add(Pathfinder.GetSolution(mLocation.Id, 403, mSavedRooms)); //hardiron
+            paths.Add(Pathfinder.GetSolution(mLocation.Id, 299, mSavedRooms)); //chuggers
 
             bool tmp = UserEditable.AutoTrain;
             UserEditable.AutoTrain = true;
 
             int shortest = 0;
-            for(int i = 1; i < paths.Count; i++)
+            for (int i = 1; i < paths.Count; i++)
             {
                 List<int> path = paths[i];
-                if (path == null)
-                {
-                    continue;
-                }
-                else if (path.Count < paths[shortest].Count)
+                if (path != null && path.Count < paths[shortest].Count)
                 {
                     shortest = i;
                 }
