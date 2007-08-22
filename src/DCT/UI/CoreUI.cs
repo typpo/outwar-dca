@@ -728,7 +728,6 @@ namespace DCT.UI
 
             lblStatus.Text = Globals.AttackMode ? "Attacking" : string.Empty;
             lblMisc.Text = "Experience gained: " + Globals.ExpGained;
-            pgr.Width = ss.Width - lblStatus.Width - lblMisc.Width - 10;
 
             if (mAccounts.MainAccount != null)
             {

@@ -30,7 +30,6 @@ namespace DCT.UI
         /// </summary>
         private void InitializeComponent()
         {
-            irc = new ChatUI();
             this.ss = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblMisc = new System.Windows.Forms.ToolStripStatusLabel();
@@ -180,6 +179,7 @@ namespace DCT.UI
             // 
             // irc
             // 
+            irc = new ChatUI();
             this.irc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.irc.Location = new System.Drawing.Point(0, 0);
             this.irc.Name = "irc";
@@ -197,27 +197,24 @@ namespace DCT.UI
             this.ss.Size = new System.Drawing.Size(664, 22);
             this.ss.SizingGrip = false;
             this.ss.TabIndex = 3;
-            this.ss.Text = "statusStrip1";
             // 
             // lblStatus
             // 
             this.lblStatus.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(24, 17);
-            this.lblStatus.Text = "(...)";
+            this.lblStatus.Size = new System.Drawing.Size(0, 17);
             // 
             // lblMisc
             // 
             this.lblMisc.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMisc.Name = "lblMisc";
-            this.lblMisc.Size = new System.Drawing.Size(20, 17);
-            this.lblMisc.Text = "(...)";
+            this.lblMisc.Size = new System.Drawing.Size(0, 17);
             // 
             // pgr
             // 
             this.pgr.Name = "pgr";
-            this.pgr.Overflow = System.Windows.Forms.ToolStripItemOverflow.Always;
-            this.pgr.Size = new System.Drawing.Size(590, 16);
+            this.pgr.Size = new System.Drawing.Size(580, 16);
+            this.pgr.Step = 1;
             // 
             // mnuMain
             // 

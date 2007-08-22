@@ -204,7 +204,6 @@ namespace DCT.Outwar.World
                 return;
             }
 
-            CoreUI.Instance.UpdateProgressbar(0, 0);
             for (int i = 0; i < mMobs.Count; i++)
             {
                 Mob mob = mMobs[i];
@@ -224,8 +223,6 @@ namespace DCT.Outwar.World
 
                     CoreUI.Instance.Log("Waiting for delay: " + delay + " ms");
                     ThreadEngine.Sleep(delay);
-
-                    CoreUI.Instance.UpdateProgressbar(i, mMobs.Count);
                 }
             }
 
@@ -237,7 +234,6 @@ namespace DCT.Outwar.World
                 {
                     ThreadEngine.Sleep(10);
                 }
-                CoreUI.Instance.UpdateProgressbar(i, mMobs.Count);
             }
         }
 
