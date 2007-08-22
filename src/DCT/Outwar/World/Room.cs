@@ -199,6 +199,10 @@ namespace DCT.Outwar.World
             {
                 EnumMobs();
             }
+            if (mMobs.Count < 1)
+            {
+                return;
+            }
 
             CoreUI.Instance.UpdateProgressbar(0, 0);
             for (int i = 0; i < mMobs.Count; i++)

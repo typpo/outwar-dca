@@ -298,7 +298,7 @@ namespace DCT.Outwar.World
         /// <returns>True if mover should retry</returns>
         private bool LoadRoom(string url)
         {
-            if (url == null || url.Trim() == "")
+            if (string.IsNullOrEmpty(url))
             {
                 CoreUI.Instance.Log("Move E: that room doesn't exist");
                 mSocket.Status = "Idle";
@@ -425,11 +425,11 @@ namespace DCT.Outwar.World
         /// <param name="id">Room id to move to</param>
         private void LoadRoom(int id)
         {
-            string url = null;
+            string url;
             if (id == 1 || mAccount.Ret != mAccount.Name)
             {
                 CoreUI.Instance.Log(mAccount.Name + " flying to room 1");
-                LoadRoom("world.php?room=1");
+                url = "world.php?room=1";
             }
             else if (!string.IsNullOrEmpty(url = mSavedRooms.GetRoom(id)))
             {
