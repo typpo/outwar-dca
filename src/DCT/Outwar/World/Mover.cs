@@ -310,7 +310,7 @@ namespace DCT.Outwar.World
             {
                 if (!mLocation.Load())
                 {
-                    CoreUI.Instance.Log("Move E: Flying error - room hash invalid");
+                    CoreUI.Instance.Log("Move E: Flying error - room hash invalid (" + url + ")");
 
                     mMoveTries++;
                     if (mMoveTries < 3)

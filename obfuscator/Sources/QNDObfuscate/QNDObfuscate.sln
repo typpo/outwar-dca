@@ -1,0 +1,40 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "QNDObfuscate", "QNDObfuscate.vbproj", "{82DACB5E-C3E6-404D-95AA-CC48F43BA20F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ObfuscatorEngine", "..\ObfuscatorEngine\ObfuscatorEngine.vcproj", "{3A1CAF3B-4E44-47EE-8438-1E919BCBCBF4}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ObfuscatorLogic", "..\ObfuscatorLogic\ObfuscatorLogic.vbproj", "{E4937BBD-7026-4A6F-912D-DAADC930C4DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Distribution
+		ConfigName.2 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{82DACB5E-C3E6-404D-95AA-CC48F43BA20F}.Debug.ActiveCfg = Debug|.NET
+		{82DACB5E-C3E6-404D-95AA-CC48F43BA20F}.Debug.Build.0 = Debug|.NET
+		{82DACB5E-C3E6-404D-95AA-CC48F43BA20F}.Distribution.ActiveCfg = Distribution|.NET
+		{82DACB5E-C3E6-404D-95AA-CC48F43BA20F}.Distribution.Build.0 = Distribution|.NET
+		{82DACB5E-C3E6-404D-95AA-CC48F43BA20F}.Release.ActiveCfg = Release|.NET
+		{82DACB5E-C3E6-404D-95AA-CC48F43BA20F}.Release.Build.0 = Release|.NET
+		{3A1CAF3B-4E44-47EE-8438-1E919BCBCBF4}.Debug.ActiveCfg = Debug|Win32
+		{3A1CAF3B-4E44-47EE-8438-1E919BCBCBF4}.Debug.Build.0 = Debug|Win32
+		{3A1CAF3B-4E44-47EE-8438-1E919BCBCBF4}.Distribution.ActiveCfg = Distribution|Win32
+		{3A1CAF3B-4E44-47EE-8438-1E919BCBCBF4}.Distribution.Build.0 = Distribution|Win32
+		{3A1CAF3B-4E44-47EE-8438-1E919BCBCBF4}.Release.ActiveCfg = Release|Win32
+		{3A1CAF3B-4E44-47EE-8438-1E919BCBCBF4}.Release.Build.0 = Release|Win32
+		{E4937BBD-7026-4A6F-912D-DAADC930C4DD}.Debug.ActiveCfg = Debug|.NET
+		{E4937BBD-7026-4A6F-912D-DAADC930C4DD}.Debug.Build.0 = Debug|.NET
+		{E4937BBD-7026-4A6F-912D-DAADC930C4DD}.Distribution.ActiveCfg = Distribution|.NET
+		{E4937BBD-7026-4A6F-912D-DAADC930C4DD}.Distribution.Build.0 = Distribution|.NET
+		{E4937BBD-7026-4A6F-912D-DAADC930C4DD}.Release.ActiveCfg = Release|.NET
+		{E4937BBD-7026-4A6F-912D-DAADC930C4DD}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
