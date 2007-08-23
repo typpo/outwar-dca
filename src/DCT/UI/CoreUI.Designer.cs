@@ -30,6 +30,7 @@ namespace DCT.UI
         /// </summary>
         private void InitializeComponent()
         {
+            irc = new ChatUI();
             this.ss = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblMisc = new System.Windows.Forms.ToolStripStatusLabel();
@@ -43,8 +44,7 @@ namespace DCT.UI
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reloadCurrentRoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewWorldphpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabAttack = new System.Windows.Forms.TabPage();
             this.grpSettings = new System.Windows.Forms.GroupBox();
             this.chkVariance = new System.Windows.Forms.CheckBox();
@@ -179,7 +179,6 @@ namespace DCT.UI
             // 
             // irc
             // 
-            irc = new ChatUI();
             this.irc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.irc.Location = new System.Drawing.Point(0, 0);
             this.irc.Name = "irc";
@@ -283,25 +282,17 @@ namespace DCT.UI
             // actionsToolStripMenuItem
             // 
             this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reloadCurrentRoomToolStripMenuItem,
-            this.viewWorldphpToolStripMenuItem});
+            this.openInBrowserToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
             this.actionsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.actionsToolStripMenuItem.Text = "Actions";
             // 
-            // reloadCurrentRoomToolStripMenuItem
+            // openInBrowserToolStripMenuItem
             // 
-            this.reloadCurrentRoomToolStripMenuItem.Name = "reloadCurrentRoomToolStripMenuItem";
-            this.reloadCurrentRoomToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.reloadCurrentRoomToolStripMenuItem.Text = "Reload current room";
-            this.reloadCurrentRoomToolStripMenuItem.Click += new System.EventHandler(this.reloadCurrentRoomToolStripMenuItem_Click);
-            // 
-            // viewWorldphpToolStripMenuItem
-            // 
-            this.viewWorldphpToolStripMenuItem.Name = "viewWorldphpToolStripMenuItem";
-            this.viewWorldphpToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.viewWorldphpToolStripMenuItem.Text = "View world.php";
-            this.viewWorldphpToolStripMenuItem.Click += new System.EventHandler(this.viewWorldphpToolStripMenuItem_Click);
+            this.openInBrowserToolStripMenuItem.Name = "openInBrowserToolStripMenuItem";
+            this.openInBrowserToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.openInBrowserToolStripMenuItem.Text = "Open in browser";
+            this.openInBrowserToolStripMenuItem.Click += new System.EventHandler(this.openInBrowserToolStripMenuItem_Click);
             // 
             // tabAttack
             // 
@@ -1625,10 +1616,8 @@ namespace DCT.UI
         private System.Windows.Forms.CheckBox chkVault;
         private System.Windows.Forms.NumericUpDown numRageStop;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ToolStripMenuItem reloadCurrentRoomToolStripMenuItem;
         private System.Windows.Forms.NumericUpDown numLevelMin;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ToolStripMenuItem viewWorldphpToolStripMenuItem;
         private System.Windows.Forms.NumericUpDown numRageLimit;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
@@ -1711,5 +1700,6 @@ namespace DCT.UI
         private System.Windows.Forms.LinkLabel lnkLoadRooms;
         private System.Windows.Forms.CheckBox chkHourTimer;
         private System.Windows.Forms.CheckBox chkCountdownTimer;
+        private System.Windows.Forms.ToolStripMenuItem openInBrowserToolStripMenuItem;
     }
 }

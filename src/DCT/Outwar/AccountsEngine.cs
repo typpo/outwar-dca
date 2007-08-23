@@ -6,6 +6,12 @@ namespace DCT.Outwar
 {
     internal class AccountsEngine
     {
+        private string mRgSessId;
+        internal string RgSessId
+        {
+            get { return mRgSessId; }
+        }
+
         private List<Account> mAccounts;
         internal List<Account> Accounts
         {
@@ -88,6 +94,11 @@ namespace DCT.Outwar
             {
                 string svrlist = HttpSocket.DefaultInstance.Get("http://outwar.com/accounts.php?ac_serverid=" + i);
                 AddAccountsFromSource(svrlist);
+            }
+
+            if (HttpSocket.DefaultInstance.HasCookie)
+            {
+                mRgSessId = HttpSocket.DefaultInstance.Cookie.Substring(11, HttpSocket.DefaultInstance.Cookie.IndexOf(";") - 11);
             }
         }
 

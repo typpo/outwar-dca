@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DCT.Outwar
 {
-    internal enum ServerName
+    public enum ServerName
     {
         sigil,
         torax,

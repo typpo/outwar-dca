@@ -98,8 +98,8 @@ namespace DCT.Protocols.Http
                                            "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; InfoPath.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"
                                        };
 
-        private static readonly RequestCachePolicy CACHE_POLICY =
-            new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
+        //private static readonly RequestCachePolicy CACHE_POLICY =
+        //    new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
 
         internal HttpSocket()
         {
@@ -141,7 +141,7 @@ namespace DCT.Protocols.Http
             {
                 try
                 {
-                    bool post = !String.IsNullOrEmpty(write);
+                    bool post = !string.IsNullOrEmpty(write);
 
                     HttpWebRequest request = GenerateRequest(url);
 
@@ -166,7 +166,7 @@ namespace DCT.Protocols.Http
                     sr.Close();
                     response.Close();
 
-                    if (String.IsNullOrEmpty(mCookie))
+                    if (string.IsNullOrEmpty(mCookie))
                     {
                         StringBuilder full = new StringBuilder();
                         string[] cookieA = response.Headers.GetValues("Set-Cookie");
@@ -257,10 +257,10 @@ namespace DCT.Protocols.Http
         private HttpWebRequest GenerateRequest(string url)
         {
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
-            request.CachePolicy = CACHE_POLICY;
+            //request.CachePolicy = CACHE_POLICY;
             request.Timeout = mTimeout; // (int)Globals.Timeout; 
 
-            if (!String.IsNullOrEmpty(mCookie))
+            if (!string.IsNullOrEmpty(mCookie))
             {
                 request.Headers.Add("Cookie: " + mCookie);
             }

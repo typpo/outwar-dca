@@ -37,6 +37,11 @@ namespace DCT.Util
             return null;
         }
 
+        internal static void SaveFileFromString(string title, string suggestedFileName, string s)
+        {
+            SaveFileFromString(title, "All Files|*.*", suggestedFileName, s);
+        }
+
         internal static void SaveFileFromString(string title, string browsemask, string suggestedFileName, string s)
         {
             SaveFileDialog dlg = new SaveFileDialog();

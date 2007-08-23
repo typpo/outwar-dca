@@ -1022,21 +1022,9 @@ namespace DCT.UI
             Application.Exit();
         }
 
-        private void reloadCurrentRoomToolStripMenuItem_Click(object sender, EventArgs e)
+        private void openInBrowserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (mAccounts.MainAccount == null)
-            {
-                return;
-            }
-            if (lvAccounts.FocusedItem != null)
-            {
-                mAccounts.MainAccount.Mover.RefreshRoom();
-            }
-        }
-
-        private void viewWorldphpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://" + mAccounts.MainAccount.Server + ".outwar.com/world.php");
+            Process.Start("http://" + mAccounts.MainAccount.Server + ".outwar.com/?rg_sess_id=" + mAccounts.RgSessId);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
