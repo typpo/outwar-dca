@@ -371,7 +371,7 @@ namespace DCT.Outwar.World
 
         private void FollowPath(IList<int> nodes)
         {
-            if (nodes.Count < 1)
+            if (nodes == null || nodes.Count < 1)
             {
                 CoreUI.Instance.Log("Move E: " + mAccount.Name + "'s projected path does not exist");
                 CoreUI.Instance.UpdateProgressbar(0, 0);

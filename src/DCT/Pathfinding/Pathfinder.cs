@@ -343,16 +343,25 @@ namespace DCT.Pathfinding
             {
                 if (rm != null && rm.Name.Equals(startRoom.Name))
                 {
-                    idList.Insert(Randomizer.Random.Next(idList.Count), rm.Id);
+                    //idList.Insert(Randomizer.Random.Next(idList.Count), rm.Id);
+                    idList.Add(rm.Id);
                 }
             }
 
             List<int> ret = new List<int>();
             ret = GetSolution(start, idList[0], savedRooms);
+            if (ret == null)
+            {
+                return null;
+            }
 
             for(int i = 1; i < idList.Count; i++)
             {
-                ret.AddRange(savedRooms.Optimize(GetPath(idList[i - 1], idList[i])));
+                List<int> tmp = savedRooms.Optimize(GetPath(idList[i - 1], idList[i]));
+                if (tmp != null)
+                {
+                    ret.AddRange(tmp);
+                }
             }
 
             return ret;
@@ -453,7 +462,7 @@ namespace DCT.Pathfinding
         private static List<int> GetNeighbors(int id)
         {
             int tmp = FindRoom(id);
-            if (tmp != -1 && Math.Abs(tmp) < mRooms.Count)
+            if (tmp > -1 && tmp < mRooms.Count)
             {
                 return mRooms[tmp].Neighbors;
             }

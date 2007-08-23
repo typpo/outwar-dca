@@ -65,7 +65,7 @@ namespace DCT.Settings
                 sw.Flush();
                 sw.Close();
             }
-            catch (InvalidOperationException)
+            catch
             {
             }
         }
