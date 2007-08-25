@@ -371,7 +371,6 @@ namespace DCT.Pathfinding
         {
             mAllPaths = new List<List<int>>();
 
-            mAllPaths.Add(GetPath(1, finish));
             mAllPaths.Add(GetPath(start, finish));
 
             List<int> bestPath = mAllPaths[0];
@@ -398,11 +397,6 @@ namespace DCT.Pathfinding
 
             if (start == finish)
             {
-                return roomList;
-            }
-            else if (finish == 1)
-            {
-                roomList.Add(1);
                 return roomList;
             }
 

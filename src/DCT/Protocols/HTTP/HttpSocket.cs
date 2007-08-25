@@ -19,6 +19,7 @@ namespace DCT.Protocols.Http
                 if (mDefaultInstance == null)
                 {
                     mDefaultInstance = new HttpSocket();
+                    mDefaultInstance.Redirect = false;
                     mDefaultInstance.UserAgent = "Typpo DCAA Client";
                 }
                 return mDefaultInstance;
@@ -105,7 +106,7 @@ namespace DCT.Protocols.Http
         {
             mTimeout = DEFAULT_TIMEOUT;
 
-            mRedirect = false;
+            mRedirect = true;
             mKeepAlive = false;
             mCookie = string.Empty;
             mUserAgent = USER_AGENTS[Randomizer.Random.Next(USER_AGENTS.Length)];

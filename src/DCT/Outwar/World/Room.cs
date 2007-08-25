@@ -45,10 +45,6 @@ namespace DCT.Outwar.World
                 {
                     int.TryParse(tmp, out mId);
                 }
-                else if (url == "world.php?room=1")
-                {
-                    mId = 1;
-                }
             }
             mUrl = url;
             mMover = mover;
@@ -150,9 +146,9 @@ namespace DCT.Outwar.World
                 bool trainer = false;
                 bool quest = false;
 
-                if (s.Contains("mobattack.php"))
+                if (s.Contains("newattack.php"))
                 {
-                    attackurl = "mobattack.php" + p.Parse("mobattack.php", "\"");
+                    attackurl = "newattack.php" + p.Parse("newattack.php", "\"");
                 }
                 if (s.Contains("Talk to"))
                 {

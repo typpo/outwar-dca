@@ -416,12 +416,7 @@ namespace DCT.Outwar.World
         private void LoadRoom(int id)
         {
             string url;
-            if (id == 1 || mAccount.Ret != mAccount.Name)
-            {
-                CoreUI.Instance.Log(mAccount.Name + " flying to room 1");
-                url = "world.php?room=1";
-            }
-            else if (!string.IsNullOrEmpty(url = mLocation[id]))
+            if (!string.IsNullOrEmpty(url = mLocation[id]))
             {
                 CoreUI.Instance.Log(mAccount.Name + " moving to room " + id);
             }

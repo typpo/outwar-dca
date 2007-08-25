@@ -281,7 +281,7 @@ namespace DCT.Outwar.World
 
             if (!mSkipLoad)
             {
-                mAttackUrl = "mobattack.php" + new Parser(mLoadSrc).Parse("mobattack.php", "\"");
+                mAttackUrl = "newattack.php" + new Parser(mLoadSrc).Parse("newattack.php", "\"");
             }
             EvaluateOutcome(mRoom.Mover.Socket.Get(mAttackUrl));
 
@@ -358,7 +358,6 @@ namespace DCT.Outwar.World
             else if (src.Contains("underlying connection was closed"))
             {
                 CoreUI.Instance.Log("Attack on " + mName + " failed - underlying connection closed by server");
-                ;
                 SendAttack();
                 return;
             }
@@ -368,36 +367,54 @@ namespace DCT.Outwar.World
             mRoom.Mover.MobsAttacked++;
             Globals.SecRight++;
 
-            if (src.Contains("You've <font color=\"#CC0000\">KILLED</font>"))
+            if (src.Contains("found a"))
             {
-                Parser mm = new Parser(src);
-                string tmp;
-                if ((tmp = mm.Parse("You have gained ", " experience!")) != "ERROR")
+                string f = Parser.Parse(src, "found a ", "<br>");
+                CoreUI.Instance.LogAttack(mRoom.Mover.Account.Name + " found a " + f);
+            }
+            if (src.Contains("has gained "))
+            {
+                if (int.TryParse(Parser.Parse(src, "has gained ", " experience!"), out mExpGained))
                 {
-                    if (!int.TryParse(tmp, out mExpGained))
-                        mExpGained = 0;
                     Globals.ExpGained += mExpGained;
                     mRoom.Mover.ExpGained += mExpGained;
-                }
-
-                CoreUI.Instance.LogAttack(mRoom.Mover.Account.Name + " beat " + mName + ", " + mId + " in room "
-                                          + mRoom.Id + " "
-                                          + (mExpGained > 0 ? (", gained exp: " + mExpGained) : ""));
-
-                if (src.Contains("You found a"))
-                {
-                    string tmpFound = mm.Parse("You found a ", "!");
-                    // Sometimes Outwar glitches
-                    if (!tmpFound.Contains("<"))
-                    {
-                        CoreUI.Instance.LogAttack(mName + " dropped " + tmpFound);
-                    }
+                    CoreUI.Instance.LogAttack(mRoom.Mover.Account.Name + " beat " + mName + ", gained " + mExpGained + " exp");
                 }
             }
-            else if (src.Contains("KILLED"))
+            else if (src.Contains("var battle_result"))
             {
-                CoreUI.Instance.LogAttack(mName + ", " + mId + " in " + mRoom.Id + " beat " + mRoom.Mover.Account.Name);
+                CoreUI.Instance.LogAttack(mRoom.Mover.Account.Name + " attacked " + mName);
             }
+            //if (src.Contains("You've <font color=\"#CC0000\">KILLED</font>"))
+            //{
+            //    Parser mm = new Parser(src);
+            //    string tmp;
+            //    if ((tmp = mm.Parse("has gained ", " experience!")) != "ERROR")
+            //    {
+            //        if (!int.TryParse(tmp, out mExpGained))
+            //            mExpGained = 0;
+            //        Globals.ExpGained += mExpGained;
+            //        mRoom.Mover.ExpGained += mExpGained;
+            //    }
+
+            //    CoreUI.Instance.LogAttack(mRoom.Mover.Account.Name + " beat " + mName + ", " + mId + " in room "
+            //                              + mRoom.Id + " "
+            //                              + (mExpGained > 0 ? (", gained exp: " + mExpGained) : ""));
+
+            //    if (src.Contains("You found a"))
+            //    {
+            //        string tmpFound = mm.Parse("You found a ", "!");
+            //        // Sometimes Outwar glitches
+            //        if (!tmpFound.Contains("<"))
+            //        {
+            //            CoreUI.Instance.LogAttack(mName + " dropped " + tmpFound);
+            //        }
+            //    }
+            //}
+            //else if (src.Contains("KILLED"))
+            //{
+            //    CoreUI.Instance.LogAttack(mName + ", " + mId + " in " + mRoom.Id + " beat " + mRoom.Mover.Account.Name);
+            //}
             else
             {
                 string tmp;
