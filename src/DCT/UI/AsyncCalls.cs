@@ -192,6 +192,7 @@ namespace DCT.UI
             if (!Pathfinder.Exists(room))
             {
                 Log("E: Select a room that exists in the map database");
+                Toggle(true);
                 return;
             }
 

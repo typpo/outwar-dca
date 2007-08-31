@@ -20,16 +20,10 @@ namespace DCT.Deployment
 
         private static void RunFromServer(string url, string entrypoint)
         {
-            WebClient c;
-            Stream s = null;
-            BinaryReader br = null;
             byte[] bin;
             try
             {
-                c = new WebClient();
-                s = c.OpenRead(url);
-                br = new BinaryReader(s);
-                bin = br.ReadBytes(Convert.ToInt32(s.Length));
+                bin = new WebClient().DownloadData(url);
             }
             catch (Exception e)
             {
@@ -38,18 +32,6 @@ namespace DCT.Deployment
                     + e.Message,
                     "Deployer Startup", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
-            finally
-            {
-                if (s != null)
-                {
-                    s.Flush();
-                    s.Close();
-                }
-                if (br != null)
-                {
-                    br.Close();
-                }
             }
 
             try

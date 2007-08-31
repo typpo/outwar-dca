@@ -278,6 +278,7 @@ namespace DCT.Pathfinding
                     continue;
                 mRooms.Add(new MappedRoom(token));
             }
+            mRooms.Sort();
 
             // ------------------
 
@@ -290,6 +291,7 @@ namespace DCT.Pathfinding
                     continue;
                 mMobs.Add(new MappedMob(token));
             }
+            mMobs.Sort();
 
             // -----------------
 
@@ -475,13 +477,12 @@ namespace DCT.Pathfinding
 
         internal static int FindRoom(int find)
         {
-            return new ArrayList(mRooms).BinarySearch(find);
+            return mRooms.BinarySearch(new MappedRoom(find));
         }
 
         internal static bool Exists(int id)
         {
-            int i = FindRoom(id);
-            return i > -1 && i < mRooms.Count;
+            return FindRoom(id) > -1;
         }
     }
 }

@@ -23,6 +23,11 @@ namespace DCT.Pathfinding
             get { return mNeighbors; }
         }
 
+        internal MappedRoom(int id)
+        {
+            mId = id;
+        }
+
         internal MappedRoom(string token)
         {
             mNeighbors = new List<int>();
@@ -38,12 +43,14 @@ namespace DCT.Pathfinding
 
         public int CompareTo(object other)
         {
-            if (other.GetType() != typeof (int))
+            if (other.GetType() == typeof(MappedRoom))
+            {
+                return mId.CompareTo(((MappedRoom)other).mId);
+            }
+            else
             {
                 throw new Exception("Invalid room compare type: " + other.GetType());
             }
-            int id = (int) other;
-            return mId.CompareTo(id);
         }
     }
 }
