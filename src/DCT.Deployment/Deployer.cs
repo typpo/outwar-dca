@@ -8,17 +8,7 @@ namespace DCT.Deployment
 {
     static class Deployer
     {
-        public static void Start(string url)
-        {
-            RunFromServer(url, null);
-        }
-
-        public static void Start(string url, string entrypoint)
-        {
-            RunFromServer(url, entrypoint);
-        }
-
-        private static void RunFromServer(string url, string entrypoint)
+        internal static void RunFromUrl(string url, string entrypoint)
         {
             byte[] bin;
             try

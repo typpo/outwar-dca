@@ -284,7 +284,7 @@ namespace DCT.Outwar.World
             }
             catch
             {
-                CoreUI.Instance.Log("E: " + mAccount.Name + " can't explore DC because the account is not authorized");
+                CoreUI.Instance.Log("E: " + mAccount.Name + " can't explore DC because the account is not authorized.\n\nRegister for a trial at http://typpo.us/trial.php");
                 Application.Exit();
                 return;
             }
