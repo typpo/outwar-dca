@@ -126,11 +126,10 @@ namespace DCT.Deployment
                     bCrypt = bCrypt - iSalt;
                     break;
                 case 1:
-                case 3:
-                    bCrypt = bCrypt ^ iSalt;
+                    bCrypt = bCrypt + iSalt;
                     break;
                 case 2:
-                    bCrypt = bCrypt + iSalt;
+                    bCrypt = bCrypt ^ iSalt;
                     break;
             }
             bCrypt = bCrypt & 255;
