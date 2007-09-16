@@ -333,12 +333,57 @@ namespace DCT.UI
             {
                 return;
             }
+
             foreach (string l in s.Split(new char[] { ',', '\n', '\r', ';', '\t' }))
             {
-                foreach (ListViewItem item in lvMobs.Items.Find(l, false))
-                {
-                    item.Checked = true;
-                }
+                SelectMobsByName(l);
+            }
+        }
+
+        private void btnPotionMobsSelect_Click(object sender, EventArgs e)
+        {
+            List<string> check = new List<string>();
+            switch (cmbPotionMobs.Text.ToLower())
+            {
+                case "kinetic":
+                    check.Add("Deadly Ripscale");
+                    check.Add("Poison Drake");
+                    check.Add("Enraged Centaur");
+                    check.Add("Earth Troll");
+                    check.Add("Evil Sherpa");
+                    if (MessageBox.Show("Do you want to select Entropic Horrors and Belligerent Zombies too (lower drop rates)?", "Select Potion Mobs", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        check.Add("Entropic Horror");
+                        check.Add("Belligerent Zombie");
+                    }
+                    break;
+                case "fire":
+                    check.Add("Haunter");
+                    check.Add("Forgotten Warrior");
+                    check.Add("Lost Demon");
+                    break;
+                case "holy":
+                    check.Add("Fallen Angel");
+                    check.Add("Apparitional Veteran");
+                    check.Add("Rabid Wallabee");
+                    break;
+                case "shadow":
+                    check.Add("Caustic Corpse");
+                    check.Add("Infuriated Savage");
+                    check.Add("Choleric Ancient");
+                    break;
+                case "arcane":
+                    check.Add("Spectral Warrior");
+                    check.Add("Ancient Deserter");
+                    check.Add("Bearded Recluse");
+                    break;
+                default:
+                    MessageBox.Show("Choose a preset option.", "Select Potion Mobs", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    return;
+            }
+            foreach (string m in check)
+            {
+                SelectMobsByName(m);
             }
         }
 
@@ -351,10 +396,23 @@ namespace DCT.UI
             }
             foreach (string l in s.Split(new char[] { ',', '\n', '\r', ';', '\t' }))
             {
-                foreach (ListViewItem item in lvPathfind.Items.Find(l, false))
-                {
-                    item.Checked = true;
-                }
+                SelectRoomsByName(l);
+            }
+        }
+
+        private void SelectRoomsByName(string name)
+        {
+            foreach (ListViewItem item in lvPathfind.Items.Find(name, false))
+            {
+                item.Checked = true;
+            }
+        }
+
+        private void SelectMobsByName(string name)
+        {
+            foreach (ListViewItem item in lvMobs.Items.Find(name, false))
+            {
+                item.Checked = true;
             }
         }
 

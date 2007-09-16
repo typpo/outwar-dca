@@ -86,7 +86,7 @@ namespace DCT.Outwar
 
         internal void Login(string user, string pass, bool remember)
         {
-            HttpSocket.DefaultInstance.Get("http://outwar.com/myaccount.php?login_username=" + user
+            HttpSocket.DefaultInstance.Post("http://outwar.com/myaccount.php", "login_username=" + user
                                            + "&login_password=" + pass
                                            + (remember ? "&remember=1" : string.Empty));
 
@@ -110,11 +110,6 @@ namespace DCT.Outwar
                 return;
             }
 
-            int i = src.IndexOf("Trustee Access");
-            if (i > -1)
-            {
-                src = src.Substring(0, i);
-            }
             Parser m1 = new Parser(src);
             int serverid;
             if (!int.TryParse(m1.Parse("serverid=", "\""), out serverid))

@@ -84,6 +84,8 @@ namespace DCT.UI
             this.label6 = new System.Windows.Forms.Label();
             this.lnkUncheckRooms = new System.Windows.Forms.LinkLabel();
             this.tabMobs = new System.Windows.Forms.TabPage();
+            this.btnPotionMobsSelect = new System.Windows.Forms.Button();
+            this.cmbPotionMobs = new System.Windows.Forms.ComboBox();
             this.lnkMobLoad = new System.Windows.Forms.LinkLabel();
             this.lnkUncheckMobs = new System.Windows.Forms.LinkLabel();
             this.lvMobs = new System.Windows.Forms.ListView();
@@ -789,6 +791,8 @@ namespace DCT.UI
             // 
             // tabMobs
             // 
+            this.tabMobs.Controls.Add(this.btnPotionMobsSelect);
+            this.tabMobs.Controls.Add(this.cmbPotionMobs);
             this.tabMobs.Controls.Add(this.lnkMobLoad);
             this.tabMobs.Controls.Add(this.lnkUncheckMobs);
             this.tabMobs.Controls.Add(this.lvMobs);
@@ -799,10 +803,34 @@ namespace DCT.UI
             this.tabMobs.Text = "Mobs";
             this.tabMobs.UseVisualStyleBackColor = true;
             // 
+            // btnPotionMobsSelect
+            // 
+            this.btnPotionMobsSelect.Location = new System.Drawing.Point(366, 205);
+            this.btnPotionMobsSelect.Name = "btnPotionMobsSelect";
+            this.btnPotionMobsSelect.Size = new System.Drawing.Size(54, 22);
+            this.btnPotionMobsSelect.TabIndex = 4;
+            this.btnPotionMobsSelect.Text = "Select";
+            this.btnPotionMobsSelect.UseVisualStyleBackColor = true;
+            this.btnPotionMobsSelect.Click += new System.EventHandler(this.btnPotionMobsSelect_Click);
+            // 
+            // cmbPotionMobs
+            // 
+            this.cmbPotionMobs.Items.AddRange(new object[] {
+            "Kinetic",
+            "Fire",
+            "Holy",
+            "Shadow",
+            "Arcane"});
+            this.cmbPotionMobs.Location = new System.Drawing.Point(239, 205);
+            this.cmbPotionMobs.Name = "cmbPotionMobs";
+            this.cmbPotionMobs.Size = new System.Drawing.Size(121, 21);
+            this.cmbPotionMobs.TabIndex = 3;
+            this.cmbPotionMobs.Text = "Choose a potion...";
+            // 
             // lnkMobLoad
             // 
             this.lnkMobLoad.AutoSize = true;
-            this.lnkMobLoad.Location = new System.Drawing.Point(74, 216);
+            this.lnkMobLoad.Location = new System.Drawing.Point(74, 210);
             this.lnkMobLoad.Name = "lnkMobLoad";
             this.lnkMobLoad.Size = new System.Drawing.Size(79, 13);
             this.lnkMobLoad.TabIndex = 2;
@@ -813,7 +841,7 @@ namespace DCT.UI
             // lnkUncheckMobs
             // 
             this.lnkUncheckMobs.AutoSize = true;
-            this.lnkUncheckMobs.Location = new System.Drawing.Point(3, 216);
+            this.lnkUncheckMobs.Location = new System.Drawing.Point(3, 210);
             this.lnkUncheckMobs.Name = "lnkUncheckMobs";
             this.lnkUncheckMobs.Size = new System.Drawing.Size(65, 13);
             this.lnkUncheckMobs.TabIndex = 1;
@@ -834,7 +862,7 @@ namespace DCT.UI
             this.lvMobs.GridLines = true;
             this.lvMobs.Location = new System.Drawing.Point(3, 0);
             this.lvMobs.Name = "lvMobs";
-            this.lvMobs.Size = new System.Drawing.Size(414, 213);
+            this.lvMobs.Size = new System.Drawing.Size(414, 204);
             this.lvMobs.TabIndex = 0;
             this.lvMobs.UseCompatibleStateImageBehavior = false;
             this.lvMobs.View = System.Windows.Forms.View.Details;
@@ -1701,5 +1729,7 @@ namespace DCT.UI
         private System.Windows.Forms.CheckBox chkHourTimer;
         private System.Windows.Forms.CheckBox chkCountdownTimer;
         private System.Windows.Forms.ToolStripMenuItem openInBrowserToolStripMenuItem;
+        private System.Windows.Forms.Button btnPotionMobsSelect;
+        private System.Windows.Forms.ComboBox cmbPotionMobs;
     }
 }

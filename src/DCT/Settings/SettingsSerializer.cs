@@ -72,7 +72,8 @@ namespace DCT.Settings
 
         internal static void Get()
         {
-            if (!File.Exists("prefs.dat"))
+            if (!File.Exists("prefs.dat") || !File.Exists("savedMobs.ini")
+                ||  !File.Exists("savedRooms.ini") || !File.Exists("savedRaids.ini"))
             {
                 return;
             }
