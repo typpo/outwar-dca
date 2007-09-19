@@ -2,10 +2,10 @@
 :BEGIN
 
 SET path="obfuscator\Executables"
-SET orig="C:\Documents and Settings\Ian\Desktop\DCT svn\src\DCT\bin\Release\DCT.exe"
-SET obfusc="C:\Documents and Settings\Ian\Desktop\DCT svn\DCT release.exe"
+SET orig="C:\Users\Administrator\Desktop\svn\trunk\DCT\src\DCT\bin\Release\DCT.exe"
+SET obfusc="C:\Users\Administrator\Desktop\svn\trunk\DCT\DCT release.exe"
 SET snpath="C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\Bin"
-SET snkey="C:\Documents and Settings\Ian\Desktop\DCT svn\src\DCT\key.snk"
+SET snkey="C:\Users\Administrator\Desktop\svn\trunk\DCT\src\DCT\key.snk"
 
 CLS
 

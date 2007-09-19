@@ -8,12 +8,13 @@ namespace DCT.Outwar
         sigil,
         torax,
         fabar,
-        zimbob
+        zimbob,
+        rancid
     }
 
     internal class Server
     {
-        internal const int NUM_SERVERS = 4;
+        internal const int NUM_SERVERS = 5;
 
         internal static List<string> NamesList
         {
@@ -24,6 +25,7 @@ namespace DCT.Outwar
                 ret.Add("Torax");
                 ret.Add("Fabar");
                 ret.Add("Zimbob");
+                ret.Add("Rancid");
                 return ret;
             }
         }
@@ -40,6 +42,8 @@ namespace DCT.Outwar
                     return 3;
                 case ServerName.zimbob:
                     return 4;
+                case ServerName.rancid:
+                    return 5;
             }
             throw new ArgumentException("No server id correlates with " + n);
         }
@@ -56,6 +60,8 @@ namespace DCT.Outwar
                     return ServerName.fabar;
                 case 4:
                     return ServerName.zimbob;
+                case 5:
+                    return ServerName.rancid;
             }
             throw new ArgumentException("No server name correlates with " + id);
         }
