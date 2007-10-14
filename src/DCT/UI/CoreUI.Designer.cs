@@ -30,7 +30,6 @@ namespace DCT.UI
         /// </summary>
         private void InitializeComponent()
         {
-            irc = new ChatUI();
             this.ss = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblMisc = new System.Windows.Forms.ToolStripStatusLabel();
@@ -95,7 +94,7 @@ namespace DCT.UI
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.tabJoiner = new System.Windows.Forms.TabPage();
-            this.numRaidInterval = new System.Windows.Forms.NumericUpDown();
+            this.numRaidIntervalMin = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.chkAutoJoin = new System.Windows.Forms.CheckBox();
             this.btnAdventuresGo = new System.Windows.Forms.Button();
@@ -152,6 +151,7 @@ namespace DCT.UI
             this.lblTimer = new System.Windows.Forms.Label();
             this.chkCountdownTimer = new System.Windows.Forms.CheckBox();
             this.lblExpRage = new System.Windows.Forms.Label();
+            this.numRaidIntervalSec = new System.Windows.Forms.NumericUpDown();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.tabAttack.SuspendLayout();
@@ -168,7 +168,7 @@ namespace DCT.UI
             ((System.ComponentModel.ISupportInitialize)(this.numPathfindId)).BeginInit();
             this.tabMobs.SuspendLayout();
             this.tabJoiner.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numRaidInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalMin)).BeginInit();
             this.tabFormer.SuspendLayout();
             this.tabTrainer.SuspendLayout();
             this.tabQuests.SuspendLayout();
@@ -177,6 +177,7 @@ namespace DCT.UI
             this.grpConnections.SuspendLayout();
             this.pnlAttack.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCountdown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalSec)).BeginInit();
             this.SuspendLayout();
             // 
             // irc
@@ -238,46 +239,46 @@ namespace DCT.UI
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(134, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(127, 22);
             this.toolStripMenuItem2.Text = "About";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // changesToolStripMenuItem
             // 
             this.changesToolStripMenuItem.Name = "changesToolStripMenuItem";
-            this.changesToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.changesToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.changesToolStripMenuItem.Text = "Changes";
             this.changesToolStripMenuItem.Click += new System.EventHandler(this.changesToolStripMenuItem_Click);
             // 
             // exportLogToolStripMenuItem
             // 
             this.exportLogToolStripMenuItem.Name = "exportLogToolStripMenuItem";
-            this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.exportLogToolStripMenuItem.Text = "Export log";
             this.exportLogToolStripMenuItem.Click += new System.EventHandler(this.exportLogToolStripMenuItem_Click);
             // 
             // clearLogToolStripMenuItem
             // 
             this.clearLogToolStripMenuItem.Name = "clearLogToolStripMenuItem";
-            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.clearLogToolStripMenuItem.Text = "Clear log";
             this.clearLogToolStripMenuItem.Click += new System.EventHandler(this.clearLogToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(131, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(124, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -286,13 +287,13 @@ namespace DCT.UI
             this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openInBrowserToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
-            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.actionsToolStripMenuItem.Text = "Actions";
             // 
             // openInBrowserToolStripMenuItem
             // 
             this.openInBrowserToolStripMenuItem.Name = "openInBrowserToolStripMenuItem";
-            this.openInBrowserToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.openInBrowserToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.openInBrowserToolStripMenuItem.Text = "Open in browser";
             this.openInBrowserToolStripMenuItem.Click += new System.EventHandler(this.openInBrowserToolStripMenuItem_Click);
             // 
@@ -893,7 +894,8 @@ namespace DCT.UI
             // 
             // tabJoiner
             // 
-            this.tabJoiner.Controls.Add(this.numRaidInterval);
+            this.tabJoiner.Controls.Add(this.numRaidIntervalSec);
+            this.tabJoiner.Controls.Add(this.numRaidIntervalMin);
             this.tabJoiner.Controls.Add(this.label15);
             this.tabJoiner.Controls.Add(this.chkAutoJoin);
             this.tabJoiner.Controls.Add(this.btnAdventuresGo);
@@ -906,38 +908,32 @@ namespace DCT.UI
             this.tabJoiner.Text = "Joiner";
             this.tabJoiner.UseVisualStyleBackColor = true;
             // 
-            // numRaidInterval
+            // numRaidIntervalMin
             // 
-            this.numRaidInterval.Enabled = false;
-            this.numRaidInterval.Location = new System.Drawing.Point(183, 24);
-            this.numRaidInterval.Minimum = new decimal(new int[] {
-            1,
+            this.numRaidIntervalMin.Location = new System.Drawing.Point(183, 24);
+            this.numRaidIntervalMin.Maximum = new decimal(new int[] {
+            999,
             0,
             0,
             0});
-            this.numRaidInterval.Name = "numRaidInterval";
-            this.numRaidInterval.Size = new System.Drawing.Size(46, 20);
-            this.numRaidInterval.TabIndex = 7;
-            this.numRaidInterval.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numRaidInterval.ValueChanged += new System.EventHandler(this.numRaidInterval_ValueChanged);
+            this.numRaidIntervalMin.Name = "numRaidIntervalMin";
+            this.numRaidIntervalMin.Size = new System.Drawing.Size(46, 20);
+            this.numRaidIntervalMin.TabIndex = 7;
+            this.numRaidIntervalMin.ValueChanged += new System.EventHandler(this.numRaidInterval_ValueChanged);
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(51, 26);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(229, 13);
+            this.label15.Size = new System.Drawing.Size(347, 13);
             this.label15.TabIndex = 6;
-            this.label15.Text = "Check for new raids every                   minute(s)";
+            this.label15.Text = "Check for new raids every                   minute(s) and                   secon" +
+                "ds";
             // 
             // chkAutoJoin
             // 
             this.chkAutoJoin.AutoSize = true;
-            this.chkAutoJoin.Enabled = false;
             this.chkAutoJoin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAutoJoin.Location = new System.Drawing.Point(14, 8);
             this.chkAutoJoin.Name = "chkAutoJoin";
@@ -1005,7 +1001,6 @@ namespace DCT.UI
             // chkAutoForm
             // 
             this.chkAutoForm.AutoSize = true;
-            this.chkAutoForm.Enabled = false;
             this.chkAutoForm.Location = new System.Drawing.Point(3, 18);
             this.chkAutoForm.Name = "chkAutoForm";
             this.chkAutoForm.Size = new System.Drawing.Size(297, 17);
@@ -1015,7 +1010,6 @@ namespace DCT.UI
             // 
             // cmbFormer
             // 
-            this.cmbFormer.Enabled = false;
             this.cmbFormer.FormattingEnabled = true;
             this.cmbFormer.Location = new System.Drawing.Point(23, 41);
             this.cmbFormer.Name = "cmbFormer";
@@ -1526,6 +1520,23 @@ namespace DCT.UI
             this.lblExpRage.TabIndex = 31;
             this.lblExpRage.Text = "...";
             // 
+            // numRaidIntervalSec
+            // 
+            this.numRaidIntervalSec.Location = new System.Drawing.Point(302, 24);
+            this.numRaidIntervalSec.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numRaidIntervalSec.Name = "numRaidIntervalSec";
+            this.numRaidIntervalSec.Size = new System.Drawing.Size(46, 20);
+            this.numRaidIntervalSec.TabIndex = 8;
+            this.numRaidIntervalSec.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
             // CoreUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1570,7 +1581,7 @@ namespace DCT.UI
             this.tabMobs.PerformLayout();
             this.tabJoiner.ResumeLayout(false);
             this.tabJoiner.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numRaidInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalMin)).EndInit();
             this.tabFormer.ResumeLayout(false);
             this.tabFormer.PerformLayout();
             this.tabTrainer.ResumeLayout(false);
@@ -1584,6 +1595,7 @@ namespace DCT.UI
             this.pnlAttack.ResumeLayout(false);
             this.pnlAttack.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCountdown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalSec)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1682,7 +1694,7 @@ namespace DCT.UI
             set { lvAdventures = value; }
         }
         private System.Windows.Forms.ComboBox cmbFormer;
-        private System.Windows.Forms.NumericUpDown numRaidInterval;
+        private System.Windows.Forms.NumericUpDown numRaidIntervalMin;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.CheckBox chkAutoForm;
         private ChatUI irc;
@@ -1731,5 +1743,6 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripMenuItem openInBrowserToolStripMenuItem;
         private System.Windows.Forms.Button btnPotionMobsSelect;
         private System.Windows.Forms.ComboBox cmbPotionMobs;
+        private System.Windows.Forms.NumericUpDown numRaidIntervalSec;
     }
 }

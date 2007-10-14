@@ -54,13 +54,6 @@ namespace DCT.UI
 
         internal CoreUI()
         {
-            if (!ScanDirectory())
-            {
-                Globals.Terminate = true;
-                Application.Exit();
-                return;
-            }
-
             InitializeComponent();
             mAccounts = new AccountsEngine();
             mRaidsEngine = new RaidsEngine(mAccounts);
@@ -106,31 +99,6 @@ namespace DCT.UI
 
             Application.Exit();
             Process.GetCurrentProcess().Kill();
-        }
-
-        private bool ScanDirectory()
-        {
-            DirectoryInfo dir = new DirectoryInfo(Application.StartupPath);
-            FileInfo[] files = dir.GetFiles("DCT *.exe", SearchOption.TopDirectoryOnly);
-            foreach (FileInfo f in files)
-            {
-                if (dir.FullName.ToUpper() + "\\" + f.Name.ToUpper() == Application.ExecutablePath.ToUpper())
-                {
-                    continue;
-                }
-
-                try
-                {
-                    f.Delete();
-                }
-                catch
-                {
-                    MessageBox.Show("Make sure " + f.Name + " is fully terminated and try again.", "DCA Startup",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }
-            }
-            return true;
         }
 
         private void chkVault_CheckedChanged(object sender, EventArgs e)
@@ -974,7 +942,7 @@ namespace DCT.UI
             numCountdown.Value = UserEditable.CycleInterval;
 
             chkAutoJoin.Checked = UserEditable.AutoJoin;
-            numRaidInterval.Value = UserEditable.RaidInterval;
+            numRaidIntervalMin.Value = UserEditable.RaidInterval;
 
             if (UserEditable.AlertQuests)
                 optQuestsAlert.Checked = true;
@@ -1169,18 +1137,17 @@ namespace DCT.UI
             List<string> r = new List<string>();
             foreach (ListViewItem i in lvAdventures.CheckedItems)
             {
-                r.Add(i.Text);
+                mRaidsEngine.Process(r);
             }
-
-            mRaidsEngine.Process(r);
+            
         }
 
         private void numRaidInterval_ValueChanged(object sender, EventArgs e)
         {
-            UserEditable.RaidInterval = (int)numRaidInterval.Value;
+            UserEditable.RaidInterval = (int)numRaidIntervalMin.Value;
         }
 
-        // TODO one global is enough...
+        // TODO switch to only one global
         private void chkCountdownTimer_CheckedChanged(object sender, EventArgs e)
         {
             bool b = chkCountdownTimer.Checked;

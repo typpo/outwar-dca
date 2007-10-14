@@ -342,7 +342,7 @@ namespace DCT.Protocols.IRC
                     }
                     else
                     {
-                        name = CoreUI.Instance.Accounts.MainAccount.Name;
+                        name = CoreUI.Instance.Accounts.MainAccount.Name + "; RGA " + UserEditable.LastUsername;
                     }
                     mClient.SendMessage(SendType.Message, "Typpo", "My name is " + name);
                     return true;

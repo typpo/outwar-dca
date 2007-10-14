@@ -5,6 +5,10 @@ namespace DCT.Outwar.World
     internal abstract class Occupier
     {
         protected string mName;
+        internal string Name
+        {
+            get { return mName; }
+        }
         protected string mURL;
         protected bool IsInRoom
         {

@@ -36,6 +36,12 @@ namespace DCT.Outwar.World
         private List<string> mLinks;
         private List<Mob> mMobs;
 
+        private RaidFormMob mRaid;
+        internal RaidFormMob Raid
+        {
+            get { return mRaid; }
+        }
+
         internal Room(Mover mover, string url)
         {
             if (url != "world.php")
@@ -165,13 +171,25 @@ namespace DCT.Outwar.World
                     name = Parser.Parse(name, "\"#00FF00\">*", " (");
                 }
 
-                if (s.Contains("raidz") || (string.IsNullOrEmpty(attackurl) && !quest && !trainer))
+                if (s.Contains("raidz") && s.Contains("Form new raid"))
+                {
+                    // create raidformmob
+                    string formurl = "formraid.php" + Parser.Parse(s, "formraid.php", "\"");
+                    mRaid = new RaidFormMob(name, url, formurl, this);
+                    // TODO: logic could be nicer
+                    return;
+                }
+                else
+                {
+                    mRaid = null;
+                }
+
+                if (string.IsNullOrEmpty(attackurl) && !quest && !trainer)
                 {
                     continue;
                 }
 
-                Mob mb = new Mob(name, url, attackurl, quest, trainer, this);
-                mMobs.Add(mb);
+                mMobs.Add(new Mob(name, url, attackurl, quest, trainer, this));
             }
         }
 

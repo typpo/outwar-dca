@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using DCT.Settings;
 using DCT.Threading;
@@ -18,11 +19,13 @@ namespace DCT.Outwar.World
             mAccounts = e;
         }
 
-        internal void Process(List<string> r)
+        internal void Process(string r)
         {
-            // form the raid...
+            // TODO: some sort of verification if in correct room; otherwise, move to room
+
+            // form the raid
             Account mainAccount = CoreUI.Instance.Accounts.MainAccount;
-            if (!mainAccount.Raider.Check(r))
+            if (!mainAccount.Raider.Form(r))
             {
                 return;
             }
@@ -32,16 +35,21 @@ namespace DCT.Outwar.World
             foreach (Account a in CoreUI.Instance.Accounts.Accounts)
             {
                 a.Raider.Raids = raids;
-                ThreadEngine.DefaultInstance.Enqueue(a.Raider.Join);
+                CoreUI.Instance.Invoke((MethodInvoker)delegate
+                {
+                    a.Raider.Join();
+                    CoreUI.Instance.Log(a.Name + " joined");
+                });
             }
 
-            ThreadEngine.DefaultInstance.ProcessAll();
+            // launch
+
             Wait();
         }
 
         private void Wait()
         {
-            mCountdownTimer = new CountDownTimer(UserEditable.RaidInterval*60);
+            mCountdownTimer = new CountDownTimer(UserEditable.RaidInterval);
             mCountdownTimer.Interval = 1000;
             mCountdownTimer.Stopped += new EventHandler(mCountdownTimer_Stopped);
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DCT.Parsing;
 using DCT.Protocols.Http;
@@ -23,6 +24,31 @@ namespace DCT.Outwar.World
             mSocket = a.Socket;
         }
 
+        internal bool Form(string r)
+        {
+            RaidFormMob m = mAccount.Mover.Location.Raid;
+            if (m == null || m.Name != r)
+            {
+                return false;
+            }
+
+            m.Form();
+            return true;
+        }
+
+        internal bool Launch()
+        {
+            RaidFormMob m = mAccount.Mover.Location.Raid;
+            if (m == null)
+            {
+                CoreUI.Instance.Log("E: Could not launch - can't find expected raid mob at current location.");
+                return false;
+            }
+
+            m.Launch();
+            return true;
+        }
+
         internal bool Check(List<string> raidnames)
         {
             CoreUI.Instance.Log(mAccount.Name + " checking for raids...");
@@ -34,7 +60,9 @@ namespace DCT.Outwar.World
             foreach (string s in p.MultiParse("('joinraid.php?", "</font>"))
             {
                 if (!s.Contains("raidid="))
+                {
                     continue;
+                }
 
                 string url = s.Substring(0, s.IndexOf("'"));
                 int i = s.IndexOf("yellow>") + 7;
@@ -68,6 +96,7 @@ namespace DCT.Outwar.World
                 string codeid = p.Parse("codeid\" value=\"", "\"");
 
                 mSocket.Post(url, "codeid=" + codeid + "&submit=Launch!");
+                mAccount.Socket.Status = "Joined " + s;
                 CoreUI.Instance.Log(mAccount.Name + " joined " + s + " raid");
             }
         }
