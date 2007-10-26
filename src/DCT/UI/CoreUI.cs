@@ -1134,10 +1134,9 @@ namespace DCT.UI
                 a.Add(mAccounts[index]);
             }
 
-            List<string> r = new List<string>();
             foreach (ListViewItem i in lvAdventures.CheckedItems)
             {
-                mRaidsEngine.Process(r);
+                mRaidsEngine.Process(i.Text);
             }
             
         }

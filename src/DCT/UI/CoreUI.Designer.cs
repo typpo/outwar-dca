@@ -30,6 +30,7 @@ namespace DCT.UI
         /// </summary>
         private void InitializeComponent()
         {
+            irc = new ChatUI();
             this.ss = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblMisc = new System.Windows.Forms.ToolStripStatusLabel();

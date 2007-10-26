@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Outwar\World\Occupier.cs" />
     <Compile Include="Outwar\World\RaidFormMob.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Protocols\IRC\ChatUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -114,6 +115,9 @@
     <Compile Include="Pathfinding\Pathfinder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Protocols\IRC\ChatUI.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ChatUI.cs</DependentUpon>
@@ -130,6 +134,7 @@
       <DependentUpon>InputBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="key.snk" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
