@@ -220,18 +220,21 @@ namespace DCT.UI
 
             mCountdownTimer.Start();
 
-            if (lstLog.Items.Count > 100)
+            if (UserEditable.ClearLogs)
             {
-                for (int i = lstLog.Items.Count - 1; i > 10; i--)
+                if (lstLog.Items.Count > 100)
                 {
-                    lstLog.Items.RemoveAt(i);
+                    for (int i = lstLog.Items.Count - 1; i > 10; i--)
+                    {
+                        lstLog.Items.RemoveAt(i);
+                    }
                 }
-            }
-            if (lstAttacks.Items.Count > 100)
-            {
-                for (int i = lstAttacks.Items.Count - 1; i > 10; i--)
+                if (lstAttacks.Items.Count > 100)
                 {
-                    lstAttacks.Items.RemoveAt(i);
+                    for (int i = lstAttacks.Items.Count - 1; i > 10; i--)
+                    {
+                        lstAttacks.Items.RemoveAt(i);
+                    }
                 }
             }
         }
@@ -923,6 +926,8 @@ namespace DCT.UI
 
         private void SyncSettings()
         {
+            clearLogsPeriodicallyToolStripMenuItem.Checked = UserEditable.ClearLogs;
+
             txtUsername.Text = UserEditable.LastUsername;
             txtPassword.Text = UserEditable.LastPassword;
 
@@ -940,6 +945,17 @@ namespace DCT.UI
             chkCountdownTimer.Checked = UserEditable.UseCountdownTimer;
             chkHourTimer.Checked = UserEditable.UseHourTimer;
             numCountdown.Value = UserEditable.CycleInterval;
+
+            switch (UserEditable.AttackMode)
+            {
+                case 0: optCountdownSingle.Checked = true;
+                    break;
+                case 1: optCountdownMulti.Checked = true;
+                    break;
+                case 2: optCountdownMobs.Checked = true;
+                    break;
+                default: throw new Exception("Your settings are corrupt; no such attack mode.");
+            }
 
             chkAutoJoin.Checked = UserEditable.AutoJoin;
             numRaidIntervalMin.Value = UserEditable.RaidInterval;
@@ -1175,6 +1191,54 @@ namespace DCT.UI
 
             }
             UserEditable.UseHourTimer = b;
+        }
+
+        private void UpdateMobRage()
+        {
+            int r = 0;
+            foreach(ListViewItem i in lvMobs.CheckedItems)
+            {
+                int t = int.Parse(i.SubItems[4].Text);
+                if(t > 0)
+                    r += t;
+            }
+            lblMobRage.Text = "Using rage: " + r;
+        }
+
+        private void btnMobRage_Click(object sender, EventArgs e)
+        {
+            btnMobRage.Enabled = false;
+            UpdateMobRage();
+            btnMobRage.Enabled = true;
+        }
+
+        private void clearLogsPeriodicallyToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            UserEditable.ClearLogs = clearLogsPeriodicallyToolStripMenuItem.Checked;
+        }
+
+        private void optCountdownSingle_CheckedChanged(object sender, EventArgs e)
+        {
+            if (optCountdownSingle.Checked)
+            {
+                UserEditable.AttackMode = 0;
+            }
+        }
+
+        private void optCountdownMulti_CheckedChanged(object sender, EventArgs e)
+        {
+            if (optCountdownMulti.Checked)
+            {
+                UserEditable.AttackMode = 1;
+            }
+        }
+
+        private void optCountdownMobs_CheckedChanged(object sender, EventArgs e)
+        {
+            if (optCountdownMobs.Checked)
+            {
+                UserEditable.AttackMode = 2;
+            }
         }
     }
 }

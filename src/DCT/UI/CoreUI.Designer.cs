@@ -45,6 +45,8 @@ namespace DCT.UI
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearLogsPeriodicallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabAttack = new System.Windows.Forms.TabPage();
             this.grpSettings = new System.Windows.Forms.GroupBox();
             this.chkVariance = new System.Windows.Forms.CheckBox();
@@ -84,6 +86,8 @@ namespace DCT.UI
             this.label6 = new System.Windows.Forms.Label();
             this.lnkUncheckRooms = new System.Windows.Forms.LinkLabel();
             this.tabMobs = new System.Windows.Forms.TabPage();
+            this.btnMobRage = new System.Windows.Forms.Button();
+            this.lblMobRage = new System.Windows.Forms.Label();
             this.btnPotionMobsSelect = new System.Windows.Forms.Button();
             this.cmbPotionMobs = new System.Windows.Forms.ComboBox();
             this.lnkMobLoad = new System.Windows.Forms.LinkLabel();
@@ -95,6 +99,7 @@ namespace DCT.UI
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.tabJoiner = new System.Windows.Forms.TabPage();
+            this.numRaidIntervalSec = new System.Windows.Forms.NumericUpDown();
             this.numRaidIntervalMin = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.chkAutoJoin = new System.Windows.Forms.CheckBox();
@@ -152,7 +157,6 @@ namespace DCT.UI
             this.lblTimer = new System.Windows.Forms.Label();
             this.chkCountdownTimer = new System.Windows.Forms.CheckBox();
             this.lblExpRage = new System.Windows.Forms.Label();
-            this.numRaidIntervalSec = new System.Windows.Forms.NumericUpDown();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.tabAttack.SuspendLayout();
@@ -169,6 +173,7 @@ namespace DCT.UI
             ((System.ComponentModel.ISupportInitialize)(this.numPathfindId)).BeginInit();
             this.tabMobs.SuspendLayout();
             this.tabJoiner.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalSec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalMin)).BeginInit();
             this.tabFormer.SuspendLayout();
             this.tabTrainer.SuspendLayout();
@@ -178,7 +183,6 @@ namespace DCT.UI
             this.grpConnections.SuspendLayout();
             this.pnlAttack.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCountdown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalSec)).BeginInit();
             this.SuspendLayout();
             // 
             // irc
@@ -223,7 +227,8 @@ namespace DCT.UI
             // 
             this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.actionsToolStripMenuItem});
+            this.actionsToolStripMenuItem,
+            this.preferencesToolStripMenuItem});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
             this.mnuMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -297,6 +302,24 @@ namespace DCT.UI
             this.openInBrowserToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.openInBrowserToolStripMenuItem.Text = "Open in browser";
             this.openInBrowserToolStripMenuItem.Click += new System.EventHandler(this.openInBrowserToolStripMenuItem_Click);
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearLogsPeriodicallyToolStripMenuItem});
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.preferencesToolStripMenuItem.Text = "Preferences";
+            // 
+            // clearLogsPeriodicallyToolStripMenuItem
+            // 
+            this.clearLogsPeriodicallyToolStripMenuItem.Checked = true;
+            this.clearLogsPeriodicallyToolStripMenuItem.CheckOnClick = true;
+            this.clearLogsPeriodicallyToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.clearLogsPeriodicallyToolStripMenuItem.Name = "clearLogsPeriodicallyToolStripMenuItem";
+            this.clearLogsPeriodicallyToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.clearLogsPeriodicallyToolStripMenuItem.Text = "Clear logs periodically";
+            this.clearLogsPeriodicallyToolStripMenuItem.CheckedChanged += new System.EventHandler(this.clearLogsPeriodicallyToolStripMenuItem_CheckedChanged);
             // 
             // tabAttack
             // 
@@ -793,6 +816,8 @@ namespace DCT.UI
             // 
             // tabMobs
             // 
+            this.tabMobs.Controls.Add(this.btnMobRage);
+            this.tabMobs.Controls.Add(this.lblMobRage);
             this.tabMobs.Controls.Add(this.btnPotionMobsSelect);
             this.tabMobs.Controls.Add(this.cmbPotionMobs);
             this.tabMobs.Controls.Add(this.lnkMobLoad);
@@ -804,6 +829,25 @@ namespace DCT.UI
             this.tabMobs.TabIndex = 9;
             this.tabMobs.Text = "Mobs";
             this.tabMobs.UseVisualStyleBackColor = true;
+            // 
+            // btnMobRage
+            // 
+            this.btnMobRage.Location = new System.Drawing.Point(105, 2);
+            this.btnMobRage.Name = "btnMobRage";
+            this.btnMobRage.Size = new System.Drawing.Size(75, 23);
+            this.btnMobRage.TabIndex = 6;
+            this.btnMobRage.Text = "Update";
+            this.btnMobRage.UseVisualStyleBackColor = true;
+            this.btnMobRage.Click += new System.EventHandler(this.btnMobRage_Click);
+            // 
+            // lblMobRage
+            // 
+            this.lblMobRage.AutoSize = true;
+            this.lblMobRage.Location = new System.Drawing.Point(5, 7);
+            this.lblMobRage.Name = "lblMobRage";
+            this.lblMobRage.Size = new System.Drawing.Size(70, 13);
+            this.lblMobRage.TabIndex = 5;
+            this.lblMobRage.Text = "Using rage: 0";
             // 
             // btnPotionMobsSelect
             // 
@@ -862,9 +906,9 @@ namespace DCT.UI
             this.columnHeader7});
             this.lvMobs.FullRowSelect = true;
             this.lvMobs.GridLines = true;
-            this.lvMobs.Location = new System.Drawing.Point(3, 0);
+            this.lvMobs.Location = new System.Drawing.Point(3, 29);
             this.lvMobs.Name = "lvMobs";
-            this.lvMobs.Size = new System.Drawing.Size(414, 204);
+            this.lvMobs.Size = new System.Drawing.Size(414, 175);
             this.lvMobs.TabIndex = 0;
             this.lvMobs.UseCompatibleStateImageBehavior = false;
             this.lvMobs.View = System.Windows.Forms.View.Details;
@@ -909,8 +953,27 @@ namespace DCT.UI
             this.tabJoiner.Text = "Joiner";
             this.tabJoiner.UseVisualStyleBackColor = true;
             // 
+            // numRaidIntervalSec
+            // 
+            this.numRaidIntervalSec.Enabled = false;
+            this.numRaidIntervalSec.Location = new System.Drawing.Point(302, 24);
+            this.numRaidIntervalSec.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numRaidIntervalSec.Name = "numRaidIntervalSec";
+            this.numRaidIntervalSec.Size = new System.Drawing.Size(46, 20);
+            this.numRaidIntervalSec.TabIndex = 8;
+            this.numRaidIntervalSec.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
             // numRaidIntervalMin
             // 
+            this.numRaidIntervalMin.Enabled = false;
             this.numRaidIntervalMin.Location = new System.Drawing.Point(183, 24);
             this.numRaidIntervalMin.Maximum = new decimal(new int[] {
             999,
@@ -935,6 +998,7 @@ namespace DCT.UI
             // chkAutoJoin
             // 
             this.chkAutoJoin.AutoSize = true;
+            this.chkAutoJoin.Enabled = false;
             this.chkAutoJoin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAutoJoin.Location = new System.Drawing.Point(14, 8);
             this.chkAutoJoin.Name = "chkAutoJoin";
@@ -1002,6 +1066,7 @@ namespace DCT.UI
             // chkAutoForm
             // 
             this.chkAutoForm.AutoSize = true;
+            this.chkAutoForm.Enabled = false;
             this.chkAutoForm.Location = new System.Drawing.Point(3, 18);
             this.chkAutoForm.Name = "chkAutoForm";
             this.chkAutoForm.Size = new System.Drawing.Size(297, 17);
@@ -1011,6 +1076,7 @@ namespace DCT.UI
             // 
             // cmbFormer
             // 
+            this.cmbFormer.Enabled = false;
             this.cmbFormer.FormattingEnabled = true;
             this.cmbFormer.Location = new System.Drawing.Point(23, 41);
             this.cmbFormer.Name = "cmbFormer";
@@ -1422,6 +1488,7 @@ namespace DCT.UI
             this.optCountdownMobs.TabIndex = 37;
             this.optCountdownMobs.Text = "Attack mobs";
             this.optCountdownMobs.UseVisualStyleBackColor = true;
+            this.optCountdownMobs.CheckedChanged += new System.EventHandler(this.optCountdownMobs_CheckedChanged);
             // 
             // optCountdownMulti
             // 
@@ -1435,6 +1502,7 @@ namespace DCT.UI
             this.optCountdownMulti.TabStop = true;
             this.optCountdownMulti.Text = "Attack multiple areas";
             this.optCountdownMulti.UseVisualStyleBackColor = true;
+            this.optCountdownMulti.CheckedChanged += new System.EventHandler(this.optCountdownMulti_CheckedChanged);
             // 
             // optCountdownSingle
             // 
@@ -1446,6 +1514,7 @@ namespace DCT.UI
             this.optCountdownSingle.TabIndex = 35;
             this.optCountdownSingle.Text = "Attack within current area";
             this.optCountdownSingle.UseVisualStyleBackColor = true;
+            this.optCountdownSingle.CheckedChanged += new System.EventHandler(this.optCountdownSingle_CheckedChanged);
             // 
             // lnkStartCountdown
             // 
@@ -1521,23 +1590,6 @@ namespace DCT.UI
             this.lblExpRage.TabIndex = 31;
             this.lblExpRage.Text = "...";
             // 
-            // numRaidIntervalSec
-            // 
-            this.numRaidIntervalSec.Location = new System.Drawing.Point(302, 24);
-            this.numRaidIntervalSec.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numRaidIntervalSec.Name = "numRaidIntervalSec";
-            this.numRaidIntervalSec.Size = new System.Drawing.Size(46, 20);
-            this.numRaidIntervalSec.TabIndex = 8;
-            this.numRaidIntervalSec.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
             // CoreUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1582,6 +1634,7 @@ namespace DCT.UI
             this.tabMobs.PerformLayout();
             this.tabJoiner.ResumeLayout(false);
             this.tabJoiner.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalSec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalMin)).EndInit();
             this.tabFormer.ResumeLayout(false);
             this.tabFormer.PerformLayout();
@@ -1596,7 +1649,6 @@ namespace DCT.UI
             this.pnlAttack.ResumeLayout(false);
             this.pnlAttack.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCountdown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalSec)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1698,7 +1750,6 @@ namespace DCT.UI
         private System.Windows.Forms.NumericUpDown numRaidIntervalMin;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.CheckBox chkAutoForm;
-        private ChatUI irc;
         private System.Windows.Forms.Panel pnlRight;
         private System.Windows.Forms.GroupBox grpConnections;
         private System.Windows.Forms.CheckBox chkRemember;
@@ -1745,5 +1796,10 @@ namespace DCT.UI
         private System.Windows.Forms.Button btnPotionMobsSelect;
         private System.Windows.Forms.ComboBox cmbPotionMobs;
         private System.Windows.Forms.NumericUpDown numRaidIntervalSec;
+        private System.Windows.Forms.Label lblMobRage;
+        private System.Windows.Forms.Button btnMobRage;
+        private ChatUI irc;
+        private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearLogsPeriodicallyToolStripMenuItem;
     }
 }

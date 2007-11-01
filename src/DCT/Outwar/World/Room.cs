@@ -73,7 +73,7 @@ namespace DCT.Outwar.World
             {
                 if (mId == 0)
                 {
-                    string tmp = Parser.Parse(mSource, "dcmap/room_", ".");
+                    string tmp = Parser.Parse(mSource, "&lastroom=", "'");
                     if (!int.TryParse(tmp, out mId))
                     {
                         return false;
@@ -253,6 +253,11 @@ namespace DCT.Outwar.World
 
         internal void AttackMob(int id)
         {
+            if (mMobs == null)
+            {
+                return;
+            }
+
             foreach (Mob mb in mMobs)
             {
                 if (mb.Id == id)

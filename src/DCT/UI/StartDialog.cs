@@ -70,7 +70,7 @@ namespace DCT.UI
                 {
                     SetStatus("Could not access server.");
                     MessageBox.Show(
-                        "Could not read startup instructions from server, try again.\n\nIf this error persists, please close or adjust any firewall/router/antivirus/antispyware that is blocking this program's connection to the internet.",
+                        "Could not read startup instructions from server, try again.\n\nIf this error persists (and you can get to www.typpo.us), please close or adjust any firewall/router/antivirus/antispyware that is blocking this program's connection to the internet.",
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Globals.Terminate = true;
                     Application.Exit();

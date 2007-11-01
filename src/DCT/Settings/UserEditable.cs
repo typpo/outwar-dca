@@ -9,6 +9,13 @@ namespace DCT.Settings
             set { mMobFilters = value; }
         }
 
+        private static bool mClearLogs;
+        internal static bool ClearLogs
+        {
+            get { return mClearLogs; }
+            set { mClearLogs = value; }
+        }
+
         private static bool mAutoJoin;
         internal static bool AutoJoin
         {
@@ -75,6 +82,13 @@ namespace DCT.Settings
         {
             get { return mReturnToStart; }
             set { mReturnToStart = value; }
+        }
+
+        private static int mAttackMode;
+        internal static int AttackMode
+        {
+            get { return mAttackMode; }
+            set { mAttackMode = value; }
         }
 
         private static int mRaidInterval;
@@ -158,6 +172,7 @@ namespace DCT.Settings
         {
             mMobFilters = new string[0];
 
+            mClearLogs = true;
             mAutoJoin = false;
             mUseVault = false;
             mAutoTrain = true;
@@ -170,6 +185,8 @@ namespace DCT.Settings
 
             mUseCountdownTimer = true;
             mUseHourTimer = false;
+
+            mAttackMode = 1;
 
             mRaidInterval = 1;
 

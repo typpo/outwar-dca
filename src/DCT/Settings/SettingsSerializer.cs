@@ -37,6 +37,8 @@ namespace DCT.Settings
             ht.Add("cycleInterval", UserEditable.CycleInterval);
             ht.Add("lastUsername", UserEditable.LastUsername);
             ht.Add("lastPassword", UserEditable.LastPassword);
+            ht.Add("clearLogs", UserEditable.ClearLogs);
+            ht.Add("attackMode", UserEditable.AttackMode);
 
             BinaryFormatter bf = new BinaryFormatter();
             bf.Serialize(fs, ht);
@@ -159,6 +161,12 @@ namespace DCT.Settings
                             break;
                         case "lastPassword":
                             UserEditable.LastPassword = (string) de.Value;
+                            break;
+                        case "clearLogs":
+                            UserEditable.ClearLogs = (bool)de.Value;
+                            break;
+                        case "attackMode":
+                            UserEditable.AttackMode = (int)de.Value;
                             break;
                     }
                 }
