@@ -57,6 +57,7 @@ namespace DCT.Polyengine
             sb.AppendLine("\t}"); // class
             sb.Append("}"); // namespace
 
+            
             Console.WriteLine("Writing to file {0}...", args[0]);
             TextWriter t = new StreamWriter(args[0]);
             try
@@ -72,6 +73,7 @@ namespace DCT.Polyengine
                 t.Flush();
                 t.Close();
             }
+            
             Console.WriteLine("Done");
         }
 
