@@ -47,10 +47,7 @@ namespace DCT.Pathfinding
             {
                 return mId.CompareTo(((MappedRoom)other).mId);
             }
-            else
-            {
-                throw new Exception("Invalid room compare type: " + other.GetType());
-            }
+            throw new Exception("Invalid room compare type: " + other.GetType());
         }
     }
 }

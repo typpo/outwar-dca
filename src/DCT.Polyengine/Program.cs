@@ -7,20 +7,48 @@ namespace DCT.Polyengine
     class Program
     {
         private static Random mRandom;
-
+        
         static void Main(string[] args)
         {
-            if(args.Length < 2)
+            mRandom = new Random();
+            if(args.Length == 1 && args[0] == "-h")
             {
                 Console.WriteLine("Usage: DCT.Polyengine outputfile key=value [...]");
                 return;
             }
+            else if (args.Length > 1)
+            {
+                Generate(args);
+                return;
+            }
 
-            mRandom = new Random();
-            Run(args);
+            Console.Write("> ");
+            string input;
+            while ((input = Console.ReadLine()) != string.Empty && input != "exit")
+            {
+                string[] ins = input.Split(' ');
+                if (ins.Length == 2)
+                {
+                    Console.WriteLine(DCT.Security.Crypt.BinToHex(DCT.Security.Crypt.Get(ins[0], ins[1], false)));
+                }
+                else if (ins[0] == "gen" && ins.Length > 2)
+                {
+                    string[] tmp = new string[ins.Length - 1];
+                    for (int i = 1; i < ins.Length; i++)
+                    {
+                        tmp[i - 1] = ins[i];
+                    }
+                    Main(tmp);
+                }
+                else
+                {
+                    Console.WriteLine("Bad input");
+                }
+                Console.Write("\n> ");
+            }
         }
 
-        private static void Run(string[] args)
+        private static void Generate(string[] args)
         {
             Console.WriteLine("Polyengine Started");
             Console.WriteLine("Ready to compute {0} crypted strings...", args.Length - 1);
