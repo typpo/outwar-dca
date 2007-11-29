@@ -235,7 +235,7 @@ namespace DCT.UI
         {
             if (Pathfinder.Rooms.Count == 0)
             {
-                Log("E: Use the correct version.");
+                Log("E: You are either using an incorrect version of the program or the program was unable to reach the map server.");
                 return;
             }
 

@@ -30,7 +30,6 @@ namespace DCT.UI
         /// </summary>
         private void InitializeComponent()
         {
-            irc = new ChatUI();
             this.ss = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblMisc = new System.Windows.Forms.ToolStripStatusLabel();
@@ -832,11 +831,11 @@ namespace DCT.UI
             // 
             // btnMobRage
             // 
-            this.btnMobRage.Location = new System.Drawing.Point(105, 2);
+            this.btnMobRage.Location = new System.Drawing.Point(129, 2);
             this.btnMobRage.Name = "btnMobRage";
             this.btnMobRage.Size = new System.Drawing.Size(75, 23);
             this.btnMobRage.TabIndex = 6;
-            this.btnMobRage.Text = "Update";
+            this.btnMobRage.Text = "Recalculate";
             this.btnMobRage.UseVisualStyleBackColor = true;
             this.btnMobRage.Click += new System.EventHandler(this.btnMobRage_Click);
             // 
@@ -845,9 +844,9 @@ namespace DCT.UI
             this.lblMobRage.AutoSize = true;
             this.lblMobRage.Location = new System.Drawing.Point(5, 7);
             this.lblMobRage.Name = "lblMobRage";
-            this.lblMobRage.Size = new System.Drawing.Size(70, 13);
+            this.lblMobRage.Size = new System.Drawing.Size(81, 13);
             this.lblMobRage.TabIndex = 5;
-            this.lblMobRage.Text = "Using rage: 0";
+            this.lblMobRage.Text = "Rage per run: 0";
             // 
             // btnPotionMobsSelect
             // 

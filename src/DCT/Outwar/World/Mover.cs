@@ -9,6 +9,7 @@ using DCT.Protocols.Http;
 using DCT.Security;
 using DCT.Settings;
 using DCT.UI;
+using DCT.Parsing;
 using Version=DCT.Security.Version;
 
 namespace DCT.Outwar.World
@@ -330,7 +331,7 @@ namespace DCT.Outwar.World
                 switch (i)
                 {
                     case 0:
-                        if (url != "world.php")
+                        if (!url.StartsWith("world.php"))
                         {
                             mSavedRooms.Save(mLocation.Id, url);
                         }
@@ -376,7 +377,19 @@ namespace DCT.Outwar.World
             CoreUI.Instance.Log("Constructing path for " + mAccount.Name + " to " + roomid);
             mSocket.Status = "Finding path";
 
-            List<int> nodes = Pathfinder.GetSolution(mLocation.Id, roomid, mSavedRooms);
+            List<int> nodes = new List<int>();
+            nodes = Pathfinder.GetSolution(mLocation.Id, roomid, mSavedRooms);
+            if (nodes == null)
+            {
+                CoreUI.Instance.Log("Cannot establish known path for " + mAccount.Name + ", teleporting...");
+                // http://sigil.outwar.com/world.php?room=55&h=c3294d453fdd5c373d6c512cd7d1e924&lastroom=54
+                string tmp = mAccount.Socket.Get("world.php?teleport=1");
+                Parser p = new Parser(tmp);
+                string url = p.Parse("window.location=\"http://" + mAccount.Server + ".outwar.com/", "\"");
+                LoadRoom(url);
+                nodes = Pathfinder.GetSolution(mLocation.Id, roomid, mSavedRooms);
+            }
+
             FollowPath(nodes);
         }
 

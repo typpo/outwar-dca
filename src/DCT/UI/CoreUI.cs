@@ -54,6 +54,7 @@ namespace DCT.UI
 
         internal CoreUI()
         {
+            irc = new ChatUI(); // VS always removes this from initializecomponent...
             InitializeComponent();
             mAccounts = new AccountsEngine();
             mRaidsEngine = new RaidsEngine(mAccounts);

@@ -356,7 +356,16 @@ namespace DCT.Pathfinding
         {
             List<int> idList = new List<int>();
 
-            MappedRoom startRoom = mRooms[FindRoom(start)];
+            int idx = FindRoom(start);
+            MappedRoom startRoom;
+            if (idx > -1 && idx < mRooms.Count)
+            {
+                startRoom = mRooms[idx];
+            }
+            else
+            {
+                return null;
+            }
             idList.Add(start);
 
             foreach (MappedRoom rm in mRooms)
