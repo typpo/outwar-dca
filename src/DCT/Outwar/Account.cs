@@ -31,12 +31,6 @@ namespace DCT.Outwar
             get { return mRaider; }
         }
 
-        private ItemManager mItemManager;
-        internal ItemManager ItemManager
-        {
-            get { return mItemManager; }
-        }
-
         private ServerName mServer;
         internal ServerName Server
         {
@@ -95,7 +89,6 @@ namespace DCT.Outwar
 
             mSocket = socket;
             mMover = new Mover(this, mSocket);
-            mItemManager = new ItemManager(this, mSocket);
             mRaider = new Raider(this);
         }
 

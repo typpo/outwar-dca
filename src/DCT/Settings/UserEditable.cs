@@ -1,180 +1,186 @@
+using System.Xml.Serialization;
+
 namespace DCT.Settings
 {
-    internal class UserEditable
+    [XmlRoot("UserEditable")]
+    public class UserEditable
     {
-        private static string[] mMobFilters;
-        internal static string[] MobFilters
+        private string[] mMobFilters;
+        [XmlArrayItem("Filter", typeof(string))]
+        public string[] MobFilters
         {
             get { return mMobFilters; }
             set { mMobFilters = value; }
         }
 
-        private static bool mClearLogs;
-        internal static bool ClearLogs
+        private bool mClearLogs;
+        [XmlElement("ClearLogs")]
+        public bool ClearLogs
         {
             get { return mClearLogs; }
             set { mClearLogs = value; }
         }
 
-        private static bool mAutoJoin;
-        internal static bool AutoJoin
+        private bool mAutoJoin;
+        [XmlIgnore()]
+        public bool AutoJoin
         {
             get { return mAutoJoin; }
             set { mAutoJoin = value; }
         }
-
-        private static bool mUseVault;
-        internal static bool UseVault
-        {
-            get { return mUseVault; }
-            set { mUseVault = value; }
-        }
-        private static bool mAttackPause;
-        internal static bool AttackPause
-        {
-            get { return mAttackPause; }
-            set { mAttackPause = value; }
-        }
-        private static bool mAlertQuests;
-        internal static bool AlertQuests
+        private bool mAlertQuests;
+        [XmlElement("AlertQuests")]
+        public bool AlertQuests
         {
             get { return mAlertQuests; }
             set { mAlertQuests = value; }
         }
-        private static bool mAutoTrain;
-        internal static bool AutoTrain
+        private bool mAutoTrain;
+        [XmlElement("AutoTrain")]
+        public bool AutoTrain
         {
             get { return mAutoTrain; }
             set { mAutoTrain = value; }
         }
-        private static bool mAutoQuest;
-        internal static bool AutoQuest
+        private bool mAutoQuest;
+        [XmlElement("AutoQuest")]
+        public bool AutoQuest
         {
             get { return mAutoQuest; }
             set { mAutoQuest = value; }
         }
-        private static bool mFilterMobs;
-        internal static bool FilterMobs
+        private bool mFilterMobs;
+        [XmlElement("FilterMobs")]
+        public bool FilterMobs
         {
             get { return mFilterMobs; }
             set { mFilterMobs = value; }
         }
-        private static bool mUseCountdownTimer;
-        internal static bool UseCountdownTimer
+        private bool mUseCountdownTimer;
+        [XmlElement("UseCountdownTimer")]
+        public bool UseCountdownTimer
         {
             get { return mUseCountdownTimer; }
             set { mUseCountdownTimer = value; }
         }
-        private static bool mUseHourTimer;
-        internal static bool UseHourTimer
+        private bool mUseHourTimer;
+        [XmlElement("UseHourTimer")]
+        public bool UseHourTimer
         {
             get { return mUseHourTimer; }
             set { mUseHourTimer = value; }
         }
-        private static bool mVariance;
-        internal static bool Variance
+        private bool mVariance;
+        [XmlElement("Variance")]
+        public bool Variance
         {
             get { return mVariance; }
             set { mVariance = value; }
         }
-        private static bool mReturnToStart;
-        internal static bool ReturnToStart
+        private bool mReturnToStart;
+        [XmlElement("ReturnToStart")]
+        public bool ReturnToStart
         {
             get { return mReturnToStart; }
             set { mReturnToStart = value; }
         }
 
-        private static int mAttackMode;
-        internal static int AttackMode
+        private int mAttackMode;
+        [XmlElement("AttackMode")]
+        public int AttackMode
         {
             get { return mAttackMode; }
             set { mAttackMode = value; }
         }
 
-        private static int mRaidInterval;
-        internal static int RaidInterval
+        private int mRaidInterval;
+        [XmlIgnore()]
+        public int RaidInterval
         {
             get { return mRaidInterval; }
             set { mRaidInterval = value; }
         }
 
-        private static int mPauseAt;
-        internal static int PauseAt
-        {
-            get { return mPauseAt; }
-            set { mPauseAt = value; }
-        }
-        private static int mDelay;
-        internal static int Delay
+        private int mDelay;
+        [XmlElement("Delay")]
+        public int Delay
         {
             get { return mDelay; }
             set { mDelay = value; }
         }
-        private static int mMaxThreads;
-        internal static int MaxThreads
+        private int mMaxThreads;
+        [XmlIgnore()]
+        public int MaxThreads
         {
             get { return mMaxThreads; }
             set { mMaxThreads = value; }
         }
-        private static int mRageLimit;
-        internal static int RageLimit
+        private int mRageLimit;
+        [XmlElement("RageLimit")]
+        public int RageLimit
         {
             get { return mRageLimit; }
             set { mRageLimit = value; }
         }
-        private static int mStopAtRage;
-        internal static int StopAtRage
+        private int mStopAtRage;
+        [XmlElement("StopAtRage")]
+        public int StopAtRage
         {
             get { return mStopAtRage; }
             set { mStopAtRage = value; }
         }
-        private static int mCycleInterval;
-        internal static int CycleInterval
+        private int mCycleInterval;
+        [XmlElement("CycleInterval")]
+        public int CycleInterval
         {
             get { return mCycleInterval; }
             set { mCycleInterval = value; }
         }
 
-        private static long mLvlLimitMin;
-        internal static long LvlLimitMin
+        private long mLvlLimitMin;
+        [XmlElement("LvlLimitMin")]
+        public long LvlLimitMin
         {
             get { return mLvlLimitMin; }
             set { mLvlLimitMin = value; }
         }
-        private static long mLvlLimit;
-        internal static long LvlLimit
+        private long mLvlLimit;
+        [XmlElement("LvlLimit")]
+        public long LvlLimit
         {
             get { return mLvlLimit; }
             set { mLvlLimit = value; }
         }
-        private static long mTimeout;
-        internal static long Timeout
+        private long mTimeout;
+        [XmlElement("Timeout")]
+        public long Timeout
         {
             get { return mTimeout; }
             set { mTimeout = value; }
         }
 
-        private static string mLastUsername;
-        internal static string LastUsername
+        private string mLastUsername;
+        [XmlElement("LastUsername")]
+        public string LastUsername
         {
             get { return mLastUsername; }
             set { mLastUsername = value; }
         }
 
-        private static string mLastPassword;
-        internal static string LastPassword
+        private string mLastPassword;
+        [XmlElement("LastPassword")]
+        public string LastPassword
         {
             get { return mLastPassword; }
             set { mLastPassword = value; }
         }
 
-        static UserEditable()
+        public UserEditable()
         {
             mMobFilters = new string[0];
 
             mClearLogs = true;
             mAutoJoin = false;
-            mUseVault = false;
             mAutoTrain = true;
             mVariance = true;
 
@@ -190,13 +196,12 @@ namespace DCT.Settings
 
             mRaidInterval = 1;
 
-            mPauseAt = 2;
             mLvlLimitMin = 0;
             mLvlLimit = 35;
             mRageLimit = 30;
             mStopAtRage = 0;
             mDelay = 0;
-            mTimeout = 8000;
+            mTimeout = 15000;
             mMaxThreads = 5;
             mCycleInterval = 40;
 

@@ -11,39 +11,6 @@ namespace DCT.Settings
     {
         internal static void Save()
         {
-            FileStream fs = new FileStream("prefs.dat", FileMode.OpenOrCreate, FileAccess.Write);
-
-            Hashtable ht = new Hashtable();
-            ht.Add("mobFilters", UserEditable.MobFilters);
-            ht.Add("useVault", UserEditable.UseVault);
-            ht.Add("alertQuests", UserEditable.AlertQuests);
-            ht.Add("autoTrain", UserEditable.AutoTrain);
-            ht.Add("filterMobs", UserEditable.FilterMobs);
-            ht.Add("pauseAt", UserEditable.PauseAt);
-            ht.Add("lvlLimit", UserEditable.LvlLimit);
-            ht.Add("lvlLimitMin", UserEditable.LvlLimitMin);
-            ht.Add("delay", UserEditable.Delay);
-            ht.Add("threadBatchSize", UserEditable.MaxThreads);
-            ht.Add("rageLimit", UserEditable.RageLimit);
-            ht.Add("stopAtRage", UserEditable.StopAtRage);
-            ht.Add("Timeout", UserEditable.Timeout);
-            ht.Add("attackPause", UserEditable.AttackPause);
-            ht.Add("useTimer", UserEditable.UseCountdownTimer);
-            ht.Add("useHourTimer", UserEditable.UseHourTimer);
-            ht.Add("totalEXPG", (Globals.ExpGainedTotal + Globals.ExpGained));
-            ht.Add("variance", UserEditable.Variance);
-            ht.Add("returnToStart", UserEditable.ReturnToStart);
-            ht.Add("raidInterval", UserEditable.RaidInterval);
-            ht.Add("cycleInterval", UserEditable.CycleInterval);
-            ht.Add("lastUsername", UserEditable.LastUsername);
-            ht.Add("lastPassword", UserEditable.LastPassword);
-            ht.Add("clearLogs", UserEditable.ClearLogs);
-            ht.Add("attackMode", UserEditable.AttackMode);
-
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(fs, ht);
-            fs.Close();
-
             try
             {
                 StreamWriter sw = new StreamWriter("savedRooms.ini");
@@ -74,7 +41,7 @@ namespace DCT.Settings
 
         internal static void Get()
         {
-            if (!File.Exists("prefs.dat") || !File.Exists("savedMobs.ini")
+            if (!File.Exists("savedMobs.ini")
                 ||  !File.Exists("savedRooms.ini") || !File.Exists("savedRaids.ini"))
             {
                 return;
@@ -84,91 +51,88 @@ namespace DCT.Settings
 
             try
             {
-                fs = new FileStream("prefs.dat", FileMode.Open);
-
-                BinaryFormatter formatter = new BinaryFormatter();
-                Hashtable ht = (Hashtable) formatter.Deserialize(fs);
-
-                foreach (DictionaryEntry de in ht)
+                if (File.Exists("prefs.dat"))
                 {
-                    switch ((string) de.Key)
+                    fs = new FileStream("prefs.dat", FileMode.Open);
+
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    Hashtable ht = (Hashtable)formatter.Deserialize(fs);
+
+                    foreach (DictionaryEntry de in ht)
                     {
-                        case "mobFilters":
-                            UserEditable.MobFilters = (string[]) de.Value;
-                            break;
-                        case "useVault":
-                            UserEditable.UseVault = (bool) de.Value;
-                            break;
-                        case "alertQuests":
-                            UserEditable.AlertQuests = (bool) de.Value;
-                            break;
-                        case "autoTrain":
-                            UserEditable.AutoTrain = (bool) de.Value;
-                            break;
-                        case "filterMobs":
-                            UserEditable.FilterMobs = (bool) de.Value;
-                            break;
-                        case "pauseAt":
-                            UserEditable.PauseAt = (int) de.Value;
-                            break;
-                        case "lvlLimit":
-                            UserEditable.LvlLimit = (long) de.Value;
-                            break;
-                        case "lvlLimitMin":
-                            UserEditable.LvlLimitMin = (long) de.Value;
-                            break;
-                        case "delay":
-                            UserEditable.Delay = (int) de.Value;
-                            break;
-                        case "threadBatchSize":
-                            UserEditable.MaxThreads = (int) de.Value;
-                            break;
-                        case "rageLimit":
-                            UserEditable.RageLimit = (int) de.Value;
-                            break;
-                        case "stopAtRage":
-                            UserEditable.StopAtRage = (int) de.Value;
-                            break;
-                        case "Timeout":
-                            UserEditable.Timeout = (long) de.Value;
-                            break;
-                        case "attackPause":
-                            UserEditable.AttackPause = (bool) de.Value;
-                            break;
-                        case "useTimer":
-                            UserEditable.UseCountdownTimer = (bool) de.Value;
-                            break;
-                        case "useHourTimer":
-                            UserEditable.UseHourTimer = (bool)de.Value;
-                            break;
-                        case "totalEXPG":
-                            Globals.ExpGainedTotal = (long) de.Value;
-                            break;
-                        case "variance":
-                            UserEditable.Variance = (bool) de.Value;
-                            break;
-                        case "returnToStart":
-                            UserEditable.ReturnToStart = (bool) de.Value;
-                            break;
-                        case "raidInterval":
-                            UserEditable.RaidInterval = (int) de.Value;
-                            break;
-                        case "cycleInterval":
-                            UserEditable.CycleInterval = (int) de.Value;
-                            break;
-                        case "lastUsername":
-                            UserEditable.LastUsername = (string) de.Value;
-                            break;
-                        case "lastPassword":
-                            UserEditable.LastPassword = (string) de.Value;
-                            break;
-                        case "clearLogs":
-                            UserEditable.ClearLogs = (bool)de.Value;
-                            break;
-                        case "attackMode":
-                            UserEditable.AttackMode = (int)de.Value;
-                            break;
+                        switch ((string)de.Key)
+                        {
+                            case "mobFilters":
+                                CoreUI.Instance.Settings.MobFilters = (string[])de.Value;
+                                break;
+                            case "alertQuests":
+                                CoreUI.Instance.Settings.AlertQuests = (bool)de.Value;
+                                break;
+                            case "autoTrain":
+                                CoreUI.Instance.Settings.AutoTrain = (bool)de.Value;
+                                break;
+                            case "filterMobs":
+                                CoreUI.Instance.Settings.FilterMobs = (bool)de.Value;
+                                break;
+                            case "lvlLimit":
+                                CoreUI.Instance.Settings.LvlLimit = (long)de.Value;
+                                break;
+                            case "lvlLimitMin":
+                                CoreUI.Instance.Settings.LvlLimitMin = (long)de.Value;
+                                break;
+                            case "delay":
+                                CoreUI.Instance.Settings.Delay = (int)de.Value;
+                                break;
+                            case "threadBatchSize":
+                                CoreUI.Instance.Settings.MaxThreads = (int)de.Value;
+                                break;
+                            case "rageLimit":
+                                CoreUI.Instance.Settings.RageLimit = (int)de.Value;
+                                break;
+                            case "stopAtRage":
+                                CoreUI.Instance.Settings.StopAtRage = (int)de.Value;
+                                break;
+                            case "Timeout":
+                                CoreUI.Instance.Settings.Timeout = (long)de.Value;
+                                break;
+                            case "useTimer":
+                                CoreUI.Instance.Settings.UseCountdownTimer = (bool)de.Value;
+                                break;
+                            case "useHourTimer":
+                                CoreUI.Instance.Settings.UseHourTimer = (bool)de.Value;
+                                break;
+                            case "totalEXPG":
+                                Globals.ExpGainedTotal = (long)de.Value;
+                                break;
+                            case "variance":
+                                CoreUI.Instance.Settings.Variance = (bool)de.Value;
+                                break;
+                            case "returnToStart":
+                                CoreUI.Instance.Settings.ReturnToStart = (bool)de.Value;
+                                break;
+                            case "raidInterval":
+                                CoreUI.Instance.Settings.RaidInterval = (int)de.Value;
+                                break;
+                            case "cycleInterval":
+                                CoreUI.Instance.Settings.CycleInterval = (int)de.Value;
+                                break;
+                            case "lastUsername":
+                                CoreUI.Instance.Settings.LastUsername = (string)de.Value;
+                                break;
+                            case "lastPassword":
+                                CoreUI.Instance.Settings.LastPassword = (string)de.Value;
+                                break;
+                            case "clearLogs":
+                                CoreUI.Instance.Settings.ClearLogs = (bool)de.Value;
+                                break;
+                            case "attackMode":
+                                CoreUI.Instance.Settings.AttackMode = (int)de.Value;
+                                break;
+                        }
                     }
+                    fs.Flush();
+                    fs.Close();
+                    File.Delete("prefs.dat");
                 }
 
                 string input;

@@ -99,13 +99,13 @@ namespace DCT.Outwar.World
                 EnumMobs();
                 EnumItems();
             }
-            else if (UserEditable.AutoTrain || UserEditable.AutoQuest || UserEditable.AlertQuests)
+            else if (CoreUI.Instance.Settings.AutoTrain || CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests)
             {
                 EnumMobs();
 
-                if (UserEditable.AutoTrain)
+                if (CoreUI.Instance.Settings.AutoTrain)
                     mTrained = Train();
-                if (UserEditable.AutoQuest || UserEditable.AlertQuests)
+                if (CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests)
                     Quest();
             }
 
@@ -237,12 +237,12 @@ namespace DCT.Outwar.World
                 }
                 mMover.Socket.Status = "Attacking " + (i + 1) + "/" + mMobs.Count;
 
-                if (mob.Attack() && UserEditable.Delay != 0)
+                if (mob.Attack() && CoreUI.Instance.Settings.Delay != 0)
                 {
-                    int delay = UserEditable.Delay
+                    int delay = CoreUI.Instance.Settings.Delay
                                 +
-                                (UserEditable.Variance
-                                     ? (UserEditable.Delay/100)*Randomizer.Random.Next(51)*Randomizer.RandomPosNeg()
+                                (CoreUI.Instance.Settings.Variance
+                                     ? (CoreUI.Instance.Settings.Delay/100)*Randomizer.Random.Next(51)*Randomizer.RandomPosNeg()
                                      : 0);
 
                     CoreUI.Instance.Log("Waiting for delay: " + delay + " ms");

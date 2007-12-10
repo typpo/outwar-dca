@@ -235,7 +235,7 @@ namespace DCT.UI
         {
             if (Pathfinder.Rooms.Count == 0)
             {
-                Log("E: You are either using an incorrect version of the program or the program was unable to reach the map server.");
+                Log("E: You are either using an incorrect version of the program or the program was unable to reach the map server.  Make sure your antivirus, antispyware, firewall, router, etc. are not blocking the program's connection to the internet.");
                 return;
             }
 
@@ -282,8 +282,8 @@ namespace DCT.UI
                 Log("Loaded " + n + " characters.");
             }
 
-            UserEditable.LastUsername = txtUsername.Text;
-            UserEditable.LastPassword = txtPassword.Text;
+            CoreUI.Instance.Settings.LastUsername = txtUsername.Text;
+            CoreUI.Instance.Settings.LastPassword = txtPassword.Text;
 
             txtUsername.Enabled = true;
             txtPassword.Enabled = true;

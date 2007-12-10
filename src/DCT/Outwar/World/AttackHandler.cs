@@ -53,7 +53,8 @@ namespace DCT.Outwar.World
         /// </summary>
         private static void Run()
         {
-            SettingsSerializer.Save();
+            //SettingsSerializer.Save();
+            UserEditableSerializer.WriteFile("config.xml", CoreUI.Instance.Settings);
 
             lock (mAccounts)
             {
@@ -94,7 +95,7 @@ namespace DCT.Outwar.World
             CoreUI.Instance.ToggleAttack(false);
             Globals.AttackOn = false;
 
-            if (UserEditable.ReturnToStart)
+            if (CoreUI.Instance.Settings.ReturnToStart)
             {
                 foreach (Account a in mAccounts)
                 {
@@ -102,7 +103,7 @@ namespace DCT.Outwar.World
                 }
             }
 
-            if (UserEditable.UseCountdownTimer || UserEditable.UseHourTimer)
+            if (CoreUI.Instance.Settings.UseCountdownTimer || CoreUI.Instance.Settings.UseHourTimer)
             {
                 CoreUI.Instance.Countdown(mType);
             }

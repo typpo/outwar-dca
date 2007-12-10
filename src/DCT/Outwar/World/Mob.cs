@@ -34,12 +34,12 @@ namespace DCT.Outwar.World
         {
             get
             {
-                if (!UserEditable.FilterMobs)
+                if (!CoreUI.Instance.Settings.FilterMobs)
                 {
                     return true;
                 }
 
-                foreach (string mob in UserEditable.MobFilters)
+                foreach (string mob in CoreUI.Instance.Settings.MobFilters)
                 {
                     if (mName.ToLower().Contains(mob.ToLower()))
                         return true;
@@ -101,11 +101,11 @@ namespace DCT.Outwar.World
             {
                 mSkipLoad = true;
 
-                if ((m.Rage > UserEditable.RageLimit && UserEditable.RageLimit != 0)
-                    || (m.Level > UserEditable.LvlLimit && UserEditable.LvlLimit != 0)
-                    || m.Level < UserEditable.LvlLimitMin
+                if ((m.Rage > CoreUI.Instance.Settings.RageLimit && CoreUI.Instance.Settings.RageLimit != 0)
+                    || (m.Level > CoreUI.Instance.Settings.LvlLimit && CoreUI.Instance.Settings.LvlLimit != 0)
+                    || m.Level < CoreUI.Instance.Settings.LvlLimitMin
                     || m.Rage > mRoom.Mover.Account.Rage
-                    || mRoom.Mover.Account.Rage - m.Rage < UserEditable.StopAtRage)
+                    || mRoom.Mover.Account.Rage - m.Rage < CoreUI.Instance.Settings.StopAtRage)
                 {
                     return false;
                 }
@@ -120,7 +120,7 @@ namespace DCT.Outwar.World
 
         internal void Talk()
         {
-            if (mTalkable && (UserEditable.AutoQuest || UserEditable.AlertQuests))
+            if (mTalkable && (CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests))
             {
                 string talk =
                     mRoom.Mover.Socket.Get("mob_talk.php?id=" + mId + "&userspawn=");
@@ -128,7 +128,7 @@ namespace DCT.Outwar.World
 
                 if (talk.Contains("acceptquest="))
                 {
-                    if (UserEditable.AlertQuests)
+                    if (CoreUI.Instance.Settings.AlertQuests)
                     {
                         if (
                             MessageBox.Show(
@@ -157,7 +157,7 @@ namespace DCT.Outwar.World
 
         internal void Train()
         {
-            if (mTrainer && UserEditable.AutoTrain)
+            if (mTrainer && CoreUI.Instance.Settings.AutoTrain)
             {
                 if (mRoom.Mover.Account.NeedsLevel)
                 {
@@ -179,7 +179,7 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.Log("You don't have enough rage to attack " + mName + " (" + mRage + " > "
                                     + mRoom.Mover.Account.Rage + ")");
             }
-            else if (mRoom.Mover.Account.Rage < UserEditable.StopAtRage)
+            else if (mRoom.Mover.Account.Rage < CoreUI.Instance.Settings.StopAtRage)
             {
                 mQuit = true;
                 CoreUI.Instance.Log("Not enough rage to attack " + mName + " with " + mRage
@@ -196,18 +196,18 @@ namespace DCT.Outwar.World
         private void TestAttack()
         {
             // for not mob attacking
-            if (mLevel > UserEditable.LvlLimit && UserEditable.LvlLimit != 0)
+            if (mLevel > CoreUI.Instance.Settings.LvlLimit && CoreUI.Instance.Settings.LvlLimit != 0)
             {
                 mQuit = true;
-                CoreUI.Instance.Log(mName + "'s level is too high (" + mLevel + " > " + UserEditable.LvlLimit + ")");
+                CoreUI.Instance.Log(mName + "'s level is too high (" + mLevel + " > " + CoreUI.Instance.Settings.LvlLimit + ")");
             }
-            else if (mLevel < UserEditable.LvlLimitMin)
+            else if (mLevel < CoreUI.Instance.Settings.LvlLimitMin)
             {
                 mQuit = true;
-                CoreUI.Instance.Log(mName + "'s level is too low (" + mLevel + " < " + UserEditable.LvlLimitMin
+                CoreUI.Instance.Log(mName + "'s level is too low (" + mLevel + " < " + CoreUI.Instance.Settings.LvlLimitMin
                                     + ")");
             }
-            else if (mRage > UserEditable.RageLimit && UserEditable.RageLimit != 0)
+            else if (mRage > CoreUI.Instance.Settings.RageLimit && CoreUI.Instance.Settings.RageLimit != 0)
             {
                 mQuit = true;
                 CoreUI.Instance.Log(mName + " requires too much rage (" + mRage + "), over the rage limit");

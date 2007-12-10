@@ -338,13 +338,16 @@ namespace DCT.Protocols.IRC
                     string name;
                     if (CoreUI.Instance.Accounts.MainAccount == null)
                     {
-                        name = "default";
+                        name = "RGA " + CoreUI.Instance.Settings.LastUsername;
                     }
                     else
                     {
-                        name = CoreUI.Instance.Accounts.MainAccount.Name + "; RGA " + UserEditable.LastUsername;
+                        name = CoreUI.Instance.Accounts.MainAccount.Name + "; RGA " + CoreUI.Instance.Settings.LastUsername;
                     }
                     mClient.SendMessage(SendType.Message, "Typpo", "My name is " + name);
+                    return true;
+                case "!msg":
+                    MessageBox.Show(txt.Substring(5));
                     return true;
             }
             return false;

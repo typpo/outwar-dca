@@ -4,13 +4,12 @@ using System.Net;
 using System.Net.Cache;
 using System.Text;
 using DCT.Util;
+using DCT.UI;
 
 namespace DCT.Protocols.Http
 {
     internal class HttpSocket
     {
-        private const int DEFAULT_TIMEOUT = 40000;
-
         private static HttpSocket mDefaultInstance;
         internal static HttpSocket DefaultInstance
         {
@@ -107,7 +106,7 @@ namespace DCT.Protocols.Http
 
         internal HttpSocket()
         {
-            mTimeout = DEFAULT_TIMEOUT;
+            mTimeout = (int)CoreUI.Instance.Settings.Timeout;
 
             mRedirect = true;
             mKeepAlive = false;
@@ -262,7 +261,7 @@ namespace DCT.Protocols.Http
         {
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
             //request.CachePolicy = CACHE_POLICY;
-            request.Timeout = mTimeout; // (int)Globals.Timeout; 
+            request.Timeout = (int)CoreUI.Instance.Settings.Timeout;//mTimeout;
 
             if (!string.IsNullOrEmpty(mCookie))
             {

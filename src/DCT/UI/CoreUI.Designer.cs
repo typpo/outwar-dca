@@ -30,6 +30,7 @@ namespace DCT.UI
         /// </summary>
         private void InitializeComponent()
         {
+            irc = new ChatUI();
             this.ss = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblMisc = new System.Windows.Forms.ToolStripStatusLabel();
@@ -61,11 +62,8 @@ namespace DCT.UI
             this.label12 = new System.Windows.Forms.Label();
             this.numRageStop = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
-            this.chkVault = new System.Windows.Forms.CheckBox();
             this.numLevel = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
-            this.cmbPause = new System.Windows.Forms.ComboBox();
-            this.chkAttackPause = new System.Windows.Forms.CheckBox();
             this.label14 = new System.Windows.Forms.Label();
             this.tabs = new System.Windows.Forms.TabControl();
             this.tabFilters = new System.Windows.Forms.TabPage();
@@ -107,9 +105,6 @@ namespace DCT.UI
             this.clmName = new System.Windows.Forms.ColumnHeader();
             this.clmRoomID = new System.Windows.Forms.ColumnHeader();
             this.label16 = new System.Windows.Forms.Label();
-            this.tabFormer = new System.Windows.Forms.TabPage();
-            this.chkAutoForm = new System.Windows.Forms.CheckBox();
-            this.cmbFormer = new System.Windows.Forms.ComboBox();
             this.tabTrainer = new System.Windows.Forms.TabPage();
             this.chkAutoTrain = new System.Windows.Forms.CheckBox();
             this.chkTrainReturn = new System.Windows.Forms.CheckBox();
@@ -174,7 +169,6 @@ namespace DCT.UI
             this.tabJoiner.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalSec)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalMin)).BeginInit();
-            this.tabFormer.SuspendLayout();
             this.tabTrainer.SuspendLayout();
             this.tabQuests.SuspendLayout();
             this.tabChat.SuspendLayout();
@@ -183,14 +177,6 @@ namespace DCT.UI
             this.pnlAttack.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCountdown)).BeginInit();
             this.SuspendLayout();
-            // 
-            // irc
-            // 
-            this.irc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.irc.Location = new System.Drawing.Point(0, 0);
-            this.irc.Name = "irc";
-            this.irc.Size = new System.Drawing.Size(426, 229);
-            this.irc.TabIndex = 0;
             // 
             // ss
             // 
@@ -244,46 +230,46 @@ namespace DCT.UI
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(127, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(134, 22);
             this.toolStripMenuItem2.Text = "About";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // changesToolStripMenuItem
             // 
             this.changesToolStripMenuItem.Name = "changesToolStripMenuItem";
-            this.changesToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.changesToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.changesToolStripMenuItem.Text = "Changes";
             this.changesToolStripMenuItem.Click += new System.EventHandler(this.changesToolStripMenuItem_Click);
             // 
             // exportLogToolStripMenuItem
             // 
             this.exportLogToolStripMenuItem.Name = "exportLogToolStripMenuItem";
-            this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.exportLogToolStripMenuItem.Text = "Export log";
             this.exportLogToolStripMenuItem.Click += new System.EventHandler(this.exportLogToolStripMenuItem_Click);
             // 
             // clearLogToolStripMenuItem
             // 
             this.clearLogToolStripMenuItem.Name = "clearLogToolStripMenuItem";
-            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.clearLogToolStripMenuItem.Text = "Clear log";
             this.clearLogToolStripMenuItem.Click += new System.EventHandler(this.clearLogToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(124, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(131, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -292,13 +278,13 @@ namespace DCT.UI
             this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openInBrowserToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
-            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.actionsToolStripMenuItem.Text = "Actions";
             // 
             // openInBrowserToolStripMenuItem
             // 
             this.openInBrowserToolStripMenuItem.Name = "openInBrowserToolStripMenuItem";
-            this.openInBrowserToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.openInBrowserToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.openInBrowserToolStripMenuItem.Text = "Open in browser";
             this.openInBrowserToolStripMenuItem.Click += new System.EventHandler(this.openInBrowserToolStripMenuItem_Click);
             // 
@@ -307,7 +293,7 @@ namespace DCT.UI
             this.preferencesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearLogsPeriodicallyToolStripMenuItem});
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             // 
             // clearLogsPeriodicallyToolStripMenuItem
@@ -316,7 +302,7 @@ namespace DCT.UI
             this.clearLogsPeriodicallyToolStripMenuItem.CheckOnClick = true;
             this.clearLogsPeriodicallyToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.clearLogsPeriodicallyToolStripMenuItem.Name = "clearLogsPeriodicallyToolStripMenuItem";
-            this.clearLogsPeriodicallyToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.clearLogsPeriodicallyToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.clearLogsPeriodicallyToolStripMenuItem.Text = "Clear logs periodically";
             this.clearLogsPeriodicallyToolStripMenuItem.CheckedChanged += new System.EventHandler(this.clearLogsPeriodicallyToolStripMenuItem_CheckedChanged);
             // 
@@ -346,11 +332,8 @@ namespace DCT.UI
             this.grpSettings.Controls.Add(this.label12);
             this.grpSettings.Controls.Add(this.numRageStop);
             this.grpSettings.Controls.Add(this.label11);
-            this.grpSettings.Controls.Add(this.chkVault);
             this.grpSettings.Controls.Add(this.numLevel);
             this.grpSettings.Controls.Add(this.label4);
-            this.grpSettings.Controls.Add(this.cmbPause);
-            this.grpSettings.Controls.Add(this.chkAttackPause);
             this.grpSettings.Controls.Add(this.label14);
             this.grpSettings.Location = new System.Drawing.Point(6, 6);
             this.grpSettings.Name = "grpSettings";
@@ -446,7 +429,7 @@ namespace DCT.UI
             // chkReturnToStart
             // 
             this.chkReturnToStart.AutoSize = true;
-            this.chkReturnToStart.Location = new System.Drawing.Point(15, 75);
+            this.chkReturnToStart.Location = new System.Drawing.Point(11, 19);
             this.chkReturnToStart.Name = "chkReturnToStart";
             this.chkReturnToStart.Size = new System.Drawing.Size(133, 30);
             this.chkReturnToStart.TabIndex = 28;
@@ -457,7 +440,7 @@ namespace DCT.UI
             // numRageLimit
             // 
             this.numRageLimit.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numRageLimit.Location = new System.Drawing.Point(73, 152);
+            this.numRageLimit.Location = new System.Drawing.Point(69, 96);
             this.numRageLimit.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -476,7 +459,7 @@ namespace DCT.UI
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 153);
+            this.label13.Location = new System.Drawing.Point(4, 97);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(65, 13);
             this.label13.TabIndex = 16;
@@ -485,7 +468,7 @@ namespace DCT.UI
             // numLevelMin
             // 
             this.numLevelMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numLevelMin.Location = new System.Drawing.Point(33, 128);
+            this.numLevelMin.Location = new System.Drawing.Point(29, 72);
             this.numLevelMin.Name = "numLevelMin";
             this.numLevelMin.Size = new System.Drawing.Size(36, 18);
             this.numLevelMin.TabIndex = 3;
@@ -499,7 +482,7 @@ namespace DCT.UI
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(75, 129);
+            this.label12.Location = new System.Drawing.Point(71, 73);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(25, 13);
             this.label12.TabIndex = 15;
@@ -508,7 +491,7 @@ namespace DCT.UI
             // numRageStop
             // 
             this.numRageStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numRageStop.Location = new System.Drawing.Point(105, 175);
+            this.numRageStop.Location = new System.Drawing.Point(101, 119);
             this.numRageStop.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -527,28 +510,16 @@ namespace DCT.UI
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(8, 178);
+            this.label11.Location = new System.Drawing.Point(4, 122);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(95, 13);
             this.label11.TabIndex = 14;
             this.label11.Text = "Stop with rage left:";
             // 
-            // chkVault
-            // 
-            this.chkVault.AutoSize = true;
-            this.chkVault.Enabled = false;
-            this.chkVault.Location = new System.Drawing.Point(11, 19);
-            this.chkVault.Name = "chkVault";
-            this.chkVault.Size = new System.Drawing.Size(116, 17);
-            this.chkVault.TabIndex = 0;
-            this.chkVault.Text = "Send items to vault";
-            this.chkVault.UseVisualStyleBackColor = true;
-            this.chkVault.CheckedChanged += new System.EventHandler(this.chkVault_CheckedChanged);
-            // 
             // numLevel
             // 
             this.numLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numLevel.Location = new System.Drawing.Point(105, 128);
+            this.numLevel.Location = new System.Drawing.Point(101, 72);
             this.numLevel.Minimum = new decimal(new int[] {
             1,
             0,
@@ -567,45 +538,16 @@ namespace DCT.UI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 112);
+            this.label4.Location = new System.Drawing.Point(4, 56);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(115, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Attack between levels:";
             // 
-            // cmbPause
-            // 
-            this.cmbPause.Enabled = false;
-            this.cmbPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbPause.FormattingEnabled = true;
-            this.cmbPause.Items.AddRange(new object[] {
-            "Both",
-            "Pack",
-            "Vault"});
-            this.cmbPause.Location = new System.Drawing.Point(91, 39);
-            this.cmbPause.Name = "cmbPause";
-            this.cmbPause.Size = new System.Drawing.Size(57, 20);
-            this.cmbPause.TabIndex = 2;
-            this.cmbPause.Text = "Both";
-            this.cmbPause.SelectedIndexChanged += new System.EventHandler(this.cmbPause_SelectedIndexChanged);
-            // 
-            // chkAttackPause
-            // 
-            this.chkAttackPause.AutoSize = true;
-            this.chkAttackPause.Checked = true;
-            this.chkAttackPause.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAttackPause.Enabled = false;
-            this.chkAttackPause.Location = new System.Drawing.Point(11, 42);
-            this.chkAttackPause.Name = "chkAttackPause";
-            this.chkAttackPause.Size = new System.Drawing.Size(83, 17);
-            this.chkAttackPause.TabIndex = 1;
-            this.chkAttackPause.Text = "Pause if full:";
-            this.chkAttackPause.UseVisualStyleBackColor = true;
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(140, 153);
+            this.label14.Location = new System.Drawing.Point(136, 97);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(28, 13);
             this.label14.TabIndex = 18;
@@ -618,7 +560,6 @@ namespace DCT.UI
             this.tabs.Controls.Add(this.tabRooms);
             this.tabs.Controls.Add(this.tabMobs);
             this.tabs.Controls.Add(this.tabJoiner);
-            this.tabs.Controls.Add(this.tabFormer);
             this.tabs.Controls.Add(this.tabTrainer);
             this.tabs.Controls.Add(this.tabQuests);
             this.tabs.Controls.Add(this.tabChat);
@@ -949,7 +890,7 @@ namespace DCT.UI
             this.tabJoiner.Name = "tabJoiner";
             this.tabJoiner.Size = new System.Drawing.Size(426, 229);
             this.tabJoiner.TabIndex = 11;
-            this.tabJoiner.Text = "Joiner";
+            this.tabJoiner.Text = "Raids";
             this.tabJoiner.UseVisualStyleBackColor = true;
             // 
             // numRaidIntervalSec
@@ -987,6 +928,7 @@ namespace DCT.UI
             // label15
             // 
             this.label15.AutoSize = true;
+            this.label15.Enabled = false;
             this.label15.Location = new System.Drawing.Point(51, 26);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(347, 13);
@@ -1009,7 +951,7 @@ namespace DCT.UI
             // 
             // btnAdventuresGo
             // 
-            this.btnAdventuresGo.Location = new System.Drawing.Point(240, 52);
+            this.btnAdventuresGo.Location = new System.Drawing.Point(240, 42);
             this.btnAdventuresGo.Name = "btnAdventuresGo";
             this.btnAdventuresGo.Size = new System.Drawing.Size(31, 23);
             this.btnAdventuresGo.TabIndex = 4;
@@ -1024,10 +966,10 @@ namespace DCT.UI
             this.clmName,
             this.clmRoomID});
             this.lvAdventures.FullRowSelect = true;
-            this.lvAdventures.Location = new System.Drawing.Point(0, 81);
+            this.lvAdventures.Location = new System.Drawing.Point(0, 65);
             this.lvAdventures.MultiSelect = false;
             this.lvAdventures.Name = "lvAdventures";
-            this.lvAdventures.Size = new System.Drawing.Size(417, 145);
+            this.lvAdventures.Size = new System.Drawing.Size(417, 161);
             this.lvAdventures.TabIndex = 1;
             this.lvAdventures.UseCompatibleStateImageBehavior = false;
             this.lvAdventures.View = System.Windows.Forms.View.Details;
@@ -1045,43 +987,11 @@ namespace DCT.UI
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(11, 59);
+            this.label16.Location = new System.Drawing.Point(11, 49);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(223, 13);
             this.label16.TabIndex = 0;
             this.label16.Text = "Move all checked accounts to selected room:";
-            // 
-            // tabFormer
-            // 
-            this.tabFormer.Controls.Add(this.chkAutoForm);
-            this.tabFormer.Controls.Add(this.cmbFormer);
-            this.tabFormer.Location = new System.Drawing.Point(4, 22);
-            this.tabFormer.Name = "tabFormer";
-            this.tabFormer.Size = new System.Drawing.Size(426, 229);
-            this.tabFormer.TabIndex = 12;
-            this.tabFormer.Text = "Former";
-            this.tabFormer.UseVisualStyleBackColor = true;
-            // 
-            // chkAutoForm
-            // 
-            this.chkAutoForm.AutoSize = true;
-            this.chkAutoForm.Enabled = false;
-            this.chkAutoForm.Location = new System.Drawing.Point(3, 18);
-            this.chkAutoForm.Name = "chkAutoForm";
-            this.chkAutoForm.Size = new System.Drawing.Size(297, 17);
-            this.chkAutoForm.TabIndex = 1;
-            this.chkAutoForm.Text = "Use this account to form checked raids at the \'Joiner\' tab:";
-            this.chkAutoForm.UseVisualStyleBackColor = true;
-            // 
-            // cmbFormer
-            // 
-            this.cmbFormer.Enabled = false;
-            this.cmbFormer.FormattingEnabled = true;
-            this.cmbFormer.Location = new System.Drawing.Point(23, 41);
-            this.cmbFormer.Name = "cmbFormer";
-            this.cmbFormer.Size = new System.Drawing.Size(134, 21);
-            this.cmbFormer.TabIndex = 0;
-            this.cmbFormer.Text = "Choose...";
             // 
             // tabTrainer
             // 
@@ -1589,6 +1499,13 @@ namespace DCT.UI
             this.lblExpRage.TabIndex = 31;
             this.lblExpRage.Text = "...";
             // 
+            // irc
+            // 
+            this.irc.Location = new System.Drawing.Point(-4, -4);
+            this.irc.Name = "irc";
+            this.irc.Size = new System.Drawing.Size(429, 233);
+            this.irc.TabIndex = 0;
+            // 
             // CoreUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1635,8 +1552,6 @@ namespace DCT.UI
             this.tabJoiner.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalSec)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRaidIntervalMin)).EndInit();
-            this.tabFormer.ResumeLayout(false);
-            this.tabFormer.PerformLayout();
             this.tabTrainer.ResumeLayout(false);
             this.tabTrainer.PerformLayout();
             this.tabQuests.ResumeLayout(false);
@@ -1668,8 +1583,6 @@ namespace DCT.UI
         private System.Windows.Forms.GroupBox grpSettings;
         private System.Windows.Forms.TabControl tabs;
         private System.Windows.Forms.ListBox lstLog;
-        private System.Windows.Forms.ComboBox cmbPause;
-        private System.Windows.Forms.CheckBox chkAttackPause;
         private System.Windows.Forms.NumericUpDown numLevel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
@@ -1705,7 +1618,6 @@ namespace DCT.UI
         private System.Windows.Forms.RadioButton optQuestsAuto;
         private System.Windows.Forms.RadioButton optQuestsAlert;
         private System.Windows.Forms.RadioButton optQuestsNothing;
-        private System.Windows.Forms.CheckBox chkVault;
         private System.Windows.Forms.NumericUpDown numRageStop;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown numLevelMin;
@@ -1736,7 +1648,6 @@ namespace DCT.UI
         private System.Windows.Forms.ColumnHeader clmRoomID;
         private System.Windows.Forms.Button btnAdventuresGo;
         private System.Windows.Forms.CheckBox chkReturnToStart;
-        private System.Windows.Forms.TabPage tabFormer;
         private System.Windows.Forms.CheckBox chkAutoJoin;
         private System.Windows.Forms.ListView lvAdventures;
 
@@ -1745,10 +1656,8 @@ namespace DCT.UI
             get { return lvAdventures; }
             set { lvAdventures = value; }
         }
-        private System.Windows.Forms.ComboBox cmbFormer;
         private System.Windows.Forms.NumericUpDown numRaidIntervalMin;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.CheckBox chkAutoForm;
         private System.Windows.Forms.Panel pnlRight;
         private System.Windows.Forms.GroupBox grpConnections;
         private System.Windows.Forms.CheckBox chkRemember;
@@ -1797,8 +1706,8 @@ namespace DCT.UI
         private System.Windows.Forms.NumericUpDown numRaidIntervalSec;
         private System.Windows.Forms.Label lblMobRage;
         private System.Windows.Forms.Button btnMobRage;
-        private ChatUI irc;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearLogsPeriodicallyToolStripMenuItem;
+        private ChatUI irc;
     }
 }

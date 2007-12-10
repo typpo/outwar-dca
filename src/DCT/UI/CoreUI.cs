@@ -47,6 +47,12 @@ namespace DCT.UI
             get { return mRaidsEngine; }
         }
 
+        private UserEditable mUserEditable;
+        internal UserEditable Settings
+        {
+            get { return mUserEditable; }
+        }
+
         private CountDownTimer mCountdownTimer;
         private AttackingType mCountdownType;
 
@@ -54,10 +60,11 @@ namespace DCT.UI
 
         internal CoreUI()
         {
-            irc = new ChatUI(); // VS always removes this from initializecomponent...
+            //irc = new ChatUI(); // VS always removes this from initializecomponent...
             InitializeComponent();
             mAccounts = new AccountsEngine();
             mRaidsEngine = new RaidsEngine(mAccounts);
+            mUserEditable = UserEditableSerializer.ReadFile("config.xml");//new UserEditable();
             mInstance = this;
 
             this.Text = "Typpo's DC Tool - [www.typpo.us] - v" + Version.Id;
@@ -95,46 +102,21 @@ namespace DCT.UI
 
             if (lvPathfind.Items.Count > 0)
             {
-                SettingsSerializer.Save();
+                UserEditableSerializer.WriteFile("config.xml", mUserEditable);
+                //SettingsSerializer.Save();
             }
 
             Application.Exit();
             Process.GetCurrentProcess().Kill();
         }
 
-        private void chkVault_CheckedChanged(object sender, EventArgs e)
-        {
-            UserEditable.UseVault = chkVault.Checked;
-        }
-
-        private void chkAttackPause_CheckedChanged(object sender, EventArgs e)
-        {
-            UserEditable.AttackPause = chkAttackPause.Checked;
-        }
-
-        private void cmbPause_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (cmbPause.Text)
-            {
-                case "Both":
-                    UserEditable.PauseAt = 2;
-                    break;
-                case "Vault":
-                    UserEditable.PauseAt = 1;
-                    break;
-                case "Pack":
-                    UserEditable.PauseAt = 0;
-                    break;
-            }
-        }
-
         private void numLevel_ValueChanged(object sender, EventArgs e)
         {
             int tmp = (int)numLevel.Value;
-            UserEditable.LvlLimit = tmp;
-            if (tmp <= UserEditable.LvlLimitMin)
+            CoreUI.Instance.Settings.LvlLimit = tmp;
+            if (tmp <= CoreUI.Instance.Settings.LvlLimitMin)
             {
-                tmp = (int)(UserEditable.LvlLimitMin + 1);
+                tmp = (int)(CoreUI.Instance.Settings.LvlLimitMin + 1);
                 numLevel.Value = tmp;
             }
         }
@@ -142,28 +124,28 @@ namespace DCT.UI
         private void numLevelMin_ValueChanged(object sender, EventArgs e)
         {
             int tmp = (int)numLevelMin.Value;
-            UserEditable.LvlLimitMin = tmp;
-            if (tmp >= UserEditable.LvlLimit)
+            CoreUI.Instance.Settings.LvlLimitMin = tmp;
+            if (tmp >= CoreUI.Instance.Settings.LvlLimit)
             {
-                tmp = (int)(UserEditable.LvlLimit - 1);
+                tmp = (int)(CoreUI.Instance.Settings.LvlLimit - 1);
                 numLevelMin.Value = tmp;
             }
         }
 
         private void numRageStop_ValueChanged(object sender, EventArgs e)
         {
-            UserEditable.StopAtRage = (int)numRageStop.Value;
+            CoreUI.Instance.Settings.StopAtRage = (int)numRageStop.Value;
         }
 
         private void numRageLimit_ValueChanged(object sender, EventArgs e)
         {
-            UserEditable.RageLimit = (int)numRageLimit.Value;
+            CoreUI.Instance.Settings.RageLimit = (int)numRageLimit.Value;
         }
 
         private void numTimer_ValueChanged(object sender, EventArgs e)
         {
-            UserEditable.CycleInterval = (int)numCountdown.Value;
-            if (mCountdownTimer != null && UserEditable.UseCountdownTimer)
+            CoreUI.Instance.Settings.CycleInterval = (int)numCountdown.Value;
+            if (mCountdownTimer != null && CoreUI.Instance.Settings.UseCountdownTimer)
             {
                 mCountdownTimer.CurrentCountdown = ((int)numCountdown.Value) * 60;
             }
@@ -176,7 +158,7 @@ namespace DCT.UI
                 MessageBox.Show("You need to login before setting a timer.", "Start Timer", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
             }
-            else if (!UserEditable.UseCountdownTimer && !UserEditable.UseHourTimer)
+            else if (!CoreUI.Instance.Settings.UseCountdownTimer && !CoreUI.Instance.Settings.UseHourTimer)
             {
                 MessageBox.Show("Choose a timer.", "Start Timer", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
@@ -202,7 +184,7 @@ namespace DCT.UI
             }
 
             int countFor;
-            if (UserEditable.UseCountdownTimer)
+            if (CoreUI.Instance.Settings.UseCountdownTimer)
             {
                 countFor = ((int)numCountdown.Value) * 60;
             }
@@ -221,7 +203,7 @@ namespace DCT.UI
 
             mCountdownTimer.Start();
 
-            if (UserEditable.ClearLogs)
+            if (CoreUI.Instance.Settings.ClearLogs)
             {
                 if (lstLog.Items.Count > 100)
                 {
@@ -247,7 +229,7 @@ namespace DCT.UI
 
         private void t_Stopped(object sender, EventArgs e)
         {
-            if (Globals.AttackMode || !(UserEditable.UseCountdownTimer || UserEditable.UseHourTimer))
+            if (Globals.AttackMode || !(CoreUI.Instance.Settings.UseCountdownTimer || CoreUI.Instance.Settings.UseHourTimer))
             {
                 return;
             }
@@ -292,7 +274,7 @@ namespace DCT.UI
             string s2 = (s % 60).ToString();
             lblTimeLeft.Text = "Time left: " + (s / 60) + ":" + (s2.Length == 1 ? "0" + s2 : s2);
 
-            if (!UserEditable.UseCountdownTimer && !UserEditable.UseHourTimer)
+            if (!CoreUI.Instance.Settings.UseCountdownTimer && !CoreUI.Instance.Settings.UseHourTimer)
             {
                 mCountdownTimer.Stop();
             }
@@ -390,25 +372,25 @@ namespace DCT.UI
 
         private void chkAutoTrain_CheckedChanged(object sender, EventArgs e)
         {
-            UserEditable.AutoTrain = chkAutoTrain.Checked;
+            CoreUI.Instance.Settings.AutoTrain = chkAutoTrain.Checked;
         }
 
         private void optQuestsAuto_CheckedChanged(object sender, EventArgs e)
         {
             if (optQuestsAuto.Checked)
             {
-                UserEditable.AlertQuests = false;
-                UserEditable.AutoQuest = true;
+                CoreUI.Instance.Settings.AlertQuests = false;
+                CoreUI.Instance.Settings.AutoQuest = true;
             }
             else if (optQuestsAlert.Checked)
             {
-                UserEditable.AlertQuests = true;
-                UserEditable.AutoQuest = false;
+                CoreUI.Instance.Settings.AlertQuests = true;
+                CoreUI.Instance.Settings.AutoQuest = false;
             }
             else
             {
-                UserEditable.AlertQuests = false;
-                UserEditable.AutoQuest = false;
+                CoreUI.Instance.Settings.AlertQuests = false;
+                CoreUI.Instance.Settings.AutoQuest = false;
             }
         }
 
@@ -424,28 +406,28 @@ namespace DCT.UI
 
         private void numTimeout_ValueChanged(object sender, EventArgs e)
         {
-            UserEditable.Timeout = (int)numTimeout.Value;
+            CoreUI.Instance.Settings.Timeout = (int)numTimeout.Value;
         }
 
         private void numThreadDelay_ValueChanged(object sender, EventArgs e)
         {
-            UserEditable.Delay = (int)numThreadDelay.Value;
+            CoreUI.Instance.Settings.Delay = (int)numThreadDelay.Value;
         }
 
         private void chkVariance_CheckedChanged(object sender, EventArgs e)
         {
-            UserEditable.Variance = chkVariance.Checked;
+            CoreUI.Instance.Settings.Variance = chkVariance.Checked;
         }
 
         private void chkFilter_CheckedChanged(object sender, EventArgs e)
         {
             txtFilters.Enabled = chkFilter.Checked;
-            UserEditable.FilterMobs = chkFilter.Checked;
+            CoreUI.Instance.Settings.FilterMobs = chkFilter.Checked;
         }
 
         private void txtFilters_TextChanged(object sender, EventArgs e)
         {
-            UserEditable.MobFilters =
+            CoreUI.Instance.Settings.MobFilters =
                 txtFilters.Text.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
         }
 
@@ -927,27 +909,24 @@ namespace DCT.UI
 
         private void SyncSettings()
         {
-            clearLogsPeriodicallyToolStripMenuItem.Checked = UserEditable.ClearLogs;
+            clearLogsPeriodicallyToolStripMenuItem.Checked = CoreUI.Instance.Settings.ClearLogs;
 
-            txtUsername.Text = UserEditable.LastUsername;
-            txtPassword.Text = UserEditable.LastPassword;
+            txtUsername.Text = CoreUI.Instance.Settings.LastUsername;
+            txtPassword.Text = CoreUI.Instance.Settings.LastPassword;
 
-            foreach (string str in UserEditable.MobFilters)
+            foreach (string str in CoreUI.Instance.Settings.MobFilters)
             {
                 txtFilters.Text = str + "\r\n";
             }
 
-            chkAttackPause.Checked = UserEditable.AttackPause;
-            chkVault.Checked = UserEditable.UseVault;
+            numRageStop.Value = CoreUI.Instance.Settings.StopAtRage;
+            numRageLimit.Value = CoreUI.Instance.Settings.RageLimit;
+            chkReturnToStart.Checked = CoreUI.Instance.Settings.ReturnToStart;
+            chkCountdownTimer.Checked = CoreUI.Instance.Settings.UseCountdownTimer;
+            chkHourTimer.Checked = CoreUI.Instance.Settings.UseHourTimer;
+            numCountdown.Value = CoreUI.Instance.Settings.CycleInterval;
 
-            numRageStop.Value = UserEditable.StopAtRage;
-            numRageLimit.Value = UserEditable.RageLimit;
-            chkReturnToStart.Checked = UserEditable.ReturnToStart;
-            chkCountdownTimer.Checked = UserEditable.UseCountdownTimer;
-            chkHourTimer.Checked = UserEditable.UseHourTimer;
-            numCountdown.Value = UserEditable.CycleInterval;
-
-            switch (UserEditable.AttackMode)
+            switch (CoreUI.Instance.Settings.AttackMode)
             {
                 case 0: optCountdownSingle.Checked = true;
                     break;
@@ -958,44 +937,37 @@ namespace DCT.UI
                 default: throw new Exception("Your settings are corrupt; no such attack mode.");
             }
 
-            chkAutoJoin.Checked = UserEditable.AutoJoin;
-            numRaidIntervalMin.Value = UserEditable.RaidInterval;
+            chkAutoJoin.Checked = CoreUI.Instance.Settings.AutoJoin;
+            numRaidIntervalMin.Value = CoreUI.Instance.Settings.RaidInterval;
 
-            if (UserEditable.AlertQuests)
+            if (CoreUI.Instance.Settings.AlertQuests)
                 optQuestsAlert.Checked = true;
-            else if (UserEditable.AutoQuest)
+            else if (CoreUI.Instance.Settings.AutoQuest)
                 optQuestsAuto.Checked = true;
             else
                 optQuestsNothing.Checked = true;
 
-            chkAutoTrain.Checked = UserEditable.AutoTrain;
+            chkAutoTrain.Checked = CoreUI.Instance.Settings.AutoTrain;
 
-            chkFilter.Checked = UserEditable.FilterMobs;
-            if (UserEditable.FilterMobs)
+            chkFilter.Checked = CoreUI.Instance.Settings.FilterMobs;
+            if (CoreUI.Instance.Settings.FilterMobs)
                 txtFilters.Enabled = true;
 
-            if (UserEditable.PauseAt == 0)
-                cmbPause.Text = "Pack";
-            else if (UserEditable.PauseAt == 1)
-                cmbPause.Text = "Vault";
-            else
-                cmbPause.Text = "Both";
-
-            numLevel.Value = UserEditable.LvlLimit;
-            numLevelMin.Value = UserEditable.LvlLimitMin;
-            numRageStop.Value = UserEditable.StopAtRage;
+            numLevel.Value = CoreUI.Instance.Settings.LvlLimit;
+            numLevelMin.Value = CoreUI.Instance.Settings.LvlLimitMin;
+            numRageStop.Value = CoreUI.Instance.Settings.StopAtRage;
 
             try
             {
-                numThreadDelay.Value = UserEditable.Delay;
+                numThreadDelay.Value = CoreUI.Instance.Settings.Delay;
             }
             catch (ArgumentOutOfRangeException)
             {
-                UserEditable.Delay = 0;
-                numThreadDelay.Value = UserEditable.Delay;
+                CoreUI.Instance.Settings.Delay = 0;
+                numThreadDelay.Value = CoreUI.Instance.Settings.Delay;
             }
 
-            chkVariance.Checked = UserEditable.Variance;
+            chkVariance.Checked = CoreUI.Instance.Settings.Variance;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1119,14 +1091,14 @@ namespace DCT.UI
 
         private void chkReturnToStart_CheckedChanged(object sender, EventArgs e)
         {
-            UserEditable.ReturnToStart = chkReturnToStart.Checked;
+            CoreUI.Instance.Settings.ReturnToStart = chkReturnToStart.Checked;
         }
 
         private void chkAutoJoin_CheckedChanged(object sender, EventArgs e)
         {
-            UserEditable.AutoJoin = chkAutoJoin.Checked;
+            CoreUI.Instance.Settings.AutoJoin = chkAutoJoin.Checked;
 
-            if (UserEditable.AutoJoin && lvAccounts.CheckedIndices.Count != 0)
+            if (CoreUI.Instance.Settings.AutoJoin && lvAccounts.CheckedIndices.Count != 0)
             {
                 ProcessRaidsThreaded();
             }
@@ -1160,7 +1132,7 @@ namespace DCT.UI
 
         private void numRaidInterval_ValueChanged(object sender, EventArgs e)
         {
-            UserEditable.RaidInterval = (int)numRaidIntervalMin.Value;
+            CoreUI.Instance.Settings.RaidInterval = (int)numRaidIntervalMin.Value;
         }
 
         // TODO switch to only one global
@@ -1173,10 +1145,10 @@ namespace DCT.UI
                 {
                     mCountdownTimer.CurrentCountdown = ((int)numCountdown.Value) * 60;
                 }
-                chkHourTimer.Checked = UserEditable.UseHourTimer = !b;
+                chkHourTimer.Checked = CoreUI.Instance.Settings.UseHourTimer = !b;
 
             }
-            UserEditable.UseCountdownTimer = b;
+            CoreUI.Instance.Settings.UseCountdownTimer = b;
         }
 
         private void chkHourTimer_CheckedChanged(object sender, EventArgs e)
@@ -1188,10 +1160,10 @@ namespace DCT.UI
                 {
                     mCountdownTimer.CurrentCountdown = SecondsUntilHour();
                 }
-                chkCountdownTimer.Checked = UserEditable.UseCountdownTimer = !b;
+                chkCountdownTimer.Checked = CoreUI.Instance.Settings.UseCountdownTimer = !b;
 
             }
-            UserEditable.UseHourTimer = b;
+            CoreUI.Instance.Settings.UseHourTimer = b;
         }
 
         private void UpdateMobRage()
@@ -1215,14 +1187,14 @@ namespace DCT.UI
 
         private void clearLogsPeriodicallyToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-            UserEditable.ClearLogs = clearLogsPeriodicallyToolStripMenuItem.Checked;
+            CoreUI.Instance.Settings.ClearLogs = clearLogsPeriodicallyToolStripMenuItem.Checked;
         }
 
         private void optCountdownSingle_CheckedChanged(object sender, EventArgs e)
         {
             if (optCountdownSingle.Checked)
             {
-                UserEditable.AttackMode = 0;
+                CoreUI.Instance.Settings.AttackMode = 0;
             }
         }
 
@@ -1230,7 +1202,7 @@ namespace DCT.UI
         {
             if (optCountdownMulti.Checked)
             {
-                UserEditable.AttackMode = 1;
+                CoreUI.Instance.Settings.AttackMode = 1;
             }
         }
 
@@ -1238,7 +1210,7 @@ namespace DCT.UI
         {
             if (optCountdownMobs.Checked)
             {
-                UserEditable.AttackMode = 2;
+                CoreUI.Instance.Settings.AttackMode = 2;
             }
         }
     }

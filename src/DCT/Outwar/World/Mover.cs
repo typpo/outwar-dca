@@ -509,8 +509,8 @@ namespace DCT.Outwar.World
             paths.Add(Pathfinder.GetSolution(mLocation.Id, 403, mSavedRooms)); //hardiron
             paths.Add(Pathfinder.GetSolution(mLocation.Id, 299, mSavedRooms)); //chuggers
 
-            bool tmp = UserEditable.AutoTrain;
-            UserEditable.AutoTrain = true;
+            bool tmp = CoreUI.Instance.Settings.AutoTrain;
+            CoreUI.Instance.Settings.AutoTrain = true;
 
             int shortest = 0;
             for (int i = 1; i < paths.Count; i++)
@@ -524,7 +524,7 @@ namespace DCT.Outwar.World
 
             FollowPath(paths[shortest]);
 
-            UserEditable.AutoTrain = tmp;
+            CoreUI.Instance.Settings.AutoTrain = tmp;
             mLocation.Train();
 
             if (mLocation.Trained)

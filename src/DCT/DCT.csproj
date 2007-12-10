@@ -105,7 +105,6 @@
       <DependentUpon>StartDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings\UserEditable.cs" />
-    <Compile Include="Outwar\ItemManager.cs" />
     <Compile Include="Parsing\Parser.cs" />
     <Compile Include="Pathfinding\MappedMob.cs" />
     <Compile Include="Pathfinding\MappedRoom.cs" />
@@ -161,6 +160,7 @@
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\Randomizer.cs" />
+    <Compile Include="Settings\UserEditableSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Misc\Bad.ico" />

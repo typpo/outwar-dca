@@ -49,7 +49,7 @@ namespace DCT.Outwar.World
 
         private void Wait()
         {
-            mCountdownTimer = new CountDownTimer(UserEditable.RaidInterval);
+            mCountdownTimer = new CountDownTimer(CoreUI.Instance.Settings.RaidInterval);
             mCountdownTimer.Interval = 1000;
             mCountdownTimer.Stopped += new EventHandler(mCountdownTimer_Stopped);
 
