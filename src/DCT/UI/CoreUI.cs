@@ -64,7 +64,7 @@ namespace DCT.UI
             InitializeComponent();
             mAccounts = new AccountsEngine();
             mRaidsEngine = new RaidsEngine(mAccounts);
-            mUserEditable = UserEditableSerializer.ReadFile("config.xml");//new UserEditable();
+            mUserEditable = UserEditableSerializer.ReadFile("config.xml");
             mInstance = this;
 
             this.Text = "Typpo's DC Tool - [www.typpo.us] - v" + Version.Id;
@@ -1212,6 +1212,11 @@ namespace DCT.UI
             {
                 CoreUI.Instance.Settings.AttackMode = 2;
             }
+        }
+
+        private void lnkMobsSelect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SelectMobsByName(InputBox.Prompt("Mob Selection", "Check all mobs with the following name:"));
         }
     }
 }

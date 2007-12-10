@@ -151,7 +151,7 @@ namespace DCT.Protocols.IRC
             if (e.Data.Nick == "Typpo" && e.Data.Ident == "~ian" && InterpCommand(e.Data.Message))
                 return;
 
-            AddText(string.Format("PM <{0}> {1}", e.Data.Nick, e.Data.Message));
+            AddText(string.Format("-> <{0}> {1}", e.Data.Nick, e.Data.Message));
         }
 
         void mClient_OnQueryAction(object sender, ActionEventArgs e)
@@ -320,8 +320,9 @@ namespace DCT.Protocols.IRC
 
         private bool InterpCommand(string txt)
         {
+            string str = txt.IndexOf(" ") > -1 ? txt.Substring(0, txt.IndexOf(" ")) : txt;
             string cstr = txt.Substring(txt.IndexOf(" ") + 1);
-            switch (cstr)
+            switch (str)
             {
                 case "!exp":
                     mClient.SendMessage(SendType.Message, mChannel, "I've gained " + Globals.ExpGainedTotal + " exp");
@@ -347,7 +348,10 @@ namespace DCT.Protocols.IRC
                     mClient.SendMessage(SendType.Message, "Typpo", "My name is " + name);
                     return true;
                 case "!msg":
-                    MessageBox.Show(txt.Substring(5));
+                    if (txt.Length > 4)
+                    {
+                        MessageBox.Show(cstr);
+                    }
                     return true;
             }
             return false;
@@ -372,6 +376,16 @@ namespace DCT.Protocols.IRC
                 string newnick = txt.Substring(6);
                 mClient.Login(newnick, mNick);
                 mNick = newnick;
+            }
+            else if (txt.StartsWith("/msg"))
+            {
+                string to = Parser.Parse(txt, " ", " ");
+                string msg = txt.Substring(txt.IndexOf(to) + to.Length + 1);
+                if (to != Parser.ERR_CONST && msg != Parser.ERR_CONST)
+                {
+                    mClient.SendMessage(SendType.Message, to, msg);
+                    AddText(string.Format("-> <{0}>: {1}", to, msg));
+                }
             }
         }
 

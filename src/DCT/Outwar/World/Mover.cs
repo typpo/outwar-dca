@@ -382,12 +382,21 @@ namespace DCT.Outwar.World
             if (nodes == null)
             {
                 CoreUI.Instance.Log("Cannot establish known path for " + mAccount.Name + ", teleporting...");
-                // http://sigil.outwar.com/world.php?room=55&h=c3294d453fdd5c373d6c512cd7d1e924&lastroom=54
-                string tmp = mAccount.Socket.Get("world.php?teleport=1");
-                Parser p = new Parser(tmp);
-                string url = p.Parse("window.location=\"http://" + mAccount.Server + ".outwar.com/", "\"");
-                LoadRoom(url);
-                nodes = Pathfinder.GetSolution(mLocation.Id, roomid, mSavedRooms);
+
+                if (
+                    MessageBox.Show("The program cannot build a path from your current area to your chosen location.  Do you want to teleport to the nearest bar and try again? (recommended 'Yes' unless you are in a separated area such as Stoneraven)", "Pathfinding Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    == DialogResult.Yes)
+                {
+                    string tmp = mAccount.Socket.Get("world.php?teleport=1");
+                    Parser p = new Parser(tmp);
+                    string url = p.Parse("window.location=\"http://" + mAccount.Server + ".outwar.com/", "\"");
+                    LoadRoom(url);
+                    nodes = Pathfinder.GetSolution(mLocation.Id, roomid, mSavedRooms);
+                }
+                else
+                {
+                    return;
+                }
             }
 
             FollowPath(nodes);

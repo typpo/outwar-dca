@@ -133,6 +133,10 @@
       <DependentUpon>InputBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Util\InputBox\InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="key.snk" />
     <None Include="Properties\Settings.settings">
@@ -157,6 +161,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Util\InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util\InputBox\InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Util\InputBox\InputBox.Designer.cs">
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\Randomizer.cs" />

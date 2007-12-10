@@ -33,7 +33,7 @@ namespace UBS.Optimizer.UI.Util
 
             while (mInput == string.Empty && !mRelease)
             {
-                Instance.ShowDialog();
+                Instance.Show();
             }
             return mInput;
         }

@@ -151,6 +151,7 @@ namespace DCT.UI
             this.lblTimer = new System.Windows.Forms.Label();
             this.chkCountdownTimer = new System.Windows.Forms.CheckBox();
             this.lblExpRage = new System.Windows.Forms.Label();
+            this.lnkMobsSelect = new System.Windows.Forms.LinkLabel();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.tabAttack.SuspendLayout();
@@ -177,6 +178,13 @@ namespace DCT.UI
             this.pnlAttack.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCountdown)).BeginInit();
             this.SuspendLayout();
+            // 
+            // irc
+            // 
+            this.irc.Location = new System.Drawing.Point(-4, -4);
+            this.irc.Name = "irc";
+            this.irc.Size = new System.Drawing.Size(429, 233);
+            this.irc.TabIndex = 0;
             // 
             // ss
             // 
@@ -756,6 +764,7 @@ namespace DCT.UI
             // 
             // tabMobs
             // 
+            this.tabMobs.Controls.Add(this.lnkMobsSelect);
             this.tabMobs.Controls.Add(this.btnMobRage);
             this.tabMobs.Controls.Add(this.lblMobRage);
             this.tabMobs.Controls.Add(this.btnPotionMobsSelect);
@@ -791,7 +800,7 @@ namespace DCT.UI
             // 
             // btnPotionMobsSelect
             // 
-            this.btnPotionMobsSelect.Location = new System.Drawing.Point(366, 205);
+            this.btnPotionMobsSelect.Location = new System.Drawing.Point(366, 199);
             this.btnPotionMobsSelect.Name = "btnPotionMobsSelect";
             this.btnPotionMobsSelect.Size = new System.Drawing.Size(54, 22);
             this.btnPotionMobsSelect.TabIndex = 4;
@@ -807,7 +816,7 @@ namespace DCT.UI
             "Holy",
             "Shadow",
             "Arcane"});
-            this.cmbPotionMobs.Location = new System.Drawing.Point(239, 205);
+            this.cmbPotionMobs.Location = new System.Drawing.Point(239, 199);
             this.cmbPotionMobs.Name = "cmbPotionMobs";
             this.cmbPotionMobs.Size = new System.Drawing.Size(121, 21);
             this.cmbPotionMobs.TabIndex = 3;
@@ -816,7 +825,7 @@ namespace DCT.UI
             // lnkMobLoad
             // 
             this.lnkMobLoad.AutoSize = true;
-            this.lnkMobLoad.Location = new System.Drawing.Point(74, 210);
+            this.lnkMobLoad.Location = new System.Drawing.Point(74, 194);
             this.lnkMobLoad.Name = "lnkMobLoad";
             this.lnkMobLoad.Size = new System.Drawing.Size(79, 13);
             this.lnkMobLoad.TabIndex = 2;
@@ -827,7 +836,7 @@ namespace DCT.UI
             // lnkUncheckMobs
             // 
             this.lnkUncheckMobs.AutoSize = true;
-            this.lnkUncheckMobs.Location = new System.Drawing.Point(3, 210);
+            this.lnkUncheckMobs.Location = new System.Drawing.Point(3, 194);
             this.lnkUncheckMobs.Name = "lnkUncheckMobs";
             this.lnkUncheckMobs.Size = new System.Drawing.Size(65, 13);
             this.lnkUncheckMobs.TabIndex = 1;
@@ -848,7 +857,7 @@ namespace DCT.UI
             this.lvMobs.GridLines = true;
             this.lvMobs.Location = new System.Drawing.Point(3, 29);
             this.lvMobs.Name = "lvMobs";
-            this.lvMobs.Size = new System.Drawing.Size(414, 175);
+            this.lvMobs.Size = new System.Drawing.Size(414, 162);
             this.lvMobs.TabIndex = 0;
             this.lvMobs.UseCompatibleStateImageBehavior = false;
             this.lvMobs.View = System.Windows.Forms.View.Details;
@@ -1499,12 +1508,16 @@ namespace DCT.UI
             this.lblExpRage.TabIndex = 31;
             this.lblExpRage.Text = "...";
             // 
-            // irc
+            // lnkMobsSelect
             // 
-            this.irc.Location = new System.Drawing.Point(-4, -4);
-            this.irc.Name = "irc";
-            this.irc.Size = new System.Drawing.Size(429, 233);
-            this.irc.TabIndex = 0;
+            this.lnkMobsSelect.AutoSize = true;
+            this.lnkMobsSelect.Location = new System.Drawing.Point(4, 213);
+            this.lnkMobsSelect.Name = "lnkMobsSelect";
+            this.lnkMobsSelect.Size = new System.Drawing.Size(117, 13);
+            this.lnkMobsSelect.TabIndex = 7;
+            this.lnkMobsSelect.TabStop = true;
+            this.lnkMobsSelect.Text = "Select mobs by name...";
+            this.lnkMobsSelect.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkMobsSelect_LinkClicked);
             // 
             // CoreUI
             // 
@@ -1709,5 +1722,6 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearLogsPeriodicallyToolStripMenuItem;
         private ChatUI irc;
+        private System.Windows.Forms.LinkLabel lnkMobsSelect;
     }
 }
