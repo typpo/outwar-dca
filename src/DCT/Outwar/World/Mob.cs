@@ -251,7 +251,7 @@ namespace DCT.Outwar.World
                 Talk();
             }
 
-            if ((test && !TestLeve()) || !TestRage())
+            if ((test && !TestLevel()) || !TestRage())
             {
                 CoreUI.Instance.Log(mName + " preeliminated - does not meet specifications.");
                 mQuit = true;

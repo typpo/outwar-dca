@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly : AssemblyTitle("Typpo's DC Tool")]
 [assembly: AssemblyDescription("Automates various movement and attacking functions on Outwar")]
 [assembly : AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Typpo")]
+[assembly: AssemblyCompany("Typpo's Software")]
 [assembly : AssemblyProduct("Typpo's DC Tool")]
-[assembly : AssemblyCopyright("Copyright ©  2007")]
+[assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
 

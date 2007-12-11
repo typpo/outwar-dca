@@ -182,6 +182,7 @@ namespace DCT.UI
             // 
             // irc
             // 
+            irc = new ChatUI();
             this.irc.Location = new System.Drawing.Point(-4, -4);
             this.irc.Name = "irc";
             this.irc.Size = new System.Drawing.Size(429, 233);

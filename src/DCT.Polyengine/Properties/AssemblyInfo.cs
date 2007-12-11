@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("DCT.Polyengine")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("UBS AG")]
+[assembly: AssemblyCompany("Typpo's Software")]
 [assembly: AssemblyProduct("DCT.Polyengine")]
-[assembly: AssemblyCopyright("Copyright © UBS AG 2007")]
+[assembly: AssemblyCopyright("Copyright © Typpo's Software 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
