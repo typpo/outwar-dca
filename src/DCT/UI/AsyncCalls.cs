@@ -49,12 +49,6 @@ namespace DCT.UI
 
         private void AttackArea()
         {
-            if (mAccounts.Count < 1)
-            {
-                LogAttack("E: You must enter an account first");
-                return;
-            }
-
             SetupHandler();
             AttackHandler.BeginArea();
         }
@@ -74,12 +68,7 @@ namespace DCT.UI
 
         private void AttackAreas()
         {
-            if (mAccounts.Count < 1)
-            {
-                LogAttack("E: You must enter an account first");
-                return;
-            }
-            else if (lvPathfind.CheckedIndices.Count < 1)
+            if (lvPathfind.CheckedIndices.Count < 1)
             {
                 Log("E: Choose at least 1 area to cover");
                 return;
@@ -133,12 +122,7 @@ namespace DCT.UI
 
         private void AttackMobs()
         {
-            if (mAccounts.Count < 1)
-            {
-                LogAttack("E: You must enter an account first");
-                return;
-            }
-            else if (lvMobs.CheckedIndices.Count < 1)
+            if (lvMobs.CheckedIndices.Count < 1)
             {
                 Log("E: Choose at least 1 mob to attack");
                 return;

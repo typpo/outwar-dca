@@ -263,16 +263,23 @@ namespace DCT.Outwar.World
 
         internal void AttackMob(int id)
         {
-            if (mMobs == null)
+            if (mMobs == null || mMobs.Count < 1)
             {
                 return;
             }
 
             foreach (Mob mb in mMobs)
             {
-                if (mb.Id == id)
+                if (mb.Id == id && mb.Attack(false) && CoreUI.Instance.Settings.Delay != 0)
                 {
-                    mb.Attack(false);
+                    int delay = CoreUI.Instance.Settings.Delay
+                        +
+                        (CoreUI.Instance.Settings.Variance
+                             ? (CoreUI.Instance.Settings.Delay / 100) * Randomizer.Random.Next(51) * Randomizer.RandomPosNeg()
+                             : 0);
+
+                    CoreUI.Instance.Log("Waiting for delay: " + delay + " ms");
+                    ThreadEngine.Sleep(delay);
                 }
             }
         }

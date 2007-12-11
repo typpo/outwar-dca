@@ -72,6 +72,7 @@ namespace DCT.UI
             this.txtFilters = new System.Windows.Forms.TextBox();
             this.chkFilter = new System.Windows.Forms.CheckBox();
             this.tabRooms = new System.Windows.Forms.TabPage();
+            this.lnkSaveRooms = new System.Windows.Forms.LinkLabel();
             this.lnkLoadRooms = new System.Windows.Forms.LinkLabel();
             this.optPathfindChoose = new System.Windows.Forms.RadioButton();
             this.btnPathfind = new System.Windows.Forms.Button();
@@ -83,6 +84,8 @@ namespace DCT.UI
             this.label6 = new System.Windows.Forms.Label();
             this.lnkUncheckRooms = new System.Windows.Forms.LinkLabel();
             this.tabMobs = new System.Windows.Forms.TabPage();
+            this.lnkMobSave = new System.Windows.Forms.LinkLabel();
+            this.lnkMobsSelect = new System.Windows.Forms.LinkLabel();
             this.btnMobRage = new System.Windows.Forms.Button();
             this.lblMobRage = new System.Windows.Forms.Label();
             this.btnPotionMobsSelect = new System.Windows.Forms.Button();
@@ -128,7 +131,7 @@ namespace DCT.UI
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lnkAccountsInvert = new System.Windows.Forms.LinkLabel();
-            this.lnkAccountsCheckNone = new System.Windows.Forms.LinkLabel();
+            this.lnkAccountsUncheckAll = new System.Windows.Forms.LinkLabel();
             this.lnkAccountsCheckAll = new System.Windows.Forms.LinkLabel();
             this.lvAccounts = new System.Windows.Forms.ListView();
             this.clmCharName = new System.Windows.Forms.ColumnHeader();
@@ -151,7 +154,6 @@ namespace DCT.UI
             this.lblTimer = new System.Windows.Forms.Label();
             this.chkCountdownTimer = new System.Windows.Forms.CheckBox();
             this.lblExpRage = new System.Windows.Forms.Label();
-            this.lnkMobsSelect = new System.Windows.Forms.LinkLabel();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.tabAttack.SuspendLayout();
@@ -635,6 +637,7 @@ namespace DCT.UI
             // 
             // tabRooms
             // 
+            this.tabRooms.Controls.Add(this.lnkSaveRooms);
             this.tabRooms.Controls.Add(this.lnkLoadRooms);
             this.tabRooms.Controls.Add(this.optPathfindChoose);
             this.tabRooms.Controls.Add(this.btnPathfind);
@@ -649,6 +652,17 @@ namespace DCT.UI
             this.tabRooms.TabIndex = 5;
             this.tabRooms.Text = "Rooms";
             this.tabRooms.UseVisualStyleBackColor = true;
+            // 
+            // lnkSaveRooms
+            // 
+            this.lnkSaveRooms.AutoSize = true;
+            this.lnkSaveRooms.Location = new System.Drawing.Point(162, 216);
+            this.lnkSaveRooms.Name = "lnkSaveRooms";
+            this.lnkSaveRooms.Size = new System.Drawing.Size(83, 13);
+            this.lnkSaveRooms.TabIndex = 7;
+            this.lnkSaveRooms.TabStop = true;
+            this.lnkSaveRooms.Text = "Export rooms list";
+            this.lnkSaveRooms.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSaveRooms_LinkClicked);
             // 
             // lnkLoadRooms
             // 
@@ -764,6 +778,7 @@ namespace DCT.UI
             // 
             // tabMobs
             // 
+            this.tabMobs.Controls.Add(this.lnkMobSave);
             this.tabMobs.Controls.Add(this.lnkMobsSelect);
             this.tabMobs.Controls.Add(this.btnMobRage);
             this.tabMobs.Controls.Add(this.lblMobRage);
@@ -778,6 +793,28 @@ namespace DCT.UI
             this.tabMobs.TabIndex = 9;
             this.tabMobs.Text = "Mobs";
             this.tabMobs.UseVisualStyleBackColor = true;
+            // 
+            // lnkMobSave
+            // 
+            this.lnkMobSave.AutoSize = true;
+            this.lnkMobSave.Location = new System.Drawing.Point(158, 196);
+            this.lnkMobSave.Name = "lnkMobSave";
+            this.lnkMobSave.Size = new System.Drawing.Size(80, 13);
+            this.lnkMobSave.TabIndex = 8;
+            this.lnkMobSave.TabStop = true;
+            this.lnkMobSave.Text = "Export mobs list";
+            this.lnkMobSave.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkMobSave_LinkClicked);
+            // 
+            // lnkMobsSelect
+            // 
+            this.lnkMobsSelect.AutoSize = true;
+            this.lnkMobsSelect.Location = new System.Drawing.Point(2, 213);
+            this.lnkMobsSelect.Name = "lnkMobsSelect";
+            this.lnkMobsSelect.Size = new System.Drawing.Size(117, 13);
+            this.lnkMobsSelect.TabIndex = 7;
+            this.lnkMobsSelect.TabStop = true;
+            this.lnkMobsSelect.Text = "Select mobs by name...";
+            this.lnkMobsSelect.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkMobsSelect_LinkClicked);
             // 
             // btnMobRage
             // 
@@ -796,7 +833,7 @@ namespace DCT.UI
             this.lblMobRage.Name = "lblMobRage";
             this.lblMobRage.Size = new System.Drawing.Size(81, 13);
             this.lblMobRage.TabIndex = 5;
-            this.lblMobRage.Text = "Rage per run: 0";
+            this.lblMobRage.Text = "Rage per run: ?";
             // 
             // btnPotionMobsSelect
             // 
@@ -816,16 +853,16 @@ namespace DCT.UI
             "Holy",
             "Shadow",
             "Arcane"});
-            this.cmbPotionMobs.Location = new System.Drawing.Point(239, 199);
+            this.cmbPotionMobs.Location = new System.Drawing.Point(245, 199);
             this.cmbPotionMobs.Name = "cmbPotionMobs";
-            this.cmbPotionMobs.Size = new System.Drawing.Size(121, 21);
+            this.cmbPotionMobs.Size = new System.Drawing.Size(115, 21);
             this.cmbPotionMobs.TabIndex = 3;
             this.cmbPotionMobs.Text = "Choose a potion...";
             // 
             // lnkMobLoad
             // 
             this.lnkMobLoad.AutoSize = true;
-            this.lnkMobLoad.Location = new System.Drawing.Point(74, 194);
+            this.lnkMobLoad.Location = new System.Drawing.Point(73, 196);
             this.lnkMobLoad.Name = "lnkMobLoad";
             this.lnkMobLoad.Size = new System.Drawing.Size(79, 13);
             this.lnkMobLoad.TabIndex = 2;
@@ -836,7 +873,7 @@ namespace DCT.UI
             // lnkUncheckMobs
             // 
             this.lnkUncheckMobs.AutoSize = true;
-            this.lnkUncheckMobs.Location = new System.Drawing.Point(3, 194);
+            this.lnkUncheckMobs.Location = new System.Drawing.Point(2, 196);
             this.lnkUncheckMobs.Name = "lnkUncheckMobs";
             this.lnkUncheckMobs.Size = new System.Drawing.Size(65, 13);
             this.lnkUncheckMobs.TabIndex = 1;
@@ -857,7 +894,7 @@ namespace DCT.UI
             this.lvMobs.GridLines = true;
             this.lvMobs.Location = new System.Drawing.Point(3, 29);
             this.lvMobs.Name = "lvMobs";
-            this.lvMobs.Size = new System.Drawing.Size(414, 162);
+            this.lvMobs.Size = new System.Drawing.Size(414, 164);
             this.lvMobs.TabIndex = 0;
             this.lvMobs.UseCompatibleStateImageBehavior = false;
             this.lvMobs.View = System.Windows.Forms.View.Details;
@@ -1160,7 +1197,7 @@ namespace DCT.UI
             this.grpConnections.Controls.Add(this.label2);
             this.grpConnections.Controls.Add(this.label1);
             this.grpConnections.Controls.Add(this.lnkAccountsInvert);
-            this.grpConnections.Controls.Add(this.lnkAccountsCheckNone);
+            this.grpConnections.Controls.Add(this.lnkAccountsUncheckAll);
             this.grpConnections.Controls.Add(this.lnkAccountsCheckAll);
             this.grpConnections.Controls.Add(this.lvAccounts);
             this.grpConnections.Location = new System.Drawing.Point(3, 3);
@@ -1259,16 +1296,16 @@ namespace DCT.UI
             this.lnkAccountsInvert.Text = "Check Invert";
             this.lnkAccountsInvert.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAccountsInvert_LinkClicked);
             // 
-            // lnkAccountsCheckNone
+            // lnkAccountsUncheckAll
             // 
-            this.lnkAccountsCheckNone.AutoSize = true;
-            this.lnkAccountsCheckNone.Location = new System.Drawing.Point(55, 317);
-            this.lnkAccountsCheckNone.Name = "lnkAccountsCheckNone";
-            this.lnkAccountsCheckNone.Size = new System.Drawing.Size(67, 13);
-            this.lnkAccountsCheckNone.TabIndex = 3;
-            this.lnkAccountsCheckNone.TabStop = true;
-            this.lnkAccountsCheckNone.Text = "Check None";
-            this.lnkAccountsCheckNone.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAccountsCheckNone_LinkClicked);
+            this.lnkAccountsUncheckAll.AutoSize = true;
+            this.lnkAccountsUncheckAll.Location = new System.Drawing.Point(55, 317);
+            this.lnkAccountsUncheckAll.Name = "lnkAccountsUncheckAll";
+            this.lnkAccountsUncheckAll.Size = new System.Drawing.Size(65, 13);
+            this.lnkAccountsUncheckAll.TabIndex = 3;
+            this.lnkAccountsUncheckAll.TabStop = true;
+            this.lnkAccountsUncheckAll.Text = "Uncheck All";
+            this.lnkAccountsUncheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAccountsCheckNone_LinkClicked);
             // 
             // lnkAccountsCheckAll
             // 
@@ -1508,17 +1545,6 @@ namespace DCT.UI
             this.lblExpRage.TabIndex = 31;
             this.lblExpRage.Text = "...";
             // 
-            // lnkMobsSelect
-            // 
-            this.lnkMobsSelect.AutoSize = true;
-            this.lnkMobsSelect.Location = new System.Drawing.Point(4, 213);
-            this.lnkMobsSelect.Name = "lnkMobsSelect";
-            this.lnkMobsSelect.Size = new System.Drawing.Size(117, 13);
-            this.lnkMobsSelect.TabIndex = 7;
-            this.lnkMobsSelect.TabStop = true;
-            this.lnkMobsSelect.Text = "Select mobs by name...";
-            this.lnkMobsSelect.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkMobsSelect_LinkClicked);
-            // 
             // CoreUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1682,7 +1708,7 @@ namespace DCT.UI
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel lnkAccountsInvert;
-        private System.Windows.Forms.LinkLabel lnkAccountsCheckNone;
+        private System.Windows.Forms.LinkLabel lnkAccountsUncheckAll;
         private System.Windows.Forms.LinkLabel lnkAccountsCheckAll;
         internal System.Windows.Forms.ListView lvAccounts;
         private System.Windows.Forms.ColumnHeader clmCharName;
@@ -1723,5 +1749,7 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripMenuItem clearLogsPeriodicallyToolStripMenuItem;
         private ChatUI irc;
         private System.Windows.Forms.LinkLabel lnkMobsSelect;
+        private System.Windows.Forms.LinkLabel lnkSaveRooms;
+        private System.Windows.Forms.LinkLabel lnkMobSave;
     }
 }

@@ -42,6 +42,17 @@ namespace DCT.Outwar.World
         /// </summary>
         private static void StartRun()
         {
+            if (mAccounts.Count < 1)
+            {
+                CoreUI.Instance.LogAttack("E: You must enter an account first");
+                return;
+            }
+            else if (CoreUI.Instance.Settings.FilterMobs && CoreUI.Instance.Settings.MobFilters.Length < 1)
+            {
+                CoreUI.Instance.LogAttack("E: You have filters enabled but you haven't set them.  Nothing will be attacked with these settings - turn filtering off.");
+                return;
+            }
+
             CoreUI.Instance.ToggleAttack(true);
 
             MethodInvoker d = new MethodInvoker(Run);
@@ -53,8 +64,8 @@ namespace DCT.Outwar.World
         /// </summary>
         private static void Run()
         {
-            //SettingsSerializer.Save();
-            UserEditableSerializer.WriteFile("config.xml", CoreUI.Instance.Settings);
+            IniWriter.Save();
+            ConfigSerializer.WriteFile("config.xml", CoreUI.Instance.Settings);
 
             lock (mAccounts)
             {

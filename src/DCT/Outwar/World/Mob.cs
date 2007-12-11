@@ -365,7 +365,6 @@ namespace DCT.Outwar.World
             // ALL GOOD
             mAttacked = true;
             mRoom.Mover.MobsAttacked++;
-            Globals.SecRight++;
 
             if (src.Contains("found a"))
             {

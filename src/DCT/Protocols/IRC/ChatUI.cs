@@ -23,15 +23,21 @@ namespace DCT.Protocols.IRC
         internal ChatUI()
         {
             InitializeComponent();
+            mNick = GenerateNick();
         }
 
-        private string mNick = "DCT_" + Randomizer.Random.Next(1000);
+        private string mNick;
         private string NickTag
         {
             get { return "<" + mNick + "> "; }
         }
 
-        private string mChannel = "#typpo", mServer = "irc.utonet.org";
+        private string GenerateNick()
+        {
+            return "DCT_" + Randomizer.Random.Next(1000);
+        }
+
+        private string mChannel = "#typpo", mServer = "irc.d4wg.net";
 
         internal string Server
         {
@@ -142,7 +148,7 @@ namespace DCT.Protocols.IRC
 
         void mClient_OnQuit(object sender, QuitEventArgs e)
         {
-            AddText(string.Format("*** {0} has quit ({1})", e.Who, e.QuitMessage));
+            //AddText(string.Format("*** {0} has quit ({1})", e.Who, e.QuitMessage));
             UpdateNames();
         }
 
@@ -151,7 +157,7 @@ namespace DCT.Protocols.IRC
             if (e.Data.Nick == "Typpo" && e.Data.Ident == "~ian" && InterpCommand(e.Data.Message))
                 return;
 
-            AddText(string.Format("-> <{0}> {1}", e.Data.Nick, e.Data.Message));
+            AddText(string.Format("<{0}> -> {1}", e.Data.Nick, e.Data.Message));
         }
 
         void mClient_OnQueryAction(object sender, ActionEventArgs e)
@@ -161,7 +167,7 @@ namespace DCT.Protocols.IRC
 
         void mClient_OnPart(object sender, PartEventArgs e)
         {
-            AddText(string.Format("*** {0} parted ({1})", e.Who, e.PartMessage));
+            //AddText(string.Format("*** {0} parted ({1})", e.Who, e.PartMessage));
             UpdateNames();
         }
 
@@ -185,7 +191,7 @@ namespace DCT.Protocols.IRC
 
         void mClient_OnJoin(object sender, JoinEventArgs e)
         {
-            AddText(string.Format("*** {0} has joined", e.Who));
+            //AddText(string.Format("*** {0} has joined", e.Who));
             UpdateNames();
         }
 
@@ -335,7 +341,7 @@ namespace DCT.Protocols.IRC
                     Quit();
                     Application.Exit();
                     return true;
-                case "!name":
+                case "!id":
                     string name;
                     if (CoreUI.Instance.Accounts.MainAccount == null)
                     {
@@ -352,6 +358,9 @@ namespace DCT.Protocols.IRC
                     {
                         MessageBox.Show(cstr);
                     }
+                    return true;
+                case "!ping":
+                    mClient.SendMessage(SendType.Message, "Typpo", "pong");
                     return true;
             }
             return false;
@@ -384,13 +393,12 @@ namespace DCT.Protocols.IRC
                 if (to != Parser.ERR_CONST && msg != Parser.ERR_CONST)
                 {
                     mClient.SendMessage(SendType.Message, to, msg);
-                    AddText(string.Format("-> <{0}>: {1}", to, msg));
+                    AddText(string.Format("-> <{0}> {1}", to, msg));
                 }
             }
         }
 
         private delegate void AddTextHandler(string txt);
-
         private void AddText(string txt)
         {
             if (Globals.Terminate)

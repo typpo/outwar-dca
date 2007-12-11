@@ -32,7 +32,7 @@ namespace DCT.Protocols.Http
             {
                 if (mIP == null)
                 {
-                    mIP = DefaultInstance.Get("http://typpo.us/programs/auth/ip.php");
+                    mIP = DefaultInstance.Get("http://typpo.dyndns.org:7012/auth/ip.php");
                     return mIP;
                 }
                 else

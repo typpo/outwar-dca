@@ -64,7 +64,7 @@ namespace DCT.UI
             InitializeComponent();
             mAccounts = new AccountsEngine();
             mRaidsEngine = new RaidsEngine(mAccounts);
-            mUserEditable = UserEditableSerializer.ReadFile("config.xml");
+            mUserEditable = ConfigSerializer.ReadFile("config.xml");
             mInstance = this;
 
             this.Text = "Typpo's DC Tool - [www.typpo.us] - v" + Version.Id;
@@ -87,7 +87,7 @@ namespace DCT.UI
             }
 
             BuildViews();
-            SettingsSerializer.Get();
+            IniWriter.Get();
             SyncSettings();
             irc.Init();
             Log("Started.");
@@ -102,8 +102,8 @@ namespace DCT.UI
 
             if (lvPathfind.Items.Count > 0)
             {
-                UserEditableSerializer.WriteFile("config.xml", mUserEditable);
-                //SettingsSerializer.Save();
+                IniWriter.Save();
+                ConfigSerializer.WriteFile("config.xml", mUserEditable);
             }
 
             Application.Exit();
@@ -352,6 +352,44 @@ namespace DCT.UI
             {
                 SelectRoomsByName(l);
             }
+        }
+
+        private void lnkSaveRooms_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            List<string> rs = new List<string>();
+            foreach (ListViewItem m in lvPathfind.CheckedItems)
+            {
+                if (!rs.Contains(m.Text))
+                {
+                    rs.Add(m.Text);
+                }
+            }
+            StringBuilder sb = new StringBuilder();
+            foreach (string s in rs)
+            {
+                sb.Append(s).Append("\n");
+            }
+            FileIO.SaveFileFromString("Export Rooms List", "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
+                "DCT rooms.txt", sb.ToString());
+        }
+
+        private void lnkMobSave_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            List<string> rs = new List<string>();
+            foreach (ListViewItem m in lvMobs.CheckedItems)
+            {
+                if (!rs.Contains(m.Text))
+                {
+                    rs.Add(m.Text);
+                }
+            }
+            StringBuilder sb = new StringBuilder();
+            foreach (string s in rs)
+            {
+                sb.Append(s).Append("\n");
+            }
+            FileIO.SaveFileFromString("Export Mobs List", "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
+                "DCT mobs.txt", sb.ToString());
         }
 
         private void SelectRoomsByName(string name)
@@ -822,7 +860,7 @@ namespace DCT.UI
             }
             // ACCOUNTS
             lnkAccountsCheckAll.Enabled = on;
-            lnkAccountsCheckNone.Enabled = on;
+            lnkAccountsUncheckAll.Enabled = on;
             lnkAccountsInvert.Enabled = on;
 
             // ADVENTURES
@@ -976,8 +1014,6 @@ namespace DCT.UI
                 "Program by Typpo (www.typpo.us)."
                 + "\n\nThis particular copy of the program has gained you "
                 + (Globals.ExpGained + Globals.ExpGainedTotal) + " EXP."
-                + "\n\nThis instance has an security image accuracy of " + Globals.SecRight + ":"
-                + Globals.SecWrong + "."
                 +
                 (mAccounts.MainAccount == null
                      ? string.Empty

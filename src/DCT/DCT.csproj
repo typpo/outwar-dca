@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Outwar\World\Occupier.cs" />
-    <Compile Include="Outwar\World\RaidFormMob.cs" />
+    <Compile Include="Outwar\World\RaidFormMob.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Protocols\IRC\ChatUI.cs">
       <SubType>UserControl</SubType>
@@ -154,7 +156,7 @@
     <Compile Include="Security\Crypt.cs" />
     <Compile Include="Outwar\World\Room.cs" />
     <Compile Include="Outwar\World\RoomHashRecord.cs" />
-    <Compile Include="Settings\SettingsSerializer.cs" />
+    <Compile Include="Settings\IniWriter.cs" />
     <Compile Include="Threading\ThreadEngine.cs" />
     <Compile Include="Util\FileIO.cs" />
     <Compile Include="Util\InputBox.cs">
@@ -170,7 +172,7 @@
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\Randomizer.cs" />
-    <Compile Include="Settings\UserEditableSerializer.cs" />
+    <Compile Include="Settings\ConfigSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Misc\Bad.ico" />
