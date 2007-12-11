@@ -89,6 +89,7 @@ namespace DCT.UI
             BuildViews();
             IniWriter.Get();
             SyncSettings();
+            CalcMobRage();
             irc.Init();
             Log("Started.");
             LogAttack("No attacks yet...");
@@ -335,10 +336,12 @@ namespace DCT.UI
                     MessageBox.Show("Choose a preset option.", "Select Potion Mobs", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
             }
+            int i = 0;
             foreach (string m in check)
             {
-                SelectMobsByName(m);
+                i += SelectMobsByName(m);
             }
+            MessageBox.Show("Selected " + i + " mobs.", "Loaded Mobs", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void lnkLoadRooms_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -348,10 +351,12 @@ namespace DCT.UI
             {
                 return;
             }
+            int i = 0;
             foreach (string l in s.Split(new char[] { ',', '\n', '\r', ';', '\t' }))
             {
-                SelectRoomsByName(l);
+                i += SelectRoomsByName(l);
             }
+            MessageBox.Show("Selected " + i + " rooms.", "Loaded Rooms", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void lnkSaveRooms_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -392,20 +397,26 @@ namespace DCT.UI
                 "DCT mobs.txt", sb.ToString());
         }
 
-        private void SelectRoomsByName(string name)
+        private int SelectRoomsByName(string name)
         {
+            int i = 0;
             foreach (ListViewItem item in lvPathfind.Items.Find(name, false))
             {
                 item.Checked = true;
+                i++;
             }
+            return i;
         }
 
-        private void SelectMobsByName(string name)
+        private int SelectMobsByName(string name)
         {
+            int i = 0;
             foreach (ListViewItem item in lvMobs.Items.Find(name, false))
             {
                 item.Checked = true;
+                i++;
             }
+            return i;
         }
 
         private void chkAutoTrain_CheckedChanged(object sender, EventArgs e)
@@ -1097,8 +1108,8 @@ namespace DCT.UI
             HttpSocket.DefaultInstance.Cookie = string.Empty;
             mAccounts.Accounts.Clear();
             lvAccounts.Items.Clear();
-            btnLogin.Enabled = true;
-            btnLogout.Enabled = false;
+            //btnLogin.Enabled = true;
+            //btnLogout.Enabled = false;
             btnRefresh.Enabled = false;
         }
 
@@ -1215,6 +1226,11 @@ namespace DCT.UI
         }
 
         private void btnMobRage_Click(object sender, EventArgs e)
+        {
+            CalcMobRage();
+        }
+
+        private void CalcMobRage()
         {
             btnMobRage.Enabled = false;
             UpdateMobRage();

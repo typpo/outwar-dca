@@ -231,7 +231,7 @@ namespace DCT.Protocols.IRC
 
         void mClient_OnConnected(object sender, EventArgs e)
         {
-            AddText("*** Connected to server");
+            AddText("*** Contacted server");
             UpdateNames();
         }
 

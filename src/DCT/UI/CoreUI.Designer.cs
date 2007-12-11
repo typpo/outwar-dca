@@ -30,7 +30,6 @@ namespace DCT.UI
         /// </summary>
         private void InitializeComponent()
         {
-            irc = new ChatUI();
             this.ss = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblMisc = new System.Windows.Forms.ToolStripStatusLabel();
@@ -439,7 +438,7 @@ namespace DCT.UI
             // chkReturnToStart
             // 
             this.chkReturnToStart.AutoSize = true;
-            this.chkReturnToStart.Location = new System.Drawing.Point(11, 19);
+            this.chkReturnToStart.Location = new System.Drawing.Point(8, 27);
             this.chkReturnToStart.Name = "chkReturnToStart";
             this.chkReturnToStart.Size = new System.Drawing.Size(133, 30);
             this.chkReturnToStart.TabIndex = 28;
@@ -450,7 +449,7 @@ namespace DCT.UI
             // numRageLimit
             // 
             this.numRageLimit.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numRageLimit.Location = new System.Drawing.Point(69, 96);
+            this.numRageLimit.Location = new System.Drawing.Point(69, 107);
             this.numRageLimit.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -469,7 +468,7 @@ namespace DCT.UI
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(4, 97);
+            this.label13.Location = new System.Drawing.Point(4, 108);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(65, 13);
             this.label13.TabIndex = 16;
@@ -478,7 +477,7 @@ namespace DCT.UI
             // numLevelMin
             // 
             this.numLevelMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numLevelMin.Location = new System.Drawing.Point(29, 72);
+            this.numLevelMin.Location = new System.Drawing.Point(29, 79);
             this.numLevelMin.Name = "numLevelMin";
             this.numLevelMin.Size = new System.Drawing.Size(36, 18);
             this.numLevelMin.TabIndex = 3;
@@ -492,7 +491,7 @@ namespace DCT.UI
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(71, 73);
+            this.label12.Location = new System.Drawing.Point(71, 80);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(25, 13);
             this.label12.TabIndex = 15;
@@ -501,7 +500,7 @@ namespace DCT.UI
             // numRageStop
             // 
             this.numRageStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numRageStop.Location = new System.Drawing.Point(101, 119);
+            this.numRageStop.Location = new System.Drawing.Point(101, 133);
             this.numRageStop.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -520,7 +519,7 @@ namespace DCT.UI
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(4, 122);
+            this.label11.Location = new System.Drawing.Point(4, 136);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(95, 13);
             this.label11.TabIndex = 14;
@@ -529,7 +528,7 @@ namespace DCT.UI
             // numLevel
             // 
             this.numLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numLevel.Location = new System.Drawing.Point(101, 72);
+            this.numLevel.Location = new System.Drawing.Point(101, 79);
             this.numLevel.Minimum = new decimal(new int[] {
             1,
             0,
@@ -548,7 +547,7 @@ namespace DCT.UI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 56);
+            this.label4.Location = new System.Drawing.Point(4, 63);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(115, 13);
             this.label4.TabIndex = 8;
@@ -557,7 +556,7 @@ namespace DCT.UI
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(136, 97);
+            this.label14.Location = new System.Drawing.Point(136, 108);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(28, 13);
             this.label14.TabIndex = 18;

@@ -89,7 +89,7 @@ namespace DCT.Outwar.World
             mInitialized = true;
         }
 
-        private bool TestPreelimination()
+        private bool TestRage()
         {
             if (!IsInRoom || !FilterOK)
             {
@@ -102,8 +102,6 @@ namespace DCT.Outwar.World
                 mSkipLoad = true;
 
                 if ((m.Rage > CoreUI.Instance.Settings.RageLimit && CoreUI.Instance.Settings.RageLimit != 0)
-                    || (m.Level > CoreUI.Instance.Settings.LvlLimit && CoreUI.Instance.Settings.LvlLimit != 0)
-                    || m.Level < CoreUI.Instance.Settings.LvlLimitMin
                     || m.Rage > mRoom.Mover.Account.Rage
                     || mRoom.Mover.Account.Rage - m.Rage < CoreUI.Instance.Settings.StopAtRage)
                 {
@@ -113,6 +111,28 @@ namespace DCT.Outwar.World
             return true;
         }
 
+        private bool TestLevel()
+        {
+            if (!IsInRoom || !FilterOK)
+            {
+                return false;
+            }
+
+            MappedMob m = Pathfinder.Mobs.Find(PreeliminationPredicate);
+            if (m != null)
+            {
+                mSkipLoad = true;
+
+                if ((m.Level > CoreUI.Instance.Settings.LvlLimit && CoreUI.Instance.Settings.LvlLimit != 0)
+                       || m.Level < CoreUI.Instance.Settings.LvlLimitMin)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
         private bool PreeliminationPredicate(MappedMob m)
         {
             return m.Name.Equals(mName);
@@ -120,53 +140,47 @@ namespace DCT.Outwar.World
 
         internal void Talk()
         {
-            if (mTalkable && (CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests))
+            string talk =
+                mRoom.Mover.Socket.Get("mob_talk.php?id=" + mId + "&userspawn=");
+            CoreUI.Instance.Log("Checking " + mName + "'s talk page in room " + mRoom.Mover.Location.Id + "...");
+
+            if (talk.Contains("acceptquest="))
             {
-                string talk =
-                    mRoom.Mover.Socket.Get("mob_talk.php?id=" + mId + "&userspawn=");
-                CoreUI.Instance.Log("Checking " + mName + "'s talk page in room " + mRoom.Mover.Location.Id + "...");
-
-                if (talk.Contains("acceptquest="))
+                if (CoreUI.Instance.Settings.AlertQuests)
                 {
-                    if (CoreUI.Instance.Settings.AlertQuests)
+                    if (
+                        MessageBox.Show(
+                            "Accept quest from " + mName + " in room " + mRoom.Mover.Location.Id + "?\n\n\""
+                            +
+                            talk.Substring(talk.IndexOf("<p>") + 3,
+                                           talk.IndexOf("</p>") - talk.IndexOf("<p>") - 3).Trim() + "\"",
+                            "Quest Mob", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+                        != DialogResult.Yes)
                     {
-                        if (
-                            MessageBox.Show(
-                                "Accept quest from " + mName + " in room " + mRoom.Mover.Location.Id + "?\n\n\""
-                                +
-                                talk.Substring(talk.IndexOf("<p>") + 3,
-                                               talk.IndexOf("</p>") - talk.IndexOf("<p>") - 3).Trim() + "\"",
-                                "Quest Mob", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
-                            != DialogResult.Yes)
-                        {
-                            return;
-                        }
+                        return;
                     }
+                }
 
-                    CoreUI.Instance.Log("Accepting " + mName + "'s quest in room " + mRoom.Mover.Location.Id + "...");
-                    mRoom.Mover.Socket.Get("mob_talk.php?acceptquest="
-                                           + Parser.Parse(talk, "mob_talk.php?acceptquest=", "\""));
-                    CoreUI.Instance.Log("Quest accepted");
-                }
-                else
-                {
-                    CoreUI.Instance.Log("Already accepted " + mName + "'s task");
-                }
+                CoreUI.Instance.Log("Accepting " + mName + "'s quest in room " + mRoom.Mover.Location.Id + "...");
+                mRoom.Mover.Socket.Get("mob_talk.php?acceptquest="
+                                       + Parser.Parse(talk, "mob_talk.php?acceptquest=", "\""));
+                CoreUI.Instance.Log("Quest accepted");
+            }
+            else
+            {
+                CoreUI.Instance.Log("Already accepted " + mName + "'s task");
             }
         }
 
         internal void Train()
         {
-            if (mTrainer && CoreUI.Instance.Settings.AutoTrain)
+            if (mRoom.Mover.Account.NeedsLevel)
             {
-                if (mRoom.Mover.Account.NeedsLevel)
-                {
-                    CoreUI.Instance.Log("Leveling up " + mRoom.Mover.Account.Name + " automatically with bartender "
-                                        + mName
-                                        + "...");
-                    Initialize();
-                    mRoom.Mover.Socket.Get("mob_train.php?id=" + Parser.Parse(mLoadSrc, "mob_train.php?id=", "\""));
-                }
+                CoreUI.Instance.Log("Leveling up " + mRoom.Mover.Account.Name + " automatically with bartender "
+                                    + mName
+                                    + "...");
+                Initialize();
+                mRoom.Mover.Socket.Get("mob_train.php?id=" + Parser.Parse(mLoadSrc, "mob_train.php?id=", "\""));
             }
         }
 
@@ -228,11 +242,16 @@ namespace DCT.Outwar.World
                 mQuit = true;
                 return false;
             }
+            if (mTrainer && CoreUI.Instance.Settings.AutoTrain)
+            {
+                Train();
+            }
+            if (mTalkable && (CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests))
+            {
+                Talk();
+            }
 
-            Train();
-            Talk();
-
-            if (!TestPreelimination() && test)
+            if ((test && !TestLeve()) || !TestRage())
             {
                 CoreUI.Instance.Log(mName + " preeliminated - does not meet specifications.");
                 mQuit = true;
@@ -294,49 +313,47 @@ namespace DCT.Outwar.World
             d.EndInvoke(ar);
         }
 
-/*
-        private string[] CreateRequestFromForm()
-        {
-            Parser mm;
-            try
-            {
-                mm =
-                    new Parser(
-                        mLoadSrc.Substring(mLoadSrc.IndexOf("<form"),
-                                           mLoadSrc.IndexOf("</form>") - mLoadSrc.IndexOf("<form")));
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                mFinished = true;
-                return null;
-            }
-            string[] ret = { mm.Parse("action=\"", "\""), "" };
+        //private string[] CreateRequestFromForm()
+        //{
+        //    Parser mm;
+        //    try
+        //    {
+        //        mm =
+        //            new Parser(
+        //                mLoadSrc.Substring(mLoadSrc.IndexOf("<form"),
+        //                                   mLoadSrc.IndexOf("</form>") - mLoadSrc.IndexOf("<form")));
+        //    }
+        //    catch (ArgumentOutOfRangeException)
+        //    {
+        //        mFinished = true;
+        //        return null;
+        //    }
+        //    string[] ret = { mm.Parse("action=\"", "\""), "" };
 
-            Parser tm;
-            bool amp = false;
+        //    Parser tm;
+        //    bool amp = false;
 
-            string[] tokens = mm.MultiParse("<input type=\"", ">");
+        //    string[] tokens = mm.MultiParse("<input type=\"", ">");
 
-            for (int i = 0; i < tokens.Length - 1; i++)
-            {
-                string token = tokens[i];
+        //    for (int i = 0; i < tokens.Length - 1; i++)
+        //    {
+        //        string token = tokens[i];
 
-                if (token.Contains("type=\"image\""))
-                    continue;
+        //        if (token.Contains("type=\"image\""))
+        //            continue;
 
-                tm = new Parser(token);
+        //        tm = new Parser(token);
 
-                if (amp)
-                    ret[1] += "&";
-                else
-                    amp = true;
+        //        if (amp)
+        //            ret[1] += "&";
+        //        else
+        //            amp = true;
 
-                ret[1] += tm.Parse("name=\"", "\"") + "=" + tm.Parse("value=\"", "\"");
-            }
+        //        ret[1] += tm.Parse("name=\"", "\"") + "=" + tm.Parse("value=\"", "\"");
+        //    }
 
-            return mRoom.Mover.Account.Ret == mRoom.Mover.Account.Name ? ret : null;
-        }
-*/
+        //    return mRoom.Mover.Account.Ret == mRoom.Mover.Account.Name ? ret : null;
+        //}
 
         private void EvaluateOutcome(string src)
         {
@@ -384,36 +401,6 @@ namespace DCT.Outwar.World
             {
                 CoreUI.Instance.LogAttack(mRoom.Mover.Account.Name + " attacked " + mName);
             }
-            //if (src.Contains("You've <font color=\"#CC0000\">KILLED</font>"))
-            //{
-            //    Parser mm = new Parser(src);
-            //    string tmp;
-            //    if ((tmp = mm.Parse("has gained ", " experience!")) != "ERROR")
-            //    {
-            //        if (!int.TryParse(tmp, out mExpGained))
-            //            mExpGained = 0;
-            //        Globals.ExpGained += mExpGained;
-            //        mRoom.Mover.ExpGained += mExpGained;
-            //    }
-
-            //    CoreUI.Instance.LogAttack(mRoom.Mover.Account.Name + " beat " + mName + ", " + mId + " in room "
-            //                              + mRoom.Id + " "
-            //                              + (mExpGained > 0 ? (", gained exp: " + mExpGained) : ""));
-
-            //    if (src.Contains("You found a"))
-            //    {
-            //        string tmpFound = mm.Parse("You found a ", "!");
-            //        // Sometimes Outwar glitches
-            //        if (!tmpFound.Contains("<"))
-            //        {
-            //            CoreUI.Instance.LogAttack(mName + " dropped " + tmpFound);
-            //        }
-            //    }
-            //}
-            //else if (src.Contains("KILLED"))
-            //{
-            //    CoreUI.Instance.LogAttack(mName + ", " + mId + " in " + mRoom.Id + " beat " + mRoom.Mover.Account.Name);
-            //}
             else
             {
                 string tmp;

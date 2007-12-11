@@ -226,8 +226,8 @@ namespace DCT.UI
             txtUsername.Enabled = false;
             txtPassword.Enabled = false;
             chkRemember.Enabled = false;
-            btnLogin.Enabled = false;
-            btnLogout.Enabled = false;
+            //btnLogin.Enabled = false;
+            //btnLogout.Enabled = false;
 
             Log("Logging in...");
 

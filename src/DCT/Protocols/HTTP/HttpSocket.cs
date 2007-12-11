@@ -137,7 +137,7 @@ namespace DCT.Protocols.Http
 
         protected virtual string Request(string url, string write, string referer)
         {
-            StreamWriter sw = null;
+            Stream sw = null;
             StreamReader sr = null;
             WebResponse response = null;
             for (int i = 0; i < 3; i++)
@@ -155,9 +155,10 @@ namespace DCT.Protocols.Http
                     {
                         request.Method = "POST";
                         request.ContentLength = write.Length;
-                        sw = new StreamWriter(request.GetRequestStream());
-                        if (post)
-                            sw.Write(write);
+                        sw = request.GetRequestStream();
+                        UTF8Encoding encoding = new UTF8Encoding();
+                        byte[] bytes = encoding.GetBytes(write);
+                        sw.Write(bytes, 0, bytes.Length);
                         sw.Flush();
                         sw.Close();
                     }

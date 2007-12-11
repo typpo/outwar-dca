@@ -86,6 +86,7 @@ namespace DCT.Outwar
 
         internal void Login(string user, string pass, bool remember)
         {
+            HttpSocket.DefaultInstance.Cookie = null;
             HttpSocket.DefaultInstance.Post("http://outwar.com/myaccount.php", "login_username=" + user
                                            + "&login_password=" + pass
                                            + (remember ? "&remember=1" : string.Empty));
