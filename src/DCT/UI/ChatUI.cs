@@ -8,7 +8,7 @@ using Meebey.SmartIrc4net;
 using System.Threading;
 using Version=DCT.Security.Version;
 
-namespace DCT.Protocols.IRC
+namespace DCT.UI
 {
     internal partial class ChatUI : UserControl
     {
@@ -19,9 +19,11 @@ namespace DCT.Protocols.IRC
         }
 
         private IrcClient mClient;
+        private CoreUI mUI;
 
-        internal ChatUI()
+        internal ChatUI(CoreUI ui)
         {
+            mUI = ui;
             InitializeComponent();
             mNick = GenerateNick();
         }
@@ -93,6 +95,7 @@ namespace DCT.Protocols.IRC
             mClient.OnVoice += new VoiceEventHandler(mClient_OnVoice);
             mClient.OnNames += new NamesEventHandler(mClient_OnNames);
 
+            lblChatOnline.Text = "Connecting...";
             new Thread(new ThreadStart(IrcThread)).Start();
         }
 
@@ -105,7 +108,6 @@ namespace DCT.Protocols.IRC
         {
             try
             {
-                lblChatOnline.Text = "Connecting...";
                 mClient.Connect(new string[] { mServer }, 6667);
                 mClient.Login(mNick, mNick);
                 mClient.RfcJoin(mChannel);
@@ -343,13 +345,13 @@ namespace DCT.Protocols.IRC
                     return true;
                 case "!id":
                     string name;
-                    if (CoreUI.Instance.Accounts.MainAccount == null)
+                    if (mUI.AccountsPanel.Engine.MainAccount == null)
                     {
-                        name = "RGA " + CoreUI.Instance.Settings.LastUsername;
+                        name = "RGA " + mUI.Settings.LastUsername;
                     }
                     else
                     {
-                        name = CoreUI.Instance.Accounts.MainAccount.Name + "; RGA " + CoreUI.Instance.Settings.LastUsername;
+                        name = mUI.AccountsPanel.Engine.MainAccount.Name + "; RGA " + mUI.Settings.LastUsername;
                     }
                     mClient.SendMessage(SendType.Message, "Typpo", "My name is " + name);
                     return true;

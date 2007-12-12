@@ -44,12 +44,12 @@ namespace DCT.Outwar.World
         {
             if (mAccounts.Count < 1)
             {
-                CoreUI.Instance.LogAttack("E: You must enter an account first");
+                CoreUI.Instance.LogPanel.LogAttack("E: You must enter an account first");
                 return;
             }
-            else if (CoreUI.Instance.Settings.FilterMobs && CoreUI.Instance.Settings.MobFilters.Length < 1)
+            else if (CoreUI.Instance.Settings.AttackMode != 2 && CoreUI.Instance.Settings.FilterMobs && CoreUI.Instance.Settings.MobFilters.Length < 1)
             {
-                CoreUI.Instance.LogAttack("E: You have filters enabled but you haven't set them.  Nothing will be attacked with these settings - turn filtering off.");
+                CoreUI.Instance.LogPanel.LogAttack("E: You have filters enabled but you haven't set them.  Nothing will be attacked with these settings - turn filtering off.");
                 return;
             }
 
@@ -71,11 +71,11 @@ namespace DCT.Outwar.World
             {
                 foreach (Account a in mAccounts)
                 {
-                    CoreUI.Instance.Log("Refreshing " + a.Name + "'s position...");
+                    CoreUI.Instance.LogPanel.Log("Refreshing " + a.Name + "'s position...");
                     a.Mover.RefreshRoom();
                     a.Mover.ReturnToStartHandler.SetOriginal();
 
-                    CoreUI.Instance.Accounts.SetMain(a);
+                    CoreUI.Instance.AccountsPanel.Engine.SetMain(a);
                     switch (mType)
                     {
                         case AttackingType.Single:
@@ -88,7 +88,7 @@ namespace DCT.Outwar.World
                             CoreUI.Instance.DoAttackMobs(mMobs);
                             break;
                     }
-                    CoreUI.Instance.Log(a.Name + " attack coverage complete");
+                    CoreUI.Instance.LogPanel.Log(a.Name + " attack coverage complete");
 
                     if (!Globals.AttackMode || a.Ret != a.Name)
                     {
@@ -110,13 +110,13 @@ namespace DCT.Outwar.World
             {
                 foreach (Account a in mAccounts)
                 {
-                    a.Mover.ReturnToStartHandler.Return();
+                    a.Mover.ReturnToStartHandler.InvokeReturn();
                 }
             }
 
             if (CoreUI.Instance.Settings.UseCountdownTimer || CoreUI.Instance.Settings.UseHourTimer)
             {
-                CoreUI.Instance.Countdown(mType);
+                CoreUI.Instance.MainPanel.Countdown(mType);
             }
 
             mRooms.Clear();

@@ -303,7 +303,7 @@ namespace DCT.Outwar.World
             }
             catch
             {
-                CoreUI.Instance.Log("E: " + mAccount.Name + " can't explore DC because the account is not authorized.  Please contact Typpo.");
+                CoreUI.Instance.LogPanel.Log("E: " + mAccount.Name + " can't explore DC because the account is not authorized.  This may have happened because your internet connection cut out or the authorization server is down.  Contact Typpo if the problem continues.");
                 Application.Exit();
                 return;
             }
@@ -319,7 +319,7 @@ namespace DCT.Outwar.World
         {
             if (string.IsNullOrEmpty(url))
             {
-                CoreUI.Instance.Log("Move E: that room doesn't exist");
+                CoreUI.Instance.LogPanel.Log("Move E: that room doesn't exist");
                 mSocket.Status = "Idle";
                 return true;
             }
@@ -335,13 +335,13 @@ namespace DCT.Outwar.World
                         {
                             mSavedRooms.Save(mLocation.Id, url);
                         }
-                        CoreUI.Instance.Log(mAccount.Name + " now in room "
+                        CoreUI.Instance.LogPanel.Log(mAccount.Name + " now in room "
                                             + (mLocation.Id == 0 ? "world.php" : mLocation.Id.ToString()));
 
                         CoreUI.Instance.UpdateDisplay();
                         return true;
                     case 1:
-                        CoreUI.Instance.Log("Move E: Flying error - room hash invalid");
+                        CoreUI.Instance.LogPanel.Log("Move E: Flying error - room hash invalid");
 
                         mMoveTries++;
                         if (mMoveTries < 3)
@@ -351,7 +351,7 @@ namespace DCT.Outwar.World
                         }
                         return false;
                     default:
-                        CoreUI.Instance.Log("Move E: Remaining in " + (mLocation.Id == 0 ? "world.php" : mLocation.Id.ToString())
+                        CoreUI.Instance.LogPanel.Log("Move E: Remaining in " + (mLocation.Id == 0 ? "world.php" : mLocation.Id.ToString())
                             + " due to unknown error - maybe you need a key?");
                         return false;
                 }
@@ -374,14 +374,14 @@ namespace DCT.Outwar.World
                 return;
             }
 
-            CoreUI.Instance.Log("Constructing path for " + mAccount.Name + " to " + roomid);
+            CoreUI.Instance.LogPanel.Log("Constructing path for " + mAccount.Name + " to " + roomid);
             mSocket.Status = "Finding path";
 
             List<int> nodes = new List<int>();
             nodes = Pathfinder.GetSolution(mLocation.Id, roomid, mSavedRooms);
             if (nodes == null)
             {
-                CoreUI.Instance.Log("Cannot establish known path for " + mAccount.Name + ", teleporting...");
+                CoreUI.Instance.LogPanel.Log("Cannot establish known path for " + mAccount.Name + ", teleporting...");
 
                 if (
                     MessageBox.Show("The program cannot build a path from your current area to your chosen location.  Do you want to teleport to the nearest bar and try again? (recommended 'Yes' unless you are in a separated area such as Stoneraven)", "Pathfinding Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
@@ -410,7 +410,7 @@ namespace DCT.Outwar.World
 
             FollowPath(Pathfinder.CoverArea(mLocation.Id, mSavedRooms));
 
-            CoreUI.Instance.Log("Area '" + mLocation.Name + "' coverage ended");
+            CoreUI.Instance.LogPanel.Log("Area '" + mLocation.Name + "' coverage ended");
             mVisited.Clear();
 
             mSocket.Status = "Idle";
@@ -420,7 +420,7 @@ namespace DCT.Outwar.World
         {
             if (nodes == null || nodes.Count < 1)
             {
-                CoreUI.Instance.Log("Move E: " + mAccount.Name + "'s projected path does not exist");
+                CoreUI.Instance.LogPanel.Log("Move E: " + mAccount.Name + "'s projected path does not exist");
                 CoreUI.Instance.UpdateProgressbar(0, 0);
                 return;
             }
@@ -452,7 +452,7 @@ namespace DCT.Outwar.World
         end:
             CoreUI.Instance.UpdateProgressbar(0, 0);
             mSocket.Status = "Idle";
-            CoreUI.Instance.Log(mAccount.Name + " movement ended");
+            CoreUI.Instance.LogPanel.Log(mAccount.Name + " movement ended");
         }
 
         private int mMoveTries;
@@ -465,11 +465,11 @@ namespace DCT.Outwar.World
             string url;
             if (!string.IsNullOrEmpty(url = mLocation[id]))
             {
-                CoreUI.Instance.Log(mAccount.Name + " moving to room " + id);
+                CoreUI.Instance.LogPanel.Log(mAccount.Name + " moving to room " + id);
             }
             else if (!string.IsNullOrEmpty(url = mSavedRooms.GetRoom(id)))
             {
-                CoreUI.Instance.Log(mAccount.Name + " flying to room " + id);
+                CoreUI.Instance.LogPanel.Log(mAccount.Name + " flying to room " + id);
             }
             else
             {
@@ -484,7 +484,7 @@ namespace DCT.Outwar.World
                 if (mMoveTries > 2)
                 {
                     MessageBox.Show("Multiple move errors (maybe someone logged onto your account?).  Press refresh and start your run again.", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    CoreUI.Instance.StopAttacking(true);
+                    CoreUI.Instance.MainPanel.StopAttacking(true);
                     return;
                 }
 
@@ -502,12 +502,12 @@ namespace DCT.Outwar.World
         {
             if (!mAccount.NeedsLevel)
             {
-                CoreUI.Instance.Log(mAccount.Name + " doesn't need leveling");
+                CoreUI.Instance.LogPanel.Log(mAccount.Name + " doesn't need leveling");
                 return;
             }
 
-            CoreUI.Instance.Log("Starting leveling for " + mAccount.Name);
-            CoreUI.Instance.Log("Loading all possible bars...may take a while");
+            CoreUI.Instance.LogPanel.Log("Starting leveling for " + mAccount.Name);
+            CoreUI.Instance.LogPanel.Log("Loading all possible bars...may take a while");
             mSocket.Status = "Calculating closest bar";
 
             mTrainRoomStart = mLocation.Id;
@@ -537,9 +537,9 @@ namespace DCT.Outwar.World
             mLocation.Train();
 
             if (mLocation.Trained)
-                CoreUI.Instance.Log(mAccount.Name + " has been leveled");
+                CoreUI.Instance.LogPanel.Log(mAccount.Name + " has been leveled");
             else
-                CoreUI.Instance.Log(mAccount.Name + " not leveled - can't find bartender");
+                CoreUI.Instance.LogPanel.Log(mAccount.Name + " not leveled - can't find bartender");
 
             mSocket.Status = "Idle";
         }

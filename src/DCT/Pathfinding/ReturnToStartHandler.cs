@@ -21,14 +21,14 @@ namespace DCT.Pathfinding
             mOriginalRoom = mAccount.Mover.Location.Id;
         }
 
-        internal void Return()
+        internal void InvokeReturn()
         {
             if (mOriginalRoom == 0)
             {
                 return;
             }
 
-            CoreUI.Instance.Log("Moving back to starting room...");
+            CoreUI.Instance.LogPanel.Log("Moving back to starting room...");
 
             Mover.PathfindHandler d = new Mover.PathfindHandler(mAccount.Mover.PathfindTo);
             d.BeginInvoke(mOriginalRoom, new AsyncCallback(PathfindCallback), d);
@@ -41,7 +41,7 @@ namespace DCT.Pathfinding
             Mover.PathfindHandler d = (Mover.PathfindHandler) ar.AsyncState;
             d.EndInvoke(ar);
 
-            CoreUI.Instance.Log("Moved back to starting room");
+            CoreUI.Instance.LogPanel.Log("Moved back to starting room");
         }
     }
 }

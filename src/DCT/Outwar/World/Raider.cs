@@ -41,7 +41,7 @@ namespace DCT.Outwar.World
             RaidFormMob m = mAccount.Mover.Location.Raid;
             if (m == null)
             {
-                CoreUI.Instance.Log("E: Could not launch - can't find expected raid mob at current location.");
+                CoreUI.Instance.LogPanel.Log("E: Could not launch - can't find expected raid mob at current location.");
                 return false;
             }
 
@@ -51,7 +51,7 @@ namespace DCT.Outwar.World
 
         internal bool Check(List<string> raidnames)
         {
-            CoreUI.Instance.Log(mAccount.Name + " checking for raids...");
+            CoreUI.Instance.LogPanel.Log(mAccount.Name + " checking for raids...");
 
             Parser p = new Parser(mSocket.Get("currentraids.php"));
 
@@ -75,7 +75,7 @@ namespace DCT.Outwar.World
             }
 
             bool found = mRaids.Count != 0;
-            CoreUI.Instance.Log(found ? mRaids.Count + " raids to join" : "No raids to join");
+            CoreUI.Instance.LogPanel.Log(found ? mRaids.Count + " raids to join" : "No raids to join");
             return found;
         }
 
@@ -83,13 +83,13 @@ namespace DCT.Outwar.World
         {
             if (mAccount.Mover.Location == null)
             {
-                CoreUI.Instance.Log("E: " + mAccount.Name + " can't join raids if not authorized");
+                CoreUI.Instance.LogPanel.Log("E: " + mAccount.Name + " can't join raids if not authorized");
                 return;
             }
 
             foreach (string s in mRaids.Values)
             {
-                CoreUI.Instance.Log(mAccount.Name + " joining " + s + " raid...");
+                CoreUI.Instance.LogPanel.Log(mAccount.Name + " joining " + s + " raid...");
 
                 string url = "joinraid.php?" + mRaids.Keys[mRaids.IndexOfValue(s)];
                 Parser p = new Parser(mSocket.Get(url));
@@ -97,7 +97,7 @@ namespace DCT.Outwar.World
 
                 mSocket.Post(url, "codeid=" + codeid + "&submit=Launch!");
                 mAccount.Socket.Status = "Joined " + s;
-                CoreUI.Instance.Log(mAccount.Name + " joined " + s + " raid");
+                CoreUI.Instance.LogPanel.Log(mAccount.Name + " joined " + s + " raid");
             }
         }
     }

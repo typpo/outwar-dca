@@ -21,13 +21,6 @@ namespace DCT.Settings
             set { mClearLogs = value; }
         }
 
-        private bool mAutoJoin;
-        [XmlIgnore()]
-        public bool AutoJoin
-        {
-            get { return mAutoJoin; }
-            set { mAutoJoin = value; }
-        }
         private bool mAlertQuests;
         [XmlElement("AlertQuests")]
         public bool AlertQuests
@@ -91,14 +84,6 @@ namespace DCT.Settings
         {
             get { return mAttackMode; }
             set { mAttackMode = value; }
-        }
-
-        private int mRaidInterval;
-        [XmlIgnore()]
-        public int RaidInterval
-        {
-            get { return mRaidInterval; }
-            set { mRaidInterval = value; }
         }
 
         private int mDelay;
@@ -180,7 +165,6 @@ namespace DCT.Settings
             mMobFilters = new string[0];
 
             mClearLogs = true;
-            mAutoJoin = false;
             mAutoTrain = true;
             mVariance = true;
 
@@ -193,8 +177,6 @@ namespace DCT.Settings
             mUseHourTimer = false;
 
             mAttackMode = 1;
-
-            mRaidInterval = 1;
 
             mLvlLimitMin = 0;
             mLvlLimit = 35;

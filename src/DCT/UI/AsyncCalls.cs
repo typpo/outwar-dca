@@ -15,39 +15,40 @@ namespace DCT.UI
         private void SetupHandler()
         {
             AttackingType type;
-            if (optCountdownSingle.Checked)
+            switch (mUserEditable.AttackMode)
             {
-                type = AttackingType.Single;
+                case 0:
+                    type = AttackingType.Single;
+                    break;
+                case 1:
+                    type = AttackingType.Multi;
+                    break;
+                default:
+                    type = AttackingType.Mobs;
+                    break;
             }
-            else if (optCountdownMulti.Checked)
-            {
-                type = AttackingType.Multi;
-            }
-            else
-            {
-                type = AttackingType.Mobs;
-            }
+
             List<Account> accounts = new List<Account>();
-            if (lvAccounts.CheckedIndices.Count > 0)
+            if (mAccountsPanel.CheckedIndices.Count > 0)
             {
-                foreach (int i in lvAccounts.CheckedIndices)
+                foreach (int i in mAccountsPanel.CheckedIndices)
                 {
-                    accounts.Add(mAccounts[i]);
+                    accounts.Add(mAccountsPanel.Engine[i]);
                 }
             }
-            else if (lvAccounts.FocusedItem != null)
+            else if (mAccountsPanel.FocusedAccount != null)
             {
-                accounts.Add(mAccounts[lvAccounts.FocusedItem.Index]);
+                accounts.Add(mAccountsPanel.Engine[mAccountsPanel.FocusedAccount.Index]);
             }
-            else if(mAccounts.Count > 0)
+            else if(mAccountsPanel.Engine.Count > 0)
             {
-                accounts.Add(mAccounts[0]);
+                accounts.Add(mAccountsPanel.Engine[0]);
             }
 
             AttackHandler.Set(accounts, type);
         }
 
-        private void AttackArea()
+        internal void AttackArea()
         {
             SetupHandler();
             AttackHandler.BeginArea();
@@ -57,27 +58,27 @@ namespace DCT.UI
         {
             Globals.AttackOn = true;
 
-            mAccounts.MainAccount.Mover.CoverArea();
+            mAccountsPanel.Engine.MainAccount.Mover.CoverArea();
 
             if (!Globals.AttackMode)
             {
-                Log("Single-area coverage quit");
-                StopAttacking(true);
+                mLogPanel.Log("Single-area coverage quit");
+                mMainPanel.StopAttacking(true);
             }
         }
 
-        private void AttackAreas()
+        internal void AttackAreas()
         {
-            if (lvPathfind.CheckedIndices.Count < 1)
+            if (mRoomsPanel.CheckedRooms.Count < 1)
             {
-                Log("E: Choose at least 1 area to cover");
+                mLogPanel.Log("E: Choose at least 1 area to cover");
                 return;
             }
 
             Dictionary<int, string> rooms = new Dictionary<int, string>();
-            foreach (int i in lvPathfind.CheckedIndices)
+            foreach (int i in mRoomsPanel.CheckedIndices)
             {
-                rooms.Add(int.Parse(lvPathfind.Items[i].SubItems[1].Text), lvPathfind.Items[i].Text);
+                rooms.Add(int.Parse(mRoomsPanel.Rooms[i].SubItems[1].Text), mRoomsPanel.Rooms[i].Text);
             }
 
             SetupHandler();
@@ -88,7 +89,7 @@ namespace DCT.UI
         {
             // TODO shouldn't need room name as string...
 
-            Account mAccount = mAccounts.MainAccount;
+            Account mAccount = mAccountsPanel.Engine.MainAccount;
             List<string> done = new List<string>();
             foreach (int rm in rooms.Keys)
             {
@@ -109,29 +110,29 @@ namespace DCT.UI
 
                 Globals.AttackOn = true;
 
-                mAccounts.MainAccount.Mover.CoverArea();
+                mAccountsPanel.Engine.MainAccount.Mover.CoverArea();
 
                 if (!Globals.AttackOn || !Globals.AttackMode)
                     goto quit;
             }
             return;
             quit:
-            Log("Multi-area coverage quit");
-            StopAttacking(true);
+            mLogPanel.Log("Multi-area coverage quit");
+            mMainPanel.StopAttacking(true);
         }
 
-        private void AttackMobs()
+        internal void AttackMobs()
         {
-            if (lvMobs.CheckedIndices.Count < 1)
+            if (mMobsPanel.CheckedIndices.Count < 1)
             {
-                Log("E: Choose at least 1 mob to attack");
+                mLogPanel.Log("E: Choose at least 1 mob to attack");
                 return;
             }
 
             Dictionary<int, int> mobs = new Dictionary<int, int>();
-            foreach (int i in lvMobs.CheckedIndices)
+            foreach (int i in mMobsPanel.CheckedIndices)
             {
-                mobs.Add(int.Parse(lvMobs.Items[i].SubItems[1].Text), int.Parse(lvMobs.Items[i].SubItems[2].Text));
+                mobs.Add(int.Parse(mMobsPanel.Mobs[i].SubItems[1].Text), int.Parse(mMobsPanel.Mobs[i].SubItems[2].Text));
             }
 
             SetupHandler();
@@ -140,7 +141,7 @@ namespace DCT.UI
 
         internal void DoAttackMobs(Dictionary<int, int> mobs)
         {
-            Account mAccount = mAccounts.MainAccount;
+            Account mAccount = mAccountsPanel.Engine.MainAccount;
 
             foreach (int mb in mobs.Keys)
             {
@@ -159,37 +160,51 @@ namespace DCT.UI
                 if (!Globals.AttackOn || !Globals.AttackMode)
                     goto quit;
 
-                mAccounts.MainAccount.Mover.Location.AttackMob(mb);
+                mAccountsPanel.Engine.MainAccount.Mover.Location.AttackMob(mb);
             }
             return;
             quit:
-            Log("Mob coverage quit");
-            StopAttacking(true);
+            mLogPanel.Log("Mob coverage quit");
+            mMainPanel.StopAttacking(true);
         }
 
         #endregion
 
         #region Pathfinding
 
-        private void InvokePathfind(int room)
+        internal void InvokePathfind(int room)
         {
+            if (mAccountsPanel.CheckedIndices.Count < 1)
+            {
+                mLogPanel.Log("E: Check the accounts you want to move");
+                return;
+            }
             if (!Pathfinder.Exists(room))
             {
-                Log("E: Select a room that exists in the map database");
+                mLogPanel.Log("E: Select a room that exists in the map database");
                 Toggle(true);
                 return;
             }
 
-            foreach (int index in lvAccounts.CheckedIndices)
+            foreach (int index in mAccountsPanel.CheckedIndices)
             {
                 PathfindHandler d = new PathfindHandler(DoPathfind);
                 d.BeginInvoke(index, room, new AsyncCallback(PathfindCallback), d);
             }
         }
 
-        private void InvokeAdventures(int room)
+        internal void InvokeAdventures(int room)
         {
-            foreach (int index in lvAccounts.CheckedIndices)
+            if (mAccountsPanel.CheckedIndices.Count < 1)
+            {
+                mLogPanel.Log("E: Check the accounts you want to move.");
+            }
+            else if (mRaidsPanel.FocusedRaid == null)
+            {
+                mLogPanel.Log("E: Choose an adventure to move to.");
+            }
+
+            foreach (int index in mAccountsPanel.CheckedIndices)
             {
                 PathfindHandler d = new PathfindHandler(DoPathfind);
                 d.BeginInvoke(index, room, new AsyncCallback(PathfindCallback), d);
@@ -207,97 +222,51 @@ namespace DCT.UI
 
         private void DoPathfind(int accountIndex, int room)
         {
-            mAccounts[accountIndex].Mover.RefreshRoom();
-            mAccounts[accountIndex].Mover.PathfindTo(room);
-        }
-
-        #endregion
-
-        #region Login
-
-        private void Login()
-        {
-            if (Pathfinder.Rooms.Count == 0)
-            {
-                Log("E: You are either using an incorrect version of the program or the program was unable to reach the map server.  Make sure your antivirus, antispyware, firewall, router, etc. are not blocking the program's connection to the internet.");
-                return;
-            }
-
-            txtUsername.Enabled = false;
-            txtPassword.Enabled = false;
-            chkRemember.Enabled = false;
-            //btnLogin.Enabled = false;
-            //btnLogout.Enabled = false;
-
-            Log("Logging in...");
-
-            LoginHandler d = new LoginHandler(DoLogin);
-            d.BeginInvoke(new AsyncCallback(LoginCallback), d);
-        }
-
-        private delegate void LoginCallbackHandler(IAsyncResult ar);
-
-        private void LoginCallback(IAsyncResult ar)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new LoginCallbackHandler(LoginCallback), ar);
-                return;
-            }
-
-            LoginHandler d = (LoginHandler) ar.AsyncState;
-            int n = d.EndInvoke(ar);
-            if (n < 1)
-            {
-                txtUsername.Text = string.Empty;
-                txtPassword.Text = string.Empty;
-                Log(
-                    "E: Outwar rejected your login.  Make sure you're putting in the correct Rampid Gaming Account information.");
-            }
-            else
-            {
-                for (int i = mAccounts.Count - n; i < mAccounts.Count; i++)
-                {
-                    Account a = mAccounts.Accounts[i];
-                    ListViewItem item = new ListViewItem(new string[] {a.Name, "Loaded", "-", "0", "0", "0"});
-                    lvAccounts.Groups[Server.NameToId(a.Server) - 1].Items.Add(item);
-                    lvAccounts.Items.Add(item);
-                }
-                Log("Loaded " + n + " characters.");
-            }
-
-            CoreUI.Instance.Settings.LastUsername = txtUsername.Text;
-            CoreUI.Instance.Settings.LastPassword = txtPassword.Text;
-
-            txtUsername.Enabled = true;
-            txtPassword.Enabled = true;
-            chkRemember.Enabled = true;
-            btnLogout.Enabled = true;
-            btnRefresh.Enabled = true;
-        }
-
-        private delegate int LoginHandler();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>Number of accounts added</returns>
-        private int DoLogin()
-        {
-            int orig = mAccounts.Count;
-            mAccounts.Login(txtUsername.Text, txtPassword.Text, chkRemember.Checked);
-
-            return mAccounts.Count - orig;
+            mAccountsPanel.Engine[accountIndex].Mover.RefreshRoom();
+            mAccountsPanel.Engine[accountIndex].Mover.PathfindTo(room);
         }
 
         #endregion
 
         #region Training
 
+        internal void InvokeTraining(bool returnToStart)
+        {
+            if (mAccountsPanel.CheckedIndices.Count < 1)
+            {
+                mLogPanel.Log("E: Check the accounts you want to move");
+                return;
+            }
+
+            Toggle(false);
+
+            foreach (int index in mAccountsPanel.CheckedIndices)
+            {
+                mAccountsPanel.Engine[index].Mover.RefreshRoom();
+                mAccountsPanel.Engine[index].Mover.ReturnToStartHandler.SetOriginal();
+                DCT.Threading.ThreadEngine.DefaultInstance.Enqueue(mAccountsPanel.Engine[index].Mover.Train);
+            }
+
+            // TODO this needs to go
+            DCT.Threading.ThreadEngine.DefaultInstance.ProcessAll();
+
+            if (returnToStart)
+            {
+                foreach (int index in mAccountsPanel.CheckedIndices)
+                {
+                    mAccountsPanel.Engine[index].Mover.ReturnToStartHandler.InvokeReturn();
+                    // TODO not necessary to thread this - it already is threaded
+                    //InvokeReturn(index);
+                }
+            }
+
+            Toggle(true);
+        }
+
         private void InvokeReturn(int index)
         {
-            MethodInvoker d = new MethodInvoker(mAccounts[index].Mover.ReturnToStartHandler.Return);
-            d.BeginInvoke(new AsyncCallback(TrainingReturnCallback), d);
+            //MethodInvoker d = new MethodInvoker(mAccountsPanel.Engine[index].Mover.ReturnToStartHandler.Return);
+            //d.BeginInvoke(new AsyncCallback(TrainingReturnCallback), d);
         }
 
         private void TrainingReturnCallback(IAsyncResult ar)

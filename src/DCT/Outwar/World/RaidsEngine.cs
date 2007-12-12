@@ -58,7 +58,7 @@ namespace DCT.Outwar.World
 
         private void mCountdownTimer_Stopped(object sender, EventArgs e)
         {
-            CoreUI.Instance.ProcessRaidsThreaded();
+            //CoreUI.Instance.ProcessRaidsThreaded();
         }
 
         public void Dispose()

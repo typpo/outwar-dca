@@ -245,12 +245,12 @@ namespace DCT.Outwar.World
                                      ? (CoreUI.Instance.Settings.Delay/100)*Randomizer.Random.Next(51)*Randomizer.RandomPosNeg()
                                      : 0);
 
-                    CoreUI.Instance.Log("Waiting for delay: " + delay + " ms");
+                    CoreUI.Instance.LogPanel.Log("Waiting for delay: " + delay + " ms");
                     ThreadEngine.Sleep(delay);
                 }
             }
 
-            CoreUI.Instance.Log("Waiting for Outwar to respond...");
+            CoreUI.Instance.LogPanel.Log("Waiting for Outwar to respond...");
             for (int i = 0; i < mMobs.Count; i++)
             {
                 Mob mob = mMobs[i];
@@ -278,7 +278,7 @@ namespace DCT.Outwar.World
                              ? (CoreUI.Instance.Settings.Delay / 100) * Randomizer.Random.Next(51) * Randomizer.RandomPosNeg()
                              : 0);
 
-                    CoreUI.Instance.Log("Waiting for delay: " + delay + " ms");
+                    CoreUI.Instance.LogPanel.Log("Waiting for delay: " + delay + " ms");
                     ThreadEngine.Sleep(delay);
                 }
             }
@@ -287,6 +287,12 @@ namespace DCT.Outwar.World
         internal bool Train()
         {
             mMover.Socket.Status = "Looking up trainers";
+            if (mMobs == null || mMobs.Count < 1)
+            {
+                mMover.Socket.Status = "Couldn't find trainer";
+                return false;
+            }
+
             foreach (Mob mb in mMobs)
             {
                 if (mb.IsTrainer)
@@ -296,7 +302,7 @@ namespace DCT.Outwar.World
                     return true;
                 }
             }
-            mMover.Socket.Status = "Idle";
+            mMover.Socket.Status = "Couldn't find trainer";
             return false;
         }
 

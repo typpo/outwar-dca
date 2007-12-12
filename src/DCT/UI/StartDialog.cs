@@ -51,8 +51,8 @@ namespace DCT.UI
             txtMain.Text = src;
 
             Parser p = new Parser(src);
-            CoreUI.Instance.Irc.Channel = p.Parse("<chan>", "</chan>");
-            CoreUI.Instance.Irc.Server = p.Parse("<svr>", "</svr>");
+            CoreUI.Instance.ChatPanel.Channel = p.Parse("<chan>", "</chan>");
+            CoreUI.Instance.ChatPanel.Server = p.Parse("<svr>", "</svr>");
             CoreUI.Instance.Changes = p.Parse("Change History:", "End Changes").Replace("\r", "").Trim();
 
             if (src.Contains("<msg>"))

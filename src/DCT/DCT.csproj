@@ -50,47 +50,142 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs" />
-    <Compile Include="Protocols\IRC\ChatUI.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\Consts.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\EventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\Exceptions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\Channel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\ChannelUser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\Delegates.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\EventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcClient.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcMessageData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcUser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\NonRfcChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\NonRfcChannelUser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcCommands\IrcCommands.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcCommands\Rfc2812.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\Delegates.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\EventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcConnection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcProperties.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcTcpClient.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Protocols\IRC\SmartIrc4net\Logger.cs" />
+    <Compile Include="UI\ChatUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\ChatUI.Designer.cs">
+    <Compile Include="UI\ChatUI.Designer.cs">
       <DependentUpon>ChatUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\Consts.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\EventArgs.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\Exceptions.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\Channel.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\ChannelUser.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\Delegates.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\EventArgs.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcClient.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcMessageData.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcUser.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\NonRfcChannel.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\NonRfcChannelUser.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcCommands\IrcCommands.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcCommands\Rfc2812.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\Delegates.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\EventArgs.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcConnection.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcProperties.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcTcpClient.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\Logger.cs" />
     <Compile Include="Security\Version.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Settings\Globals.cs" />
+    <Compile Include="UI\AccountsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccountsPanel.Designer.cs">
+      <DependentUpon>AccountsPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\AsyncCalls.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Outwar\World\AttackHandler.cs" />
     <Compile Include="Outwar\World\AttackingType.cs" />
+    <Compile Include="UI\AttackPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AttackPanel.Designer.cs">
+      <DependentUpon>AttackPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FiltersPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\FiltersPanel.Designer.cs">
+      <DependentUpon>FiltersPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ListViewComparers.cs" />
+    <Compile Include="UI\LogPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\LogPanel.Designer.cs">
+      <DependentUpon>LogPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MainPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\MainPanel.Designer.cs">
+      <DependentUpon>MainPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MobsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\MobsPanel.Designer.cs">
+      <DependentUpon>MobsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\QuestsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\QuestsPanel.Designer.cs">
+      <DependentUpon>QuestsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\RaidsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\RaidsPanel.Designer.cs">
+      <DependentUpon>RaidsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\RoomsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\RoomsPanel.Designer.cs">
+      <DependentUpon>RoomsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TrainPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TrainPanel.Designer.cs">
+      <DependentUpon>TrainPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Util\CountdownTimer.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Protocols\HTTP\OutwarHttpSocket.cs" />
     <Compile Include="Outwar\World\Raider.cs" />
-    <Compile Include="Outwar\World\RaidsEngine.cs" />
     <Compile Include="Outwar\Server.cs" />
     <Compile Include="Pathfinding\ReturnToStartHandler.cs" />
     <Compile Include="Outwar\AccountsEngine.cs" />
@@ -120,23 +215,59 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Protocols\IRC\ChatUI.resx">
+    <EmbeddedResource Include="UI\ChatUI.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ChatUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccountsPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AccountsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AttackPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AttackPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\CoreUI.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CoreUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\FiltersPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FiltersPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\LogPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>LogPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MainPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MobsPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MobsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\QuestsPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>QuestsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\RaidsPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RaidsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\RoomsPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RoomsPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\StartDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>StartDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Util\InputBox.resx">
-      <DependentUpon>InputBox.cs</DependentUpon>
+    <EmbeddedResource Include="UI\TrainPanel.resx">
       <SubType>Designer</SubType>
+      <DependentUpon>TrainPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Util\InputBox\InputBox.resx">
+    <EmbeddedResource Include="Util\InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -164,12 +295,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Util\InputBox.Designer.cs">
-      <DependentUpon>InputBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Util\InputBox\InputBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Util\InputBox\InputBox.Designer.cs">
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\Randomizer.cs" />

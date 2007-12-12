@@ -68,7 +68,7 @@ namespace DCT.Outwar.World
                 return;
             }
 
-            CoreUI.Instance.Log("Loading '" + mName + "'");
+            CoreUI.Instance.LogPanel.Log("Loading '" + mName + "'");
 
             mLoadSrc = mRoom.Mover.Socket.Get(mURL);
 
@@ -89,7 +89,7 @@ namespace DCT.Outwar.World
             mInitialized = true;
         }
 
-        private bool TestRage()
+        private bool TestRage(bool rageLimit)
         {
             if (!IsInRoom || !FilterOK)
             {
@@ -101,7 +101,7 @@ namespace DCT.Outwar.World
             {
                 mSkipLoad = true;
 
-                if ((m.Rage > CoreUI.Instance.Settings.RageLimit && CoreUI.Instance.Settings.RageLimit != 0)
+                if ((rageLimit && CoreUI.Instance.Settings.RageLimit != 0 && m.Rage > CoreUI.Instance.Settings.RageLimit)
                     || m.Rage > mRoom.Mover.Account.Rage
                     || mRoom.Mover.Account.Rage - m.Rage < CoreUI.Instance.Settings.StopAtRage)
                 {
@@ -142,7 +142,7 @@ namespace DCT.Outwar.World
         {
             string talk =
                 mRoom.Mover.Socket.Get("mob_talk.php?id=" + mId + "&userspawn=");
-            CoreUI.Instance.Log("Checking " + mName + "'s talk page in room " + mRoom.Mover.Location.Id + "...");
+            CoreUI.Instance.LogPanel.Log("Checking " + mName + "'s talk page in room " + mRoom.Mover.Location.Id + "...");
 
             if (talk.Contains("acceptquest="))
             {
@@ -161,14 +161,14 @@ namespace DCT.Outwar.World
                     }
                 }
 
-                CoreUI.Instance.Log("Accepting " + mName + "'s quest in room " + mRoom.Mover.Location.Id + "...");
+                CoreUI.Instance.LogPanel.Log("Accepting " + mName + "'s quest in room " + mRoom.Mover.Location.Id + "...");
                 mRoom.Mover.Socket.Get("mob_talk.php?acceptquest="
                                        + Parser.Parse(talk, "mob_talk.php?acceptquest=", "\""));
-                CoreUI.Instance.Log("Quest accepted");
+                CoreUI.Instance.LogPanel.Log("Quest accepted");
             }
             else
             {
-                CoreUI.Instance.Log("Already accepted " + mName + "'s task");
+                CoreUI.Instance.LogPanel.Log("Already accepted " + mName + "'s task");
             }
         }
 
@@ -176,7 +176,7 @@ namespace DCT.Outwar.World
         {
             if (mRoom.Mover.Account.NeedsLevel)
             {
-                CoreUI.Instance.Log("Leveling up " + mRoom.Mover.Account.Name + " automatically with bartender "
+                CoreUI.Instance.LogPanel.Log("Leveling up " + mRoom.Mover.Account.Name + " automatically with bartender "
                                     + mName
                                     + "...");
                 Initialize();
@@ -190,19 +190,19 @@ namespace DCT.Outwar.World
             if (mRage > mRoom.Mover.Account.Rage)
             {
                 mQuit = true;
-                CoreUI.Instance.Log("You don't have enough rage to attack " + mName + " (" + mRage + " > "
+                CoreUI.Instance.LogPanel.Log("You don't have enough rage to attack " + mName + " (" + mRage + " > "
                                     + mRoom.Mover.Account.Rage + ")");
             }
             else if (mRoom.Mover.Account.Rage < CoreUI.Instance.Settings.StopAtRage)
             {
                 mQuit = true;
-                CoreUI.Instance.Log("Not enough rage to attack " + mName + " with " + mRage
+                CoreUI.Instance.LogPanel.Log("Not enough rage to attack " + mName + " with " + mRage
                                     + " and stay above rage quota");
             }
             else if (mRoom.Mover.Account.Rage < 1)
             {
                 mQuit = true;
-                CoreUI.Instance.Log("Can't attack " + mName + ", you're out of rage");
+                CoreUI.Instance.LogPanel.Log("Can't attack " + mName + ", you're out of rage");
                 Globals.AttackOn = false; // TODO: stop it
             }
         }
@@ -213,18 +213,18 @@ namespace DCT.Outwar.World
             if (mLevel > CoreUI.Instance.Settings.LvlLimit && CoreUI.Instance.Settings.LvlLimit != 0)
             {
                 mQuit = true;
-                CoreUI.Instance.Log(mName + "'s level is too high (" + mLevel + " > " + CoreUI.Instance.Settings.LvlLimit + ")");
+                CoreUI.Instance.LogPanel.Log(mName + "'s level is too high (" + mLevel + " > " + CoreUI.Instance.Settings.LvlLimit + ")");
             }
             else if (mLevel < CoreUI.Instance.Settings.LvlLimitMin)
             {
                 mQuit = true;
-                CoreUI.Instance.Log(mName + "'s level is too low (" + mLevel + " < " + CoreUI.Instance.Settings.LvlLimitMin
+                CoreUI.Instance.LogPanel.Log(mName + "'s level is too low (" + mLevel + " < " + CoreUI.Instance.Settings.LvlLimitMin
                                     + ")");
             }
             else if (mRage > CoreUI.Instance.Settings.RageLimit && CoreUI.Instance.Settings.RageLimit != 0)
             {
                 mQuit = true;
-                CoreUI.Instance.Log(mName + " requires too much rage (" + mRage + "), over the rage limit");
+                CoreUI.Instance.LogPanel.Log(mName + " requires too much rage (" + mRage + "), over the rage limit");
             }
         }
 
@@ -251,9 +251,9 @@ namespace DCT.Outwar.World
                 Talk();
             }
 
-            if ((test && !TestLevel()) || !TestRage())
+            if ((test && !TestLevel()) || !TestRage(test))
             {
-                CoreUI.Instance.Log(mName + " preeliminated - does not meet specifications.");
+                CoreUI.Instance.LogPanel.Log(mName + " preeliminated - does not meet specifications.");
                 mQuit = true;
                 return false;
             }
@@ -296,7 +296,7 @@ namespace DCT.Outwar.World
 
             mAttacking = true;
 
-            CoreUI.Instance.Log("Attacking " + mName + " (" + mId + ") in rm. " + mRoom.Id);
+            CoreUI.Instance.LogPanel.Log("Attacking " + mName + " (" + mId + ") in rm. " + mRoom.Id);
 
             if (!mSkipLoad)
             {
@@ -362,19 +362,19 @@ namespace DCT.Outwar.World
                 || src.Contains("operation has timed out")
                 || mRoom.Mover.Account.Ret != mRoom.Mover.Account.Name)
             {
-                CoreUI.Instance.Log("Attack on " + mName + " failed - timed out by server");
+                CoreUI.Instance.LogPanel.Log("Attack on " + mName + " failed - timed out by server");
                 SendAttack();
                 return;
             }
             else if (src.Contains("an existing connection was forcibly closed by the remote host"))
             {
-                CoreUI.Instance.Log("Attack on " + mName + " failed - connection forcibly closed by server");
+                CoreUI.Instance.LogPanel.Log("Attack on " + mName + " failed - connection forcibly closed by server");
                 SendAttack();
                 return;
             }
             else if (src.Contains("underlying connection was closed"))
             {
-                CoreUI.Instance.Log("Attack on " + mName + " failed - underlying connection closed by server");
+                CoreUI.Instance.LogPanel.Log("Attack on " + mName + " failed - underlying connection closed by server");
                 SendAttack();
                 return;
             }
@@ -386,7 +386,7 @@ namespace DCT.Outwar.World
             if (src.Contains("found a"))
             {
                 string f = Parser.Parse(src, "found a ", "<br>");
-                CoreUI.Instance.LogAttack(mRoom.Mover.Account.Name + " found a " + f);
+                CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + " found a " + f);
             }
             if (src.Contains("has gained "))
             {
@@ -394,27 +394,27 @@ namespace DCT.Outwar.World
                 {
                     Globals.ExpGained += mExpGained;
                     mRoom.Mover.ExpGained += mExpGained;
-                    CoreUI.Instance.LogAttack(mRoom.Mover.Account.Name + " beat " + mName + ", gained " + mExpGained + " exp");
+                    CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + " beat " + mName + ", gained " + mExpGained + " exp");
                 }
             }
             else if (src.Contains("var battle_result"))
             {
-                CoreUI.Instance.LogAttack(mRoom.Mover.Account.Name + " attacked " + mName);
+                CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + " attacked " + mName);
             }
             else
             {
                 string tmp;
                 if (src.StartsWith("ERROR"))
                 {
-                    CoreUI.Instance.LogAttack("Attack E occurred in Connection: " + src);
+                    CoreUI.Instance.LogPanel.LogAttack("Attack E occurred in Connection: " + src);
                 }
                 else if ((tmp = Parser.Parse(src, "ERROR:</b></font> ", "<br>")) == "ERROR")
                 {
-                    CoreUI.Instance.LogAttack("Attack E: An unknown error occurred");
+                    CoreUI.Instance.LogPanel.LogAttack("Attack E: An unknown error occurred");
                 }
                 else
                 {
-                    CoreUI.Instance.LogAttack("Attack E (server-side): " + tmp);
+                    CoreUI.Instance.LogPanel.LogAttack("Attack E (server-side): " + tmp);
                 }
             }
 

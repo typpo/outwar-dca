@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCT.Deployment", "DCT.Deplo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCT.Polyengine", "DCT.Polyengine\DCT.Polyengine.csproj", "{F953BE7B-09A2-4559-9B63-54E9BAA6FF73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCT.TScript", "DCT.TScript\DCT.TScript.csproj", "{7CEAA67D-2491-49A1-9A8B-7492F6847954}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,10 +25,6 @@ Global
 		{F953BE7B-09A2-4559-9B63-54E9BAA6FF73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F953BE7B-09A2-4559-9B63-54E9BAA6FF73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F953BE7B-09A2-4559-9B63-54E9BAA6FF73}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7CEAA67D-2491-49A1-9A8B-7492F6847954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CEAA67D-2491-49A1-9A8B-7492F6847954}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CEAA67D-2491-49A1-9A8B-7492F6847954}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CEAA67D-2491-49A1-9A8B-7492F6847954}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

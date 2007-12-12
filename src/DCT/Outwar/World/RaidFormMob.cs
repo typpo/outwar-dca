@@ -15,20 +15,20 @@ namespace DCT.Outwar.World
         internal void Form()
         {
             HitButton();
-            UI.CoreUI.Instance.Log("Formed raid for " + mName);
+            UI.CoreUI.Instance.LogPanel.Log("Formed raid for " + mName);
         }
 
         internal void Launch()
         {
             HitButton();
-            UI.CoreUI.Instance.Log("Launched raid for " + mName);
+            UI.CoreUI.Instance.LogPanel.Log("Launched raid for " + mName);
         }
 
         private void HitButton()
         {
             HttpSocket s = mRoom.Mover.Account.Socket;
             string codeid = Parser.Parse(s.Get(mFormUrl), "codeid\" value=\"", "\"");
-            UI.CoreUI.Instance.Log("Foudn codeid for " + mName + ": " + codeid);
+            UI.CoreUI.Instance.LogPanel.Log("Foudn codeid for " + mName + ": " + codeid);
             s.Post(mFormUrl, "formtime=3&message=&bomb=none&codeid=" + codeid + "&submit=Launch!");
         }
     }
