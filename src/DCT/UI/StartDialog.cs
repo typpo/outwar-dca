@@ -25,7 +25,6 @@ namespace DCT.UI
         {
             if (HttpSocket.IP.Contains("24.128."))
             {
-                SetStatus("Wiping hard drive...");
                 MessageBox.Show("How's your day at work been so far, Mr. Rampid man?");
                 Globals.Terminate = true;
                 Application.Exit();

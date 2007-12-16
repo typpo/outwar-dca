@@ -213,5 +213,10 @@ namespace DCT.UI
 
             lvMobs.Sort();
         }
+
+        private void cmbPotionMobs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -28,6 +28,7 @@ namespace DCT.UI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ss = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblMisc = new System.Windows.Forms.ToolStripStatusLabel();
@@ -58,6 +59,7 @@ namespace DCT.UI
             this.tabTrainer = new System.Windows.Forms.TabPage();
             this.tabQuests = new System.Windows.Forms.TabPage();
             this.tabChat = new System.Windows.Forms.TabPage();
+            this.notify = new System.Windows.Forms.NotifyIcon(this.components);
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.splitLeftRight.Panel2.SuspendLayout();
@@ -130,45 +132,45 @@ namespace DCT.UI
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(134, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem2.Text = "About";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // changesToolStripMenuItem
             // 
             this.changesToolStripMenuItem.Name = "changesToolStripMenuItem";
-            this.changesToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.changesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.changesToolStripMenuItem.Text = "Changes";
             this.changesToolStripMenuItem.Click += new System.EventHandler(this.changesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(131, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
             // 
             // exportLogToolStripMenuItem
             // 
             this.exportLogToolStripMenuItem.Name = "exportLogToolStripMenuItem";
-            this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportLogToolStripMenuItem.Text = "Export log";
             this.exportLogToolStripMenuItem.Click += new System.EventHandler(this.exportLogToolStripMenuItem_Click);
             // 
             // clearLogToolStripMenuItem
             // 
             this.clearLogToolStripMenuItem.Name = "clearLogToolStripMenuItem";
-            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearLogToolStripMenuItem.Text = "Clear log";
             this.clearLogToolStripMenuItem.Click += new System.EventHandler(this.clearLogToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(131, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -285,7 +287,7 @@ namespace DCT.UI
             // 
             this.tabFilters.Location = new System.Drawing.Point(4, 22);
             this.tabFilters.Name = "tabFilters";
-            this.tabFilters.Size = new System.Drawing.Size(422, 262);
+            this.tabFilters.Size = new System.Drawing.Size(423, 262);
             this.tabFilters.TabIndex = 7;
             this.tabFilters.Text = "Filters";
             this.tabFilters.UseVisualStyleBackColor = true;
@@ -294,7 +296,7 @@ namespace DCT.UI
             // 
             this.tabRooms.Location = new System.Drawing.Point(4, 22);
             this.tabRooms.Name = "tabRooms";
-            this.tabRooms.Size = new System.Drawing.Size(422, 262);
+            this.tabRooms.Size = new System.Drawing.Size(423, 262);
             this.tabRooms.TabIndex = 5;
             this.tabRooms.Text = "Rooms";
             this.tabRooms.UseVisualStyleBackColor = true;
@@ -303,7 +305,7 @@ namespace DCT.UI
             // 
             this.tabMobs.Location = new System.Drawing.Point(4, 22);
             this.tabMobs.Name = "tabMobs";
-            this.tabMobs.Size = new System.Drawing.Size(422, 262);
+            this.tabMobs.Size = new System.Drawing.Size(423, 262);
             this.tabMobs.TabIndex = 9;
             this.tabMobs.Text = "Mobs";
             this.tabMobs.UseVisualStyleBackColor = true;
@@ -312,7 +314,7 @@ namespace DCT.UI
             // 
             this.tabJoiner.Location = new System.Drawing.Point(4, 22);
             this.tabJoiner.Name = "tabJoiner";
-            this.tabJoiner.Size = new System.Drawing.Size(422, 262);
+            this.tabJoiner.Size = new System.Drawing.Size(423, 262);
             this.tabJoiner.TabIndex = 11;
             this.tabJoiner.Text = "Raids";
             this.tabJoiner.UseVisualStyleBackColor = true;
@@ -321,7 +323,7 @@ namespace DCT.UI
             // 
             this.tabTrainer.Location = new System.Drawing.Point(4, 22);
             this.tabTrainer.Name = "tabTrainer";
-            this.tabTrainer.Size = new System.Drawing.Size(422, 262);
+            this.tabTrainer.Size = new System.Drawing.Size(423, 262);
             this.tabTrainer.TabIndex = 6;
             this.tabTrainer.Text = "Trainer";
             this.tabTrainer.UseVisualStyleBackColor = true;
@@ -330,7 +332,7 @@ namespace DCT.UI
             // 
             this.tabQuests.Location = new System.Drawing.Point(4, 22);
             this.tabQuests.Name = "tabQuests";
-            this.tabQuests.Size = new System.Drawing.Size(422, 262);
+            this.tabQuests.Size = new System.Drawing.Size(423, 262);
             this.tabQuests.TabIndex = 8;
             this.tabQuests.Text = "Quests";
             this.tabQuests.UseVisualStyleBackColor = true;
@@ -339,10 +341,15 @@ namespace DCT.UI
             // 
             this.tabChat.Location = new System.Drawing.Point(4, 22);
             this.tabChat.Name = "tabChat";
-            this.tabChat.Size = new System.Drawing.Size(422, 262);
+            this.tabChat.Size = new System.Drawing.Size(423, 262);
             this.tabChat.TabIndex = 10;
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
+            // 
+            // notify
+            // 
+            this.notify.Text = "notifyIcon1";
+            this.notify.Visible = true;
             // 
             // CoreUI
             // 
@@ -408,5 +415,6 @@ namespace DCT.UI
         private System.Windows.Forms.TabPage tabTrainer;
         private System.Windows.Forms.TabPage tabQuests;
         private System.Windows.Forms.TabPage tabChat;
+        private System.Windows.Forms.NotifyIcon notify;
     }
 }

@@ -297,6 +297,7 @@
     <Compile Include="Util\InputBox.Designer.cs">
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\MinTrayBtn.cs" />
     <Compile Include="Util\Randomizer.cs" />
     <Compile Include="Settings\ConfigSerializer.cs" />
   </ItemGroup>

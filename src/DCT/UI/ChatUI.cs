@@ -311,7 +311,7 @@ namespace DCT.UI
                 {
                     return;
                 }
-                else if (txtChatType.Text.StartsWith("/"))
+                else if (txt.StartsWith("/"))
                 {
                     InterpUserCommand(txt);
                 }
@@ -391,9 +391,9 @@ namespace DCT.UI
             else if (txt.StartsWith("/msg"))
             {
                 string to = Parser.Parse(txt, " ", " ");
-                string msg = txt.Substring(txt.IndexOf(to) + to.Length + 1);
-                if (to != Parser.ERR_CONST && msg != Parser.ERR_CONST)
+                if (to != Parser.ERR_CONST)
                 {
+                    string msg = txt.Substring(txt.IndexOf(to) + to.Length + 1);
                     mClient.SendMessage(SendType.Message, to, msg);
                     AddText(string.Format("-> <{0}> {1}", to, msg));
                 }
