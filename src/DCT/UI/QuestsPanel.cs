@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DCT.UI
 {
-    internal partial class QuestsPanel : UserControl
+    public partial class QuestsPanel : UserControl
     {
         internal bool AutoQuest
         {

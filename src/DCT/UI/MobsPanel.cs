@@ -10,7 +10,7 @@ using DCT.Pathfinding;
 
 namespace DCT.UI
 {
-    internal partial class MobsPanel : UserControl
+    public partial class MobsPanel : UserControl
     {
         internal ListView.ListViewItemCollection Mobs
         {

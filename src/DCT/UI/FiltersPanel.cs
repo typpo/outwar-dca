@@ -9,7 +9,7 @@ using System.IO;
 
 namespace DCT.UI
 {
-    internal partial class FiltersPanel : UserControl
+    public partial class FiltersPanel : UserControl
     {
         internal string FiltersText
         {

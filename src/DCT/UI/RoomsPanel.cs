@@ -10,7 +10,7 @@ using DCT.Pathfinding;
 
 namespace DCT.UI
 {
-    internal partial class RoomsPanel : UserControl
+    public partial class RoomsPanel : UserControl
     {
         internal ListView.ListViewItemCollection Rooms
         {

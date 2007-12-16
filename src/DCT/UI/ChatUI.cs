@@ -10,7 +10,7 @@ using Version=DCT.Security.Version;
 
 namespace DCT.UI
 {
-    internal partial class ChatUI : UserControl
+    public partial class ChatUI : UserControl
     {
         internal Label StatusLabel
         {

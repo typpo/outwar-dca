@@ -9,7 +9,7 @@ using DCT.Util;
 
 namespace DCT.UI
 {
-    internal partial class LogPanel : UserControl
+    public partial class LogPanel : UserControl
     {
         internal LogPanel()
         {

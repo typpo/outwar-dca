@@ -9,7 +9,7 @@ using DCT.Pathfinding;
 
 namespace DCT.UI
 {
-    internal partial class RaidsPanel : UserControl
+    public partial class RaidsPanel : UserControl
     {
         internal ListView.ListViewItemCollection Raids
         {

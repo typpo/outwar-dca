@@ -15,10 +15,10 @@ using Version=DCT.Security.Version;
 
 namespace DCT.UI
 {
-    internal partial class CoreUI : Form
+    public partial class CoreUI : Form
     {
         private static CoreUI mInstance;
-        internal static CoreUI Instance
+        public static CoreUI Instance
         {
             get { return mInstance; }
         }
@@ -65,7 +65,7 @@ namespace DCT.UI
         }
 
         private UserEditable mUserEditable;
-        internal UserEditable Settings
+        public UserEditable Settings
         {
             get { return mUserEditable; }
         }
@@ -82,7 +82,7 @@ namespace DCT.UI
         private QuestsPanel mQuestsPanel;
         private ChatUI mChat;
 
-        internal CoreUI()
+        public CoreUI()
         {
             InitializeComponent();
 

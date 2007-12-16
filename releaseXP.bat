@@ -11,9 +11,9 @@ ECHO Obfuscating...
 CD %path%
 START /WAIT QNDObfuscate20.exe %orig% %obfusc%
 
-:: ECHO Re-signing...
-:: CD %snpath%
-:: START /WAIT sn.exe -R %obfusc% %snkey%
+ECHO Re-signing...
+CD %snpath%
+START /WAIT sn.exe -R %obfusc% %snkey%
 
 ECHO Finished
 :END

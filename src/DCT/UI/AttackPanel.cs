@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DCT.UI
 {
-    internal partial class AttackPanel : UserControl
+    public partial class AttackPanel : UserControl
     {
         internal int StopAtRage
         {

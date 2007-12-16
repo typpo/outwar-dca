@@ -11,7 +11,7 @@ using DCT.Settings;
 
 namespace DCT.UI
 {
-    internal partial class MainPanel : UserControl
+    public partial class MainPanel : UserControl
     {
         internal string StatusText
         {

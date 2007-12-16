@@ -11,7 +11,7 @@ using DCT.Protocols.Http;
 
 namespace DCT.UI
 {
-    internal partial class AccountsPanel : UserControl
+    public partial class AccountsPanel : UserControl
     {
         internal ListView.ListViewItemCollection Accounts
         {
