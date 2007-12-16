@@ -116,7 +116,6 @@
       <DependentUpon>ChatUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Security\Version.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="Settings\Globals.cs" />
     <Compile Include="UI\AccountsPanel.cs">
       <SubType>UserControl</SubType>
@@ -275,17 +274,7 @@
       <DependentUpon>InputBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="key.snk" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="Security\Auth.cs">
       <SubType>Code</SubType>
     </Compile>

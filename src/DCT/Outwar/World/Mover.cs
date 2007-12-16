@@ -385,7 +385,7 @@ namespace DCT.Outwar.World
                     MessageBox.Show("The program cannot build a path from your current area to your chosen location.  Do you want to teleport to the nearest bar and try again? (recommended 'Yes' unless you are in a separated area such as Stoneraven)", "Pathfinding Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     == DialogResult.Yes)
                 {
-                    CoreUI.Instance.LogPanel.Log("Cannot establish known path for " + mAccount.Name + ", teleporting...");
+                    CoreUI.Instance.LogPanel.Log(mAccount.Name + " teleporting...");
 
                     string tmp = mAccount.Socket.Get("world.php?teleport=1");
                     Parser p = new Parser(tmp);
