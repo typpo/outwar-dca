@@ -12,16 +12,16 @@
  * Full LGPL License: <http://www.gnu.org/licenses/lgpl.txt>
  * 
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General internal
+ * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General internal License for more details.
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General internal
+ * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
@@ -36,7 +36,7 @@ namespace Meebey.SmartIrc4net
     /// 
     /// </summary>
     /// <threadsafety static="true" instance="true" />
-    internal class Channel
+    public class Channel
     {
         private string           _Name;
         private string           _Key       = String.Empty;
@@ -72,7 +72,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <value> </value>
-        internal string Name {
+        public string Name {
             get {
                 return _Name;
             }
@@ -82,7 +82,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <value> </value>
-        internal string Key {
+        public string Key {
             get {
                 return _Key;
             }
@@ -95,7 +95,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <value> </value>
-        internal Hashtable Users {
+        public Hashtable Users {
             get {
                 return (Hashtable)_Users.Clone();
             }
@@ -115,7 +115,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <value> </value>
-        internal Hashtable Ops {
+        public Hashtable Ops {
             get {
                 return (Hashtable)_Ops.Clone();
             }
@@ -135,7 +135,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <value> </value>
-        internal Hashtable Voices {
+        public Hashtable Voices {
             get {
                 return (Hashtable)_Voices.Clone();
             }
@@ -155,7 +155,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <value> </value>
-        internal StringCollection Bans {
+        public StringCollection Bans {
             get {
                 return _Bans;
             }
@@ -165,7 +165,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <value> </value>
-        internal string Topic {
+        public string Topic {
             get {
                 return _Topic;
             }
@@ -178,7 +178,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <value> </value>
-        internal int UserLimit {
+        public int UserLimit {
             get {
                 return _UserLimit;
             }
@@ -191,7 +191,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <value> </value>
-        internal string Mode {
+        public string Mode {
             get {
                 return _Mode;
             }
@@ -204,7 +204,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <value> </value>
-        internal DateTime ActiveSyncStart {
+        public DateTime ActiveSyncStart {
             get {
                 return _ActiveSyncStart;
             }
@@ -214,7 +214,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <value> </value>
-        internal DateTime ActiveSyncStop {
+        public DateTime ActiveSyncStop {
             get {
                 return _ActiveSyncStop;
             }
@@ -228,7 +228,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <value> </value>
-        internal TimeSpan ActiveSyncTime {
+        public TimeSpan ActiveSyncTime {
             get {
                 return _ActiveSyncTime;
             }

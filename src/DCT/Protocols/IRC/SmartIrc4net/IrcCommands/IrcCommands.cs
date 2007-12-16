@@ -12,16 +12,16 @@
  * Full LGPL License: <http://www.gnu.org/licenses/lgpl.txt>
  * 
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General internal
+ * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General internal License for more details.
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General internal
+ * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
@@ -32,10 +32,10 @@ namespace Meebey.SmartIrc4net
     ///
     /// </summary>
     /// <threadsafety static="true" instance="true" />
-    internal class IrcCommands: IrcConnection
+    public class IrcCommands: IrcConnection
     {
 #if LOG4NET
-        internal IrcCommands()
+        public IrcCommands()
         {
             Logger.Main.Debug("IrcCommands created");
         }
@@ -56,7 +56,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="destination"></param>
         /// <param name="message"></param>
         /// <param name="priority"></param>
-        internal void SendMessage(SendType type, string destination, string message, Priority priority)
+        public void SendMessage(SendType type, string destination, string message, Priority priority)
         {
             switch(type) {
                 case SendType.Message:
@@ -83,7 +83,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="type"></param>
         /// <param name="destination"></param>
         /// <param name="message"></param>
-        internal void SendMessage(SendType type, string destination, string message)
+        public void SendMessage(SendType type, string destination, string message)
         {
             SendMessage(type, destination, message, Priority.Medium);
         }
@@ -94,7 +94,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="data"></param>
         /// <param name="message"></param>
         /// <param name="priority"></param>
-        internal void SendReply(IrcMessageData data, string message, Priority priority)
+        public void SendReply(IrcMessageData data, string message, Priority priority)
         {
             switch (data.Type) {
                 case ReceiveType.ChannelMessage:
@@ -114,7 +114,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="data"></param>
         /// <param name="message"></param>
-        internal void SendReply(IrcMessageData data, string message)
+        public void SendReply(IrcMessageData data, string message)
         {
             SendReply(data, message, Priority.Medium);
         }
@@ -125,7 +125,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
         /// <param name="priority"></param>
-        internal void Op(string channel, string nickname, Priority priority)
+        public void Op(string channel, string nickname, Priority priority)
         {
             WriteLine(Rfc2812.Mode(channel, "+o "+nickname), priority);
         }
@@ -135,7 +135,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
-        internal void Op(string channel, string nickname)
+        public void Op(string channel, string nickname)
         {
             WriteLine(Rfc2812.Mode(channel, "+o "+nickname));
         }
@@ -146,7 +146,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
         /// <param name="priority"></param>
-        internal void Deop(string channel, string nickname, Priority priority)
+        public void Deop(string channel, string nickname, Priority priority)
         {
             WriteLine(Rfc2812.Mode(channel, "-o "+nickname), priority);
         }
@@ -156,7 +156,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
-        internal void Deop(string channel, string nickname)
+        public void Deop(string channel, string nickname)
         {
             WriteLine(Rfc2812.Mode(channel, "-o "+nickname));
         }
@@ -167,7 +167,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
         /// <param name="priority"></param>
-        internal void Voice(string channel, string nickname, Priority priority)
+        public void Voice(string channel, string nickname, Priority priority)
         {
             WriteLine(Rfc2812.Mode(channel, "+v "+nickname), priority);
         }
@@ -177,7 +177,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
-        internal void Voice(string channel, string nickname)
+        public void Voice(string channel, string nickname)
         {
             WriteLine(Rfc2812.Mode(channel, "+v "+nickname));
         }
@@ -188,7 +188,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
         /// <param name="priority"></param>
-        internal void Devoice(string channel, string nickname, Priority priority)
+        public void Devoice(string channel, string nickname, Priority priority)
         {
             WriteLine(Rfc2812.Mode(channel, "-v "+nickname), priority);
         }
@@ -198,7 +198,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
-        internal void Devoice(string channel, string nickname)
+        public void Devoice(string channel, string nickname)
         {
             WriteLine(Rfc2812.Mode(channel, "-v "+nickname));
         }
@@ -208,7 +208,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="priority"></param>
-        internal void Ban(string channel, Priority priority)
+        public void Ban(string channel, Priority priority)
         {
             WriteLine(Rfc2812.Mode(channel, "+b"), priority);
         }
@@ -217,7 +217,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="channel"></param>
-        internal void Ban(string channel)
+        public void Ban(string channel)
         {
             WriteLine(Rfc2812.Mode(channel, "+b"));
         }
@@ -228,7 +228,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="hostmask"></param>
         /// <param name="priority"></param>
-        internal void Ban(string channel, string hostmask, Priority priority)
+        public void Ban(string channel, string hostmask, Priority priority)
         {
             WriteLine(Rfc2812.Mode(channel, "+b "+hostmask), priority);
         }
@@ -238,7 +238,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="hostmask"></param>
-        internal void Ban(string channel, string hostmask)
+        public void Ban(string channel, string hostmask)
         {
             WriteLine(Rfc2812.Mode(channel, "+b "+hostmask));
         }
@@ -249,7 +249,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="hostmask"></param>
         /// <param name="priority"></param>
-        internal void Unban(string channel, string hostmask, Priority priority)
+        public void Unban(string channel, string hostmask, Priority priority)
         {
             WriteLine(Rfc2812.Mode(channel, "-b "+hostmask), priority);
         }
@@ -259,7 +259,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="hostmask"></param>
-        internal void Unban(string channel, string hostmask)
+        public void Unban(string channel, string hostmask)
         {
             WriteLine(Rfc2812.Mode(channel, "-b "+hostmask));
         }
@@ -271,7 +271,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
         /// <param name="priority"></param>
-        internal void Halfop(string channel, string nickname, Priority priority)
+        public void Halfop(string channel, string nickname, Priority priority)
         {
             WriteLine(Rfc2812.Mode(channel, "+h "+nickname), priority);
         }
@@ -281,7 +281,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
-        internal void Dehalfop(string channel, string nickname)
+        public void Dehalfop(string channel, string nickname)
         {
             WriteLine(Rfc2812.Mode(channel, "-h "+nickname));
         }
@@ -292,7 +292,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="password"></param>
         /// <param name="priority"></param>
-        internal void RfcPass(string password, Priority priority)
+        public void RfcPass(string password, Priority priority)
         {
             WriteLine(Rfc2812.Pass(password), priority);
         }
@@ -301,7 +301,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="password"></param>
-        internal void RfcPass(string password)
+        public void RfcPass(string password)
         {
             WriteLine(Rfc2812.Pass(password));
         }
@@ -313,7 +313,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="usermode"></param>
         /// <param name="realname"></param>
         /// <param name="priority"></param>
-        internal void RfcUser(string username, int usermode, string realname, Priority priority)
+        public void RfcUser(string username, int usermode, string realname, Priority priority)
         {
             WriteLine(Rfc2812.User(username, usermode, realname), priority);
         }
@@ -324,7 +324,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="username"></param>
         /// <param name="usermode"></param>
         /// <param name="realname"></param>
-        internal void RfcUser(string username, int usermode, string realname)
+        public void RfcUser(string username, int usermode, string realname)
         {
             WriteLine(Rfc2812.User(username, usermode, realname));
         }
@@ -335,7 +335,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="name"></param>
         /// <param name="password"></param>
         /// <param name="priority"></param>
-        internal void RfcOper(string name, string password, Priority priority)
+        public void RfcOper(string name, string password, Priority priority)
         {
             WriteLine(Rfc2812.Oper(name, password), priority);
         }
@@ -345,7 +345,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="name"></param>
         /// <param name="password"></param>
-        internal void RfcOper(string name, string password)
+        public void RfcOper(string name, string password)
         {
             WriteLine(Rfc2812.Oper(name, password));
         }
@@ -356,7 +356,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="destination"></param>
         /// <param name="message"></param>
         /// <param name="priority"></param>
-        internal void RfcPrivmsg(string destination, string message, Priority priority)
+        public void RfcPrivmsg(string destination, string message, Priority priority)
         {
             WriteLine(Rfc2812.Privmsg(destination, message), priority);
         }
@@ -366,7 +366,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="destination"></param>
         /// <param name="message"></param>
-        internal void RfcPrivmsg(string destination, string message)
+        public void RfcPrivmsg(string destination, string message)
         {
             WriteLine(Rfc2812.Privmsg(destination, message));
         }
@@ -377,7 +377,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="destination"></param>
         /// <param name="message"></param>
         /// <param name="priority"></param>
-        internal void RfcNotice(string destination, string message, Priority priority)
+        public void RfcNotice(string destination, string message, Priority priority)
         {
             WriteLine(Rfc2812.Notice(destination, message), priority);
         }
@@ -387,7 +387,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="destination"></param>
         /// <param name="message"></param>
-        internal void RfcNotice(string destination, string message)
+        public void RfcNotice(string destination, string message)
         {
             WriteLine(Rfc2812.Notice(destination, message));
         }
@@ -397,7 +397,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="priority"></param>
-        internal void RfcJoin(string channel, Priority priority)
+        public void RfcJoin(string channel, Priority priority)
         {
             WriteLine(Rfc2812.Join(channel), priority);
         }
@@ -406,7 +406,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="channel"></param>
-        internal void RfcJoin(string channel)
+        public void RfcJoin(string channel)
         {
             WriteLine(Rfc2812.Join(channel));
         }
@@ -416,7 +416,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channels"></param>
         /// <param name="priority"></param>
-        internal void RfcJoin(string[] channels, Priority priority)
+        public void RfcJoin(string[] channels, Priority priority)
         {
             WriteLine(Rfc2812.Join(channels), priority);
         }
@@ -425,7 +425,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="channels"></param>
-        internal void RfcJoin(string[] channels)
+        public void RfcJoin(string[] channels)
         {
             WriteLine(Rfc2812.Join(channels));
         }
@@ -436,7 +436,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="key"></param>
         /// <param name="priority"></param>
-        internal void RfcJoin(string channel, string key, Priority priority)
+        public void RfcJoin(string channel, string key, Priority priority)
         {
             WriteLine(Rfc2812.Join(channel, key), priority);
         }
@@ -446,7 +446,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="key"></param>
-        internal void RfcJoin(string channel, string key)
+        public void RfcJoin(string channel, string key)
         {
             WriteLine(Rfc2812.Join(channel, key));
         }
@@ -457,7 +457,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channels"></param>
         /// <param name="keys"></param>
         /// <param name="priority"></param>
-        internal void RfcJoin(string[] channels, string[] keys, Priority priority)
+        public void RfcJoin(string[] channels, string[] keys, Priority priority)
         {
             WriteLine(Rfc2812.Join(channels, keys), priority);
         }
@@ -467,7 +467,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channels"></param>
         /// <param name="keys"></param>
-        internal void RfcJoin(string[] channels, string[] keys)
+        public void RfcJoin(string[] channels, string[] keys)
         {
             WriteLine(Rfc2812.Join(channels, keys));
         }
@@ -477,7 +477,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="priority"></param>
-        internal void RfcPart(string channel, Priority priority)
+        public void RfcPart(string channel, Priority priority)
         {
             WriteLine(Rfc2812.Part(channel), priority);
         }
@@ -486,7 +486,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="channel"></param>
-        internal void RfcPart(string channel)
+        public void RfcPart(string channel)
         {
             WriteLine(Rfc2812.Part(channel));
         }
@@ -496,7 +496,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channels"></param>
         /// <param name="priority"></param>
-        internal void RfcPart(string[] channels, Priority priority)
+        public void RfcPart(string[] channels, Priority priority)
         {
             WriteLine(Rfc2812.Part(channels), priority);
         }
@@ -505,7 +505,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="channels"></param>
-        internal void RfcPart(string[] channels)
+        public void RfcPart(string[] channels)
         {
             WriteLine(Rfc2812.Part(channels));
         }
@@ -516,7 +516,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="partmessage"></param>
         /// <param name="priority"></param>
-        internal void RfcPart(string channel, string partmessage, Priority priority)
+        public void RfcPart(string channel, string partmessage, Priority priority)
         {
             WriteLine(Rfc2812.Part(channel, partmessage), priority);
         }
@@ -526,7 +526,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="partmessage"></param>
-        internal void RfcPart(string channel, string partmessage)
+        public void RfcPart(string channel, string partmessage)
         {
             WriteLine(Rfc2812.Part(channel, partmessage));
         }
@@ -537,7 +537,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channels"></param>
         /// <param name="partmessage"></param>
         /// <param name="priority"></param>
-        internal void RfcPart(string[] channels, string partmessage, Priority priority)
+        public void RfcPart(string[] channels, string partmessage, Priority priority)
         {
             WriteLine(Rfc2812.Part(channels, partmessage), priority);
         }
@@ -547,7 +547,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channels"></param>
         /// <param name="partmessage"></param>
-        internal void RfcPart(string[] channels, string partmessage)
+        public void RfcPart(string[] channels, string partmessage)
         {
             WriteLine(Rfc2812.Part(channels, partmessage));
         }
@@ -558,7 +558,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
         /// <param name="priority"></param>
-        internal void RfcKick(string channel, string nickname, Priority priority)
+        public void RfcKick(string channel, string nickname, Priority priority)
         {
             WriteLine(Rfc2812.Kick(channel, nickname), priority);
         }
@@ -568,7 +568,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
-        internal void RfcKick(string channel, string nickname)
+        public void RfcKick(string channel, string nickname)
         {
             WriteLine(Rfc2812.Kick(channel, nickname));
         }
@@ -579,7 +579,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channels"></param>
         /// <param name="nickname"></param>
         /// <param name="priority"></param>
-        internal void RfcKick(string[] channels, string nickname, Priority priority)
+        public void RfcKick(string[] channels, string nickname, Priority priority)
         {
             WriteLine(Rfc2812.Kick(channels, nickname), priority);
         }
@@ -589,7 +589,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channels"></param>
         /// <param name="nickname"></param>
-        internal void RfcKick(string[] channels, string nickname)
+        public void RfcKick(string[] channels, string nickname)
         {
             WriteLine(Rfc2812.Kick(channels, nickname));
         }
@@ -600,7 +600,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="nicknames"></param>
         /// <param name="priority"></param>
-        internal void RfcKick(string channel, string[] nicknames, Priority priority)
+        public void RfcKick(string channel, string[] nicknames, Priority priority)
         {
             WriteLine(Rfc2812.Kick(channel, nicknames), priority);
         }
@@ -610,7 +610,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="nicknames"></param>
-        internal void RfcKick(string channel, string[] nicknames)
+        public void RfcKick(string channel, string[] nicknames)
         {
             WriteLine(Rfc2812.Kick(channel, nicknames));
         }
@@ -621,7 +621,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channels"></param>
         /// <param name="nicknames"></param>
         /// <param name="priority"></param>
-        internal void RfcKick(string[] channels, string[] nicknames, Priority priority)
+        public void RfcKick(string[] channels, string[] nicknames, Priority priority)
         {
             WriteLine(Rfc2812.Kick(channels, nicknames), priority);
         }
@@ -631,7 +631,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channels"></param>
         /// <param name="nicknames"></param>
-        internal void RfcKick(string[] channels, string[] nicknames)
+        public void RfcKick(string[] channels, string[] nicknames)
         {
             WriteLine(Rfc2812.Kick(channels, nicknames));
         }
@@ -643,7 +643,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="nickname"></param>
         /// <param name="comment"></param>
         /// <param name="priority"></param>
-        internal void RfcKick(string channel, string nickname, string comment, Priority priority)
+        public void RfcKick(string channel, string nickname, string comment, Priority priority)
         {
             WriteLine(Rfc2812.Kick(channel, nickname, comment), priority);
         }
@@ -654,7 +654,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="nickname"></param>
         /// <param name="comment"></param>
-        internal void RfcKick(string channel, string nickname, string comment)
+        public void RfcKick(string channel, string nickname, string comment)
         {
             WriteLine(Rfc2812.Kick(channel, nickname, comment));
         }
@@ -666,7 +666,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="nickname"></param>
         /// <param name="comment"></param>
         /// <param name="priority"></param>
-        internal void RfcKick(string[] channels, string nickname, string comment, Priority priority)
+        public void RfcKick(string[] channels, string nickname, string comment, Priority priority)
         {
             WriteLine(Rfc2812.Kick(channels, nickname, comment), priority);
         }
@@ -677,7 +677,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channels"></param>
         /// <param name="nickname"></param>
         /// <param name="comment"></param>
-        internal void RfcKick(string[] channels, string nickname, string comment)
+        public void RfcKick(string[] channels, string nickname, string comment)
         {
             WriteLine(Rfc2812.Kick(channels, nickname, comment));
         }
@@ -689,7 +689,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="nicknames"></param>
         /// <param name="comment"></param>
         /// <param name="priority"></param>
-        internal void RfcKick(string channel, string[] nicknames, string comment, Priority priority)
+        public void RfcKick(string channel, string[] nicknames, string comment, Priority priority)
         {
             WriteLine(Rfc2812.Kick(channel, nicknames, comment), priority);
         }
@@ -700,7 +700,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="nicknames"></param>
         /// <param name="comment"></param>
-        internal void RfcKick(string channel, string[] nicknames, string comment)
+        public void RfcKick(string channel, string[] nicknames, string comment)
         {
             WriteLine(Rfc2812.Kick(channel, nicknames, comment));
         }
@@ -712,7 +712,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="nicknames"></param>
         /// <param name="comment"></param>
         /// <param name="priority"></param>
-        internal void RfcKick(string[] channels, string[] nicknames, string comment, Priority priority)
+        public void RfcKick(string[] channels, string[] nicknames, string comment, Priority priority)
         {
             WriteLine(Rfc2812.Kick(channels, nicknames, comment), priority);
         }
@@ -723,7 +723,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channels"></param>
         /// <param name="nicknames"></param>
         /// <param name="comment"></param>
-        internal void RfcKick(string[] channels, string[] nicknames, string comment)
+        public void RfcKick(string[] channels, string[] nicknames, string comment)
         {
             WriteLine(Rfc2812.Kick(channels, nicknames, comment));
         }
@@ -732,7 +732,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcMotd(Priority priority)
+        public void RfcMotd(Priority priority)
         {
             WriteLine(Rfc2812.Motd(), priority);
         }
@@ -740,7 +740,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcMotd()
+        public void RfcMotd()
         {
             WriteLine(Rfc2812.Motd());
         }
@@ -750,7 +750,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcMotd(string target, Priority priority)
+        public void RfcMotd(string target, Priority priority)
         {
             WriteLine(Rfc2812.Motd(target), priority);
         }
@@ -759,7 +759,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="target"></param>
-        internal void RfcMotd(string target)
+        public void RfcMotd(string target)
         {
             WriteLine(Rfc2812.Motd(target));
         }
@@ -768,7 +768,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcLuser(Priority priority)
+        public void RfcLuser(Priority priority)
         {
             WriteLine(Rfc2812.Luser(), priority);
         }
@@ -776,7 +776,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcLuser()
+        public void RfcLuser()
         {
             WriteLine(Rfc2812.Luser());
         }
@@ -786,7 +786,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="mask"></param>
         /// <param name="priority"></param>
-        internal void RfcLuser(string mask, Priority priority)
+        public void RfcLuser(string mask, Priority priority)
         {
             WriteLine(Rfc2812.Luser(mask), priority);
         }
@@ -795,7 +795,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="mask"></param>
-        internal void RfcLuser(string mask)
+        public void RfcLuser(string mask)
         {
             WriteLine(Rfc2812.Luser(mask));
         }
@@ -806,7 +806,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="mask"></param>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcLuser(string mask, string target, Priority priority)
+        public void RfcLuser(string mask, string target, Priority priority)
         {
             WriteLine(Rfc2812.Luser(mask, target), priority);
         }
@@ -816,7 +816,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="mask"></param>
         /// <param name="target"></param>
-        internal void RfcLuser(string mask, string target)
+        public void RfcLuser(string mask, string target)
         {
             WriteLine(Rfc2812.Luser(mask, target));
         }
@@ -825,7 +825,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcVersion(Priority priority)
+        public void RfcVersion(Priority priority)
         {
             WriteLine(Rfc2812.Version(), priority);
         }
@@ -833,7 +833,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcVersion()
+        public void RfcVersion()
         {
             WriteLine(Rfc2812.Version());
         }
@@ -843,7 +843,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcVersion(string target, Priority priority)
+        public void RfcVersion(string target, Priority priority)
         {
             WriteLine(Rfc2812.Version(target), priority);
         }
@@ -852,7 +852,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="target"></param>
-        internal void RfcVersion(string target)
+        public void RfcVersion(string target)
         {
             WriteLine(Rfc2812.Version(target));
         }
@@ -861,7 +861,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcStats(Priority priority)
+        public void RfcStats(Priority priority)
         {
             WriteLine(Rfc2812.Stats(), priority);
         }
@@ -869,7 +869,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcStats()
+        public void RfcStats()
         {
             WriteLine(Rfc2812.Stats());
         }
@@ -879,7 +879,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="query"></param>
         /// <param name="priority"></param>
-        internal void RfcStats(string query, Priority priority)
+        public void RfcStats(string query, Priority priority)
         {
             WriteLine(Rfc2812.Stats(query), priority);
         }
@@ -888,7 +888,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="query"></param>
-        internal void RfcStats(string query)
+        public void RfcStats(string query)
         {
             WriteLine(Rfc2812.Stats(query));
         }
@@ -899,7 +899,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="query"></param>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcStats(string query, string target, Priority priority)
+        public void RfcStats(string query, string target, Priority priority)
         {
             WriteLine(Rfc2812.Stats(query, target), priority);
         }
@@ -909,7 +909,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="query"></param>
         /// <param name="target"></param>
-        internal void RfcStats(string query, string target)
+        public void RfcStats(string query, string target)
         {
             WriteLine(Rfc2812.Stats(query, target));
         }
@@ -917,7 +917,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcLinks()
+        public void RfcLinks()
         {
             WriteLine(Rfc2812.Links());
         }
@@ -927,7 +927,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="servermask"></param>
         /// <param name="priority"></param>
-        internal void RfcLinks(string servermask, Priority priority)
+        public void RfcLinks(string servermask, Priority priority)
         {
             WriteLine(Rfc2812.Links(servermask), priority);
         }
@@ -936,7 +936,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="servermask"></param>
-        internal void RfcLinks(string servermask)
+        public void RfcLinks(string servermask)
         {
             WriteLine(Rfc2812.Links(servermask));
         }
@@ -947,7 +947,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="remoteserver"></param>
         /// <param name="servermask"></param>
         /// <param name="priority"></param>
-        internal void RfcLinks(string remoteserver, string servermask, Priority priority)
+        public void RfcLinks(string remoteserver, string servermask, Priority priority)
         {
             WriteLine(Rfc2812.Links(remoteserver, servermask), priority);
         }
@@ -957,7 +957,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="remoteserver"></param>
         /// <param name="servermask"></param>
-        internal void RfcLinks(string remoteserver, string servermask)
+        public void RfcLinks(string remoteserver, string servermask)
         {
             WriteLine(Rfc2812.Links(remoteserver, servermask));
         }
@@ -966,7 +966,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcTime(Priority priority)
+        public void RfcTime(Priority priority)
         {
             WriteLine(Rfc2812.Time(), priority);
         }
@@ -974,7 +974,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcTime()
+        public void RfcTime()
         {
             WriteLine(Rfc2812.Time());
         }
@@ -984,7 +984,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcTime(string target, Priority priority)
+        public void RfcTime(string target, Priority priority)
         {
             WriteLine(Rfc2812.Time(target), priority);
         }
@@ -993,7 +993,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="target"></param>
-        internal void RfcTime(string target)
+        public void RfcTime(string target)
         {
             WriteLine(Rfc2812.Time(target));
         }
@@ -1004,7 +1004,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="targetserver"></param>
         /// <param name="port"></param>
         /// <param name="priority"></param>
-        internal void RfcConnect(string targetserver, string port, Priority priority)
+        public void RfcConnect(string targetserver, string port, Priority priority)
         {
             WriteLine(Rfc2812.Connect(targetserver, port), priority);
         }
@@ -1014,7 +1014,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="targetserver"></param>
         /// <param name="port"></param>
-        internal void RfcConnect(string targetserver, string port)
+        public void RfcConnect(string targetserver, string port)
         {
             WriteLine(Rfc2812.Connect(targetserver, port));
         }
@@ -1026,7 +1026,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="port"></param>
         /// <param name="remoteserver"></param>
         /// <param name="priority"></param>
-        internal void RfcConnect(string targetserver, string port, string remoteserver, Priority priority)
+        public void RfcConnect(string targetserver, string port, string remoteserver, Priority priority)
         {
             WriteLine(Rfc2812.Connect(targetserver, port, remoteserver), priority);
         }
@@ -1037,7 +1037,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="targetserver"></param>
         /// <param name="port"></param>
         /// <param name="remoteserver"></param>
-        internal void RfcConnect(string targetserver, string port, string remoteserver)
+        public void RfcConnect(string targetserver, string port, string remoteserver)
         {
             WriteLine(Rfc2812.Connect(targetserver, port, remoteserver));
         }
@@ -1046,7 +1046,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcTrace(Priority priority)
+        public void RfcTrace(Priority priority)
         {
             WriteLine(Rfc2812.Trace(), priority);
         }
@@ -1054,7 +1054,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcTrace()
+        public void RfcTrace()
         {
             WriteLine(Rfc2812.Trace());
         }
@@ -1064,7 +1064,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcTrace(string target, Priority priority)
+        public void RfcTrace(string target, Priority priority)
         {
             WriteLine(Rfc2812.Trace(target), priority);
         }
@@ -1073,7 +1073,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="target"></param>
-        internal void RfcTrace(string target)
+        public void RfcTrace(string target)
         {
             WriteLine(Rfc2812.Trace(target));
         }
@@ -1082,7 +1082,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcAdmin(Priority priority)
+        public void RfcAdmin(Priority priority)
         {
             WriteLine(Rfc2812.Admin(), priority);
         }
@@ -1090,7 +1090,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcAdmin()
+        public void RfcAdmin()
         {
             WriteLine(Rfc2812.Admin());
         }
@@ -1100,7 +1100,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcAdmin(string target, Priority priority)
+        public void RfcAdmin(string target, Priority priority)
         {
             WriteLine(Rfc2812.Admin(target), priority);
         }
@@ -1109,7 +1109,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="target"></param>
-        internal void RfcAdmin(string target)
+        public void RfcAdmin(string target)
         {
             WriteLine(Rfc2812.Admin(target));
         }
@@ -1118,7 +1118,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcInfo(Priority priority)
+        public void RfcInfo(Priority priority)
         {
             WriteLine(Rfc2812.Info(), priority);
         }
@@ -1126,7 +1126,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcInfo()
+        public void RfcInfo()
         {
             WriteLine(Rfc2812.Info());
         }
@@ -1136,7 +1136,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcInfo(string target, Priority priority)
+        public void RfcInfo(string target, Priority priority)
         {
             WriteLine(Rfc2812.Info(target), priority);
         }
@@ -1145,7 +1145,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="target"></param>
-        internal void RfcInfo(string target)
+        public void RfcInfo(string target)
         {
             WriteLine(Rfc2812.Info(target));
         }
@@ -1154,7 +1154,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcServlist(Priority priority)
+        public void RfcServlist(Priority priority)
         {
             WriteLine(Rfc2812.Servlist(), priority);
         }
@@ -1162,7 +1162,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcServlist()
+        public void RfcServlist()
         {
             WriteLine(Rfc2812.Servlist());
         }
@@ -1172,7 +1172,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="mask"></param>
         /// <param name="priority"></param>
-        internal void RfcServlist(string mask, Priority priority)
+        public void RfcServlist(string mask, Priority priority)
         {
             WriteLine(Rfc2812.Servlist(mask), priority);
         }
@@ -1181,7 +1181,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="mask"></param>
-        internal void RfcServlist(string mask)
+        public void RfcServlist(string mask)
         {
             WriteLine(Rfc2812.Servlist(mask));
         }
@@ -1192,7 +1192,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="mask"></param>
         /// <param name="type"></param>
         /// <param name="priority"></param>
-        internal void RfcServlist(string mask, string type, Priority priority)
+        public void RfcServlist(string mask, string type, Priority priority)
         {
             WriteLine(Rfc2812.Servlist(mask, type), priority);
         }
@@ -1202,7 +1202,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="mask"></param>
         /// <param name="type"></param>
-        internal void RfcServlist(string mask, string type)
+        public void RfcServlist(string mask, string type)
         {
             WriteLine(Rfc2812.Servlist(mask, type));
         }
@@ -1213,7 +1213,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="servicename"></param>
         /// <param name="servicetext"></param>
         /// <param name="priority"></param>
-        internal void RfcSquery(string servicename, string servicetext, Priority priority)
+        public void RfcSquery(string servicename, string servicetext, Priority priority)
         {
             WriteLine(Rfc2812.Squery(servicename, servicetext), priority);
         }
@@ -1223,7 +1223,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="servicename"></param>
         /// <param name="servicetext"></param>
-        internal void RfcSquery(string servicename, string servicetext)
+        public void RfcSquery(string servicename, string servicetext)
         {
             WriteLine(Rfc2812.Squery(servicename, servicetext));
         }
@@ -1233,7 +1233,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="priority"></param>
-        internal void RfcList(string channel, Priority priority)
+        public void RfcList(string channel, Priority priority)
         {
             WriteLine(Rfc2812.List(channel), priority);
         }
@@ -1242,7 +1242,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="channel"></param>
-        internal void RfcList(string channel)
+        public void RfcList(string channel)
         {
             WriteLine(Rfc2812.List(channel));
         }
@@ -1252,7 +1252,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channels"></param>
         /// <param name="priority"></param>
-        internal void RfcList(string[] channels, Priority priority)
+        public void RfcList(string[] channels, Priority priority)
         {
             WriteLine(Rfc2812.List(channels), priority);
         }
@@ -1261,7 +1261,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="channels"></param>
-        internal void RfcList(string[] channels)
+        public void RfcList(string[] channels)
         {
             WriteLine(Rfc2812.List(channels));
         }
@@ -1272,7 +1272,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcList(string channel, string target, Priority priority)
+        public void RfcList(string channel, string target, Priority priority)
         {
             WriteLine(Rfc2812.List(channel, target), priority);
         }
@@ -1282,7 +1282,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="target"></param>
-        internal void RfcList(string channel, string target)
+        public void RfcList(string channel, string target)
         {
             WriteLine(Rfc2812.List(channel, target));
         }
@@ -1293,7 +1293,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channels"></param>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcList(string[] channels, string target, Priority priority)
+        public void RfcList(string[] channels, string target, Priority priority)
         {
             WriteLine(Rfc2812.List(channels, target), priority);
         }
@@ -1303,7 +1303,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channels"></param>
         /// <param name="target"></param>
-        internal void RfcList(string[] channels, string target)
+        public void RfcList(string[] channels, string target)
         {
             WriteLine(Rfc2812.List(channels, target));
         }
@@ -1313,7 +1313,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="priority"></param>
-        internal void RfcNames(string channel, Priority priority)
+        public void RfcNames(string channel, Priority priority)
         {
             WriteLine(Rfc2812.Names(channel), priority);
         }
@@ -1322,7 +1322,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="channel"></param>
-        internal void RfcNames(string channel)
+        public void RfcNames(string channel)
         {
             WriteLine(Rfc2812.Names(channel));
         }
@@ -1332,7 +1332,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channels"></param>
         /// <param name="priority"></param>
-        internal void RfcNames(string[] channels, Priority priority)
+        public void RfcNames(string[] channels, Priority priority)
         {
             WriteLine(Rfc2812.Names(channels), priority);
         }
@@ -1341,7 +1341,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="channels"></param>
-        internal void RfcNames(string[] channels)
+        public void RfcNames(string[] channels)
         {
             WriteLine(Rfc2812.Names(channels));
         }
@@ -1352,7 +1352,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcNames(string channel, string target, Priority priority)
+        public void RfcNames(string channel, string target, Priority priority)
         {
             WriteLine(Rfc2812.Names(channel, target), priority);
         }
@@ -1362,7 +1362,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="target"></param>
-        internal void RfcNames(string channel, string target)
+        public void RfcNames(string channel, string target)
         {
             WriteLine(Rfc2812.Names(channel, target));
         }
@@ -1373,7 +1373,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channels"></param>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcNames(string[] channels, string target, Priority priority)
+        public void RfcNames(string[] channels, string target, Priority priority)
         {
             WriteLine(Rfc2812.Names(channels, target), priority);
         }
@@ -1383,7 +1383,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channels"></param>
         /// <param name="target"></param>
-        internal void RfcNames(string[] channels, string target)
+        public void RfcNames(string[] channels, string target)
         {
             WriteLine(Rfc2812.Names(channels, target));
         }
@@ -1393,7 +1393,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="priority"></param>
-        internal void RfcTopic(string channel, Priority priority)
+        public void RfcTopic(string channel, Priority priority)
         {
             WriteLine(Rfc2812.Topic(channel), priority);
         }
@@ -1402,7 +1402,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="channel"></param>
-        internal void RfcTopic(string channel)
+        public void RfcTopic(string channel)
         {
             WriteLine(Rfc2812.Topic(channel));
         }
@@ -1413,7 +1413,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channel"></param>
         /// <param name="newtopic"></param>
         /// <param name="priority"></param>
-        internal void RfcTopic(string channel, string newtopic, Priority priority)
+        public void RfcTopic(string channel, string newtopic, Priority priority)
         {
             WriteLine(Rfc2812.Topic(channel, newtopic), priority);
         }
@@ -1423,7 +1423,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channel"></param>
         /// <param name="newtopic"></param>
-        internal void RfcTopic(string channel, string newtopic)
+        public void RfcTopic(string channel, string newtopic)
         {
             WriteLine(Rfc2812.Topic(channel, newtopic));
         }
@@ -1433,7 +1433,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcMode(string target, Priority priority)
+        public void RfcMode(string target, Priority priority)
         {
             WriteLine(Rfc2812.Mode(target), priority);
         }
@@ -1442,7 +1442,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="target"></param>
-        internal void RfcMode(string target)
+        public void RfcMode(string target)
         {
             WriteLine(Rfc2812.Mode(target));
         }
@@ -1453,7 +1453,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="target"></param>
         /// <param name="newmode"></param>
         /// <param name="priority"></param>
-        internal void RfcMode(string target, string newmode, Priority priority)
+        public void RfcMode(string target, string newmode, Priority priority)
         {
             WriteLine(Rfc2812.Mode(target, newmode), priority);
         }
@@ -1463,7 +1463,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="target"></param>
         /// <param name="newmode"></param>
-        internal void RfcMode(string target, string newmode)
+        public void RfcMode(string target, string newmode)
         {
             WriteLine(Rfc2812.Mode(target, newmode));
         }
@@ -1475,7 +1475,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="distribution"></param>
         /// <param name="info"></param>
         /// <param name="priority"></param>
-        internal void RfcService(string nickname, string distribution, string info, Priority priority)
+        public void RfcService(string nickname, string distribution, string info, Priority priority)
         {
             WriteLine(Rfc2812.Service(nickname, distribution, info), priority);
         }
@@ -1486,7 +1486,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="nickname"></param>
         /// <param name="distribution"></param>
         /// <param name="info"></param>
-        internal void RfcService(string nickname, string distribution, string info)
+        public void RfcService(string nickname, string distribution, string info)
         {
             WriteLine(Rfc2812.Service(nickname, distribution, info));
         }
@@ -1497,7 +1497,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="nickname"></param>
         /// <param name="channel"></param>
         /// <param name="priority"></param>
-        internal void RfcInvite(string nickname, string channel, Priority priority)
+        public void RfcInvite(string nickname, string channel, Priority priority)
         {
             WriteLine(Rfc2812.Invite(nickname, channel), priority);
         }
@@ -1507,7 +1507,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="nickname"></param>
         /// <param name="channel"></param>
-        internal void RfcInvite(string nickname, string channel)
+        public void RfcInvite(string nickname, string channel)
         {
             WriteLine(Rfc2812.Invite(nickname, channel));
         }
@@ -1517,7 +1517,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="newnickname"></param>
         /// <param name="priority"></param>
-        internal void RfcNick(string newnickname, Priority priority)
+        public void RfcNick(string newnickname, Priority priority)
         {
             WriteLine(Rfc2812.Nick(newnickname), priority);
         }
@@ -1526,7 +1526,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="newnickname"></param>
-        internal void RfcNick(string newnickname)
+        public void RfcNick(string newnickname)
         {
             WriteLine(Rfc2812.Nick(newnickname));
         }
@@ -1535,7 +1535,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcWho(Priority priority)
+        public void RfcWho(Priority priority)
         {
             WriteLine(Rfc2812.Who(), priority);
         }
@@ -1543,7 +1543,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcWho()
+        public void RfcWho()
         {
             WriteLine(Rfc2812.Who());
         }
@@ -1553,7 +1553,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="mask"></param>
         /// <param name="priority"></param>
-        internal void RfcWho(string mask, Priority priority)
+        public void RfcWho(string mask, Priority priority)
         {
             WriteLine(Rfc2812.Who(mask), priority);
         }
@@ -1562,7 +1562,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="mask"></param>
-        internal void RfcWho(string mask)
+        public void RfcWho(string mask)
         {
             WriteLine(Rfc2812.Who(mask));
         }
@@ -1573,7 +1573,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="mask"></param>
         /// <param name="ircop"></param>
         /// <param name="priority"></param>
-        internal void RfcWho(string mask, bool ircop, Priority priority)
+        public void RfcWho(string mask, bool ircop, Priority priority)
         {
             WriteLine(Rfc2812.Who(mask, ircop), priority);
         }
@@ -1583,7 +1583,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="mask"></param>
         /// <param name="ircop"></param>
-        internal void RfcWho(string mask, bool ircop)
+        public void RfcWho(string mask, bool ircop)
         {
             WriteLine(Rfc2812.Who(mask, ircop));
         }
@@ -1593,7 +1593,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="mask"></param>
         /// <param name="priority"></param>
-        internal void RfcWhois(string mask, Priority priority)
+        public void RfcWhois(string mask, Priority priority)
         {
             WriteLine(Rfc2812.Whois(mask), priority);
         }
@@ -1602,7 +1602,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="mask"></param>
-        internal void RfcWhois(string mask)
+        public void RfcWhois(string mask)
         {
             WriteLine(Rfc2812.Whois(mask));
         }
@@ -1612,7 +1612,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="masks"></param>
         /// <param name="priority"></param>
-        internal void RfcWhois(string[] masks, Priority priority)
+        public void RfcWhois(string[] masks, Priority priority)
         {
             WriteLine(Rfc2812.Whois(masks), priority);
         }
@@ -1621,7 +1621,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="masks"></param>
-        internal void RfcWhois(string[] masks)
+        public void RfcWhois(string[] masks)
         {
             WriteLine(Rfc2812.Whois(masks));
         }
@@ -1632,7 +1632,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="target"></param>
         /// <param name="mask"></param>
         /// <param name="priority"></param>
-        internal void RfcWhois(string target, string mask, Priority priority)
+        public void RfcWhois(string target, string mask, Priority priority)
         {
             WriteLine(Rfc2812.Whois(target, mask), priority);
         }
@@ -1642,7 +1642,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="target"></param>
         /// <param name="mask"></param>
-        internal void RfcWhois(string target, string mask)
+        public void RfcWhois(string target, string mask)
         {
             WriteLine(Rfc2812.Whois(target, mask));
         }
@@ -1653,7 +1653,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="target"></param>
         /// <param name="masks"></param>
         /// <param name="priority"></param>
-        internal void RfcWhois(string target, string[] masks, Priority priority)
+        public void RfcWhois(string target, string[] masks, Priority priority)
         {
             WriteLine(Rfc2812.Whois(target ,masks), priority);
         }
@@ -1663,7 +1663,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="target"></param>
         /// <param name="masks"></param>
-        internal void RfcWhois(string target, string[] masks)
+        public void RfcWhois(string target, string[] masks)
         {
             WriteLine(Rfc2812.Whois(target, masks));
         }
@@ -1673,7 +1673,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="nickname"></param>
         /// <param name="priority"></param>
-        internal void RfcWhowas(string nickname, Priority priority)
+        public void RfcWhowas(string nickname, Priority priority)
         {
             WriteLine(Rfc2812.Whowas(nickname), priority);
         }
@@ -1682,7 +1682,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="nickname"></param>
-        internal void RfcWhowas(string nickname)
+        public void RfcWhowas(string nickname)
         {
             WriteLine(Rfc2812.Whowas(nickname));
         }
@@ -1692,7 +1692,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="nicknames"></param>
         /// <param name="priority"></param>
-        internal void RfcWhowas(string[] nicknames, Priority priority)
+        public void RfcWhowas(string[] nicknames, Priority priority)
         {
             WriteLine(Rfc2812.Whowas(nicknames), priority);
         }
@@ -1701,7 +1701,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="nicknames"></param>
-        internal void RfcWhowas(string[] nicknames)
+        public void RfcWhowas(string[] nicknames)
         {
             WriteLine(Rfc2812.Whowas(nicknames));
         }
@@ -1712,7 +1712,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="nickname"></param>
         /// <param name="count"></param>
         /// <param name="priority"></param>
-        internal void RfcWhowas(string nickname, string count, Priority priority)
+        public void RfcWhowas(string nickname, string count, Priority priority)
         {
             WriteLine(Rfc2812.Whowas(nickname, count), priority);
         }
@@ -1722,7 +1722,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="nickname"></param>
         /// <param name="count"></param>
-        internal void RfcWhowas(string nickname, string count)
+        public void RfcWhowas(string nickname, string count)
         {
             WriteLine(Rfc2812.Whowas(nickname, count));
         }
@@ -1733,7 +1733,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="nicknames"></param>
         /// <param name="count"></param>
         /// <param name="priority"></param>
-        internal void RfcWhowas(string[] nicknames, string count, Priority priority)
+        public void RfcWhowas(string[] nicknames, string count, Priority priority)
         {
             WriteLine(Rfc2812.Whowas(nicknames, count), priority);
         }
@@ -1743,7 +1743,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="nicknames"></param>
         /// <param name="count"></param>
-        internal void RfcWhowas(string[] nicknames, string count)
+        public void RfcWhowas(string[] nicknames, string count)
         {
             WriteLine(Rfc2812.Whowas(nicknames, count));
         }
@@ -1755,7 +1755,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="count"></param>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcWhowas(string nickname, string count, string target, Priority priority)
+        public void RfcWhowas(string nickname, string count, string target, Priority priority)
         {
             WriteLine(Rfc2812.Whowas(nickname, count, target), priority);
         }
@@ -1766,7 +1766,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="nickname"></param>
         /// <param name="count"></param>
         /// <param name="target"></param>
-        internal void RfcWhowas(string nickname, string count, string target)
+        public void RfcWhowas(string nickname, string count, string target)
         {
             WriteLine(Rfc2812.Whowas(nickname, count, target));
         }
@@ -1778,7 +1778,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="count"></param>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcWhowas(string[] nicknames, string count, string target, Priority priority)
+        public void RfcWhowas(string[] nicknames, string count, string target, Priority priority)
         {
             WriteLine(Rfc2812.Whowas(nicknames, count, target), priority);
         }
@@ -1789,7 +1789,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="nicknames"></param>
         /// <param name="count"></param>
         /// <param name="target"></param>
-        internal void RfcWhowas(string[] nicknames, string count, string target)
+        public void RfcWhowas(string[] nicknames, string count, string target)
         {
             WriteLine(Rfc2812.Whowas(nicknames, count, target));
         }
@@ -1800,7 +1800,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="nickname"></param>
         /// <param name="comment"></param>
         /// <param name="priority"></param>
-        internal void RfcKill(string nickname, string comment, Priority priority)
+        public void RfcKill(string nickname, string comment, Priority priority)
         {
             WriteLine(Rfc2812.Kill(nickname, comment), priority);
         }
@@ -1810,7 +1810,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="nickname"></param>
         /// <param name="comment"></param>
-        internal void RfcKill(string nickname, string comment)
+        public void RfcKill(string nickname, string comment)
         {
             WriteLine(Rfc2812.Kill(nickname, comment));
         }
@@ -1820,7 +1820,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="server"></param>
         /// <param name="priority"></param>
-        internal void RfcPing(string server, Priority priority)
+        public void RfcPing(string server, Priority priority)
         {
             WriteLine(Rfc2812.Ping(server), priority);
         }
@@ -1829,7 +1829,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="server"></param>
-        internal void RfcPing(string server)
+        public void RfcPing(string server)
         {
             WriteLine(Rfc2812.Ping(server));
         }
@@ -1840,7 +1840,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="server"></param>
         /// <param name="server2"></param>
         /// <param name="priority"></param>
-        internal void RfcPing(string server, string server2, Priority priority)
+        public void RfcPing(string server, string server2, Priority priority)
         {
             WriteLine(Rfc2812.Ping(server, server2), priority);
         }
@@ -1850,7 +1850,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="server"></param>
         /// <param name="server2"></param>
-        internal void RfcPing(string server, string server2)
+        public void RfcPing(string server, string server2)
         {
             WriteLine(Rfc2812.Ping(server, server2));
         }
@@ -1860,7 +1860,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="server"></param>
         /// <param name="priority"></param>
-        internal void RfcPong(string server, Priority priority)
+        public void RfcPong(string server, Priority priority)
         {
             WriteLine(Rfc2812.Pong(server), priority);
         }
@@ -1869,7 +1869,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="server"></param>
-        internal void RfcPong(string server)
+        public void RfcPong(string server)
         {
             WriteLine(Rfc2812.Pong(server));
         }
@@ -1880,7 +1880,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="server"></param>
         /// <param name="server2"></param>
         /// <param name="priority"></param>
-        internal void RfcPong(string server, string server2, Priority priority)
+        public void RfcPong(string server, string server2, Priority priority)
         {
             WriteLine(Rfc2812.Pong(server, server2), priority);
         }
@@ -1890,7 +1890,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="server"></param>
         /// <param name="server2"></param>
-        internal void RfcPong(string server, string server2)
+        public void RfcPong(string server, string server2)
         {
             WriteLine(Rfc2812.Pong(server, server2));
         }
@@ -1899,7 +1899,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcAway(Priority priority)
+        public void RfcAway(Priority priority)
         {
             WriteLine(Rfc2812.Away(), priority);
         }
@@ -1907,7 +1907,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcAway()
+        public void RfcAway()
         {
             WriteLine(Rfc2812.Away());
         }
@@ -1917,7 +1917,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="awaytext"></param>
         /// <param name="priority"></param>
-        internal void RfcAway(string awaytext, Priority priority)
+        public void RfcAway(string awaytext, Priority priority)
         {
             WriteLine(Rfc2812.Away(awaytext), priority);
         }
@@ -1926,7 +1926,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="awaytext"></param>
-        internal void RfcAway(string awaytext)
+        public void RfcAway(string awaytext)
         {
             WriteLine(Rfc2812.Away(awaytext));
         }
@@ -1934,7 +1934,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcRehash()
+        public void RfcRehash()
         {
             WriteLine(Rfc2812.Rehash());
         }
@@ -1942,7 +1942,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcDie()
+        public void RfcDie()
         {
             WriteLine(Rfc2812.Die());
         }
@@ -1950,7 +1950,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcRestart()
+        public void RfcRestart()
         {
             WriteLine(Rfc2812.Restart());
         }
@@ -1960,7 +1960,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="user"></param>
         /// <param name="priority"></param>
-        internal void RfcSummon(string user, Priority priority)
+        public void RfcSummon(string user, Priority priority)
         {
             WriteLine(Rfc2812.Summon(user), priority);
         }
@@ -1969,7 +1969,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="user"></param>
-        internal void RfcSummon(string user)
+        public void RfcSummon(string user)
         {
             WriteLine(Rfc2812.Summon(user));
         }
@@ -1980,7 +1980,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="user"></param>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcSummon(string user, string target, Priority priority)
+        public void RfcSummon(string user, string target, Priority priority)
         {
             WriteLine(Rfc2812.Summon(user, target), priority);
         }
@@ -1990,7 +1990,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="user"></param>
         /// <param name="target"></param>
-        internal void RfcSummon(string user, string target)
+        public void RfcSummon(string user, string target)
         {
             WriteLine(Rfc2812.Summon(user, target));
         }
@@ -2002,7 +2002,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="target"></param>
         /// <param name="channel"></param>
         /// <param name="priority"></param>
-        internal void RfcSummon(string user, string target, string channel, Priority priority)
+        public void RfcSummon(string user, string target, string channel, Priority priority)
         {
             WriteLine(Rfc2812.Summon(user, target, channel), priority);
         }
@@ -2013,7 +2013,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="user"></param>
         /// <param name="target"></param>
         /// <param name="channel"></param>
-        internal void RfcSummon(string user, string target, string channel)
+        public void RfcSummon(string user, string target, string channel)
         {
             WriteLine(Rfc2812.Summon(user, target, channel));
         }
@@ -2022,7 +2022,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcUsers(Priority priority)
+        public void RfcUsers(Priority priority)
         {
             WriteLine(Rfc2812.Users(), priority);
         }
@@ -2030,7 +2030,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcUsers()
+        public void RfcUsers()
         {
             WriteLine(Rfc2812.Users());
         }
@@ -2040,7 +2040,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="target"></param>
         /// <param name="priority"></param>
-        internal void RfcUsers(string target, Priority priority)
+        public void RfcUsers(string target, Priority priority)
         {
             WriteLine(Rfc2812.Users(target), priority);
         }
@@ -2049,7 +2049,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="target"></param>
-        internal void RfcUsers(string target)
+        public void RfcUsers(string target)
         {
             WriteLine(Rfc2812.Users(target));
         }
@@ -2059,7 +2059,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="wallopstext"></param>
         /// <param name="priority"></param>
-        internal void RfcWallops(string wallopstext, Priority priority)
+        public void RfcWallops(string wallopstext, Priority priority)
         {
             WriteLine(Rfc2812.Wallops(wallopstext), priority);
         }
@@ -2068,7 +2068,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="wallopstext"></param>
-        internal void RfcWallops(string wallopstext)
+        public void RfcWallops(string wallopstext)
         {
             WriteLine(Rfc2812.Wallops(wallopstext));
         }
@@ -2078,7 +2078,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="nickname"></param>
         /// <param name="priority"></param>
-        internal void RfcUserhost(string nickname, Priority priority)
+        public void RfcUserhost(string nickname, Priority priority)
         {
             WriteLine(Rfc2812.Userhost(nickname), priority);
         }
@@ -2087,7 +2087,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="nickname"></param>
-        internal void RfcUserhost(string nickname)
+        public void RfcUserhost(string nickname)
         {
             WriteLine(Rfc2812.Userhost(nickname));
         }
@@ -2097,7 +2097,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="nicknames"></param>
         /// <param name="priority"></param>
-        internal void RfcUserhost(string[] nicknames, Priority priority)
+        public void RfcUserhost(string[] nicknames, Priority priority)
         {
             WriteLine(Rfc2812.Userhost(nicknames), priority);
         }
@@ -2106,7 +2106,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="nicknames"></param>
-        internal void RfcUserhost(string[] nicknames)
+        public void RfcUserhost(string[] nicknames)
         {
             WriteLine(Rfc2812.Userhost(nicknames));
         }
@@ -2116,7 +2116,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="nickname"></param>
         /// <param name="priority"></param>
-        internal void RfcIson(string nickname, Priority priority)
+        public void RfcIson(string nickname, Priority priority)
         {
             WriteLine(Rfc2812.Ison(nickname), priority);
         }
@@ -2125,7 +2125,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="nickname"></param>
-        internal void RfcIson(string nickname)
+        public void RfcIson(string nickname)
         {
             WriteLine(Rfc2812.Ison(nickname));
         }
@@ -2135,7 +2135,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="nicknames"></param>
         /// <param name="priority"></param>
-        internal void RfcIson(string[] nicknames, Priority priority)
+        public void RfcIson(string[] nicknames, Priority priority)
         {
             WriteLine(Rfc2812.Ison(nicknames), priority);
         }
@@ -2144,7 +2144,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="nicknames"></param>
-        internal void RfcIson(string[] nicknames)
+        public void RfcIson(string[] nicknames)
         {
             WriteLine(Rfc2812.Ison(nicknames));
         }
@@ -2153,7 +2153,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="priority"></param>
-        internal void RfcQuit(Priority priority)
+        public void RfcQuit(Priority priority)
         {
             WriteLine(Rfc2812.Quit(), priority);
         }
@@ -2161,12 +2161,12 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void RfcQuit()
+        public void RfcQuit()
         {
             WriteLine(Rfc2812.Quit());
         }
 
-        internal void RfcQuit(string quitmessage, Priority priority)
+        public void RfcQuit(string quitmessage, Priority priority)
         {
             WriteLine(Rfc2812.Quit(quitmessage), priority);
         }
@@ -2175,7 +2175,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="quitmessage"></param>
-        internal void RfcQuit(string quitmessage)
+        public void RfcQuit(string quitmessage)
         {
             WriteLine(Rfc2812.Quit(quitmessage));
         }
@@ -2186,7 +2186,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="server"></param>
         /// <param name="comment"></param>
         /// <param name="priority"></param>
-        internal void RfcSquit(string server, string comment, Priority priority)
+        public void RfcSquit(string server, string comment, Priority priority)
         {
             WriteLine(Rfc2812.Squit(server, comment), priority);
         }
@@ -2196,7 +2196,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="server"></param>
         /// <param name="comment"></param>
-        internal void RfcSquit(string server, string comment)
+        public void RfcSquit(string server, string comment)
         {
             WriteLine(Rfc2812.Squit(server, comment));
         }

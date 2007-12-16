@@ -12,16 +12,16 @@
  * Full LGPL License: <http://www.gnu.org/licenses/lgpl.txt>
  * 
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General internal
+ * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General internal License for more details.
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General internal
+ * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
@@ -35,7 +35,7 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    internal enum LogCategory
+    public enum LogCategory
     {
         Main,
         Connection,
@@ -66,7 +66,7 @@ namespace Meebey.SmartIrc4net
         {
         }
         
-        internal static void Init()
+        public static void Init()
         {
             if (_Init) {
                 return;
@@ -99,98 +99,98 @@ namespace Meebey.SmartIrc4net
             _LoggerList[LogCategory.Dcc]            = log4net.LogManager.GetLogger("DCC");
         }
 
-        internal static log4net.ILog Main
+        public static log4net.ILog Main
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.Main];
             }
         }
 
-        internal static log4net.ILog Socket
+        public static log4net.ILog Socket
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.Socket];
             }
         }
 
-        internal static log4net.ILog Queue
+        public static log4net.ILog Queue
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.Queue];
             }
         }
 
-        internal static log4net.ILog Connection
+        public static log4net.ILog Connection
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.Connection];
             }
         }
 
-        internal static log4net.ILog IrcMessages
+        public static log4net.ILog IrcMessages
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.IrcMessages];
             }
         }
 
-        internal static log4net.ILog MessageParser
+        public static log4net.ILog MessageParser
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.MessageParser];
             }
         }
 
-        internal static log4net.ILog MessageTypes
+        public static log4net.ILog MessageTypes
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.MessageTypes];
             }
         }
 
-        internal static log4net.ILog ActionHandler
+        public static log4net.ILog ActionHandler
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.ActionHandler];
             }
         }
 
-        internal static log4net.ILog TimeHandler
+        public static log4net.ILog TimeHandler
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.TimeHandler];
             }
         }
 
-        internal static log4net.ILog MessageHandler
+        public static log4net.ILog MessageHandler
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.MessageHandler];
             }
         }
 
-        internal static log4net.ILog ChannelSyncing
+        public static log4net.ILog ChannelSyncing
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.ChannelSyncing];
             }
         }
 
-        internal static log4net.ILog UserSyncing
+        public static log4net.ILog UserSyncing
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.UserSyncing];
             }
         }
 
-        internal static log4net.ILog Modules
+        public static log4net.ILog Modules
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.Modules];
             }
         }
 
-        internal static log4net.ILog Dcc
+        public static log4net.ILog Dcc
         {
             get {
                 return (log4net.ILog)_LoggerList[LogCategory.Dcc];

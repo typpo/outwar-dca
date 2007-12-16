@@ -12,16 +12,16 @@
  * Full LGPL License: <http://www.gnu.org/licenses/lgpl.txt>
  *
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General internal
+ * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General internal License for more details.
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General internal
+ * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
@@ -37,7 +37,7 @@ namespace Meebey.SmartIrc4net
     /// This layer is an event driven high-level API with all features you could need for IRC programming.
     /// </summary>
     /// <threadsafety static="true" instance="true" />
-    internal class IrcClient : IrcCommands
+    public class IrcClient : IrcCommands
     {
         private string           _Nickname                = string.Empty;
         private string[]         _NicknameList;
@@ -83,53 +83,53 @@ namespace Meebey.SmartIrc4net
         private static Regex     _ModeRegex               = new Regex("^:.*? MODE (.*) .*$", RegexOptions.Compiled);
         private static Regex     _QuitRegex               = new Regex("^:.*? QUIT :.*$", RegexOptions.Compiled);
 
-        internal event EventHandler               OnRegistered;
-        internal event PingEventHandler           OnPing;
-        internal event PongEventHandler           OnPong;
-        internal event IrcEventHandler            OnRawMessage;
-        internal event ErrorEventHandler          OnError;
-        internal event IrcEventHandler            OnErrorMessage;
-        internal event JoinEventHandler           OnJoin;
-        internal event NamesEventHandler          OnNames;
-        internal event PartEventHandler           OnPart;
-        internal event QuitEventHandler           OnQuit;
-        internal event KickEventHandler           OnKick;
-        internal event AwayEventHandler           OnAway;
-        internal event IrcEventHandler            OnUnAway;
-        internal event IrcEventHandler            OnNowAway;
-        internal event InviteEventHandler         OnInvite;
-        internal event BanEventHandler            OnBan;
-        internal event UnbanEventHandler          OnUnban;
-        internal event OpEventHandler             OnOp;
-        internal event DeopEventHandler           OnDeop;
-        internal event HalfopEventHandler         OnHalfop;
-        internal event DehalfopEventHandler       OnDehalfop;
-        internal event VoiceEventHandler          OnVoice;
-        internal event DevoiceEventHandler        OnDevoice;
-        internal event WhoEventHandler            OnWho;
-        internal event MotdEventHandler           OnMotd;
-        internal event TopicEventHandler          OnTopic;
-        internal event TopicChangeEventHandler    OnTopicChange;
-        internal event NickChangeEventHandler     OnNickChange;
-        internal event IrcEventHandler            OnModeChange;
-        internal event IrcEventHandler            OnUserModeChange;
-        internal event IrcEventHandler            OnChannelModeChange;
-        internal event IrcEventHandler            OnChannelMessage;
-        internal event ActionEventHandler         OnChannelAction;
-        internal event IrcEventHandler            OnChannelNotice;
-        internal event IrcEventHandler            OnChannelActiveSynced;
-        internal event IrcEventHandler            OnChannelPassiveSynced;
-        internal event IrcEventHandler            OnQueryMessage;
-        internal event ActionEventHandler         OnQueryAction;
-        internal event IrcEventHandler            OnQueryNotice;
-        internal event CtcpEventHandler           OnCtcpRequest;
-        internal event CtcpEventHandler           OnCtcpReply;
+        public event EventHandler               OnRegistered;
+        public event PingEventHandler           OnPing;
+        public event PongEventHandler           OnPong;
+        public event IrcEventHandler            OnRawMessage;
+        public event ErrorEventHandler          OnError;
+        public event IrcEventHandler            OnErrorMessage;
+        public event JoinEventHandler           OnJoin;
+        public event NamesEventHandler          OnNames;
+        public event PartEventHandler           OnPart;
+        public event QuitEventHandler           OnQuit;
+        public event KickEventHandler           OnKick;
+        public event AwayEventHandler           OnAway;
+        public event IrcEventHandler            OnUnAway;
+        public event IrcEventHandler            OnNowAway;
+        public event InviteEventHandler         OnInvite;
+        public event BanEventHandler            OnBan;
+        public event UnbanEventHandler          OnUnban;
+        public event OpEventHandler             OnOp;
+        public event DeopEventHandler           OnDeop;
+        public event HalfopEventHandler         OnHalfop;
+        public event DehalfopEventHandler       OnDehalfop;
+        public event VoiceEventHandler          OnVoice;
+        public event DevoiceEventHandler        OnDevoice;
+        public event WhoEventHandler            OnWho;
+        public event MotdEventHandler           OnMotd;
+        public event TopicEventHandler          OnTopic;
+        public event TopicChangeEventHandler    OnTopicChange;
+        public event NickChangeEventHandler     OnNickChange;
+        public event IrcEventHandler            OnModeChange;
+        public event IrcEventHandler            OnUserModeChange;
+        public event IrcEventHandler            OnChannelModeChange;
+        public event IrcEventHandler            OnChannelMessage;
+        public event ActionEventHandler         OnChannelAction;
+        public event IrcEventHandler            OnChannelNotice;
+        public event IrcEventHandler            OnChannelActiveSynced;
+        public event IrcEventHandler            OnChannelPassiveSynced;
+        public event IrcEventHandler            OnQueryMessage;
+        public event ActionEventHandler         OnQueryAction;
+        public event IrcEventHandler            OnQueryNotice;
+        public event CtcpEventHandler           OnCtcpRequest;
+        public event CtcpEventHandler           OnCtcpReply;
 
         /// <summary>
         /// Enables/disables the active channel sync feature.
         /// Default: false
         /// </summary>
-        internal bool ActiveChannelSyncing {
+        public bool ActiveChannelSyncing {
             get {
                 return _ActiveChannelSyncing;
             }
@@ -148,7 +148,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Enables/disables the passive channel sync feature. Not implemented yet!
         /// </summary>
-        internal bool PassiveChannelSyncing {
+        public bool PassiveChannelSyncing {
             get {
                 return _PassiveChannelSyncing;
             }
@@ -169,7 +169,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Sets the ctcp version that should be replied on ctcp version request.
         /// </summary>
-        internal string CtcpVersion {
+        public string CtcpVersion {
             get {
                 return _CtcpVersion;
             }
@@ -182,7 +182,7 @@ namespace Meebey.SmartIrc4net
         /// Enables/disables auto joining of channels when invited.
         /// Default: false
         /// </summary>
-        internal bool AutoJoinOnInvite {
+        public bool AutoJoinOnInvite {
             get {
                 return _AutoJoinOnInvite;
             }
@@ -202,7 +202,7 @@ namespace Meebey.SmartIrc4net
         /// Enables/disables automatic rejoining of channels when a connection to the server is lost.
         /// Default: false
         /// </summary>
-        internal bool AutoRejoin {
+        public bool AutoRejoin {
             get {
                 return _AutoRejoin;
             }
@@ -222,7 +222,7 @@ namespace Meebey.SmartIrc4net
         /// Enables/disables auto rejoining of channels when kicked.
         /// Default: false
         /// </summary>
-        internal bool AutoRejoinOnKick {
+        public bool AutoRejoinOnKick {
             get {
                 return _AutoRejoinOnKick;
             }
@@ -242,7 +242,7 @@ namespace Meebey.SmartIrc4net
         /// Enables/disables auto relogin to the server after a reconnect.
         /// Default: false
         /// </summary>
-        internal bool AutoRelogin {
+        public bool AutoRelogin {
             get {
                 return _AutoRelogin;
             }
@@ -262,7 +262,7 @@ namespace Meebey.SmartIrc4net
         /// Enables/disables auto nick handling on nick collisions
         /// Default: true
         /// </summary>
-        internal bool AutoNickHandling {
+        public bool AutoNickHandling {
             get {
                 return _AutoNickHandling;
             }
@@ -282,7 +282,7 @@ namespace Meebey.SmartIrc4net
         /// Enables/disables support for non rfc features.
         /// Default: false
         /// </summary>
-        internal bool SupportNonRfc {
+        public bool SupportNonRfc {
             get {
                 return _SupportNonRfc;
             }
@@ -305,7 +305,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the nickname of us.
         /// </summary>
-        internal string Nickname {
+        public string Nickname {
             get {
                 return _Nickname;
             }
@@ -314,7 +314,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the list of nicknames of us.
         /// </summary>
-        internal string[] NicknameList {
+        public string[] NicknameList {
             get {
                 return _NicknameList;
             }
@@ -323,7 +323,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the supposed real name of us.
         /// </summary>
-        internal string Realname {
+        public string Realname {
             get {
                 return _Realname;
             }
@@ -335,7 +335,7 @@ namespace Meebey.SmartIrc4net
         /// <remarks>
         /// System username is set by default 
         /// </remarks>
-        internal string Username {
+        public string Username {
             get {
                 return _Username;
             }
@@ -344,7 +344,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the alphanumeric mode mask of us.
         /// </summary>
-        internal string Usermode {
+        public string Usermode {
             get {
                 return _Usermode;
             }
@@ -353,7 +353,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the numeric mode mask of us.
         /// </summary>
-        internal int IUsermode {
+        public int IUsermode {
             get {
                 return _IUsermode;
             }
@@ -362,7 +362,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Returns if we are away on this connection
         /// </summary>
-        internal bool IsAway {
+        public bool IsAway {
             get {
                 return _IsAway;
             }
@@ -371,7 +371,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the password for the server.
         /// </summary>
-        internal string Password {
+        public string Password {
             get {
                 return _Password;
             }
@@ -380,7 +380,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the list of channels we are joined.
         /// </summary>
-        internal StringCollection JoinedChannels {
+        public StringCollection JoinedChannels {
             get {
                 return _JoinedChannels;
             }
@@ -389,7 +389,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the server message of the day.
         /// </summary>
-        internal StringCollection Motd {
+        public StringCollection Motd {
             get {
                 return _Motd;
             }
@@ -398,7 +398,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// This class manages the connection server and provides access to all the objects needed to send and receive messages.
         /// </summary>
-        internal IrcClient()
+        public IrcClient()
         {
 #if LOG4NET
             Logger.Main.Debug("IrcClient created");
@@ -420,7 +420,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="addresslist">The list of server hostnames.</param>
         /// <param name="port">The TCP port the server listens on.</param>
-        internal new void Connect(string[] addresslist, int port)
+        public new void Connect(string[] addresslist, int port)
         {
             _SupportNonRfcLocked = true;
             base.Connect(addresslist, port);
@@ -431,7 +431,7 @@ namespace Meebey.SmartIrc4net
         /// </overloads>
         /// <param name="login">If the login data should be sent, after successful connect.</param>
         /// <param name="channels">If the channels should be rejoined, after successful connect.</param>
-        internal void Reconnect(bool login, bool channels)
+        public void Reconnect(bool login, bool channels)
         {
             if (channels) {
                 _StoreChannelsToRejoin();
@@ -448,7 +448,7 @@ namespace Meebey.SmartIrc4net
         }
 
         /// <param name="login">If the login data should be sent, after successful connect.</param>
-        internal void Reconnect(bool login)
+        public void Reconnect(bool login)
         {
             Reconnect(login, true);
         }
@@ -468,7 +468,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="username">The user's machine logon name</param>        
         /// <param name="password">The optional password can and MUST be set before any attempt to register
         ///  the connection is made.</param>        
-        internal void Login(string[] nicklist, string realname, int usermode, string username, string password)
+        public void Login(string[] nicklist, string realname, int usermode, string username, string password)
         {
 #if LOG4NET
             Logger.Connection.Info("logging in");
@@ -504,7 +504,7 @@ namespace Meebey.SmartIrc4net
         /// Set to 0 to recieve wallops and be invisible. 
         /// Set to 4 to be invisible and not receive wallops.</param>        
         /// <param name="username">The user's machine logon name</param>        
-        internal void Login(string[] nicklist, string realname, int usermode, string username)
+        public void Login(string[] nicklist, string realname, int usermode, string username)
         {
             Login(nicklist, realname, usermode, username, "");
         }
@@ -518,7 +518,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="usermode">A numeric mode parameter.  
         /// Set to 0 to recieve wallops and be invisible. 
         /// Set to 4 to be invisible and not receive wallops.</param>        
-        internal void Login(string[] nicklist, string realname, int usermode)
+        public void Login(string[] nicklist, string realname, int usermode)
         {
             Login(nicklist, realname, usermode, "", "");
         }
@@ -529,7 +529,7 @@ namespace Meebey.SmartIrc4net
         /// <remark>Login is used at the beginning of connection to specify the username, hostname and realname of a new user.</remark>
         /// <param name="nicklist">The users list of 'nick' names which may NOT contain spaces</param>
         /// <param name="realname">The users 'real' name which may contain space characters</param> 
-        internal void Login(string[] nicklist, string realname)
+        public void Login(string[] nicklist, string realname)
         {
             Login(nicklist, realname, 0, "", "");
         }
@@ -546,7 +546,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="username">The user's machine logon name</param>        
         /// <param name="password">The optional password can and MUST be set before any attempt to register
         ///  the connection is made.</param>   
-        internal void Login(string nick, string realname, int usermode, string username, string password)
+        public void Login(string nick, string realname, int usermode, string username, string password)
         {
             Login(new string[] {nick, nick+"_", nick+"__"}, realname, usermode, username, password);
         }
@@ -561,7 +561,7 @@ namespace Meebey.SmartIrc4net
         /// Set to 0 to recieve wallops and be invisible. 
         /// Set to 4 to be invisible and not receive wallops.</param>        
         /// <param name="username">The user's machine logon name</param>        
-        internal void Login(string nick, string realname, int usermode, string username)
+        public void Login(string nick, string realname, int usermode, string username)
         {
             Login(new string[] {nick, nick+"_", nick+"__"}, realname, usermode, username, "");
         }
@@ -575,7 +575,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="usermode">A numeric mode parameter.  
         /// Set to 0 to recieve wallops and be invisible. 
         /// Set to 4 to be invisible and not receive wallops.</param>        
-        internal void Login(string nick, string realname, int usermode)
+        public void Login(string nick, string realname, int usermode)
         {
             Login(new string[] {nick, nick+"_", nick+"__"}, realname, usermode, "", "");
         }
@@ -586,7 +586,7 @@ namespace Meebey.SmartIrc4net
         /// <remark>Login is used at the beginning of connection to specify the username, hostname and realname of a new user.</remark>
         /// <param name="nick">The users 'nick' name which may NOT contain spaces</param>
         /// <param name="realname">The users 'real' name which may contain space characters</param>
-        internal void Login(string nick, string realname)
+        public void Login(string nick, string realname)
         {
             Login(new string[] {nick, nick+"_", nick+"__"}, realname, 0, "", "");
         }
@@ -596,7 +596,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="nickname">The users 'nick' name which may NOT contain spaces</param>
         /// <returns>True if nickname belongs to you</returns>
-        internal bool IsMe(string nickname)
+        public bool IsMe(string nickname)
         {
             return (Nickname == nickname);
         }
@@ -606,7 +606,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channelname">The name of the channel you wish to query</param>
         /// <returns>True if you are found in channel</returns>
-        internal bool IsJoined(string channelname)
+        public bool IsJoined(string channelname)
         {
             return IsJoined(channelname, Nickname);
         }
@@ -617,7 +617,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channelname">The name of the channel you wish to query</param>
         /// <param name="nickname">The users 'nick' name which may NOT contain spaces</param>
         /// <returns>True if nickname is found in channel</returns>
-        internal bool IsJoined(string channelname, string nickname)
+        public bool IsJoined(string channelname, string nickname)
         {
             if (channelname == null) {
                 throw new System.ArgumentNullException("channelname");
@@ -642,7 +642,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="nickname">The users 'nick' name which may NOT contain spaces</param>
         /// <returns>IrcUser object of requested nickname</returns>
-        internal IrcUser GetIrcUser(string nickname)
+        public IrcUser GetIrcUser(string nickname)
         {
             if (nickname == null) {
                 throw new System.ArgumentNullException("nickname");
@@ -657,7 +657,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="channelname">The name of the channel you wish to query</param>
         /// <param name="nickname">The users 'nick' name which may NOT contain spaces</param>
         /// <returns>ChannelUser object of requested channelname/nickname</returns>
-        internal ChannelUser GetChannelUser(string channelname, string nickname)
+        public ChannelUser GetChannelUser(string channelname, string nickname)
         {
             if (channelname == null) {
                 throw new System.ArgumentNullException("channel");
@@ -680,7 +680,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="channelname">The name of the channel you wish to query</param>
         /// <returns>Channel object of requested channel</returns>
-        internal Channel GetChannel(string channelname)
+        public Channel GetChannel(string channelname)
         {
             if (channelname == null) {
                 throw new System.ArgumentNullException("channelname");
@@ -693,7 +693,7 @@ namespace Meebey.SmartIrc4net
         /// Gets a list of all joined channels on server
         /// </summary>
         /// <returns>String array of all joined channel names</returns>
-        internal string[] GetChannels()
+        public string[] GetChannels()
         {
             string[] channels = new string[_Channels.Values.Count];
             int i = 0;
@@ -704,7 +704,7 @@ namespace Meebey.SmartIrc4net
             return channels;
         }
         
-        internal IrcMessageData MessageParser(string rawline)
+        public IrcMessageData MessageParser(string rawline)
         {
             string         line;
             string[]       linear;

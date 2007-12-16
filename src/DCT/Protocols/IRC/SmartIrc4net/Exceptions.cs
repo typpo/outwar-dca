@@ -12,16 +12,16 @@
  * Full LGPL License: <http://www.gnu.org/licenses/lgpl.txt>
  * 
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General internal
+ * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General internal License for more details.
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General internal
+ * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
@@ -33,17 +33,17 @@ namespace Meebey.SmartIrc4net
 {
     /// <threadsafety static="true" instance="true" />
     [Serializable()]
-    internal class SmartIrc4netException : ApplicationException
+    public class SmartIrc4netException : ApplicationException
     {
-        internal SmartIrc4netException() : base()
+        public SmartIrc4netException() : base()
         {
         }
         
-        internal SmartIrc4netException(string message) : base(message)
+        public SmartIrc4netException(string message) : base(message)
         {
         }
         
-        internal SmartIrc4netException(string message, Exception e) : base(message, e)
+        public SmartIrc4netException(string message, Exception e) : base(message, e)
         {
         }
         
@@ -54,17 +54,17 @@ namespace Meebey.SmartIrc4net
     
     /// <threadsafety static="true" instance="true" />
     [Serializable()]
-    internal class ConnectionException : SmartIrc4netException
+    public class ConnectionException : SmartIrc4netException
     {
-        internal ConnectionException() : base()
+        public ConnectionException() : base()
         {
         }
         
-        internal ConnectionException(string message) : base(message)
+        public ConnectionException(string message) : base(message)
         {
         }
         
-        internal ConnectionException(string message, Exception e) : base(message, e)
+        public ConnectionException(string message, Exception e) : base(message, e)
         {
         }
         
@@ -75,17 +75,17 @@ namespace Meebey.SmartIrc4net
     
     /// <threadsafety static="true" instance="true" />
     [Serializable()]
-    internal class CouldNotConnectException : ConnectionException
+    public class CouldNotConnectException : ConnectionException
     {
-        internal CouldNotConnectException() : base()
+        public CouldNotConnectException() : base()
         {
         }
         
-        internal CouldNotConnectException(string message) : base(message)
+        public CouldNotConnectException(string message) : base(message)
         {
         }
         
-        internal CouldNotConnectException(string message, Exception e) : base(message, e)
+        public CouldNotConnectException(string message, Exception e) : base(message, e)
         {
         }
 
@@ -96,17 +96,17 @@ namespace Meebey.SmartIrc4net
 
     /// <threadsafety static="true" instance="true" />
     [Serializable()]
-    internal class NotConnectedException : ConnectionException
+    public class NotConnectedException : ConnectionException
     {
-        internal NotConnectedException() : base()
+        public NotConnectedException() : base()
         {
         }
         
-        internal NotConnectedException(string message) : base(message)
+        public NotConnectedException(string message) : base(message)
         {
         }
         
-        internal NotConnectedException(string message, Exception e) : base(message, e)
+        public NotConnectedException(string message, Exception e) : base(message, e)
         {
         }
         
@@ -117,17 +117,17 @@ namespace Meebey.SmartIrc4net
 
     /// <threadsafety static="true" instance="true" />
     [Serializable()]
-    internal class AlreadyConnectedException : ConnectionException
+    public class AlreadyConnectedException : ConnectionException
     {
-        internal AlreadyConnectedException() : base()
+        public AlreadyConnectedException() : base()
         {
         }
         
-        internal AlreadyConnectedException(string message) : base(message)
+        public AlreadyConnectedException(string message) : base(message)
         {
         }
         
-        internal AlreadyConnectedException(string message, Exception e) : base(message, e)
+        public AlreadyConnectedException(string message, Exception e) : base(message, e)
         {
         }
         

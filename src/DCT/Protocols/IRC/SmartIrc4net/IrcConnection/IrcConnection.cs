@@ -12,16 +12,16 @@
  * Full LGPL License: <http://www.gnu.org/licenses/lgpl.txt>
  * 
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General internal
+ * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General internal License for more details.
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General internal
+ * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
@@ -40,7 +40,7 @@ namespace Meebey.SmartIrc4net
     /// 
     /// </summary>
     /// <threadsafety static="true" instance="true" />
-    internal class IrcConnection
+    public class IrcConnection
     {
         private string           _VersionNumber;
         private string           _VersionString;
@@ -75,35 +75,35 @@ namespace Meebey.SmartIrc4net
         /// <event cref="OnReadLine">
         /// Raised when a \r\n terminated line is read from the socket
         /// </event>
-        internal event ReadLineEventHandler   OnReadLine;
+        public event ReadLineEventHandler   OnReadLine;
         /// <event cref="OnWriteLine">
         /// Raised when a \r\n terminated line is written to the socket
         /// </event>
-        internal event WriteLineEventHandler  OnWriteLine;
+        public event WriteLineEventHandler  OnWriteLine;
         /// <event cref="OnConnect">
         /// Raised before the connect attempt
         /// </event>
-        internal event EventHandler           OnConnecting;
+        public event EventHandler           OnConnecting;
         /// <event cref="OnConnect">
         /// Raised on successful connect
         /// </event>
-        internal event EventHandler           OnConnected;
+        public event EventHandler           OnConnected;
         /// <event cref="OnConnect">
         /// Raised before the connection is closed
         /// </event>
-        internal event EventHandler           OnDisconnecting;
+        public event EventHandler           OnDisconnecting;
         /// <event cref="OnConnect">
         /// Raised when the connection is closed
         /// </event>
-        internal event EventHandler           OnDisconnected;
+        public event EventHandler           OnDisconnected;
         /// <event cref="OnConnectionError">
         /// Raised when the connection got into an error state
         /// </event>
-        internal event EventHandler           OnConnectionError;
+        public event EventHandler           OnConnectionError;
         /// <event cref="AutoConnectErrorEventHandler">
         /// Raised when the connection got into an error state during auto connect loop
         /// </event>
-        internal event AutoConnectErrorEventHandler   OnAutoConnectError;
+        public event AutoConnectErrorEventHandler   OnAutoConnectError;
         
         /// <summary>
         /// When a connection error is detected this property will return true
@@ -124,7 +124,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the current address of the connection
         /// </summary>
-        internal string Address {
+        public string Address {
             get {
                 return _AddressList[_CurrentAddress];
             }
@@ -133,7 +133,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the address list of the connection
         /// </summary>
-        internal string[] AddressList {
+        public string[] AddressList {
             get {
                 return _AddressList;
             }
@@ -142,7 +142,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the used port of the connection
         /// </summary>
-        internal int Port {
+        public int Port {
             get {
                 return _Port;
             }
@@ -157,7 +157,7 @@ namespace Meebey.SmartIrc4net
         /// true, if the library should reconnect on lost connections
         /// false, if the library should not take care of it
         /// </value>
-        internal bool AutoReconnect {
+        public bool AutoReconnect {
             get {
                 return _AutoReconnect;
             }
@@ -181,7 +181,7 @@ namespace Meebey.SmartIrc4net
         /// true, if the library should retry to connect
         /// false, if the library should not retry
         /// </value>
-        internal bool AutoRetry {
+        public bool AutoRetry {
             get {
                 return _AutoRetry;
             }
@@ -201,7 +201,7 @@ namespace Meebey.SmartIrc4net
         /// Delay between retry attempts in Connect() in seconds.
         /// Default: 30
         /// </summary>
-        internal int AutoRetryDelay {
+        public int AutoRetryDelay {
             get {
                 return _AutoRetryDelay;
             }
@@ -215,7 +215,7 @@ namespace Meebey.SmartIrc4net
         /// message, given in milliseconds.
         /// Default: 200
         /// </summary>
-        internal int SendDelay {
+        public int SendDelay {
             get {
                 return _SendDelay;
             }
@@ -227,7 +227,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// On successful registration on the IRC network, this is set to true.
         /// </summary>
-        internal bool IsRegistered {
+        public bool IsRegistered {
             get {
                 return _IsRegistered;
             }
@@ -236,7 +236,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// On successful connect to the IRC server, this is set to true.
         /// </summary>
-        internal bool IsConnected {
+        public bool IsConnected {
             get {
                 return _IsConnected;
             }
@@ -245,7 +245,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the SmartIrc4net version number
         /// </summary>
-        internal string VersionNumber {
+        public string VersionNumber {
             get {
                 return _VersionNumber;
             }
@@ -254,7 +254,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Gets the full SmartIrc4net version string
         /// </summary>
-        internal string VersionString {
+        public string VersionString {
             get {
                 return _VersionString;
             }
@@ -264,7 +264,7 @@ namespace Meebey.SmartIrc4net
         /// Encoding which is used for reading and writing to the socket
         /// Default: encoding of the system
         /// </summary>
-        internal Encoding Encoding {
+        public Encoding Encoding {
             get {
                 return _Encoding;
             }
@@ -277,7 +277,7 @@ namespace Meebey.SmartIrc4net
         /// Timeout in seconds for receiving data from the socket
         /// Default: 600
         /// </summary>
-        internal int SocketReceiveTimeout {
+        public int SocketReceiveTimeout {
             get {
                 return _SocketReceiveTimeout;
             }
@@ -290,7 +290,7 @@ namespace Meebey.SmartIrc4net
         /// Timeout in seconds for sending data to the socket
         /// Default: 600
         /// </summary>
-        internal int SocketSendTimeout {
+        public int SocketSendTimeout {
             get {
                 return _SocketSendTimeout;
             }
@@ -303,7 +303,7 @@ namespace Meebey.SmartIrc4net
         /// Interval in seconds to run the idle worker
         /// Default: 60
         /// </summary>
-        internal int IdleWorkerInterval {
+        public int IdleWorkerInterval {
             get {
                 return _IdleWorkerInterval;
             }
@@ -316,7 +316,7 @@ namespace Meebey.SmartIrc4net
         /// Interval in seconds to send a PING
         /// Default: 60
         /// </summary>
-        internal int PingInterval {
+        public int PingInterval {
             get {
                 return _PingInterval;
             }
@@ -329,7 +329,7 @@ namespace Meebey.SmartIrc4net
         /// Timeout in seconds for server response to a PING
         /// Default: 600
         /// </summary>
-        internal int PingTimeout {
+        public int PingTimeout {
             get {
                 return _PingTimeout;
             }
@@ -341,7 +341,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Latency between client and the server
         /// </summary>
-        internal TimeSpan Lag {
+        public TimeSpan Lag {
             get {
                 return _Lag;
             }
@@ -350,7 +350,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// Initializes the message queues, read and write thread
         /// </summary>
-        internal IrcConnection()
+        public IrcConnection()
         {
 #if LOG4NET
             Logger.Init();
@@ -395,7 +395,7 @@ namespace Meebey.SmartIrc4net
         /// <param name="port">Portnumber to connect to</param>
         /// <exception cref="CouldNotConnectException">The connection failed</exception>
         /// <exception cref="AlreadyConnectedException">If there is already an active connection</exception>
-        internal void Connect(string[] addresslist, int port)
+        public void Connect(string[] addresslist, int port)
         {
             if (_IsConnected) {
                 throw new AlreadyConnectedException("Already connected to: "+Address+":"+Port);
@@ -494,7 +494,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="address">Server address to connect to</param>
         /// <param name="port">Port number to connect to</param>
-        internal void Connect(string address, int port)
+        public void Connect(string address, int port)
         {
             Connect(new string[] {address}, port);
         }
@@ -511,7 +511,7 @@ namespace Meebey.SmartIrc4net
         /// <exception cref="AlreadyConnectedException">
         /// If there is already an active connection
         /// </exception>
-        internal void Reconnect()
+        public void Reconnect()
         {
 #if LOG4NET
             Logger.Connection.Info("reconnecting...");
@@ -526,7 +526,7 @@ namespace Meebey.SmartIrc4net
         /// <exception cref="NotConnectedException">
         /// If there was no active connection
         /// </exception>
-        internal void Disconnect()
+        public void Disconnect()
         {
             if (!IsConnected) {
                 throw new NotConnectedException("The connection could not be disconnected because there is no active connection");
@@ -558,7 +558,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="blocking"></param>
-        internal void Listen(bool blocking)
+        public void Listen(bool blocking)
         {
             if (blocking) {
                 while (IsConnected) {
@@ -574,7 +574,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void Listen()
+        public void Listen()
         {
             Listen(true);
         }
@@ -583,7 +583,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="blocking"></param>
-        internal void ListenOnce(bool blocking)
+        public void ListenOnce(bool blocking)
         {
             ReadLine(blocking);
         }
@@ -591,7 +591,7 @@ namespace Meebey.SmartIrc4net
         /// <summary>
         /// 
         /// </summary>
-        internal void ListenOnce()
+        public void ListenOnce()
         {
             ListenOnce(true);
         }
@@ -601,7 +601,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="blocking"></param>
         /// <returns></returns>
-        internal string ReadLine(bool blocking)
+        public string ReadLine(bool blocking)
         {
             string data = "";
             if (blocking) {
@@ -640,7 +640,7 @@ namespace Meebey.SmartIrc4net
         /// </summary>
         /// <param name="data"></param>
         /// <param name="priority"></param>
-        internal void WriteLine(string data, Priority priority)
+        public void WriteLine(string data, Priority priority)
         {
             if (priority == Priority.Critical) {
                 if (!IsConnected) {
@@ -657,7 +657,7 @@ namespace Meebey.SmartIrc4net
         /// 
         /// </summary>
         /// <param name="data"></param>
-        internal void WriteLine(string data)
+        public void WriteLine(string data)
         {
             WriteLine(data, Priority.Medium);
         }
@@ -775,7 +775,7 @@ namespace Meebey.SmartIrc4net
             private Thread         _Thread;
             private Queue          _Queue = Queue.Synchronized(new Queue());
 
-            internal Queue Queue {
+            public Queue Queue {
                 get {
                     return _Queue;
                 }
@@ -785,7 +785,7 @@ namespace Meebey.SmartIrc4net
             /// 
             /// </summary>
             /// <param name="connection"></param>
-            internal ReadThread(IrcConnection connection)
+            public ReadThread(IrcConnection connection)
             {
                 _Connection = connection;
             }
@@ -793,7 +793,7 @@ namespace Meebey.SmartIrc4net
             /// <summary>
             /// 
             /// </summary>
-            internal void Start()
+            public void Start()
             {
                 _Thread = new Thread(new ThreadStart(_Worker));
                 _Thread.Name = "ReadThread ("+_Connection.Address+":"+_Connection.Port+")";
@@ -804,7 +804,7 @@ namespace Meebey.SmartIrc4net
             /// <summary>
             /// 
             /// </summary>
-            internal void Stop()
+            public void Stop()
             {
                 _Thread.Abort();
                 try {
@@ -871,7 +871,7 @@ namespace Meebey.SmartIrc4net
             /// 
             /// </summary>
             /// <param name="connection"></param>
-            internal WriteThread(IrcConnection connection)
+            public WriteThread(IrcConnection connection)
             {
                 _Connection = connection;
             }
@@ -879,7 +879,7 @@ namespace Meebey.SmartIrc4net
             /// <summary>
             /// 
             /// </summary>
-            internal void Start()
+            public void Start()
             {
                 _Thread = new Thread(new ThreadStart(_Worker));
                 _Thread.Name = "WriteThread ("+_Connection.Address+":"+_Connection.Port+")";
@@ -890,7 +890,7 @@ namespace Meebey.SmartIrc4net
             /// <summary>
             /// 
             /// </summary>
-            internal void Stop()
+            public void Stop()
             {
                 _Thread.Abort();
                 try {
@@ -1085,7 +1085,7 @@ namespace Meebey.SmartIrc4net
             /// 
             /// </summary>
             /// <param name="connection"></param>
-            internal IdleWorkerThread(IrcConnection connection)
+            public IdleWorkerThread(IrcConnection connection)
             {
                 _Connection = connection;
             }
@@ -1093,7 +1093,7 @@ namespace Meebey.SmartIrc4net
             /// <summary>
             /// 
             /// </summary>
-            internal void Start()
+            public void Start()
             {
                 DateTime now = DateTime.Now;
                 _Connection._LastPingSent = now;
@@ -1108,7 +1108,7 @@ namespace Meebey.SmartIrc4net
             /// <summary>
             /// 
             /// </summary>
-            internal void Stop()
+            public void Stop()
             {
                 _Thread.Abort();
             }

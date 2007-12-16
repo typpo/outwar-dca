@@ -87,9 +87,9 @@ namespace DCT.UI
             this.chkVariance.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkVariance.Location = new System.Drawing.Point(229, 98);
             this.chkVariance.Name = "chkVariance";
-            this.chkVariance.Size = new System.Drawing.Size(130, 17);
+            this.chkVariance.Size = new System.Drawing.Size(154, 17);
             this.chkVariance.TabIndex = 7;
-            this.chkVariance.Text = "Global timing variance";
+            this.chkVariance.Text = "Global timing randomization";
             this.chkVariance.UseVisualStyleBackColor = true;
             this.chkVariance.CheckedChanged += new System.EventHandler(this.chkVariance_CheckedChanged);
             // 

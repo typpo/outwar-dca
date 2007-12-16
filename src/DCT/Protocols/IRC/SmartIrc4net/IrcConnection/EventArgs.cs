@@ -12,16 +12,16 @@
  * Full LGPL License: <http://www.gnu.org/licenses/lgpl.txt>
  * 
  * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General internal
+ * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General internal License for more details.
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General internal
+ * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
@@ -34,11 +34,11 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    internal class ReadLineEventArgs : EventArgs
+    public class ReadLineEventArgs : EventArgs
     {
         private string _Line;
         
-        internal string Line {
+        public string Line {
             get {
                 return _Line;
             }
@@ -53,11 +53,11 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     ///
     /// </summary>
-    internal class WriteLineEventArgs : EventArgs
+    public class WriteLineEventArgs : EventArgs
     {
         private string _Line;
         
-        internal string Line {
+        public string Line {
             get {
                 return _Line;
             }
@@ -72,25 +72,25 @@ namespace Meebey.SmartIrc4net
     /// <summary>
     /// 
     /// </summary>
-    internal class AutoConnectErrorEventArgs : EventArgs
+    public class AutoConnectErrorEventArgs : EventArgs
     {
         private Exception           _Exception;
         private string              _Address;
         private int                 _Port;
 
-        internal Exception Exception {
+        public Exception Exception {
             get {
                 return _Exception;
             }
         }
 
-        internal string Address {
+        public string Address {
             get  {
                 return _Address;
             }
         }
         
-        internal int Port {
+        public int Port {
             get {
                 return _Port;
             }
