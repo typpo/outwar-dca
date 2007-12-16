@@ -64,6 +64,8 @@ namespace DCT.Outwar.World
         /// </summary>
         private static void Run()
         {
+            // save settings
+            RegistryUtil.Save();
             IniWriter.Save();
             ConfigSerializer.WriteFile("config.xml", CoreUI.Instance.Settings);
 

@@ -25,12 +25,6 @@ namespace DCT.Outwar
             get { return mMover; }
         }
 
-        private Raider mRaider;
-        internal Raider Raider
-        {
-            get { return mRaider; }
-        }
-
         private ServerName mServer;
         internal ServerName Server
         {
@@ -89,7 +83,6 @@ namespace DCT.Outwar
 
             mSocket = socket;
             mMover = new Mover(this, mSocket);
-            mRaider = new Raider(this);
         }
 
         internal void GetStats(string source)

@@ -29,8 +29,8 @@ namespace DCT.UI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CoreUI));
             this.ss = new System.Windows.Forms.StatusStrip();
-            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblMisc = new System.Windows.Forms.ToolStripStatusLabel();
             this.pgr = new System.Windows.Forms.ToolStripProgressBar();
             this.mnuMain = new System.Windows.Forms.MenuStrip();
@@ -43,6 +43,8 @@ namespace DCT.UI
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.minimizeToTrayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.openInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openTyppousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +61,10 @@ namespace DCT.UI
             this.tabTrainer = new System.Windows.Forms.TabPage();
             this.tabQuests = new System.Windows.Forms.TabPage();
             this.tabChat = new System.Windows.Forms.TabPage();
-            this.notify = new System.Windows.Forms.NotifyIcon(this.components);
+            this.mNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.mNotifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.splitLeftRight.Panel2.SuspendLayout();
@@ -69,13 +74,13 @@ namespace DCT.UI
             this.splitTopBottom.SuspendLayout();
             this.splitLeftRight2.SuspendLayout();
             this.tabs.SuspendLayout();
+            this.mNotifyMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // ss
             // 
             this.ss.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.ss.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblStatus,
             this.lblMisc,
             this.pgr});
             this.ss.Location = new System.Drawing.Point(0, 463);
@@ -83,12 +88,6 @@ namespace DCT.UI
             this.ss.Size = new System.Drawing.Size(664, 22);
             this.ss.SizingGrip = false;
             this.ss.TabIndex = 3;
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(0, 17);
             // 
             // lblMisc
             // 
@@ -132,56 +131,70 @@ namespace DCT.UI
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(134, 22);
             this.toolStripMenuItem2.Text = "About";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // changesToolStripMenuItem
             // 
             this.changesToolStripMenuItem.Name = "changesToolStripMenuItem";
-            this.changesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.changesToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.changesToolStripMenuItem.Text = "Changes";
             this.changesToolStripMenuItem.Click += new System.EventHandler(this.changesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(131, 6);
             // 
             // exportLogToolStripMenuItem
             // 
             this.exportLogToolStripMenuItem.Name = "exportLogToolStripMenuItem";
-            this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.exportLogToolStripMenuItem.Text = "Export log";
             this.exportLogToolStripMenuItem.Click += new System.EventHandler(this.exportLogToolStripMenuItem_Click);
             // 
             // clearLogToolStripMenuItem
             // 
             this.clearLogToolStripMenuItem.Name = "clearLogToolStripMenuItem";
-            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.clearLogToolStripMenuItem.Text = "Clear log";
             this.clearLogToolStripMenuItem.Click += new System.EventHandler(this.clearLogToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(131, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // actionsToolStripMenuItem
             // 
             this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.minimizeToTrayToolStripMenuItem,
+            this.toolStripMenuItem4,
             this.openInBrowserToolStripMenuItem,
             this.openTyppousToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
             this.actionsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.actionsToolStripMenuItem.Text = "Actions";
+            // 
+            // minimizeToTrayToolStripMenuItem
+            // 
+            this.minimizeToTrayToolStripMenuItem.Name = "minimizeToTrayToolStripMenuItem";
+            this.minimizeToTrayToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.minimizeToTrayToolStripMenuItem.Text = "Minimize to tray";
+            this.minimizeToTrayToolStripMenuItem.Click += new System.EventHandler(this.minimizeToTrayToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(161, 6);
             // 
             // openInBrowserToolStripMenuItem
             // 
@@ -346,10 +359,37 @@ namespace DCT.UI
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
             // 
-            // notify
+            // mNotifyIcon
             // 
-            this.notify.Text = "notifyIcon1";
-            this.notify.Visible = true;
+            this.mNotifyIcon.ContextMenuStrip = this.mNotifyMenu;
+            this.mNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("mNotifyIcon.Icon")));
+            this.mNotifyIcon.Text = "Typpo\'s DCT";
+            this.mNotifyIcon.Visible = true;
+            this.mNotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mNotifyIcon_MouseDoubleClick);
+            // 
+            // mNotifyMenu
+            // 
+            this.mNotifyMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.quitToolStripMenuItem});
+            this.mNotifyMenu.Name = "mNotifyMenu";
+            this.mNotifyMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.mNotifyMenu.Size = new System.Drawing.Size(112, 48);
+            this.mNotifyMenu.Opening += new System.ComponentModel.CancelEventHandler(this.mNotifyMenu_Opening);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // quitToolStripMenuItem
+            // 
+            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
             // CoreUI
             // 
@@ -364,9 +404,9 @@ namespace DCT.UI
             this.Name = "CoreUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResizeBegin += new System.EventHandler(this.CoreUI_ResizeBegin);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CoreUI_FormClosing);
             this.ResizeEnd += new System.EventHandler(this.CoreUI_ResizeEnd);
-            this.Load += new System.EventHandler(this.FrmMain_Load);
+            this.Load += new System.EventHandler(this.CoreUI_Load);
             this.ss.ResumeLayout(false);
             this.ss.PerformLayout();
             this.mnuMain.ResumeLayout(false);
@@ -378,6 +418,7 @@ namespace DCT.UI
             this.splitTopBottom.ResumeLayout(false);
             this.splitLeftRight2.ResumeLayout(false);
             this.tabs.ResumeLayout(false);
+            this.mNotifyMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -386,7 +427,6 @@ namespace DCT.UI
         #endregion
 
         private System.Windows.Forms.StatusStrip ss;
-        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.MenuStrip mnuMain;
         private System.Windows.Forms.ToolStripStatusLabel lblMisc;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -415,6 +455,11 @@ namespace DCT.UI
         private System.Windows.Forms.TabPage tabTrainer;
         private System.Windows.Forms.TabPage tabQuests;
         private System.Windows.Forms.TabPage tabChat;
-        private System.Windows.Forms.NotifyIcon notify;
+        private System.Windows.Forms.NotifyIcon mNotifyIcon;
+        private System.Windows.Forms.ToolStripMenuItem minimizeToTrayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ContextMenuStrip mNotifyMenu;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
     }
 }

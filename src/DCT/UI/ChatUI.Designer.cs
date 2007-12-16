@@ -46,22 +46,21 @@ namespace DCT.UI
             // 
             this.lblChatOnline.AutoSize = true;
             this.lblChatOnline.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblChatOnline.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChatOnline.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblChatOnline.Location = new System.Drawing.Point(0, 0);
             this.lblChatOnline.Name = "lblChatOnline";
-            this.lblChatOnline.Size = new System.Drawing.Size(78, 13);
+            this.lblChatOnline.Size = new System.Drawing.Size(65, 12);
             this.lblChatOnline.TabIndex = 7;
             this.lblChatOnline.Text = "Not connected";
             // 
             // txtChatType
             // 
-            this.txtChatType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtChatType.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtChatType.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtChatType.Location = new System.Drawing.Point(0, 0);
             this.txtChatType.MaxLength = 250;
-            this.txtChatType.Multiline = true;
             this.txtChatType.Name = "txtChatType";
-            this.txtChatType.Size = new System.Drawing.Size(334, 27);
+            this.txtChatType.Size = new System.Drawing.Size(334, 21);
             this.txtChatType.TabIndex = 6;
             this.txtChatType.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChatType_KeyDown);
             // 
@@ -71,9 +70,9 @@ namespace DCT.UI
             this.lstChat.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstChat.FormattingEnabled = true;
             this.lstChat.HorizontalScrollbar = true;
-            this.lstChat.Location = new System.Drawing.Point(0, 24);
+            this.lstChat.Location = new System.Drawing.Point(0, 11);
             this.lstChat.Name = "lstChat";
-            this.lstChat.Size = new System.Drawing.Size(88, 238);
+            this.lstChat.Size = new System.Drawing.Size(88, 251);
             this.lstChat.TabIndex = 5;
             // 
             // txtChat
@@ -86,7 +85,7 @@ namespace DCT.UI
             this.txtChat.Name = "txtChat";
             this.txtChat.ReadOnly = true;
             this.txtChat.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtChat.Size = new System.Drawing.Size(334, 231);
+            this.txtChat.Size = new System.Drawing.Size(334, 233);
             this.txtChat.TabIndex = 4;
             // 
             // split
@@ -110,6 +109,7 @@ namespace DCT.UI
             // split1
             // 
             this.split1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.split1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.split1.Location = new System.Drawing.Point(0, 0);
             this.split1.Name = "split1";
             this.split1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -122,7 +122,7 @@ namespace DCT.UI
             // 
             this.split1.Panel2.Controls.Add(this.txtChatType);
             this.split1.Size = new System.Drawing.Size(334, 262);
-            this.split1.SplitterDistance = 231;
+            this.split1.SplitterDistance = 233;
             this.split1.TabIndex = 7;
             // 
             // ChatUI

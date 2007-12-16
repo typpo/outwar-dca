@@ -118,14 +118,35 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="ss.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>193, 17</value>
+    <value>343, 5</value>
   </metadata>
   <metadata name="mnuMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>96, 17</value>
+    <value>246, 5</value>
   </metadata>
-  <metadata name="notify.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+  <metadata name="mNotifyIcon.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 5</value>
   </metadata>
+  <metadata name="mNotifyMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>129, 5</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="mNotifyIcon.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAICAQAAEABADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAgAIAAAAAAAAAAAAAEAAAAAAA
+        AAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAwMDAAICAgAAAAP8AAP8AAAD//wD/AAAA/wD/AP//
+        AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAALu7u7sAAAAAAAAAAAAAC7u7u7u7u7AAAAAAAAAAALu7
+        u7u7u7u7AAAAAAAAALu7u7u7u7u7u7sAAAAAAAu7u7u7u7u7u7u7sAAAAAC7u7u7u7u7u7u7u7sAAAAA
+        u7u7u7u7u7u7u7u7AAAAC7u7u7uwAAALu7u7u7AAALu7u7uwC7u7sAu7u7u7AAC7u7uwC7u7u7uwC7u7
+        uwAAu7u7C7u7u7u7u7C7u7sAC7u7sLu7u7u7u7u7C7u7sAu7uwu7u7u7u7u7u7C7u7ALu7sLu7u7u7u7
+        u7uwu7uwC7u7u7u7u7u7u7u7u7u7sAu7u7u7u7u7u7u7u7u7u7ALu7u7u7ALu7uwC7u7u7uwC7u7u7sA
+        ALu7AAC7u7u7sAu7u7u7AAC7uwAAu7u7u7AAu7u7uwAAu7sAALu7u7sAALu7u7sAALu7AAC7u7u7AAC7
+        u7u7AAC7uwAAu7u7uwAAC7u7u7ALu7uwC7u7u7AAAAC7u7u7u7u7u7u7u7sAAAAAu7u7u7C7uwu7u7u7
+        AAAAAAu7u7sLu7uwu7u7sAAAAAAAu7uwu7u7uwu7uwAAAAAAAAC7u7u7u7u7uwAAAAAAAAAAC7u7u7u7
+        u7AAAAAAAAAAAAAAu7u7uwAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/8A///4AB//4AAH/8AAA/+AAAH/AA
+        AA/gAAAHwAAAA8AAAAOAAAABgAAAAYAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA
+        AAGAAAABgAAAAcAAAAPAAAAD4AAAB/AAAA/4AAAf/AAAP/4AAH//gAH///AP/w==
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>

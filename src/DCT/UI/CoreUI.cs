@@ -129,10 +129,9 @@ namespace DCT.UI
             mChat = new ChatUI(this);
             mChat.Dock = DockStyle.Fill;
             tabs.TabPages[7].Controls.Add(mChat);
-
-            mUserEditable = ConfigSerializer.ReadFile("config.xml");
             
             mInstance = this;
+            mUserEditable = ConfigSerializer.ReadFile("config.xml");
 
             this.Text = "Typpo's DC Tool - [www.typpo.us] - v" + Version.Id;
 
@@ -143,7 +142,7 @@ namespace DCT.UI
             }
         }
 
-        private void FrmMain_Load(object sender, EventArgs e)
+        private void CoreUI_Load(object sender, EventArgs e)
         {
             StartDialog ff = new StartDialog();
             ff.ShowDialog();
@@ -154,6 +153,7 @@ namespace DCT.UI
             }
 
             BuildViews();
+            RegistryUtil.Load();
             IniWriter.Get();
             SyncSettings();
             mMobsPanel.CalcMobRage();
@@ -163,7 +163,7 @@ namespace DCT.UI
             mLogPanel.LogAttack("No attacks yet...");
         }
 
-        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void CoreUI_FormClosing(object sender, FormClosingEventArgs e)
         {
             Globals.AttackOn = false;
             Globals.AttackMode = false;
@@ -171,8 +171,17 @@ namespace DCT.UI
 
             if (mRoomsPanel.Rooms.Count > 0)
             {
+                RegistryUtil.Save();
                 IniWriter.Save();
                 ConfigSerializer.WriteFile("config.xml", mUserEditable);
+            }
+
+            // clean up notifyicon
+            if (mNotifyIcon != null)
+            {
+                mNotifyIcon.Visible = false;
+                mNotifyIcon.Dispose();
+                mNotifyIcon = null;
             }
 
             Application.Exit();
@@ -194,7 +203,6 @@ namespace DCT.UI
                 return;
             }
 
-            lblStatus.Text = Globals.AttackMode ? "Attacking" : string.Empty;
             lblMisc.Text = "Experience gained: " + Globals.ExpGained;
 
             if (mAccountsPanel.Engine.MainAccount != null)
@@ -398,17 +406,25 @@ namespace DCT.UI
                 MessageBox.Show("You haven't logged in on an account yet.", "Open In Browser", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Process.Start("http://" + mAccountsPanel.Engine.MainAccount.Server + ".outwar.com/?rg_sess_id=" + mAccountsPanel.Engine.RgSessId);
+            try
+            {
+                Process.Start("http://" + mAccountsPanel.Engine.MainAccount.Server + ".outwar.com/?rg_sess_id=" + mAccountsPanel.Engine.RgSessId);
+            }
+            catch { }   // firefox crash
+        }
+
+        private void openTyppousToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("http://typpo.us/");
+            }
+            catch { }   // firefox crash
         }
 
         private void clearLogsPeriodicallyToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
             CoreUI.Instance.Settings.ClearLogs = clearLogsPeriodicallyToolStripMenuItem.Checked;
-        }
-
-        private void openTyppousToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://typpo.us/");
         }
 
         private void CoreUI_ResizeBegin(object sender, EventArgs e)
@@ -422,6 +438,36 @@ namespace DCT.UI
             if (Height < 400) Height = 400;
 
             ResumeLayout();
+        }
+
+        private void minimizeToTrayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        // Notification icon stuff
+
+        private void mNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.Visible)
+                this.Hide();
+            else
+                this.Show();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void mNotifyMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            openToolStripMenuItem.Enabled = !Visible;
         }
     }
 }

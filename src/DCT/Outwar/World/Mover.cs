@@ -381,12 +381,12 @@ namespace DCT.Outwar.World
             nodes = Pathfinder.GetSolution(mLocation.Id, roomid, mSavedRooms);
             if (nodes == null)
             {
-                CoreUI.Instance.LogPanel.Log("Cannot establish known path for " + mAccount.Name + ", teleporting...");
-
                 if (
                     MessageBox.Show("The program cannot build a path from your current area to your chosen location.  Do you want to teleport to the nearest bar and try again? (recommended 'Yes' unless you are in a separated area such as Stoneraven)", "Pathfinding Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     == DialogResult.Yes)
                 {
+                    CoreUI.Instance.LogPanel.Log("Cannot establish known path for " + mAccount.Name + ", teleporting...");
+
                     string tmp = mAccount.Socket.Get("world.php?teleport=1");
                     Parser p = new Parser(tmp);
                     string url = p.Parse("window.location=\"http://" + mAccount.Server + ".outwar.com/", "\"");
@@ -395,6 +395,7 @@ namespace DCT.Outwar.World
                 }
                 else
                 {
+                    CoreUI.Instance.MainPanel.StopAttacking(true);
                     return;
                 }
             }

@@ -42,8 +42,8 @@ namespace DCT.UI
             this.btnStart = new System.Windows.Forms.ToolStripButton();
             this.btnStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.lblTimeLeft = new System.Windows.Forms.ToolStripLabel();
             this.btnStartTimer = new System.Windows.Forms.ToolStripButton();
+            this.lblTimeLeft = new System.Windows.Forms.ToolStripLabel();
             this.pnlAttack.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCountdown)).BeginInit();
             this.pnl.SuspendLayout();
@@ -212,12 +212,6 @@ namespace DCT.UI
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // lblTimeLeft
-            // 
-            this.lblTimeLeft.Name = "lblTimeLeft";
-            this.lblTimeLeft.Size = new System.Drawing.Size(65, 22);
-            this.lblTimeLeft.Text = "Time left: N/A";
-            // 
             // btnStartTimer
             // 
             this.btnStartTimer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -228,6 +222,12 @@ namespace DCT.UI
             this.btnStartTimer.Size = new System.Drawing.Size(53, 22);
             this.btnStartTimer.Text = "Start timer";
             this.btnStartTimer.Click += new System.EventHandler(this.btnStartTimer_Click);
+            // 
+            // lblTimeLeft
+            // 
+            this.lblTimeLeft.Name = "lblTimeLeft";
+            this.lblTimeLeft.Size = new System.Drawing.Size(65, 22);
+            this.lblTimeLeft.Text = "Time left: N/A";
             // 
             // MainPanel
             // 

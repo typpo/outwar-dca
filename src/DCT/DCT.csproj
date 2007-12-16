@@ -11,9 +11,10 @@
     <AssemblyName>DCT</AssemblyName>
     <ApplicationIcon>Misc\Bad.ico</ApplicationIcon>
     <StartupObject>DCT.Program</StartupObject>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
     <SignManifests>false</SignManifests>
+    <DelaySign>false</DelaySign>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,10 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Outwar\World\Occupier.cs" />
-    <Compile Include="Outwar\World\RaidFormMob.cs">
-      <SubType>Code</SubType>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Protocols\IRC\SmartIrc4net\Consts.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -106,6 +108,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Protocols\IRC\SmartIrc4net\Logger.cs" />
+    <Compile Include="Settings\RegistryUtil.cs" />
     <Compile Include="UI\ChatUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -185,7 +188,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Protocols\HTTP\OutwarHttpSocket.cs" />
-    <Compile Include="Outwar\World\Raider.cs" />
     <Compile Include="Outwar\Server.cs" />
     <Compile Include="Pathfinding\ReturnToStartHandler.cs" />
     <Compile Include="Outwar\AccountsEngine.cs" />
@@ -214,6 +216,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ChatUI.resx">
       <SubType>Designer</SubType>
@@ -297,15 +301,11 @@
     <Compile Include="Util\InputBox.Designer.cs">
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Util\MinTrayBtn.cs" />
     <Compile Include="Util\Randomizer.cs" />
     <Compile Include="Settings\ConfigSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Misc\Bad.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

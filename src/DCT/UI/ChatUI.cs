@@ -109,7 +109,7 @@ namespace DCT.UI
             try
             {
                 mClient.Connect(new string[] { mServer }, 6667);
-                mClient.Login(mNick, mNick);
+                mClient.Login(mNick, mNick, 0, "nobody");
                 mClient.RfcJoin(mChannel);
                 mClient.Listen();
             }
@@ -333,7 +333,7 @@ namespace DCT.UI
             switch (str)
             {
                 case "!exp":
-                    mClient.SendMessage(SendType.Message, mChannel, "I've gained " + Globals.ExpGainedTotal + " exp");
+                    mClient.SendMessage(SendType.Message, mChannel, "I've gained " + (Globals.ExpGainedTotal + Globals.ExpGained) + " exp");
                     return true;
                 case "!ver":
                     mClient.SendMessage(SendType.Message, mChannel, "Using version " + Version.Id);
@@ -397,6 +397,10 @@ namespace DCT.UI
                     mClient.SendMessage(SendType.Message, to, msg);
                     AddText(string.Format("-> <{0}> {1}", to, msg));
                 }
+            }
+            else if (txt == "/clear")
+            {
+                txtChat.Text = string.Empty;
             }
         }
 
