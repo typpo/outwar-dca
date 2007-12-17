@@ -287,7 +287,6 @@ namespace DCT.UI
             if (mMainPanel.CountdownTimer != null && on)
             {
                 mMainPanel.CountdownTimer.Stop();
-                //lblTimeLeft.Text = "Time Left: N/A";
             }
 
             if (mChat.StatusLabel.Text.StartsWith("Not"))
@@ -447,7 +446,21 @@ namespace DCT.UI
 
         // Notification icon stuff
 
-        private void mNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void mNotifyIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (this.Visible)
+                this.Hide();
+            else if (mAccountsPanel.Engine.MainAccount != null)
+            {
+                mNotifyIcon.ShowBalloonTip(1000, "Account Stats",
+                    string.Format("Exp: {0:n0}\nRage: {1:n0}\nExp Gained: {2:n0}\n{3}\n\nDouble-click to open", mAccountsPanel.Engine.MainAccount.Exp, mAccountsPanel.Engine.MainAccount.Rage, Globals.ExpGained, mMainPanel.TimeLeft)
+                    , ToolTipIcon.Info);
+            }
+            else
+                this.Show();
+        }
+
+        private void mNotifyIcon_DoubleClick(object sender, EventArgs e)
         {
             if (this.Visible)
                 this.Hide();

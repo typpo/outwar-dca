@@ -115,6 +115,7 @@ namespace DCT.UI
             this.lnkAccountsUncheckAll.TabIndex = 3;
             this.lnkAccountsUncheckAll.TabStop = true;
             this.lnkAccountsUncheckAll.Text = "Uncheck All";
+            this.lnkAccountsUncheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAccountsUncheckAll_LinkClicked);
             // 
             // btnRefresh
             // 

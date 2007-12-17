@@ -23,6 +23,11 @@ namespace DCT.UI
             }
         }
 
+        internal string TimeLeft
+        {
+            get { return lblTimeLeft.Text; }
+        }
+
         internal bool AttackingOn
         {
             get { return btnStart.Enabled; }
@@ -185,6 +190,8 @@ namespace DCT.UI
 
             mUI.Toggle(false);
             mUI.ToggleAttack(true);
+
+            lblTimeLeft.Text = "Time left: 0:00";
 
             switch (mCountdownType)
             {

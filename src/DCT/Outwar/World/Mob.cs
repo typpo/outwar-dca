@@ -91,7 +91,7 @@ namespace DCT.Outwar.World
 
         private bool TestRage(bool rageLimit)
         {
-            if (!IsInRoom || !FilterOK)
+            if (!IsInRoom)
             {
                 return false;
             }
@@ -113,7 +113,7 @@ namespace DCT.Outwar.World
 
         private bool TestLevel()
         {
-            if (!IsInRoom || !FilterOK)
+            if (!IsInRoom)
             {
                 return false;
             }
@@ -251,7 +251,7 @@ namespace DCT.Outwar.World
                 Talk();
             }
 
-            if ((test && !TestLevel()) || !TestRage(test))
+            if ((test && !TestLevel() && FilterOK) || !TestRage(test))
             {
                 CoreUI.Instance.LogPanel.Log(mName + " preeliminated - does not meet specifications.");
                 mQuit = true;

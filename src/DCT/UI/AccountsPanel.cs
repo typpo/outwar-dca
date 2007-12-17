@@ -107,7 +107,7 @@ namespace DCT.UI
             }
         }
 
-        private void lnkAccountsCheckNone_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lnkAccountsUncheckAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             foreach (ListViewItem item in lvAccounts.Items)
             {

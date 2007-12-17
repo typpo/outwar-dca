@@ -62,7 +62,6 @@ namespace DCT.UI
 
         private void btnAdventuresGo_Click(object sender, EventArgs e)
         {
-            mUI.Toggle(false);
             mUI.RoomsPanel.PathfindById = true;
             int room = int.Parse(lvAdventures.FocusedItem.SubItems[1].Text);
 

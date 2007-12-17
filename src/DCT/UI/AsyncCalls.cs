@@ -204,6 +204,7 @@ namespace DCT.UI
                 mLogPanel.Log("E: Choose an adventure to move to.");
             }
 
+            Toggle(false);
             foreach (int index in mAccountsPanel.CheckedIndices)
             {
                 PathfindHandler d = new PathfindHandler(DoPathfind);

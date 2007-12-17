@@ -361,11 +361,14 @@ namespace DCT.UI
             // 
             // mNotifyIcon
             // 
+            this.mNotifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.mNotifyIcon.BalloonTipTitle = "Current Stats";
             this.mNotifyIcon.ContextMenuStrip = this.mNotifyMenu;
             this.mNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("mNotifyIcon.Icon")));
             this.mNotifyIcon.Text = "Typpo\'s DCT";
             this.mNotifyIcon.Visible = true;
-            this.mNotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mNotifyIcon_MouseDoubleClick);
+            this.mNotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mNotifyIcon_MouseClick);
+            this.mNotifyIcon.DoubleClick += new System.EventHandler(this.mNotifyIcon_DoubleClick);
             // 
             // mNotifyMenu
             // 
