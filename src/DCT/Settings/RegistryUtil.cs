@@ -8,24 +8,38 @@ namespace DCT.Settings
 
         internal static void Save()
         {
-            RegistryKey k = Registry.LocalMachine.OpenSubKey(KEY, true);
-            if (k == null)
+            try
             {
-                k = Registry.LocalMachine.CreateSubKey(KEY);
+                RegistryKey k = Registry.LocalMachine.OpenSubKey(KEY, true);
+                if (k == null)
+                {
+                    k = Registry.LocalMachine.CreateSubKey(KEY);
+                }
+                k.SetValue("DCTexpg", (Globals.ExpGainedTotal + Globals.ExpGained), RegistryValueKind.String);
             }
-            k.SetValue("DCTexpg", (Globals.ExpGainedTotal + Globals.ExpGained), RegistryValueKind.String);
+            catch (System.UnauthorizedAccessException)
+            {
+
+            }
         }
 
         internal static void Load()
         {
-            RegistryKey myKey = Registry.LocalMachine.OpenSubKey(KEY, false);
-            if (myKey == null)
-                return;
+            try
+            {
+                RegistryKey myKey = Registry.LocalMachine.OpenSubKey(KEY, false);
+                if (myKey == null)
+                    return;
 
-            object tmp = myKey.GetValue("DCTexpg");
-            if (tmp == null)
-                return;
-            Globals.ExpGainedTotal = long.Parse((string)tmp);
+                object tmp = myKey.GetValue("DCTexpg");
+                if (tmp == null)
+                    return;
+                Globals.ExpGainedTotal = long.Parse((string)tmp);
+            }
+            catch (System.UnauthorizedAccessException)
+            {
+
+            }
         }
     }
 }
