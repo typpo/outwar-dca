@@ -12,6 +12,8 @@ namespace DCT.UI
 {
     public partial class ChatUI : UserControl
     {
+        private const int mScrollback = 400;
+
         internal Label StatusLabel
         {
             get { return lblChatOnline; }
@@ -416,6 +418,15 @@ namespace DCT.UI
             {
                 Invoke(new AddTextHandler(AddText), txt);
                 return;
+            }
+
+            // scrollback ends somewhere
+            if (txtChat.Lines.Length > mScrollback)
+            {
+                int i = txtChat.Lines.Length - mScrollback;
+                string[] tmp = new string[i];
+                Array.Copy(txtChat.Lines, mScrollback, tmp, 0, i);
+                txtChat.Lines = tmp;
             }
 
             txtChat.Text += txt + "\r\n";
