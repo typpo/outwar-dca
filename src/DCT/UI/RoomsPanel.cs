@@ -111,8 +111,6 @@ namespace DCT.UI
 
         private void btnPathfind_Click(object sender, EventArgs e)
         {
-            mUI.Toggle(false);
-
             int room;
             if (PathfindById)
             {

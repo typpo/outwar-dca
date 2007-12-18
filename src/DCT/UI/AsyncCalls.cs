@@ -132,7 +132,11 @@ namespace DCT.UI
             Dictionary<int, int> mobs = new Dictionary<int, int>();
             foreach (int i in mMobsPanel.CheckedIndices)
             {
-                mobs.Add(int.Parse(mMobsPanel.Mobs[i].SubItems[1].Text), int.Parse(mMobsPanel.Mobs[i].SubItems[2].Text));
+                int key = int.Parse(mMobsPanel.Mobs[i].SubItems[1].Text);
+                if (!mobs.ContainsKey(key))
+                {
+                    mobs.Add(key, int.Parse(mMobsPanel.Mobs[i].SubItems[2].Text));
+                }
             }
 
             SetupHandler();
@@ -182,9 +186,10 @@ namespace DCT.UI
             if (!Pathfinder.Exists(room))
             {
                 mLogPanel.Log("E: Select a room that exists in the map database");
-                Toggle(true);
                 return;
             }
+
+            Toggle(false);
 
             foreach (int index in mAccountsPanel.CheckedIndices)
             {

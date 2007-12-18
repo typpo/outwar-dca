@@ -112,9 +112,9 @@ namespace DCT.UI
             mUI.Settings.Variance = chkVariance.Checked;
         }
 
-        private void label5_Click(object sender, EventArgs e)
+        private void chkAutoTeleport_CheckedChanged(object sender, EventArgs e)
         {
-
+            mUI.Settings.AutoTeleport = chkAutoTeleport.Checked;
         }
     }
 }

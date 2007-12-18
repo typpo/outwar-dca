@@ -106,7 +106,7 @@ namespace DCT.Protocols.Http
 
         internal HttpSocket()
         {
-            mTimeout = (int)CoreUI.Instance.Settings.Timeout;
+            mTimeout = CoreUI.Instance.Settings.Timeout;
 
             mRedirect = true;
             mKeepAlive = false;
@@ -137,7 +137,7 @@ namespace DCT.Protocols.Http
 
         protected virtual string Request(string url, string write, string referer)
         {
-            Stream sw = null;
+            StreamWriter sw = null;
             StreamReader sr = null;
             WebResponse response = null;
             for (int i = 0; i < 3; i++)
@@ -155,10 +155,8 @@ namespace DCT.Protocols.Http
                     {
                         request.Method = "POST";
                         request.ContentLength = write.Length;
-                        sw = request.GetRequestStream();
-                        UTF8Encoding encoding = new UTF8Encoding();
-                        byte[] bytes = encoding.GetBytes(write);
-                        sw.Write(bytes, 0, bytes.Length);
+                        sw = new StreamWriter(request.GetRequestStream());
+                        sw.Write(write);
                         sw.Flush();
                         sw.Close();
                     }
@@ -193,76 +191,13 @@ namespace DCT.Protocols.Http
             }
 
             return string.Empty;
-
-            /*
-            StreamWriter sw = null;
-            StreamReader sr = null;
-            WebResponse response = null;
-            string ret;
-
-            try
-            {
-                bool post = write != string.Empty;
-
-                HttpWebRequest request = GenerateRequest(url);
-
-                if (referer != null && referer != "")
-                    request.Referer = referer;
-
-                if (post)
-                {
-                    request.Method = "POST";
-                    request.ContentLength = write.Length;
-                    sw = new StreamWriter(request.GetRequestStream());
-                    sw.Write(write);
-                }
-
-                response = request.GetResponse();
-                sr = new StreamReader(response.GetResponseStream());
-
-                ret = sr.ReadToEnd();
-                response.Close();
-
-                if (String.IsNullOrEmpty(mCookie))
-                {
-                    StringBuilder full = new StringBuilder();
-                    string[] cookieA = response.Headers.GetValues("Set-Cookie");
-
-                    if (cookieA != null)
-                    {
-                        for (int j = 0; j < cookieA.Length; j++)
-                            full.Append(cookieA[j].Substring(0, cookieA[j].IndexOf(";") + 1));
-                    }
-
-                    mCookie = full.ToString();
-                }
-            }
-            finally
-            {
-                if (sw != null)
-                {
-                    sw.Flush();
-                    sw.Close();
-                }
-                if (sr != null)
-                {
-                    sr.Close();
-                }
-                if (response != null)
-                {
-                    response.Close();
-                }
-            }
-
-            return ret;
-            */
         }
 
         private HttpWebRequest GenerateRequest(string url)
         {
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
             //request.CachePolicy = CACHE_POLICY;
-            request.Timeout = (int)CoreUI.Instance.Settings.Timeout;//mTimeout;
+            request.Timeout = CoreUI.Instance.Settings.Timeout;//mTimeout;
 
             if (!string.IsNullOrEmpty(mCookie))
             {

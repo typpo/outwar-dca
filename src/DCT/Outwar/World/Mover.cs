@@ -303,7 +303,7 @@ namespace DCT.Outwar.World
             }
             catch
             {
-                CoreUI.Instance.LogPanel.Log("E: " + mAccount.Name + " can't explore DC because the account is not authorized.  This may have happened because your internet connection cut out or the authorization server is down.  Contact Typpo if the problem continues.");
+                CoreUI.Instance.LogPanel.Log("E: " + mAccount.Name + " can't explore DC because the account is not authorized.  This is probably because there is a new version out.\n\nIf you are sure you are running the latest version, you may be reading this because your internet connection cut out or the authorization server is down.");
                 Application.Exit();
                 return;
             }
@@ -323,35 +323,30 @@ namespace DCT.Outwar.World
                 mSocket.Status = "Idle";
                 return true;
             }
-
-            mLocation = new Room(this, url);
             if (mAccount.Ret == mAccount.Name)
             {
-                int i = mLocation.Load();
+                Room tmp = new Room(this, url);
+                int i = tmp.Load();
                 switch (i)
                 {
                     case 0:
                         if (!url.StartsWith("world.php"))
                         {
-                            mSavedRooms.Save(mLocation.Id, url);
+                            mSavedRooms.Save(tmp.Id, url);
                         }
                         CoreUI.Instance.LogPanel.Log(mAccount.Name + " now in room "
-                                            + (mLocation.Id == 0 ? "world.php" : mLocation.Id.ToString()));
+                                            + (tmp.Id == 0 ? "world.php" : tmp.Id.ToString()));
 
                         CoreUI.Instance.UpdateDisplay();
+                        mLocation = tmp;
                         return true;
                     case 1:
+                        mSavedRooms.Clear();
+                        RefreshRoom();
                         CoreUI.Instance.LogPanel.Log("Move E: Flying error - room hash invalid");
-
-                        mMoveTries++;
-                        if (mMoveTries < 3)
-                        {
-                            mSavedRooms.Clear();
-                            RefreshRoom();
-                        }
                         return false;
                     default:
-                        CoreUI.Instance.LogPanel.Log("Move E: Remaining in " + (mLocation.Id == 0 ? "world.php" : mLocation.Id.ToString())
+                        CoreUI.Instance.LogPanel.Log("Move E: Remaining in " + (tmp.Id == 0 ? "world.php" : tmp.Id.ToString())
                             + " due to unknown error - maybe you need a key?");
                         return false;
                 }
@@ -381,8 +376,8 @@ namespace DCT.Outwar.World
             nodes = Pathfinder.GetSolution(mLocation.Id, roomid, mSavedRooms);
             if (nodes == null)
             {
-                if (
-                    MessageBox.Show("The program cannot build a path from your current area to your chosen location.  Do you want to teleport to the nearest bar and try again? (recommended 'Yes' unless you are in a separated area such as Stoneraven)", "Pathfinding Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                if (CoreUI.Instance.Settings.AutoTeleport ||
+                    MessageBox.Show("The program cannot build a path from your current area to your chosen location.  Do you want to teleport to the nearest bar and try again?  Recommended 'Yes' unless you are in a separated area such as Stoneraven.\n\n(this option can be automatically enabled under the Attack tab)", "Pathfinding Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     == DialogResult.Yes)
                 {
                     CoreUI.Instance.LogPanel.Log(mAccount.Name + " teleporting...");
@@ -456,12 +451,15 @@ namespace DCT.Outwar.World
             CoreUI.Instance.LogPanel.Log(mAccount.Name + " movement ended");
         }
 
-        private int mMoveTries;
+        private void LoadRoom(int id)
+        {
+            LoadRoom(id, 0);
+        }
         /// <summary>
         /// Attempts to move to a room as per specific id#
         /// </summary>
         /// <param name="id">Room id to move to</param>
-        private void LoadRoom(int id)
+        private void LoadRoom(int id, int tries)
         {
             string url;
             if (!string.IsNullOrEmpty(url = mLocation[id]))
@@ -477,19 +475,15 @@ namespace DCT.Outwar.World
                 return;
             }
 
-            mMoveTries = 0;
-
-            // TODO this never triggers
             if(!LoadRoom(url))
             {
-                if (mMoveTries > 2)
+                if (++tries > 2)
                 {
-                    MessageBox.Show("Multiple move errors (maybe someone logged onto your account?).  Press refresh and start your run again.", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show(mAccount.Name + " is having trouble moving.  Reasons for this include:\n\n- It's impossible to reach your destination (are you missing a key?)\n- The program just can't find a way to get where you want to go\n- Someone logged into your account - press refresh and start your run again", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     CoreUI.Instance.MainPanel.StopAttacking(true);
                     return;
                 }
-
-                LoadRoom(id);
+                LoadRoom(id, tries);
                 return;
             }
 

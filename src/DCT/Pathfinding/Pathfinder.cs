@@ -285,45 +285,60 @@ namespace DCT.Pathfinding
                 keySb.Append((char)stack.Pop());
             }
 
-            string map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(urlSb.ToString()), keySb.ToString(), false));
-            map = Crypt.Get(Crypt.HexToBin(map), HttpSocket.DefaultInstance.UserAgent, false);
-
+            string map;
+            int i = 0;
             mRooms = new List<MappedRoom>();
-
-            foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
+            while (mRooms.Count < 1 && i < 2)
             {
-                if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
-                    continue;
-                mRooms.Add(new MappedRoom(token));
+                map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(urlSb.ToString()), keySb.ToString(), false));
+                map = Crypt.Get(Crypt.HexToBin(map), HttpSocket.DefaultInstance.UserAgent, false);
+
+                foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
+                        continue;
+                    mRooms.Add(new MappedRoom(token));
+                }
+                i++;
             }
             mRooms.Sort();
 
             // ------------------
 
-            map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_MOBS), KEY_MOBS, false));
-            map = Crypt.Get(Crypt.HexToBin(map), HttpSocket.DefaultInstance.UserAgent, false);
-
+            i = 0;
             mMobs = new List<MappedMob>();
-            foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
+            while (mMobs.Count < 1 && i < 2)
             {
-                if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
-                    continue;
-                mMobs.Add(new MappedMob(token));
+                map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_MOBS), KEY_MOBS, false));
+                map = Crypt.Get(Crypt.HexToBin(map), HttpSocket.DefaultInstance.UserAgent, false);
+
+                foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
+                        continue;
+                    mMobs.Add(new MappedMob(token));
+                }
+                i++;
             }
             mMobs.Sort();
 
             // -----------------
-
+            
+            i = 0;
             mAdventures = new SortedList<string, int>();
-            map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_RAIDS), KEY_RAIDS, false));
-            foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
+            while (mAdventures.Count < 1 && i < 2)
             {
-                if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
-                    continue;
-                int i = token.IndexOf(";");
-                string name = token.Substring(0, i);
-                int id = int.Parse(token.Substring(i + 1));
-                mAdventures.Add(name, id);
+                map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_RAIDS), KEY_RAIDS, false));
+                foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
+                        continue;
+                    int j = token.IndexOf(";");
+                    string name = token.Substring(0, j);
+                    int id = int.Parse(token.Substring(j + 1));
+                    mAdventures.Add(name, id);
+                }
+                i++;
             }
         }
 

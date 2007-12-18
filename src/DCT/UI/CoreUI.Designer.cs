@@ -49,6 +49,7 @@ namespace DCT.UI
             this.openTyppousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearLogsPeriodicallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showSystrayIconWhenOpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitLeftRight = new System.Windows.Forms.SplitContainer();
             this.splitTopBottom = new System.Windows.Forms.SplitContainer();
             this.splitLeftRight2 = new System.Windows.Forms.SplitContainer();
@@ -213,7 +214,8 @@ namespace DCT.UI
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearLogsPeriodicallyToolStripMenuItem});
+            this.clearLogsPeriodicallyToolStripMenuItem,
+            this.showSystrayIconWhenOpenToolStripMenuItem});
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.preferencesToolStripMenuItem.Text = "Preferences";
@@ -224,9 +226,19 @@ namespace DCT.UI
             this.clearLogsPeriodicallyToolStripMenuItem.CheckOnClick = true;
             this.clearLogsPeriodicallyToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.clearLogsPeriodicallyToolStripMenuItem.Name = "clearLogsPeriodicallyToolStripMenuItem";
-            this.clearLogsPeriodicallyToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.clearLogsPeriodicallyToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.clearLogsPeriodicallyToolStripMenuItem.Text = "Clear logs periodically";
             this.clearLogsPeriodicallyToolStripMenuItem.CheckedChanged += new System.EventHandler(this.clearLogsPeriodicallyToolStripMenuItem_CheckedChanged);
+            // 
+            // showSystrayIconWhenOpenToolStripMenuItem
+            // 
+            this.showSystrayIconWhenOpenToolStripMenuItem.Checked = true;
+            this.showSystrayIconWhenOpenToolStripMenuItem.CheckOnClick = true;
+            this.showSystrayIconWhenOpenToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showSystrayIconWhenOpenToolStripMenuItem.Name = "showSystrayIconWhenOpenToolStripMenuItem";
+            this.showSystrayIconWhenOpenToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.showSystrayIconWhenOpenToolStripMenuItem.Text = "Show systray icon when open";
+            this.showSystrayIconWhenOpenToolStripMenuItem.Click += new System.EventHandler(this.showSystrayIconWhenOpenToolStripMenuItem_Click);
             // 
             // splitLeftRight
             // 
@@ -464,5 +476,6 @@ namespace DCT.UI
         private System.Windows.Forms.ContextMenuStrip mNotifyMenu;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showSystrayIconWhenOpenToolStripMenuItem;
     }
 }

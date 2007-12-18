@@ -29,6 +29,7 @@ namespace DCT.UI
         private void InitializeComponent()
         {
             this.grpSettings = new System.Windows.Forms.GroupBox();
+            this.chkAutoTeleport = new System.Windows.Forms.CheckBox();
             this.chkVariance = new System.Windows.Forms.CheckBox();
             this.numThreadDelay = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
@@ -56,6 +57,7 @@ namespace DCT.UI
             // 
             // grpSettings
             // 
+            this.grpSettings.Controls.Add(this.chkAutoTeleport);
             this.grpSettings.Controls.Add(this.chkVariance);
             this.grpSettings.Controls.Add(this.numThreadDelay);
             this.grpSettings.Controls.Add(this.label9);
@@ -80,6 +82,18 @@ namespace DCT.UI
             this.grpSettings.TabStop = false;
             this.grpSettings.Text = "Settings";
             // 
+            // chkAutoTeleport
+            // 
+            this.chkAutoTeleport.AutoSize = true;
+            this.chkAutoTeleport.Location = new System.Drawing.Point(16, 139);
+            this.chkAutoTeleport.Name = "chkAutoTeleport";
+            this.chkAutoTeleport.Size = new System.Drawing.Size(241, 30);
+            this.chkAutoTeleport.TabIndex = 5;
+            this.chkAutoTeleport.Text = "Automatically teleport from unfamiliar locations\r\n(do not check if in Stoneraven)" +
+                "";
+            this.chkAutoTeleport.UseVisualStyleBackColor = true;
+            this.chkAutoTeleport.CheckedChanged += new System.EventHandler(this.chkAutoTeleport_CheckedChanged);
+            // 
             // chkVariance
             // 
             this.chkVariance.AutoSize = true;
@@ -88,7 +102,7 @@ namespace DCT.UI
             this.chkVariance.Location = new System.Drawing.Point(229, 98);
             this.chkVariance.Name = "chkVariance";
             this.chkVariance.Size = new System.Drawing.Size(154, 17);
-            this.chkVariance.TabIndex = 7;
+            this.chkVariance.TabIndex = 8;
             this.chkVariance.Text = "Global timing randomization";
             this.chkVariance.UseVisualStyleBackColor = true;
             this.chkVariance.CheckedChanged += new System.EventHandler(this.chkVariance_CheckedChanged);
@@ -103,7 +117,7 @@ namespace DCT.UI
             0});
             this.numThreadDelay.Name = "numThreadDelay";
             this.numThreadDelay.Size = new System.Drawing.Size(81, 20);
-            this.numThreadDelay.TabIndex = 5;
+            this.numThreadDelay.TabIndex = 6;
             this.numThreadDelay.ThousandsSeparator = true;
             this.numThreadDelay.ValueChanged += new System.EventHandler(this.numThreadDelay_ValueChanged);
             // 
@@ -146,7 +160,7 @@ namespace DCT.UI
             0});
             this.numTimeout.Name = "numTimeout";
             this.numTimeout.Size = new System.Drawing.Size(68, 20);
-            this.numTimeout.TabIndex = 6;
+            this.numTimeout.TabIndex = 7;
             this.numTimeout.ThousandsSeparator = true;
             this.numTimeout.Value = new decimal(new int[] {
             8000,
@@ -163,15 +177,14 @@ namespace DCT.UI
             this.label5.Size = new System.Drawing.Size(87, 13);
             this.label5.TabIndex = 29;
             this.label5.Text = "Request timeout:";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // chkReturnToStart
             // 
             this.chkReturnToStart.AutoSize = true;
-            this.chkReturnToStart.Location = new System.Drawing.Point(30, 116);
+            this.chkReturnToStart.Location = new System.Drawing.Point(17, 116);
             this.chkReturnToStart.Name = "chkReturnToStart";
             this.chkReturnToStart.Size = new System.Drawing.Size(133, 17);
-            this.chkReturnToStart.TabIndex = 0;
+            this.chkReturnToStart.TabIndex = 4;
             this.chkReturnToStart.Text = "Return to starting room";
             this.chkReturnToStart.UseVisualStyleBackColor = true;
             this.chkReturnToStart.CheckedChanged += new System.EventHandler(this.chkReturnToStart_CheckedChanged);
@@ -179,7 +192,7 @@ namespace DCT.UI
             // numRageLimit
             // 
             this.numRageLimit.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numRageLimit.Location = new System.Drawing.Point(92, 65);
+            this.numRageLimit.Location = new System.Drawing.Point(79, 65);
             this.numRageLimit.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -187,7 +200,7 @@ namespace DCT.UI
             0});
             this.numRageLimit.Name = "numRageLimit";
             this.numRageLimit.Size = new System.Drawing.Size(67, 18);
-            this.numRageLimit.TabIndex = 3;
+            this.numRageLimit.TabIndex = 2;
             this.numRageLimit.Value = new decimal(new int[] {
             30,
             0,
@@ -198,7 +211,7 @@ namespace DCT.UI
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(27, 66);
+            this.label13.Location = new System.Drawing.Point(14, 66);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(65, 13);
             this.label13.TabIndex = 16;
@@ -207,10 +220,10 @@ namespace DCT.UI
             // numLevelMin
             // 
             this.numLevelMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numLevelMin.Location = new System.Drawing.Point(45, 38);
+            this.numLevelMin.Location = new System.Drawing.Point(32, 38);
             this.numLevelMin.Name = "numLevelMin";
             this.numLevelMin.Size = new System.Drawing.Size(36, 18);
-            this.numLevelMin.TabIndex = 1;
+            this.numLevelMin.TabIndex = 0;
             this.numLevelMin.Value = new decimal(new int[] {
             50,
             0,
@@ -221,7 +234,7 @@ namespace DCT.UI
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(86, 39);
+            this.label12.Location = new System.Drawing.Point(73, 39);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(25, 13);
             this.label12.TabIndex = 15;
@@ -230,7 +243,7 @@ namespace DCT.UI
             // numRageStop
             // 
             this.numRageStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numRageStop.Location = new System.Drawing.Point(124, 92);
+            this.numRageStop.Location = new System.Drawing.Point(111, 92);
             this.numRageStop.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -238,7 +251,7 @@ namespace DCT.UI
             0});
             this.numRageStop.Name = "numRageStop";
             this.numRageStop.Size = new System.Drawing.Size(43, 18);
-            this.numRageStop.TabIndex = 4;
+            this.numRageStop.TabIndex = 3;
             this.numRageStop.Value = new decimal(new int[] {
             1000,
             0,
@@ -249,7 +262,7 @@ namespace DCT.UI
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(27, 95);
+            this.label11.Location = new System.Drawing.Point(14, 95);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(95, 13);
             this.label11.TabIndex = 14;
@@ -258,7 +271,7 @@ namespace DCT.UI
             // numLevel
             // 
             this.numLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numLevel.Location = new System.Drawing.Point(117, 38);
+            this.numLevel.Location = new System.Drawing.Point(104, 38);
             this.numLevel.Minimum = new decimal(new int[] {
             1,
             0,
@@ -266,7 +279,7 @@ namespace DCT.UI
             0});
             this.numLevel.Name = "numLevel";
             this.numLevel.Size = new System.Drawing.Size(36, 18);
-            this.numLevel.TabIndex = 2;
+            this.numLevel.TabIndex = 1;
             this.numLevel.Value = new decimal(new int[] {
             62,
             0,
@@ -277,7 +290,7 @@ namespace DCT.UI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 24);
+            this.label4.Location = new System.Drawing.Point(13, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(115, 13);
             this.label4.TabIndex = 8;
@@ -286,7 +299,7 @@ namespace DCT.UI
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(159, 66);
+            this.label14.Location = new System.Drawing.Point(146, 66);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(28, 13);
             this.label14.TabIndex = 18;
@@ -330,6 +343,7 @@ namespace DCT.UI
         private System.Windows.Forms.NumericUpDown numLevel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox chkAutoTeleport;
 
     }
 }

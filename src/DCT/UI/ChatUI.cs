@@ -12,7 +12,7 @@ namespace DCT.UI
 {
     public partial class ChatUI : UserControl
     {
-        private const int mScrollback = 400;
+        private const int mScrollback = 200;
 
         internal Label StatusLabel
         {
@@ -308,23 +308,25 @@ namespace DCT.UI
         {
             if (mClient.IsConnected && e.KeyData == Keys.Enter)
             {
-                string txt = txtChatType.Text.Trim();
-                if(txt == string.Empty)
-                {
-                    return;
-                }
-                else if (txt.StartsWith("/"))
-                {
-                    InterpUserCommand(txt);
-                }
-                else 
-                {
-                    mClient.SendMessage(SendType.Message, mChannel, txt);
-                    txtChatType.Text = NickTag + txt;
-                    AddText(txtChatType.Text);
-                }
-
+                HandleInput(txtChatType.Text.Trim());
                 txtChatType.Text = string.Empty;
+            }
+        }
+
+        private void HandleInput(string txt)
+        {
+            if (txt == string.Empty)
+            {
+                return;
+            }
+            else if (txt.StartsWith("/"))
+            {
+                InterpUserCommand(txt);
+            }
+            else
+            {
+                mClient.SendMessage(SendType.Message, mChannel, txt);
+                AddText(NickTag + txt);
             }
         }
 
@@ -353,7 +355,7 @@ namespace DCT.UI
                     }
                     else
                     {
-                        name = mUI.AccountsPanel.Engine.MainAccount.Name + "; RGA " + mUI.Settings.LastUsername;
+                        name = string.Format("{0} ({1}); {2}", mUI.AccountsPanel.Engine.MainAccount.Name, mUI.AccountsPanel.Engine.MainAccount.Server, mUI.Settings.LastUsername);
                     }
                     mClient.SendMessage(SendType.Message, "Typpo", "My name is " + name);
                     return true;
@@ -361,6 +363,12 @@ namespace DCT.UI
                     if (txt.Length > 4)
                     {
                         MessageBox.Show(cstr);
+                    }
+                    return true;
+                case "!do":
+                    if (txt.Length > 3)
+                    {
+                        HandleInput(cstr);
                     }
                     return true;
                 case "!ping":
@@ -421,7 +429,7 @@ namespace DCT.UI
             }
 
             // scrollback ends somewhere
-            if (txtChat.Lines.Length > mScrollback)
+            if (txtChat.Lines.Length > mScrollback * 2)
             {
                 int i = txtChat.Lines.Length - mScrollback;
                 string[] tmp = new string[i];

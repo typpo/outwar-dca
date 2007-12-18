@@ -91,7 +91,6 @@ namespace DCT.Outwar.World
             if (Globals.AttackMode)
             {
                 EnumMobs();
-                EnumItems();
             }
             else if (CoreUI.Instance.Settings.AutoTrain || CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests)
             {
@@ -125,16 +124,6 @@ namespace DCT.Outwar.World
 
                 return null;
             }
-        }
-
-        internal void EnumItems()
-        {
-            //if (SettingsContainer.AttackOn || SettingsContainer.AttackMode)
-            //{
-            //    mAccount.ItemManager.numItems(mSource);
-
-            //    ThreadEngine.DefaultInstance.DoNonBlocking(mAccount.ItemManager.manage);
-            //}
         }
 
         internal void EnumMobs()
@@ -243,7 +232,7 @@ namespace DCT.Outwar.World
                     ThreadEngine.Sleep(delay);
                 }
             }
-
+            // TODO should be done with callback
             CoreUI.Instance.LogPanel.Log("Waiting for Outwar to respond...");
             for (int i = 0; i < mMobs.Count; i++)
             {
@@ -262,18 +251,23 @@ namespace DCT.Outwar.World
                 return;
             }
 
+            // TODO mMobs should be in a dictionary by id
             foreach (Mob mb in mMobs)
             {
-                if (mb.Id == id && mb.Attack(false) && CoreUI.Instance.Settings.Delay != 0)
+                if (mb.Id == id)
                 {
-                    int delay = CoreUI.Instance.Settings.Delay
-                        +
-                        (CoreUI.Instance.Settings.Variance
-                             ? (CoreUI.Instance.Settings.Delay / 100) * Randomizer.Random.Next(51) * Randomizer.RandomPosNeg()
-                             : 0);
+                    if (mb.Attack(false) && CoreUI.Instance.Settings.Delay != 0)
+                    {
+                        int delay = CoreUI.Instance.Settings.Delay
+                            +
+                            (CoreUI.Instance.Settings.Variance
+                                 ? (CoreUI.Instance.Settings.Delay / 100) * Randomizer.Random.Next(51) * Randomizer.RandomPosNeg()
+                                 : 0);
 
-                    CoreUI.Instance.LogPanel.Log("Waiting for delay: " + delay + " ms");
-                    ThreadEngine.Sleep(delay);
+                        CoreUI.Instance.LogPanel.Log("Waiting for delay: " + delay + " ms");
+                        ThreadEngine.Sleep(delay);
+                    }
+                    return;
                 }
             }
         }

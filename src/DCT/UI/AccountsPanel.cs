@@ -202,6 +202,9 @@ namespace DCT.UI
             {
                 txtUsername.Text = string.Empty;
                 txtPassword.Text = string.Empty;
+                btnLogin.Enabled = true;
+                btnLogout.Enabled = false;
+                btnRefresh.Enabled = false;
                 mUI.LogPanel.Log("E: Outwar rejected your login.  Make sure you're putting in the correct Rampid Gaming Account information.");
             }
             else

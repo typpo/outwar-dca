@@ -299,51 +299,52 @@ namespace DCT.UI
 
         private void SyncSettings()
         {
-            clearLogsPeriodicallyToolStripMenuItem.Checked = CoreUI.Instance.Settings.ClearLogs;
+            clearLogsPeriodicallyToolStripMenuItem.Checked = mUserEditable.ClearLogs;
+            showSystrayIconWhenOpenToolStripMenuItem.Checked = mUserEditable.NotifyVisible;
 
-            mAccountsPanel.Username = CoreUI.Instance.Settings.LastUsername;
-            mAccountsPanel.Password = CoreUI.Instance.Settings.LastPassword;
+            mAccountsPanel.Username = mUserEditable.LastUsername;
+            mAccountsPanel.Password = mUserEditable.LastPassword;
 
-            foreach (string str in CoreUI.Instance.Settings.MobFilters)
+            foreach (string str in mUserEditable.MobFilters)
             {
                 mFiltersPanel.FiltersText = str + "\r\n";
             }
 
-            mAttackPanel.StopAtRage = CoreUI.Instance.Settings.StopAtRage;
-            mAttackPanel.RageLimit = CoreUI.Instance.Settings.RageLimit;
-            mAttackPanel.ReturnToStart = CoreUI.Instance.Settings.ReturnToStart;
-            mMainPanel.UseCountdown = CoreUI.Instance.Settings.UseCountdownTimer;
-            mMainPanel.UseHourTimer = CoreUI.Instance.Settings.UseHourTimer;
-            mMainPanel.CountdownValue = CoreUI.Instance.Settings.CycleInterval;
+            mAttackPanel.StopAtRage = mUserEditable.StopAtRage;
+            mAttackPanel.RageLimit = mUserEditable.RageLimit;
+            mAttackPanel.ReturnToStart = mUserEditable.ReturnToStart;
+            mMainPanel.UseCountdown = mUserEditable.UseCountdownTimer;
+            mMainPanel.UseHourTimer = mUserEditable.UseHourTimer;
+            mMainPanel.CountdownValue = mUserEditable.CycleInterval;
 
             mMainPanel.SyncAttackMode();
 
-            if (CoreUI.Instance.Settings.AlertQuests)
+            if (mUserEditable.AlertQuests)
                 mQuestsPanel.AlertQuest = true;
-            else if (CoreUI.Instance.Settings.AutoQuest)
+            else if (mUserEditable.AutoQuest)
                 mQuestsPanel.AutoQuest = true;
             else
                 mQuestsPanel.NothingQuest = true;
 
-            mTrainPanel.AutoTrain = CoreUI.Instance.Settings.AutoTrain;
+            mTrainPanel.AutoTrain = mUserEditable.AutoTrain;
 
-            mFiltersPanel.FiltersEnabled = CoreUI.Instance.Settings.FilterMobs;
+            mFiltersPanel.FiltersEnabled = mUserEditable.FilterMobs;
 
-            mAttackPanel.LevelMax = CoreUI.Instance.Settings.LvlLimit;
-            mAttackPanel.LevelMin = CoreUI.Instance.Settings.LvlLimitMin;
-            mAttackPanel.StopAtRage = CoreUI.Instance.Settings.StopAtRage;
+            mAttackPanel.LevelMax = mUserEditable.LvlLimit;
+            mAttackPanel.LevelMin = mUserEditable.LvlLimitMin;
+            mAttackPanel.StopAtRage = mUserEditable.StopAtRage;
 
             try
             {
-                mAttackPanel.ThreadDelay = CoreUI.Instance.Settings.Delay;
+                mAttackPanel.ThreadDelay = mUserEditable.Delay;
             }
             catch (ArgumentOutOfRangeException)
             {
-                CoreUI.Instance.Settings.Delay = 0;
-                mAttackPanel.ThreadDelay = CoreUI.Instance.Settings.Delay;
+                mUserEditable.Delay = 0;
+                mAttackPanel.ThreadDelay = mUserEditable.Delay;
             }
 
-            mAttackPanel.Variance = CoreUI.Instance.Settings.Variance;
+            mAttackPanel.Variance = mUserEditable.Variance;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -435,37 +436,48 @@ namespace DCT.UI
         {
             if (Width < 500) Width = 500;
             if (Height < 400) Height = 400;
-
             ResumeLayout();
-        }
-
-        private void minimizeToTrayToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Hide();
         }
 
         // Notification icon stuff
 
         private void mNotifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            if (this.Visible)
-                this.Hide();
-            else if (mAccountsPanel.Engine.MainAccount != null)
+            if (!this.Visible && mAccountsPanel.Engine.MainAccount != null)
             {
                 mNotifyIcon.ShowBalloonTip(1000, "Account Stats",
                     string.Format("Exp: {0:n0}\nRage: {1:n0}\nExp Gained: {2:n0}\n{3}\n\nDouble-click to open", mAccountsPanel.Engine.MainAccount.Exp, mAccountsPanel.Engine.MainAccount.Rage, Globals.ExpGained, mMainPanel.TimeLeft)
                     , ToolTipIcon.Info);
             }
             else
-                this.Show();
+            {
+                ToggleSystray();
+            }
+        }
+
+        private void minimizeToTrayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToggleSystray();
         }
 
         private void mNotifyIcon_DoubleClick(object sender, EventArgs e)
         {
+            ToggleSystray();
+        }
+
+        private void ToggleSystray()
+        {
             if (this.Visible)
+            {
+                mNotifyIcon.Visible = true;
                 this.Hide();
+            }
             else
-                this.Show();
+            {
+                Show();
+                if (!mUserEditable.NotifyVisible)
+                    mNotifyIcon.Visible = false;
+            }
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -481,6 +493,11 @@ namespace DCT.UI
         private void mNotifyMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             openToolStripMenuItem.Enabled = !Visible;
+        }
+
+        private void showSystrayIconWhenOpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            mNotifyIcon.Visible = mUserEditable.NotifyVisible = showSystrayIconWhenOpenToolStripMenuItem.Checked;
         }
     }
 }

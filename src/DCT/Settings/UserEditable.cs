@@ -14,12 +14,28 @@ namespace DCT.Settings
             set { mMobFilters = value; }
         }
 
+        private bool mNotifyVisible;
+        [XmlElement("NotifyVisible")]
+        public bool NotifyVisible
+        {
+            get { return mNotifyVisible; }
+            set { mNotifyVisible = value; }
+        }
+
         private bool mClearLogs;
         [XmlElement("ClearLogs")]
         public bool ClearLogs
         {
             get { return mClearLogs; }
             set { mClearLogs = value; }
+        }
+
+        private bool mAutoTeleport;
+        [XmlElement("AutoTeleport")]
+        public bool AutoTeleport
+        {
+            get { return mAutoTeleport; }
+            set { mAutoTeleport = value; }
         }
 
         private bool mAlertQuests;
@@ -137,9 +153,9 @@ namespace DCT.Settings
             get { return mLvlLimit; }
             set { mLvlLimit = value; }
         }
-        private long mTimeout;
+        private int mTimeout;
         [XmlElement("Timeout")]
-        public long Timeout
+        public int Timeout
         {
             get { return mTimeout; }
             set { mTimeout = value; }
@@ -164,6 +180,10 @@ namespace DCT.Settings
         public UserEditable()
         {
             mMobFilters = new string[0];
+
+            mNotifyVisible = true;
+
+            mAutoTeleport = false;
 
             mClearLogs = true;
             mAutoTrain = true;

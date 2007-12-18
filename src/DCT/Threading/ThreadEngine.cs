@@ -6,7 +6,7 @@ namespace DCT.Threading
 {
     internal class ThreadEngine
     {
-        private const int DEFAULT_MAX = 20;
+        private const int DEFAULT_MAX = 5;
         private const int DEFAULT_DELAY = 100;
 
         private static ThreadEngine mDefaultInstance;

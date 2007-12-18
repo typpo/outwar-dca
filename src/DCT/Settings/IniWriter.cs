@@ -93,7 +93,7 @@ namespace DCT.Settings
                                 CoreUI.Instance.Settings.StopAtRage = (int)de.Value;
                                 break;
                             case "Timeout":
-                                CoreUI.Instance.Settings.Timeout = (long)de.Value;
+                                CoreUI.Instance.Settings.Timeout = (int)de.Value;
                                 break;
                             case "useTimer":
                                 CoreUI.Instance.Settings.UseCountdownTimer = (bool)de.Value;
