@@ -441,5 +441,16 @@ namespace DCT.UI
             txtChat.SelectionStart = txtChat.Text.Length;
             txtChat.ScrollToCaret();
         }
+
+        private void lstChat_DoubleClick(object sender, EventArgs e)
+        {
+            if (lstChat.SelectedIndex > -1)
+            {
+                txtChatType.Text = string.Format("/msg {0} ", (string)lstChat.SelectedItem);
+                txtChatType.Focus();
+                txtChatType.SelectionStart = txtChatType.Text.Length;
+                txtChatType.SelectionLength = 0;
+            }
+        }
     }
 }

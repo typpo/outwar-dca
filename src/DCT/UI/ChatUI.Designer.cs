@@ -74,6 +74,7 @@ namespace DCT.UI
             this.lstChat.Name = "lstChat";
             this.lstChat.Size = new System.Drawing.Size(88, 251);
             this.lstChat.TabIndex = 5;
+            this.lstChat.DoubleClick += new System.EventHandler(this.lstChat_DoubleClick);
             // 
             // txtChat
             // 
