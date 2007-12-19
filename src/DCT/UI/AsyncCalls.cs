@@ -15,7 +15,7 @@ namespace DCT.UI
         private void SetupHandler()
         {
             AttackingType type;
-            switch (mUserEditable.AttackMode)
+            switch (mSettings.AttackMode)
             {
                 case 0:
                     type = AttackingType.Single;

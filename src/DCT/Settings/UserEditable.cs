@@ -14,6 +14,14 @@ namespace DCT.Settings
             set { mMobFilters = value; }
         }
 
+        private bool mFly;
+        [XmlElement("Fly")]
+        public bool Fly
+        {
+            get { return mFly; }
+            set { mFly = value; }
+        }
+
         private bool mNotifyVisible;
         [XmlElement("NotifyVisible")]
         public bool NotifyVisible
@@ -183,6 +191,7 @@ namespace DCT.Settings
 
             mNotifyVisible = true;
 
+            mFly = true;
             mAutoTeleport = false;
 
             mClearLogs = true;

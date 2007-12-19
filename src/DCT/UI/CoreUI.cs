@@ -64,10 +64,10 @@ namespace DCT.UI
             get { return mRaidsPanel; }
         }
 
-        private UserEditable mUserEditable;
+        private UserEditable mSettings;
         public UserEditable Settings
         {
-            get { return mUserEditable; }
+            get { return mSettings; }
         }
 
         private MainPanel mMainPanel;
@@ -131,7 +131,7 @@ namespace DCT.UI
             tabs.TabPages[7].Controls.Add(mChat);
             
             mInstance = this;
-            mUserEditable = ConfigSerializer.ReadFile("config.xml");
+            mSettings = ConfigSerializer.ReadFile("config.xml");
 
             this.Text = "Typpo's DC Tool - [www.typpo.us] - v" + Version.Id;
 
@@ -173,7 +173,7 @@ namespace DCT.UI
             {
                 RegistryUtil.Save();
                 IniWriter.Save();
-                ConfigSerializer.WriteFile("config.xml", mUserEditable);
+                ConfigSerializer.WriteFile("config.xml", mSettings);
             }
 
             // clean up notifyicon
@@ -299,52 +299,53 @@ namespace DCT.UI
 
         private void SyncSettings()
         {
-            clearLogsPeriodicallyToolStripMenuItem.Checked = mUserEditable.ClearLogs;
-            showSystrayIconWhenOpenToolStripMenuItem.Checked = mUserEditable.NotifyVisible;
+            clearLogsPeriodicallyToolStripMenuItem.Checked = mSettings.ClearLogs;
+            showSystrayIconWhenOpenToolStripMenuItem.Checked = mSettings.NotifyVisible;
 
-            mAccountsPanel.Username = mUserEditable.LastUsername;
-            mAccountsPanel.Password = mUserEditable.LastPassword;
+            mAccountsPanel.Username = mSettings.LastUsername;
+            mAccountsPanel.Password = mSettings.LastPassword;
 
-            foreach (string str in mUserEditable.MobFilters)
+            foreach (string str in mSettings.MobFilters)
             {
                 mFiltersPanel.FiltersText = str + "\r\n";
             }
 
-            mAttackPanel.StopAtRage = mUserEditable.StopAtRage;
-            mAttackPanel.RageLimit = mUserEditable.RageLimit;
-            mAttackPanel.ReturnToStart = mUserEditable.ReturnToStart;
-            mMainPanel.UseCountdown = mUserEditable.UseCountdownTimer;
-            mMainPanel.UseHourTimer = mUserEditable.UseHourTimer;
-            mMainPanel.CountdownValue = mUserEditable.CycleInterval;
+            mAttackPanel.StopAtRage = mSettings.StopAtRage;
+            mAttackPanel.RageLimit = mSettings.RageLimit;
+            mAttackPanel.ReturnToStart = mSettings.ReturnToStart;
+            mAttackPanel.Fly = mSettings.Fly;
+            mMainPanel.UseCountdown = mSettings.UseCountdownTimer;
+            mMainPanel.UseHourTimer = mSettings.UseHourTimer;
+            mMainPanel.CountdownValue = mSettings.CycleInterval;
 
             mMainPanel.SyncAttackMode();
 
-            if (mUserEditable.AlertQuests)
+            if (mSettings.AlertQuests)
                 mQuestsPanel.AlertQuest = true;
-            else if (mUserEditable.AutoQuest)
+            else if (mSettings.AutoQuest)
                 mQuestsPanel.AutoQuest = true;
             else
                 mQuestsPanel.NothingQuest = true;
 
-            mTrainPanel.AutoTrain = mUserEditable.AutoTrain;
+            mTrainPanel.AutoTrain = mSettings.AutoTrain;
 
-            mFiltersPanel.FiltersEnabled = mUserEditable.FilterMobs;
+            mFiltersPanel.FiltersEnabled = mSettings.FilterMobs;
 
-            mAttackPanel.LevelMax = mUserEditable.LvlLimit;
-            mAttackPanel.LevelMin = mUserEditable.LvlLimitMin;
-            mAttackPanel.StopAtRage = mUserEditable.StopAtRage;
+            mAttackPanel.LevelMax = mSettings.LvlLimit;
+            mAttackPanel.LevelMin = mSettings.LvlLimitMin;
+            mAttackPanel.StopAtRage = mSettings.StopAtRage;
 
             try
             {
-                mAttackPanel.ThreadDelay = mUserEditable.Delay;
+                mAttackPanel.ThreadDelay = mSettings.Delay;
             }
             catch (ArgumentOutOfRangeException)
             {
-                mUserEditable.Delay = 0;
-                mAttackPanel.ThreadDelay = mUserEditable.Delay;
+                mSettings.Delay = 0;
+                mAttackPanel.ThreadDelay = mSettings.Delay;
             }
 
-            mAttackPanel.Variance = mUserEditable.Variance;
+            mAttackPanel.Variance = mSettings.Variance;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -475,7 +476,7 @@ namespace DCT.UI
             else
             {
                 Show();
-                if (!mUserEditable.NotifyVisible)
+                if (!mSettings.NotifyVisible)
                     mNotifyIcon.Visible = false;
             }
         }
@@ -497,7 +498,7 @@ namespace DCT.UI
 
         private void showSystrayIconWhenOpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            mNotifyIcon.Visible = mUserEditable.NotifyVisible = showSystrayIconWhenOpenToolStripMenuItem.Checked;
+            mNotifyIcon.Visible = mSettings.NotifyVisible = showSystrayIconWhenOpenToolStripMenuItem.Checked;
         }
     }
 }

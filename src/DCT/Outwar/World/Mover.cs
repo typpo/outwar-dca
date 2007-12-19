@@ -330,7 +330,7 @@ namespace DCT.Outwar.World
                 switch (i)
                 {
                     case 0:
-                        if (!url.StartsWith("world.php"))
+                        if (url.Contains("?room=") && CoreUI.Instance.Settings.Fly)
                         {
                             mSavedRooms.Save(tmp.Id, url);
                         }

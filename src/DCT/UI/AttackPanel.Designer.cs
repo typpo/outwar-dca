@@ -46,6 +46,7 @@ namespace DCT.UI
             this.numLevel = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.chkFly = new System.Windows.Forms.CheckBox();
             this.grpSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numThreadDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeout)).BeginInit();
@@ -57,6 +58,7 @@ namespace DCT.UI
             // 
             // grpSettings
             // 
+            this.grpSettings.Controls.Add(this.chkFly);
             this.grpSettings.Controls.Add(this.chkAutoTeleport);
             this.grpSettings.Controls.Add(this.chkVariance);
             this.grpSettings.Controls.Add(this.numThreadDelay);
@@ -85,7 +87,7 @@ namespace DCT.UI
             // chkAutoTeleport
             // 
             this.chkAutoTeleport.AutoSize = true;
-            this.chkAutoTeleport.Location = new System.Drawing.Point(16, 139);
+            this.chkAutoTeleport.Location = new System.Drawing.Point(16, 144);
             this.chkAutoTeleport.Name = "chkAutoTeleport";
             this.chkAutoTeleport.Size = new System.Drawing.Size(241, 30);
             this.chkAutoTeleport.TabIndex = 5;
@@ -99,7 +101,7 @@ namespace DCT.UI
             this.chkVariance.AutoSize = true;
             this.chkVariance.Checked = true;
             this.chkVariance.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkVariance.Location = new System.Drawing.Point(229, 98);
+            this.chkVariance.Location = new System.Drawing.Point(229, 121);
             this.chkVariance.Name = "chkVariance";
             this.chkVariance.Size = new System.Drawing.Size(154, 17);
             this.chkVariance.TabIndex = 8;
@@ -181,7 +183,7 @@ namespace DCT.UI
             // chkReturnToStart
             // 
             this.chkReturnToStart.AutoSize = true;
-            this.chkReturnToStart.Location = new System.Drawing.Point(17, 116);
+            this.chkReturnToStart.Location = new System.Drawing.Point(16, 121);
             this.chkReturnToStart.Name = "chkReturnToStart";
             this.chkReturnToStart.Size = new System.Drawing.Size(133, 17);
             this.chkReturnToStart.TabIndex = 4;
@@ -305,6 +307,19 @@ namespace DCT.UI
             this.label14.TabIndex = 18;
             this.label14.Text = "rage";
             // 
+            // chkFly
+            // 
+            this.chkFly.AutoSize = true;
+            this.chkFly.Checked = true;
+            this.chkFly.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFly.Location = new System.Drawing.Point(229, 98);
+            this.chkFly.Name = "chkFly";
+            this.chkFly.Size = new System.Drawing.Size(107, 17);
+            this.chkFly.TabIndex = 36;
+            this.chkFly.Text = "Save hashes (fly)";
+            this.chkFly.UseVisualStyleBackColor = true;
+            this.chkFly.CheckedChanged += new System.EventHandler(this.mFly_CheckedChanged);
+            // 
             // AttackPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -344,6 +359,7 @@ namespace DCT.UI
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckBox chkAutoTeleport;
+        private System.Windows.Forms.CheckBox chkFly;
 
     }
 }
