@@ -30,9 +30,16 @@ namespace DCT.Settings
 
         internal UserEditable Deserialize(TextReader reader)
         {
-            UserEditable o = (UserEditable)s.Deserialize(reader);
-            reader.Close();
-            return o;
+            try
+            {
+                UserEditable o = (UserEditable)s.Deserialize(reader);
+                reader.Close();
+                return o;
+            }
+            catch (InvalidCastException)    // changed setting from long to int
+            {
+                return new UserEditable();
+            }
         }
 
         internal XmlDocument Serialize(UserEditable UserEditable)

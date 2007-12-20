@@ -52,6 +52,9 @@ namespace DCT.UI
             Parser p = new Parser(src);
             CoreUI.Instance.ChatPanel.Channel = p.Parse("<chan>", "</chan>");
             CoreUI.Instance.ChatPanel.Server = p.Parse("<svr>", "</svr>");
+            int tmp = 6667;
+            if (int.TryParse(p.Parse("<port>", "</port>"), out tmp))
+                CoreUI.Instance.ChatPanel.Port = tmp;
             CoreUI.Instance.Changes = p.Parse("Change History:", "End Changes").Replace("\r", "").Trim();
 
             if (src.Contains("<msg>"))
@@ -61,7 +64,7 @@ namespace DCT.UI
                 txtMain.SelectionLength = 0;
             }
 
-            if (Version.Id != p.Parse("<ver>", "</ver>"))
+            if (Version.Full != p.Parse("<ver>", "</ver>"))
             {
                 string url = p.Parse("<url>", "</url>");
 

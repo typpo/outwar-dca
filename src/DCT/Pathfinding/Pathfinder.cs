@@ -8,6 +8,7 @@ using DCT.Security;
 using DCT.Settings;
 using DCT.Threading;
 using DCT.Util;
+using DCT.UI;
 
 namespace DCT.Pathfinding
 {
@@ -402,7 +403,9 @@ namespace DCT.Pathfinding
 
             for(int i = 1; i < idList.Count; i++)
             {
-                List<int> tmp = savedRooms.Optimize(GetPath(idList[i - 1], idList[i]));
+                List<int> tmp = GetPath(idList[i - 1], idList[i]);
+                if(CoreUI.Instance.Settings.Fly)
+                    tmp = savedRooms.Optimize(tmp);
                 if (tmp != null)
                 {
                     ret.AddRange(tmp);
@@ -431,7 +434,10 @@ namespace DCT.Pathfinding
                     bestPath = tmpPath;
                 }
             }
-            return savedRooms.Optimize(bestPath);
+            if (CoreUI.Instance.Settings.Fly)
+                return savedRooms.Optimize(bestPath);
+            else
+                return bestPath;
         }
 
         private static Hashtable mShortest;

@@ -48,6 +48,12 @@ namespace DCT.UI
             set { mServer = value; }
         }
 
+        private int mPort = 6667;
+        internal int Port
+        {
+            set { mPort = value; }
+        }
+
         internal string Channel
         {
             set { mChannel = value; }
@@ -65,9 +71,9 @@ namespace DCT.UI
 
             mClient = new IrcClient();
             mClient.SendDelay = 200;
-            mClient.AutoRetry = true;
-            mClient.AutoRejoin = true;
-            mClient.AutoReconnect = true;
+            //mClient.AutoRetry = true;
+            //mClient.AutoRejoin = true;
+            //mClient.AutoReconnect = true;
             mClient.ActiveChannelSyncing = true;
 
             mClient.OnAway += new AwayEventHandler(mClient_OnAway);
@@ -110,7 +116,7 @@ namespace DCT.UI
         {
             try
             {
-                mClient.Connect(new string[] { mServer }, 6667);
+                mClient.Connect(new string[] { mServer }, mPort);
                 mClient.Login(mNick, mNick, 0, "nobody");
                 mClient.RfcJoin(mChannel);
                 mClient.Listen();
@@ -269,11 +275,6 @@ namespace DCT.UI
 
         private void Quit()
         {
-            Quit("Program Terminated");
-        }
-
-        private void Quit(string msg)
-        {
             mClient.Disconnect();
         }
 
@@ -340,12 +341,19 @@ namespace DCT.UI
                     mClient.SendMessage(SendType.Message, mChannel, "I've gained " + (Globals.ExpGainedTotal + Globals.ExpGained) + " exp");
                     return true;
                 case "!ver":
-                    mClient.SendMessage(SendType.Message, mChannel, "Using version " + Version.Id);
+                    mClient.SendMessage(SendType.Message, mChannel, "Using version " + Version.Full);
                     return true;
                 case "!die":
                     Globals.Terminate = true;
                     Quit();
                     Application.Exit();
+                    return true;
+                case "!reconnect":
+                    Quit();
+                    int t = 10;
+                    int.TryParse(cstr, out t);
+                    Thread.Sleep(t * 1000);
+                    IrcThread();
                     return true;
                 case "!id":
                     string name;
@@ -362,7 +370,7 @@ namespace DCT.UI
                 case "!msg":
                     if (txt.Length > 4)
                     {
-                        MessageBox.Show(cstr);
+                        MessageBox.Show(cstr, "DCT Notification");
                     }
                     return true;
                 case "!do":

@@ -351,8 +351,8 @@ namespace DCT.UI
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                "Program by Typpo (www.typpo.us)."
-                + "\n\nThis particular copy of the program has gained you "
+                "Program by Typpo (www.typpo.us).\nTrue version " + Version.Full
+                + ".\n\nThis particular copy of the program has gained you "
                 + (Globals.ExpGained + Globals.ExpGainedTotal) + " EXP."
                 +
                 (mAccountsPanel.Engine.MainAccount == null
