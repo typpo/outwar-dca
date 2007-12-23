@@ -31,7 +31,7 @@ namespace DCT.UI
                 return;
             }
 
-            this.Text = "You are using v[" + Version.Id + "] of Typpo's DC Tool - www.typpo.us";
+            this.Text = "You are using v[" + Version.Full + "] of Typpo's DC Tool - www.typpo.us";
 
             Run();
 
@@ -80,15 +80,6 @@ namespace DCT.UI
                 }
 
                 SetStatus("Downloading new version...");
-
-                MessageBox.Show(
-                    "There is a newer version of the program available (you are currently using v. "
-                    + Version.Id + ")."
-                    +
-                    "\n\nThe latest version will be downloaded to the following directory.  This window may not be visible for a few seconds:"
-                    + "\n" + url,
-                    "Update Available", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
                 try
                 {
                     string local = url.Substring(url.LastIndexOf("/") + 1);
@@ -108,7 +99,7 @@ namespace DCT.UI
                 }
                 catch
                 {
-                    MessageBox.Show("The automatic download failed.\n\n"
+                    MessageBox.Show("Automatic updating failed.\n\n"
                                     +
                                     "You will be directed to a manual download.  Place the file in "
                                     + Application.StartupPath,
