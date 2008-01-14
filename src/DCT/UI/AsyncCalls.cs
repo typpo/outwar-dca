@@ -189,13 +189,7 @@ namespace DCT.UI
                 return;
             }
 
-            Toggle(false);
-
-            foreach (int index in mAccountsPanel.CheckedIndices)
-            {
-                PathfindHandler d = new PathfindHandler(DoPathfind);
-                d.BeginInvoke(index, room, new AsyncCallback(PathfindCallback), d);
-            }
+            InvokeBulkMove(room);
         }
 
         internal void InvokeAdventures(int room)
@@ -209,6 +203,24 @@ namespace DCT.UI
                 mLogPanel.Log("E: Choose an adventure to move to.");
             }
 
+            InvokeBulkMove(room);
+        }
+
+        //private int mBulkCounter;
+        private void InvokeBulkMove(int room)
+        {
+            //if (mAccountsPanel.CheckedIndices.Count > 1)
+            //{
+            //    string tmp;
+            //    int n;
+            //    do
+            //    {
+            //        tmp = Util.InputBox.Prompt("Bulk Move", "Move up to how many accounts at once?", "5");
+            //    }
+            //    while (int.TryParse(tmp, out n));
+            //    mBulkCounter = 0;
+            //}
+            // TODO stagger
             Toggle(false);
             foreach (int index in mAccountsPanel.CheckedIndices)
             {
@@ -222,6 +234,8 @@ namespace DCT.UI
             PathfindHandler d = (PathfindHandler) ar.AsyncState;
             d.EndInvoke(ar);
             Toggle(true);
+
+            //mBulkCounter++;
         }
 
         private delegate void PathfindHandler(int accountIndex, int room);

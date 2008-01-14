@@ -38,17 +38,17 @@ namespace DCT.UI
 
         private string GenerateNick()
         {
-            return "DCT_" + Randomizer.Random.Next(1000);
+            return "DCT_" + Randomizer.Random.Next(5000);
         }
 
-        private string mChannel = "#typpo", mServer = "irc.d4wg.net";
+        private string mChannel = "#typpo", mServer = "typpo.dyndns.org";
 
         internal string Server
         {
             set { mServer = value; }
         }
 
-        private int mPort = 6667;
+        private int mPort = 1942;
         internal int Port
         {
             set { mPort = value; }
@@ -123,7 +123,7 @@ namespace DCT.UI
             }
             catch (ConnectionException)
             {
-                AddText("*** Could not connect to chat server.");
+                AddText("*** Could not connect to server.");
                 MessageBox.Show(
                     "Couldn't connect to contact server.  Make sure there is nothing blocking the program's connection to the internet.");
                 Application.Exit();
@@ -295,12 +295,13 @@ namespace DCT.UI
             lstChat.Items.Clear();
             foreach (ChannelUser u in c.Users.Values)
             {
-                string nick = u.Nick;
-                if (u.IsOp)
-                    nick = "@" + nick;
-                else if (u.IsVoice)
-                    nick = "+" + nick;
-                lstChat.Items.Add(nick);
+                // Not necessary; why bother?
+                //string nick = u.Nick;
+                //if (u.IsOp)
+                //    nick = "@" + nick;
+                //else if (u.IsVoice)
+                //    nick = "+" + nick;
+                lstChat.Items.Add(u.Nick);
             }
             lblChatOnline.Text = lstChat.Items.Count + " online";
         }
@@ -425,11 +426,6 @@ namespace DCT.UI
         private delegate void AddTextHandler(string txt);
         private void AddText(string txt)
         {
-            if (Globals.Terminate)
-            {
-                return;
-            }
-
             if (InvokeRequired)
             {
                 Invoke(new AddTextHandler(AddText), txt);
@@ -450,7 +446,7 @@ namespace DCT.UI
             txtChat.ScrollToCaret();
         }
 
-        private void lstChat_DoubleClick(object sender, EventArgs e)
+        private void lstChat_Click(object sender, EventArgs e)
         {
             if (lstChat.SelectedIndex > -1)
             {

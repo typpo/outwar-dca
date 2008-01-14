@@ -234,6 +234,11 @@ namespace DCT.Outwar.World
             return Attack(true);
         }
 
+        /// <summary>
+        /// Attempts to start attack thread
+        /// </summary>
+        /// <param name="test">True if we should test mob stats for preelimination</param>
+        /// <returns>True if thread started; False otherwise</returns>
         internal bool Attack(bool test)
         {
             if (mAttacked || (!FilterOK && test) || !IsInRoom
@@ -284,6 +289,7 @@ namespace DCT.Outwar.World
                 return false;
             }
 
+            // Launch attack thread
             MethodInvoker d = new MethodInvoker(SendAttack);
             d.BeginInvoke(new AsyncCallback(AttackCallback), d);
 

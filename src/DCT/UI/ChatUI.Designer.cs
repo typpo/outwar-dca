@@ -31,9 +31,9 @@ namespace DCT.UI
             this.lblChatOnline = new System.Windows.Forms.Label();
             this.txtChatType = new System.Windows.Forms.TextBox();
             this.lstChat = new System.Windows.Forms.ListBox();
-            this.txtChat = new System.Windows.Forms.TextBox();
             this.split = new System.Windows.Forms.SplitContainer();
             this.split1 = new System.Windows.Forms.SplitContainer();
+            this.txtChat = new System.Windows.Forms.TextBox();
             this.split.Panel1.SuspendLayout();
             this.split.Panel2.SuspendLayout();
             this.split.SuspendLayout();
@@ -67,27 +67,14 @@ namespace DCT.UI
             // lstChat
             // 
             this.lstChat.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lstChat.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstChat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lstChat.FormattingEnabled = true;
             this.lstChat.HorizontalScrollbar = true;
             this.lstChat.Location = new System.Drawing.Point(0, 11);
             this.lstChat.Name = "lstChat";
             this.lstChat.Size = new System.Drawing.Size(88, 251);
             this.lstChat.TabIndex = 5;
-            this.lstChat.DoubleClick += new System.EventHandler(this.lstChat_DoubleClick);
-            // 
-            // txtChat
-            // 
-            this.txtChat.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtChat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtChat.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtChat.Location = new System.Drawing.Point(0, 0);
-            this.txtChat.Multiline = true;
-            this.txtChat.Name = "txtChat";
-            this.txtChat.ReadOnly = true;
-            this.txtChat.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtChat.Size = new System.Drawing.Size(334, 233);
-            this.txtChat.TabIndex = 4;
+            this.lstChat.Click += new System.EventHandler(this.lstChat_Click);
             // 
             // split
             // 
@@ -126,6 +113,17 @@ namespace DCT.UI
             this.split1.SplitterDistance = 233;
             this.split1.TabIndex = 7;
             // 
+            // txtChat
+            // 
+            this.txtChat.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtChat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtChat.Location = new System.Drawing.Point(0, 0);
+            this.txtChat.Multiline = true;
+            this.txtChat.Name = "txtChat";
+            this.txtChat.ReadOnly = true;
+            this.txtChat.Size = new System.Drawing.Size(334, 233);
+            this.txtChat.TabIndex = 0;
+            // 
             // ChatUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,8 +149,8 @@ namespace DCT.UI
         private System.Windows.Forms.Label lblChatOnline;
         private System.Windows.Forms.TextBox txtChatType;
         private System.Windows.Forms.ListBox lstChat;
-        private System.Windows.Forms.TextBox txtChat;
         private System.Windows.Forms.SplitContainer split;
         private System.Windows.Forms.SplitContainer split1;
+        private System.Windows.Forms.TextBox txtChat;
     }
 }

@@ -389,6 +389,7 @@ namespace DCT.Pathfinding
             {
                 if (rm != null && rm.Name.Equals(startRoom.Name))
                 {
+                    // TODO: reactivate?
                     //idList.Insert(Randomizer.Random.Next(idList.Count), rm.Id);
                     idList.Add(rm.Id);
                 }
@@ -458,6 +459,7 @@ namespace DCT.Pathfinding
 
             mShortest = new Hashtable();
 
+            // BFS search
             do
             {
                 roomList = paths.Dequeue();
