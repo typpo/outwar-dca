@@ -87,7 +87,6 @@ namespace DCT.Protocols.Http
         }
 
         private static readonly string[] USER_AGENTS = {
-                                           "Lynx/2.8.4rel.1 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/0.9.6b",
                                            "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:0.9.4) Gecko/20011019 Netscape6/6.2"
                                            ,
                                            "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:0.9.9) Gecko/20020311",
@@ -95,7 +94,6 @@ namespace DCT.Protocols.Http
                                            "Mozilla/5.0 (compatible; Konqueror/3.1; Linux 2.4.22-4GB-athlon; X11; i686)"
                                            ,
                                            "Opera/7.0 (Windows 2000; U) [en]",
-                                           "Opera/7.02 Bork-edition (Windows NT 5.0; U) [en]",
                                            "Mozilla/4.0 (compatible; MSIE 5.0; AOL 5.0; Windows 98; DigExt; VNIE4 3.1.814)"
                                            ,
                                            "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; InfoPath.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"
