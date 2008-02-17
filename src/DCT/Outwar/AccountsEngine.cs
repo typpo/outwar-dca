@@ -94,7 +94,9 @@ namespace DCT.Outwar
             string loginpage = HttpSocket.DefaultInstance.Get("http://sigil.outwar.com");
             if(loginpage.Contains("tempSec"))
             {
-                toPost += "&tempSec=" + Parser.Parse(loginpage, "Enter \"", "\" here");
+                string tmp = Parser.Parse(loginpage, "Enter ", " here");
+                tmp = Parser.RemoveRange(tmp, "<", ">").Replace("\"", "").Replace("'", "");
+                toPost += "&tempSec=" + tmp;
             }
             HttpSocket.DefaultInstance.Post("http://outwar.com/myaccount.php", toPost);
 

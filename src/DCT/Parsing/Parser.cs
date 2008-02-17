@@ -79,7 +79,7 @@ namespace DCT.Parsing
             {
                 foreach (string t in MultiParse(whole, start, end))
                 {
-                    whole = whole.Replace(t, "");
+                    whole = whole.Replace(start + t + end, "");
                 }
                 return whole;
             }
@@ -120,11 +120,11 @@ namespace DCT.Parsing
                 {
                     return new string[] { };
                 }
-                string[] ret = new string[tokens.Length - 1];
+                string[] ret = new string[tokens.Length];
 
-                for (int i = 1; i < tokens.Length; i++)
+                for (int i = 0; i < tokens.Length; i++)
                 {
-                    ret[i - 1] = CutTrailing(tokens[i], end);
+                    ret[i] = CutTrailing(tokens[i], end);
                 }
 
                 return ret;

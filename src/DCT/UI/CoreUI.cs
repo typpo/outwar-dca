@@ -313,6 +313,8 @@ namespace DCT.UI
             mAttackPanel.StopAtRage = mSettings.StopAtRage;
             mAttackPanel.RageLimit = mSettings.RageLimit;
             mAttackPanel.ReturnToStart = mSettings.ReturnToStart;
+            // TODO buh
+            mSettings.Fly = false;            
             mAttackPanel.Fly = mSettings.Fly;
             mMainPanel.UseCountdown = mSettings.UseCountdownTimer;
             mMainPanel.UseHourTimer = mSettings.UseHourTimer;

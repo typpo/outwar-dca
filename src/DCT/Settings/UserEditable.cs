@@ -191,7 +191,7 @@ namespace DCT.Settings
 
             mNotifyVisible = true;
 
-            mFly = true;
+            mFly = false;
             mAutoTeleport = false;
 
             mClearLogs = true;
