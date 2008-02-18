@@ -13,16 +13,16 @@ namespace DCT.Protocols.Http
             set { mAccount = value; }
         }
 
-        protected override string Request(string url, string write, string referer)
+        protected override string Request(string url, string write)
         {
             if (mAccount == null)
             {
                 throw new Exception("Attempted HTTP request before account was assigned.");
             }
 
-            string ret = base.Request("http://" + mAccount.Server + ".outwar.com/" + url, write, referer);
+            string ret = base.Request("http://" + mAccount.Server + ".outwar.com/" + url, write);
             ret = Parser.RemoveRange(ret, "<!--", "-->");
-            if (ret.Contains(".outwar.com"))
+            if (Settings.Globals.AttackMode && ret.Contains(".outwar.com"))
             {
                 mAccount.GetStats(ret);
             }

@@ -89,18 +89,15 @@ namespace DCT.Outwar
         {
             Parser mm = new Parser(source);
 
-            if (source.Contains("name=\"owtime\">"))
-            {
-                int.TryParse(mm.Parse("LEVEL:</b> ", "</div>").Trim(), out mLevel);
-                int.TryParse(mm.Parse("RAGE</span>:</b> ", "</div>").Trim(), out mRage);
+            int.TryParse(mm.Parse("LEVEL:</b> ", "</div>").Trim(), out mLevel);
+            int.TryParse(mm.Parse("RAGE</span>:</b> ", "</div>").Trim(), out mRage);
 
-                long.TryParse(mm.Parse("EXP:</b> ", "</div>").Trim().Replace(",", ""), out mExp);
+            long.TryParse(mm.Parse("EXP:</b> ", "</div>").Trim().Replace(",", ""), out mExp);
 
-                if (source.Contains("LEVEL!"))
-                    mNeedsLevel = true;
-                else
-                    mNeedsLevel = false;
-            }
+            if (source.Contains("LEVEL!"))
+                mNeedsLevel = true;
+            else
+                mNeedsLevel = false;
         }
     }
 }

@@ -54,13 +54,6 @@ namespace DCT.Protocols.Http
             set { mRedirect = value; }
         }
 
-        private bool mKeepAlive;
-        internal bool KeepAlive
-        {
-            get { return mKeepAlive; }
-            set { mKeepAlive = value; }
-        }
-
         private int mTimeout;
         internal int Timeout
         {
@@ -107,60 +100,40 @@ namespace DCT.Protocols.Http
             mTimeout = CoreUI.Instance.Settings.Timeout;
 
             mRedirect = true;
-            mKeepAlive = false;
             mCookie = string.Empty;
             mUserAgent = USER_AGENTS[Randomizer.Random.Next(USER_AGENTS.Length)];
             Status = "Created";
         }
-
         internal string Get(string url)
         {
-            return Get(url, string.Empty);
-        }
-
-        internal string Get(string url, string referer)
-        {
-            return Request(url, string.Empty, referer);
+            return Request(url, null);
         }
 
         internal string Post(string url, string postData)
         {
-            return Post(url, postData, string.Empty);
+            return Request(url, postData);
         }
 
-        internal string Post(string url, string postData, string referer)
+        protected virtual string Request(string url, string write)
         {
-            return Request(url, postData, referer);
-        }
-
-        protected virtual string Request(string url, string write, string referer)
-        {
-            StreamWriter sw = null;
-            StreamReader sr = null;
-            WebResponse response = null;
             for (int i = 0; i < 3; i++)
             {
                 try
                 {
-                    bool post = !string.IsNullOrEmpty(write);
-
                     HttpWebRequest request = GenerateRequest(url);
 
-                    if (!string.IsNullOrEmpty(referer))
-                        request.Referer = referer;
-
-                    if (post)
+                    if (write != null)
                     {
                         request.Method = "POST";
                         request.ContentLength = write.Length;
-                        sw = new StreamWriter(request.GetRequestStream());
+                        StreamWriter sw = new StreamWriter(request.GetRequestStream());
                         sw.Write(write);
                         sw.Flush();
                         sw.Close();
                     }
 
-                    response = request.GetResponse();
-                    sr = new StreamReader(response.GetResponseStream());
+                    WebResponse response = request.GetResponse();
+                    StreamReader sr = new StreamReader(response.GetResponseStream());
 
                     string ret = sr.ReadToEnd();
                     sr.Close();
@@ -204,7 +177,6 @@ namespace DCT.Protocols.Http
 
             request.UserAgent = mUserAgent;
             request.ContentType = "application/x-www-form-urlencoded";
-            request.KeepAlive = mKeepAlive;
             request.AllowAutoRedirect = mRedirect;
 
             return request;

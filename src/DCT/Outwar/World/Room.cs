@@ -167,7 +167,7 @@ namespace DCT.Outwar.World
                 if (s.Contains("raidz") && s.Contains("Form new raid"))
                 {
                     // create raidformmob
-                    string formurl = "formraid.php" + Parser.Parse(s, "formraid.php", "\"");
+                    //string formurl = "formraid.php" + Parser.Parse(s, "formraid.php", "\"");
                     //mRaid = new RaidFormMob(name, url, formurl, this);
                     // TODO: logic could be nicer
                     continue;

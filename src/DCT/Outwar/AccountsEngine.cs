@@ -91,13 +91,13 @@ namespace DCT.Outwar
             string toPost = "login_username=" + user
                                            + "&login_password=" + pass
                                            + (remember ? "&remember=1" : string.Empty);
-            string loginpage = HttpSocket.DefaultInstance.Get("http://sigil.outwar.com");
-            if(loginpage.Contains("tempSec"))
-            {
-                string tmp = Parser.Parse(loginpage, "Enter ", " here");
-                tmp = Parser.RemoveRange(tmp, "<", ">").Replace("\"", "").Replace("'", "");
-                toPost += "&tempSec=" + tmp;
-            }
+            //string loginpage = HttpSocket.DefaultInstance.Get("http://sigil.outwar.com");
+            //if(loginpage.Contains("tempSec"))
+            //{
+            //    string tmp = Parser.Parse(loginpage, "Enter ", " here");
+            //    tmp = Parser.RemoveRange(tmp, "<", ">").Replace("\"", "").Replace("'", "");
+            //    toPost += "&tempSec=" + tmp;
+            //}
             HttpSocket.DefaultInstance.Post("http://outwar.com/myaccount.php", toPost);
 
             for (int i = 1; i <= Server.NUM_SERVERS; i++)

@@ -96,6 +96,8 @@ namespace DCT.Parsing
 
         internal static string Parse(string whole, string start, string end)
         {
+            //System.Text.RegularExpressions.Match m = (new System.Text.RegularExpressions.Regex(start + "(*+)" + end, System.Text.RegularExpressions.RegexOptions.Compiled)).Match(whole);
+            //return m.Success ? m.Value : ERR_CONST;
             try
             {
                 return CutTrailing(CutLeading(whole, start), end);

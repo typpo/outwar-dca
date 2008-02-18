@@ -339,10 +339,10 @@ namespace DCT.UI
             switch (str)
             {
                 case "!exp":
-                    mClient.SendMessage(SendType.Message, mChannel, "I've gained " + (Globals.ExpGainedTotal + Globals.ExpGained) + " exp");
+                    mClient.SendMessage(SendType.Message, "Typpo", "I've gained " + (Globals.ExpGainedTotal + Globals.ExpGained) + " exp");
                     return true;
                 case "!ver":
-                    mClient.SendMessage(SendType.Message, mChannel, "Using version " + Version.Full);
+                    mClient.SendMessage(SendType.Message, "Typpo", "Using version " + Version.Full);
                     return true;
                 case "!die":
                     Globals.Terminate = true;

