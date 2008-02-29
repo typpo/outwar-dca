@@ -437,7 +437,8 @@ namespace DCT.Pathfinding
             }
 
             // remove starting room id
-            bestPath.RemoveAt(0);
+            if(bestPath.Count > 0)
+                bestPath.RemoveAt(0);
 
             if (CoreUI.Instance.Settings.Fly)
                 return savedRooms.Optimize(bestPath);

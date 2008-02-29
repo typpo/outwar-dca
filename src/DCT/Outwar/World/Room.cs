@@ -158,10 +158,10 @@ namespace DCT.Outwar.World
                     trainer = true;
                 }
 
-                if (s.Contains("rareicon.jpg"))
+                if (s.Contains("Spawned by"))
                 {   
                     // spawn mob
-                    name = Parser.Parse(name, "\"#00FF00\">*", " (");
+                    name = Parser.Parse(name, "\"#00FF00\">*", " [");
                 }
 
                 if (s.Contains("raidz") && s.Contains("Form new raid"))
