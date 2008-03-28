@@ -102,6 +102,13 @@ namespace DCT.Settings
             get { return mReturnToStart; }
             set { mReturnToStart = value; }
         }
+        private bool mRandomizeLastRoom;
+        [XmlElement("RandomizeLastRoom")]
+        public bool RandomizeLastRoom
+        {
+            get { return mRandomizeLastRoom; }
+            set { mRandomizeLastRoom = value; }
+        }
 
         private int mAttackMode;
         [XmlElement("AttackMode")]
@@ -192,10 +199,10 @@ namespace DCT.Settings
             mNotifyVisible = true;
 
             mFly = false;
-            mAutoTeleport = false;
+            mAutoTeleport = true;
 
             mClearLogs = true;
-            mAutoTrain = true;
+            mAutoTrain = false;
             mVariance = true;
 
             mAlertQuests = false;
@@ -205,6 +212,8 @@ namespace DCT.Settings
 
             mUseCountdownTimer = true;
             mUseHourTimer = false;
+
+            mRandomizeLastRoom = true;
 
             mAttackMode = 1;
 

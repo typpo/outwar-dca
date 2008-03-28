@@ -312,6 +312,7 @@ namespace DCT.UI
 
             mAttackPanel.StopAtRage = mSettings.StopAtRage;
             mAttackPanel.RageLimit = mSettings.RageLimit;
+            mAttackPanel.RandomizeLastRoom = mSettings.RandomizeLastRoom;
             mAttackPanel.ReturnToStart = mSettings.ReturnToStart;
             // TODO buh
             mSettings.Fly = false;            

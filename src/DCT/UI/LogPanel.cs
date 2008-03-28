@@ -40,6 +40,11 @@ namespace DCT.UI
             }
         }
 
+        internal string LastMessage
+        {
+            get { return (string)lstLog.Items[0]; }
+        }
+
         internal void Export()
         {
             StringBuilder sb = new StringBuilder();

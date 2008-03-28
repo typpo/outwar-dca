@@ -121,6 +121,7 @@ namespace DCT.UI
             this.txtChat.Multiline = true;
             this.txtChat.Name = "txtChat";
             this.txtChat.ReadOnly = true;
+            this.txtChat.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtChat.Size = new System.Drawing.Size(334, 233);
             this.txtChat.TabIndex = 0;
             // 

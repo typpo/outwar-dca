@@ -29,12 +29,24 @@ namespace DCT.Outwar.World
         }
         private int mId;
         private string mUrl;
+        internal string Url
+        {
+            get { return mUrl; }
+        }
         private string mName;
         // TODO this should not be here
         private bool mTrained;
         private string mSource;
         private List<string> mLinks;
+        internal List<string> Links
+        {
+            get { return mLinks; }
+        }
         private List<Mob> mMobs;
+        internal List<Mob> Mobs
+        {
+            get { return mMobs; }
+        }
 
         internal Room(Mover mover, string url)
         {
@@ -56,7 +68,7 @@ namespace DCT.Outwar.World
         /// <summary>
         /// 
         /// </summary>
-        /// <returns>0 on success, 1 on hash error, 2 on anything else</returns>
+        /// <returns>0 on success, 1 on hash error, 2 on key, 3 on anything else</returns>
         internal int Load()
         {
             // load source from url
@@ -80,7 +92,7 @@ namespace DCT.Outwar.World
                     string tmp = Parser.Parse(mSource, "&lastroom=", "'");
                     if (!int.TryParse(tmp, out mId))
                     {
-                        return 2;
+                        return 3;
                     }
                 }
                 mName = p.Parse("'font-size:9pt;color:black'><b>- ", " -");

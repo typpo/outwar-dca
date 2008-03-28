@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Outwar\DCErrorReport.cs" />
     <Compile Include="Outwar\World\Occupier.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -283,6 +284,7 @@
     <Compile Include="Outwar\World\RoomHashRecord.cs" />
     <Compile Include="Settings\IniWriter.cs" />
     <Compile Include="Threading\ThreadEngine.cs" />
+    <Compile Include="Util\ErrorReporter.cs" />
     <Compile Include="Util\FileIO.cs" />
     <Compile Include="Util\InputBox.cs">
       <SubType>Form</SubType>

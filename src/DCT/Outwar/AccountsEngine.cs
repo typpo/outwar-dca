@@ -90,7 +90,8 @@ namespace DCT.Outwar
             HttpSocket.DefaultInstance.Cookie = null;
             string toPost = "login_username=" + user
                                            + "&login_password=" + pass
-                                           + (remember ? "&remember=1" : string.Empty);
+                                           + (remember ? "&remember=1" : string.Empty)
+                                           + "&submit=Login";
             //string loginpage = HttpSocket.DefaultInstance.Get("http://sigil.outwar.com");
             //if(loginpage.Contains("tempSec"))
             //{
