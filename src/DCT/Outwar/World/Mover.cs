@@ -343,7 +343,8 @@ namespace DCT.Outwar.World
                         //mSavedRooms.Clear();
                         RefreshRoom();
                         CoreUI.Instance.LogPanel.Log("Move E: Room hash invalid");
-                        DCErrorReport.Report(this, "Bad room hash");
+                        // This is just a simple hour change error
+                        //DCErrorReport.Report(this, "Bad room hash");
                         return 1;
                     case 2:
                         CoreUI.Instance.LogPanel.Log("Move E: Need key");
@@ -418,7 +419,7 @@ namespace DCT.Outwar.World
             if (CoreUI.Instance.Settings.RandomizeLastRoom)
             {
                 CoreUI.Instance.LogPanel.Log("Moving to finish room...");
-                string url = mLocation.Links[Util.Randomizer.Random.Next(0, mLocation.Links.Count)];
+                string url = mLocation.Links[Util.Randomizer.Random.Next(mLocation.Links.Count-5, mLocation.Links.Count)];
                 LoadRoom(url);
             }
         }

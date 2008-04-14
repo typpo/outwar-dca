@@ -71,9 +71,9 @@ namespace DCT.UI
 
             mClient = new IrcClient();
             mClient.SendDelay = 200;
-            //mClient.AutoRetry = true;
-            //mClient.AutoRejoin = true;
-            //mClient.AutoReconnect = true;
+            mClient.AutoRetry = true;   // defaults to retry every 30 secs
+            mClient.AutoRejoin = true;
+            mClient.AutoReconnect = true;
             mClient.ActiveChannelSyncing = true;
 
             mClient.OnAway += new AwayEventHandler(mClient_OnAway);
