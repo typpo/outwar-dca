@@ -211,13 +211,14 @@ namespace DCT.UI
                     string.Format("Exp: {0:n0}      Rage: {1:n0}", mAccountsPanel.Engine.MainAccount.Exp,
                                   mAccountsPanel.Engine.MainAccount.Rage);
 
-                int i = mAccountsPanel.Engine.Accounts.IndexOf(mAccountsPanel.Engine.MainAccount);
-                mAccountsPanel.Accounts[i].SubItems[0].Text = mAccountsPanel.Engine.MainAccount.Name;
-                mAccountsPanel.Accounts[i].SubItems[1].Text = mAccountsPanel.Engine.MainAccount.Socket.Status;
-                mAccountsPanel.Accounts[i].SubItems[2].Text = mAccountsPanel.Engine.MainAccount.Mover.Location == null ? "-" : mAccountsPanel.Engine.MainAccount.Mover.Location.Id.ToString();
-                mAccountsPanel.Accounts[i].SubItems[3].Text = mAccountsPanel.Engine.MainAccount.Mover.SavedRooms.Count.ToString();
-                mAccountsPanel.Accounts[i].SubItems[4].Text = mAccountsPanel.Engine.MainAccount.Mover.MobsAttacked.ToString();
-                mAccountsPanel.Accounts[i].SubItems[5].Text = mAccountsPanel.Engine.MainAccount.Mover.ExpGained.ToString();
+                Account a = mAccountsPanel.Engine.MainAccount;
+                int i = mAccountsPanel.Engine.Accounts.IndexOf(a);
+                mAccountsPanel.Accounts[i].SubItems[0].Text = a.Name;
+                mAccountsPanel.Accounts[i].SubItems[1].Text = a.Mover.Location == null ? "-" : a.Mover.Location.Id.ToString();
+                mAccountsPanel.Accounts[i].SubItems[2].Text = a.Mover.MobsAttacked.ToString();
+                mAccountsPanel.Accounts[i].SubItems[3].Text = a.Mover.ExpGained.ToString();
+                mAccountsPanel.Accounts[i].SubItems[4].Text = (a.Mover.ExpGained / a.Mover.MobsAttacked).ToString();
+                mAccountsPanel.Accounts[i].SubItems[5].Text = (a.Mover.RageUsed / a.Mover.MobsAttacked).ToString();
             }
         }
 

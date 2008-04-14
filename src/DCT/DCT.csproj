@@ -281,7 +281,6 @@
     </Compile>
     <Compile Include="Security\Crypt.cs" />
     <Compile Include="Outwar\World\Room.cs" />
-    <Compile Include="Outwar\World\RoomHashRecord.cs" />
     <Compile Include="Settings\IniWriter.cs" />
     <Compile Include="Threading\ThreadEngine.cs" />
     <Compile Include="Util\ErrorReporter.cs" />

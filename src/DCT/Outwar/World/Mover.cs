@@ -16,12 +16,6 @@ namespace DCT.Outwar.World
 {
     internal class Mover
     {
-        private RoomHashRecord mSavedRooms;
-        internal RoomHashRecord SavedRooms
-        {
-            get { return mSavedRooms; }
-        }
-
         private Room mLocation;
         internal Room Location
         {
@@ -33,6 +27,13 @@ namespace DCT.Outwar.World
         {
             get { return mMobsAttacked; }
             set { mMobsAttacked = value; }
+        }
+
+        private long mRageUsed;
+        internal long RageUsed
+        {
+            get { return mRageUsed; }
+            set { mRageUsed = value; }
         }
 
         private long mExpGained;
@@ -68,7 +69,6 @@ namespace DCT.Outwar.World
             mSocket = socket;
             mAccount = account;
             mLocation = null;
-            mSavedRooms = new RoomHashRecord(mAccount);
 
             mTrainRoomStart = -1;
             mMobsAttacked = 0;
@@ -320,7 +320,6 @@ namespace DCT.Outwar.World
             if (string.IsNullOrEmpty(url))
             {
                 CoreUI.Instance.LogPanel.Log("Move E: that room doesn't exist");
-                mSocket.Status = "Idle";
                 return 1;
             }
             if (mAccount.Ret == mAccount.Name)
@@ -330,10 +329,10 @@ namespace DCT.Outwar.World
                 switch (i)
                 {
                     case 0:
-                        if (url.Contains("?room=") && CoreUI.Instance.Settings.Fly)
-                        {
-                            mSavedRooms.Save(tmp.Id, url);
-                        }
+                        //if (url.Contains("?room=") && CoreUI.Instance.Settings.Fly)
+                        //{
+                        //    mSavedRooms.Save(tmp.Id, url);
+                        //}
                         CoreUI.Instance.LogPanel.Log(mAccount.Name + " now in room "
                                             + (tmp.Id == 0 ? "world.php" : tmp.Id.ToString()));
 
@@ -341,9 +340,9 @@ namespace DCT.Outwar.World
                         mLocation = tmp;
                         return 0;
                     case 1:
-                        mSavedRooms.Clear();
+                        //mSavedRooms.Clear();
                         RefreshRoom();
-                        CoreUI.Instance.LogPanel.Log("Move E: Flying error - room hash invalid");
+                        CoreUI.Instance.LogPanel.Log("Move E: Room hash invalid");
                         DCErrorReport.Report(this, "Bad room hash");
                         return 1;
                     case 2:
@@ -376,10 +375,9 @@ namespace DCT.Outwar.World
             }
 
             CoreUI.Instance.LogPanel.Log("Constructing path for " + mAccount.Name + " to " + roomid);
-            mSocket.Status = "Finding path";
 
             List<int> nodes = new List<int>();
-            nodes = Pathfinder.GetSolution(mLocation.Id, roomid, mSavedRooms);
+            nodes = Pathfinder.GetSolution(mLocation.Id, roomid);
 
             if (nodes == null)
             {
@@ -393,7 +391,7 @@ namespace DCT.Outwar.World
                     Parser p = new Parser(tmp);
                     string url = p.Parse("window.location=\"http://" + mAccount.Server + ".outwar.com/", "\"");
                     LoadRoom(url);
-                    nodes = Pathfinder.GetSolution(mLocation.Id, roomid, mSavedRooms);
+                    nodes = Pathfinder.GetSolution(mLocation.Id, roomid);
                 }
                 else
                 {
@@ -408,11 +406,9 @@ namespace DCT.Outwar.World
 
         internal void CoverArea()
         {
-            mSocket.Status = "Calculating path";
-
             mVisited = new List<int>();
 
-            List<int> path = Pathfinder.CoverArea(mLocation.Id, mSavedRooms);
+            List<int> path = Pathfinder.CoverArea(mLocation.Id);
             FollowPath(path);
 
             CoreUI.Instance.LogPanel.Log("Area '" + mLocation.Name + "' coverage ended");
@@ -425,8 +421,6 @@ namespace DCT.Outwar.World
                 string url = mLocation.Links[Util.Randomizer.Random.Next(0, mLocation.Links.Count)];
                 LoadRoom(url);
             }
-
-            mSocket.Status = "Idle";
         }
 
         private void FollowPath(IList<int> nodes)
@@ -453,8 +447,13 @@ namespace DCT.Outwar.World
                     goto end;
                 }
 
-                mSocket.Status = "Step " + (i + 1) + " of " + nodes.Count;
-                LoadRoom(node);
+                // Send request
+                if (!LoadRoom(node, 0))
+                {
+                    // bad room link
+                    CoreUI.Instance.LogPanel.Log("Room " + node + " is inaccessible");
+                    continue;
+                }
                 CoreUI.Instance.UpdateProgressbar(i + 1, nodes.Count);
 
                 if (mVisited != null)
@@ -465,24 +464,18 @@ namespace DCT.Outwar.World
 
         end:
             CoreUI.Instance.UpdateProgressbar(0, 0);
-            mSocket.Status = "Idle";
             CoreUI.Instance.LogPanel.Log(mAccount.Name + " movement ended");
-        }
-
-        private void LoadRoom(int id)
-        {
-            LoadRoom(id, 0);
         }
         /// <summary>
         /// Attempts to move to a room as per specific id#
         /// </summary>
         /// <param name="id">Room id to move to</param>
-        private void LoadRoom(int id, int tries)
+        private bool LoadRoom(int id, int tries)
         {
             string url;
-            if (!string.IsNullOrEmpty(url = mLocation[id]))
+            if (string.IsNullOrEmpty(url = mLocation[id]))
             {
-                CoreUI.Instance.LogPanel.Log(mAccount.Name + " moving to room " + id);
+                return false;
             }
             //else if (!string.IsNullOrEmpty(url = mSavedRooms.GetRoom(id)))
             //{
@@ -490,7 +483,7 @@ namespace DCT.Outwar.World
             //}
             else
             {
-                return;
+                CoreUI.Instance.LogPanel.Log(mAccount.Name + " moving to room " + id);
             }
 
             int r = LoadRoom(url);
@@ -501,16 +494,23 @@ namespace DCT.Outwar.World
                     MessageBox.Show(mAccount.Name + " is having trouble moving.  Reasons for this include:\n\n- It's impossible to reach your destination (are you missing a key?)\n- The program just can't find a way to get where you want to go\n- Someone logged into your account - press refresh and start your run again", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     CoreUI.Instance.MainPanel.StopAttacking(true);
                     // Note: error report here is not necessary because specific cases are handled in LoadRoom
-                    return;
+                    return false;
                 }
-                LoadRoom(id, tries);
-                return;
+                return LoadRoom(id, tries);
             }
+            else if (r == 2)  // error without override, ie. key
+            {
+                return false;
+            }
+
+            // otherwise things are all good
 
             if (Globals.AttackOn)
             {
                 mLocation.Attack();
             }
+
+            return true;
         }
 
         internal void Train()
@@ -523,15 +523,14 @@ namespace DCT.Outwar.World
 
             CoreUI.Instance.LogPanel.Log("Starting leveling for " + mAccount.Name);
             CoreUI.Instance.LogPanel.Log("Loading all possible bars...may take a while");
-            mSocket.Status = "Calculating closest bar";
 
             mTrainRoomStart = mLocation.Id;
 
             List<List<int>> paths = new List<List<int>>();
-            paths.Add(Pathfinder.GetSolution(mLocation.Id, 258, mSavedRooms)); // dustglass
-            paths.Add(Pathfinder.GetSolution(mLocation.Id, 241, mSavedRooms)); // drunkenclam
-            paths.Add(Pathfinder.GetSolution(mLocation.Id, 403, mSavedRooms)); //hardiron
-            paths.Add(Pathfinder.GetSolution(mLocation.Id, 299, mSavedRooms)); //chuggers
+            paths.Add(Pathfinder.GetSolution(mLocation.Id, 258)); // dustglass
+            paths.Add(Pathfinder.GetSolution(mLocation.Id, 241)); // drunkenclam
+            paths.Add(Pathfinder.GetSolution(mLocation.Id, 403)); //hardiron
+            paths.Add(Pathfinder.GetSolution(mLocation.Id, 299)); //chuggers
 
             bool tmp = CoreUI.Instance.Settings.AutoTrain;
             CoreUI.Instance.Settings.AutoTrain = true;
@@ -555,8 +554,6 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.LogPanel.Log(mAccount.Name + " has been leveled");
             else
                 CoreUI.Instance.LogPanel.Log(mAccount.Name + " not leveled - can't find bartender");
-
-            mSocket.Status = "Idle";
         }
 
         internal void TrainReturn()

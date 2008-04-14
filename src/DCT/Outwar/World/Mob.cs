@@ -391,6 +391,7 @@ namespace DCT.Outwar.World
             // ALL GOOD
             mAttacked = true;
             mRoom.Mover.MobsAttacked++;
+            mRoom.Mover.RageUsed += mRage;
 
             if (src.Contains("found a"))
             {

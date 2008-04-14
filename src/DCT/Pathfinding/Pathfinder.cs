@@ -369,7 +369,7 @@ namespace DCT.Pathfinding
             return sb.ToString();
         }
 
-        internal static List<int> CoverArea(int start, RoomHashRecord savedRooms)
+        internal static List<int> CoverArea(int start)
         {
             List<int> idList = new List<int>();
 
@@ -396,7 +396,7 @@ namespace DCT.Pathfinding
             }
 
             List<int> ret = new List<int>();
-            ret = GetSolution(start, idList[0], savedRooms);
+            ret = GetSolution(start, idList[0]);
             if (ret == null)
             {
                 return null;
@@ -405,8 +405,8 @@ namespace DCT.Pathfinding
             for(int i = 1; i < idList.Count; i++)
             {
                 List<int> tmp = GetPath(idList[i - 1], idList[i]);
-                if(CoreUI.Instance.Settings.Fly)
-                    tmp = savedRooms.Optimize(tmp);
+                //if(CoreUI.Instance.Settings.Fly)
+                //    tmp = savedRooms.Optimize(tmp);
                 if (tmp != null)
                 {
                     ret.AddRange(tmp);
@@ -416,7 +416,7 @@ namespace DCT.Pathfinding
             return ret;
         }
 
-        internal static List<int> GetSolution(int start, int finish, RoomHashRecord savedRooms)
+        internal static List<int> GetSolution(int start, int finish)
         {
             mAllPaths = new List<List<int>>();
 
@@ -440,9 +440,9 @@ namespace DCT.Pathfinding
             if(bestPath.Count > 0)
                 bestPath.RemoveAt(0);
 
-            if (CoreUI.Instance.Settings.Fly)
-                return savedRooms.Optimize(bestPath);
-            else
+            //if (CoreUI.Instance.Settings.Fly)
+            //    return savedRooms.Optimize(bestPath);
+            //else
                 return bestPath;
         }
 

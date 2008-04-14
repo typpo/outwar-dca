@@ -230,7 +230,6 @@ namespace DCT.Outwar.World
                 {
                     return;
                 }
-                mMover.Socket.Status = "Attacking " + (i + 1) + "/" + mMobs.Count;
 
                 if (mob.Attack() && CoreUI.Instance.Settings.Delay != 0)
                 {
@@ -286,10 +285,8 @@ namespace DCT.Outwar.World
 
         internal bool Train()
         {
-            mMover.Socket.Status = "Looking up trainers";
             if (mMobs == null || mMobs.Count < 1)
             {
-                mMover.Socket.Status = "Couldn't find trainer";
                 return false;
             }
 
@@ -298,17 +295,14 @@ namespace DCT.Outwar.World
                 if (mb.IsTrainer)
                 {
                     mb.Train();
-                    mMover.Socket.Status = "Trained";
                     return true;
                 }
             }
-            mMover.Socket.Status = "Couldn't find trainer";
             return false;
         }
 
         internal void Quest()
         {
-            mMover.Socket.Status = "Looking up quests";
             foreach (Mob mb in mMobs)
             {
                 if (mb.IsTalkable)
@@ -316,7 +310,6 @@ namespace DCT.Outwar.World
                     mb.Talk();
                 }
             }
-            mMover.Socket.Status = "Idle";
         }
     }
 }

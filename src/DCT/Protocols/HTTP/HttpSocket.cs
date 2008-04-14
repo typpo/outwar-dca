@@ -40,13 +40,6 @@ namespace DCT.Protocols.Http
             }
         }
 
-        private string mStatus;
-        internal string Status
-        {
-            get { return mStatus; }
-            set { mStatus = value; }
-        }
-
         private bool mRedirect;
         internal bool Redirect
         {
@@ -102,7 +95,6 @@ namespace DCT.Protocols.Http
             mRedirect = true;
             mCookie = string.Empty;
             mUserAgent = USER_AGENTS[Randomizer.Random.Next(USER_AGENTS.Length)];
-            Status = "Created";
         }
         internal string Get(string url)
         {

@@ -43,11 +43,11 @@ namespace DCT.UI
             this.label2 = new System.Windows.Forms.Label();
             this.lvAccounts = new System.Windows.Forms.ListView();
             this.clmCharName = new System.Windows.Forms.ColumnHeader();
-            this.clmStatus = new System.Windows.Forms.ColumnHeader();
             this.clmInRoom = new System.Windows.Forms.ColumnHeader();
-            this.clmRooms = new System.Windows.Forms.ColumnHeader();
             this.clmMobs = new System.Windows.Forms.ColumnHeader();
             this.clmEXP = new System.Windows.Forms.ColumnHeader();
+            this.clmRage = new System.Windows.Forms.ColumnHeader();
+            this.clmAvgExp = new System.Windows.Forms.ColumnHeader();
             this.grpConnections.SuspendLayout();
             this.pnl.SuspendLayout();
             this.SuspendLayout();
@@ -199,11 +199,11 @@ namespace DCT.UI
             this.lvAccounts.CheckBoxes = true;
             this.lvAccounts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clmCharName,
-            this.clmStatus,
             this.clmInRoom,
-            this.clmRooms,
             this.clmMobs,
-            this.clmEXP});
+            this.clmEXP,
+            this.clmAvgExp,
+            this.clmRage});
             this.lvAccounts.Dock = System.Windows.Forms.DockStyle.Top;
             this.lvAccounts.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvAccounts.FullRowSelect = true;
@@ -221,20 +221,10 @@ namespace DCT.UI
             // 
             this.clmCharName.Text = "Name";
             // 
-            // clmStatus
-            // 
-            this.clmStatus.Text = "Status";
-            this.clmStatus.Width = 65;
-            // 
             // clmInRoom
             // 
             this.clmInRoom.Text = "In";
             this.clmInRoom.Width = 30;
-            // 
-            // clmRooms
-            // 
-            this.clmRooms.Text = "Rooms";
-            this.clmRooms.Width = 30;
             // 
             // clmMobs
             // 
@@ -245,6 +235,16 @@ namespace DCT.UI
             // 
             this.clmEXP.Text = "EXPG";
             this.clmEXP.Width = 30;
+            // 
+            // clmRage
+            // 
+            this.clmRage.DisplayIndex = 4;
+            this.clmRage.Text = "AvgRage";
+            // 
+            // clmAvgExp
+            // 
+            this.clmAvgExp.DisplayIndex = 5;
+            this.clmAvgExp.Text = "AvgExp";
             // 
             // AccountsPanel
             // 
@@ -276,11 +276,11 @@ namespace DCT.UI
         private System.Windows.Forms.LinkLabel lnkAccountsCheckAll;
         internal System.Windows.Forms.ListView lvAccounts;
         private System.Windows.Forms.ColumnHeader clmCharName;
-        private System.Windows.Forms.ColumnHeader clmStatus;
         private System.Windows.Forms.ColumnHeader clmInRoom;
-        private System.Windows.Forms.ColumnHeader clmRooms;
         private System.Windows.Forms.ColumnHeader clmMobs;
         private System.Windows.Forms.ColumnHeader clmEXP;
         private System.Windows.Forms.Panel pnl;
+        private System.Windows.Forms.ColumnHeader clmAvgExp;
+        private System.Windows.Forms.ColumnHeader clmRage;
     }
 }
