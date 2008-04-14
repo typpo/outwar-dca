@@ -29,12 +29,12 @@ namespace DCT.Outwar.World
             set { mMobsAttacked = value; }
         }
 
-        private long mRageUsed;
-        internal long RageUsed
-        {
-            get { return mRageUsed; }
-            set { mRageUsed = value; }
-        }
+        //private long mRageUsed;
+        //internal long RageUsed
+        //{
+        //    get { return mRageUsed; }
+        //    set { mRageUsed = value; }
+        //}
 
         private long mExpGained;
         internal long ExpGained

@@ -46,7 +46,6 @@ namespace DCT.UI
             this.clmInRoom = new System.Windows.Forms.ColumnHeader();
             this.clmMobs = new System.Windows.Forms.ColumnHeader();
             this.clmEXP = new System.Windows.Forms.ColumnHeader();
-            this.clmRage = new System.Windows.Forms.ColumnHeader();
             this.clmAvgExp = new System.Windows.Forms.ColumnHeader();
             this.grpConnections.SuspendLayout();
             this.pnl.SuspendLayout();
@@ -202,8 +201,7 @@ namespace DCT.UI
             this.clmInRoom,
             this.clmMobs,
             this.clmEXP,
-            this.clmAvgExp,
-            this.clmRage});
+            this.clmAvgExp});
             this.lvAccounts.Dock = System.Windows.Forms.DockStyle.Top;
             this.lvAccounts.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvAccounts.FullRowSelect = true;
@@ -233,18 +231,13 @@ namespace DCT.UI
             // 
             // clmEXP
             // 
-            this.clmEXP.Text = "EXPG";
-            this.clmEXP.Width = 30;
-            // 
-            // clmRage
-            // 
-            this.clmRage.DisplayIndex = 4;
-            this.clmRage.Text = "AvgRage";
+            this.clmEXP.Text = "xpGain";
+            this.clmEXP.Width = 45;
             // 
             // clmAvgExp
             // 
-            this.clmAvgExp.DisplayIndex = 5;
-            this.clmAvgExp.Text = "AvgExp";
+            this.clmAvgExp.Text = "xpAvg";
+            this.clmAvgExp.Width = 50;
             // 
             // AccountsPanel
             // 
@@ -281,6 +274,5 @@ namespace DCT.UI
         private System.Windows.Forms.ColumnHeader clmEXP;
         private System.Windows.Forms.Panel pnl;
         private System.Windows.Forms.ColumnHeader clmAvgExp;
-        private System.Windows.Forms.ColumnHeader clmRage;
     }
 }
