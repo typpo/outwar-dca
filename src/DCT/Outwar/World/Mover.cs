@@ -414,14 +414,6 @@ namespace DCT.Outwar.World
 
             CoreUI.Instance.LogPanel.Log("Area '" + mLocation.Name + "' coverage ended");
             mVisited.Clear();
-
-            // randomize last room
-            if (CoreUI.Instance.Settings.RandomizeLastRoom)
-            {
-                CoreUI.Instance.LogPanel.Log("Moving to finish room...");
-                string url = mLocation.Links[Util.Randomizer.Random.Next(mLocation.Links.Count-5, mLocation.Links.Count)];
-                LoadRoom(url);
-            }
         }
 
         private void FollowPath(IList<int> nodes)
@@ -488,7 +480,7 @@ namespace DCT.Outwar.World
             }
 
             int r = LoadRoom(url);
-            if(r==1)    // error with override
+            if(r==1)    // error with override, meaning we STOP
             {
                 if (++tries > 2)
                 {

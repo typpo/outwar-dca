@@ -102,13 +102,6 @@ namespace DCT.Settings
             get { return mReturnToStart; }
             set { mReturnToStart = value; }
         }
-        private bool mRandomizeLastRoom;
-        [XmlElement("RandomizeLastRoom")]
-        public bool RandomizeLastRoom
-        {
-            get { return mRandomizeLastRoom; }
-            set { mRandomizeLastRoom = value; }
-        }
 
         private int mAttackMode;
         [XmlElement("AttackMode")]
@@ -212,8 +205,6 @@ namespace DCT.Settings
 
             mUseCountdownTimer = true;
             mUseHourTimer = false;
-
-            mRandomizeLastRoom = true;
 
             mAttackMode = 1;
 

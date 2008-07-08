@@ -54,14 +54,8 @@ namespace DCT.UI
 
         internal bool ReturnToStart
         {
-            get { return optReturnToStart.Checked; }
-            set { optReturnToStart.Checked = value; }
-        }
-
-        internal bool RandomizeLastRoom
-        {
-            get { return optRandLastRoom.Checked; }
-            set { optRandLastRoom.Checked = value; }
+            get { return chkReturnToStart.Checked; }
+            set { chkReturnToStart.Checked = value; }
         }
 
         private CoreUI mUI;
@@ -134,16 +128,10 @@ namespace DCT.UI
             mUI.Settings.Fly = chkFly.Checked;
         }
 
-        private void optRandLastRoom_CheckedChanged(object sender, EventArgs e)
+        private void chkReturnToStart_CheckedChanged_1(object sender, EventArgs e)
         {
-            CoreUI.Instance.Settings.RandomizeLastRoom = true;
-            CoreUI.Instance.Settings.ReturnToStart = false;
-        }
 
-        private void optReturnToStart_CheckedChanged(object sender, EventArgs e)
-        {
-            CoreUI.Instance.Settings.RandomizeLastRoom = false;
-            CoreUI.Instance.Settings.ReturnToStart = true;
+            CoreUI.Instance.Settings.ReturnToStart = chkReturnToStart.Checked;
         }
     }
 }
