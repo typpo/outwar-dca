@@ -44,7 +44,7 @@ namespace DCT.UI
         {
             SetStatus("Loading open message...");
             string src =
-                HttpSocket.DefaultInstance.Get("http://typpo.dyndns.org:7012/dct/open.txt")
+                HttpSocket.DefaultInstance.Get("http://www.typpo.us/dctopen.txt")
                     .Replace("\n", "\r\n");
 
             txtMain.Text = src;

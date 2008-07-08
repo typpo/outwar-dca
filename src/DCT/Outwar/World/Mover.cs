@@ -348,12 +348,12 @@ namespace DCT.Outwar.World
                         return 1;
                     case 2:
                         CoreUI.Instance.LogPanel.Log("Move E: Need key");
-                        DCErrorReport.Report(this, "Need key");
+                        //DCErrorReport.Report(this, "Need key");
                         return 2;
                     default:
                         CoreUI.Instance.LogPanel.Log("Move E: Remaining in " + (tmp.Id == 0 ? "world.php" : tmp.Id.ToString())
                             + " due to unknown error");
-                        DCErrorReport.Report(this, "Unknown error");
+                        //DCErrorReport.Report(this, "Unknown error");
                         return 1;
                 }
             }
@@ -399,7 +399,7 @@ namespace DCT.Outwar.World
                     CoreUI.Instance.MainPanel.StopAttacking(true);
                     return;
                 }
-                DCErrorReport.Report(this, "Null nodes path (unfamiliar location); teleport attempt possible");
+                //DCErrorReport.Report(this, "Null nodes path (unfamiliar location); teleport attempt possible");
             }
 
             FollowPath(nodes);
@@ -430,7 +430,7 @@ namespace DCT.Outwar.World
             {
                 CoreUI.Instance.LogPanel.Log("Move E: " + mAccount.Name + "'s projected path does not exist");
                 CoreUI.Instance.UpdateProgressbar(0, 0);
-                DCErrorReport.Report(this, "Projected path does not exist; movement attempt failed");
+                //DCErrorReport.Report(this, "Projected path does not exist; movement attempt failed");
                 return;
             }
 
