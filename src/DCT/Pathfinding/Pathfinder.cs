@@ -437,13 +437,13 @@ namespace DCT.Pathfinding
             }
 
             // remove starting room id
-            if(bestPath.Count > 0)
+            if (bestPath != null && bestPath.Count > 0)
                 bestPath.RemoveAt(0);
 
             //if (CoreUI.Instance.Settings.Fly)
             //    return savedRooms.Optimize(bestPath);
             //else
-                return bestPath;
+            return bestPath;
         }
 
         private static Hashtable mShortest;

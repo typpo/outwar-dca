@@ -325,37 +325,10 @@ namespace DCT.Outwar.World
             if (mAccount.Ret == mAccount.Name)
             {
                 Room tmp = new Room(this, url);
-                int i = tmp.Load();
-                switch (i)
-                {
-                    case 0:
-                        //if (url.Contains("?room=") && CoreUI.Instance.Settings.Fly)
-                        //{
-                        //    mSavedRooms.Save(tmp.Id, url);
-                        //}
-                        CoreUI.Instance.LogPanel.Log(mAccount.Name + " now in room "
-                                            + (tmp.Id == 0 ? "world.php" : tmp.Id.ToString()));
-
-                        CoreUI.Instance.UpdateDisplay();
-                        mLocation = tmp;
-                        return 0;
-                    case 1:
-                        //mSavedRooms.Clear();
-                        RefreshRoom();
-                        CoreUI.Instance.LogPanel.Log("Move E: Room hash invalid");
-                        // This is just a simple hour change error
-                        //DCErrorReport.Report(this, "Bad room hash");
-                        return 1;
-                    case 2:
-                        CoreUI.Instance.LogPanel.Log("Move E: Need key");
-                        //DCErrorReport.Report(this, "Need key");
-                        return 2;
-                    default:
-                        CoreUI.Instance.LogPanel.Log("Move E: Remaining in " + (tmp.Id == 0 ? "world.php" : tmp.Id.ToString())
-                            + " due to unknown error");
-                        //DCErrorReport.Report(this, "Unknown error");
-                        return 1;
-                }
+                int r = tmp.Load();
+                if (r == 0)
+                    mLocation = tmp;
+                return r;
             }
             else
             {
@@ -478,32 +451,41 @@ namespace DCT.Outwar.World
             {
                 CoreUI.Instance.LogPanel.Log(mAccount.Name + " moving to room " + id);
             }
-
-            int r = LoadRoom(url);
-            if(r==1)    // error with override, meaning we STOP
+            
+            switch (LoadRoom(url))
             {
-                if (++tries > 2)
-                {
-                    MessageBox.Show(mAccount.Name + " is having trouble moving.  Reasons for this include:\n\n- It's impossible to reach your destination (are you missing a key?)\n- The program just can't find a way to get where you want to go\n- Someone logged into your account - press refresh and start your run again", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    CoreUI.Instance.MainPanel.StopAttacking(true);
-                    // Note: error report here is not necessary because specific cases are handled in LoadRoom
+                case 3:
+                case 1:
+                    // error with override, meaning we STOP and try again
+
+                    CoreUI.Instance.LogPanel.Log("Move E: Room hash invalid");
+                    RefreshRoom();
+
+                    if (++tries > 2)
+                    {
+                        MessageBox.Show(mAccount.Name + " is having trouble moving.  Reasons for this include:\n\n- It's impossible to reach your destination (are you missing a key?)\n- The program just can't find a way to get where you want to go\n- Someone logged into your account - press refresh and start your run again", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        CoreUI.Instance.MainPanel.StopAttacking(true);
+                        // Note: error report here is not necessary because specific cases are handled in LoadRoom
+                        return false;
+                    }
+                    return LoadRoom(id, tries);
+                case 2:
+                    // error without override, ie. key
+                    CoreUI.Instance.LogPanel.Log("Move E: Need key");
                     return false;
-                }
-                return LoadRoom(id, tries);
-            }
-            else if (r == 2)  // error without override, ie. key
-            {
-                return false;
-            }
+                default:
+                    // otherwise things are all good
+                    CoreUI.Instance.LogPanel.Log(mAccount.Name + " now in room "
+                    + (mLocation.Id == 0 ? "world.php" : mLocation.Id.ToString()));
 
-            // otherwise things are all good
+                    CoreUI.Instance.UpdateDisplay();
 
-            if (Globals.AttackOn)
-            {
-                mLocation.Attack();
+                    if (Globals.AttackOn)
+                    {
+                        mLocation.Attack();
+                    }
+                    return true;
             }
-
-            return true;
         }
 
         internal void Train()
