@@ -389,25 +389,25 @@ namespace DCT.UI
 
         private void InterpUserCommand(string txt)
         {
-            if (txt.StartsWith("/me"))
+            if (txt.StartsWith("/me") && txt.Length > 3)
             {
                 string msg = txt.Substring(4);
                 mClient.SendMessage(SendType.Action, mChannel, msg);
                 AddText(string.Format("* {0} {1}", mNick, msg));
             }
-            else if (txt.StartsWith("/slap"))
+            else if (txt.StartsWith("/slap") && txt.Length > 5)
             {
                 string msg = "slaps " + txt.Substring(6) + " around a bit with a large trout";
                 mClient.SendMessage(SendType.Action, mChannel, msg);
                 AddText(string.Format("* {0} {1}", mNick, msg));
             }
-            else if (txt.StartsWith("/nick"))
+            else if (txt.StartsWith("/nick") && txt.Length > 5)
             {
                 string newnick = txt.Substring(6);
                 mClient.Login(newnick, mNick);
                 mNick = newnick;
             }
-            else if (txt.StartsWith("/msg"))
+            else if (txt.StartsWith("/msg") && txt.Length > 4)
             {
                 string to = Parser.Parse(txt, " ", " ");
                 if (to != Parser.ERR_CONST)

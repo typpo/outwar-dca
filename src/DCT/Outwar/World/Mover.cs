@@ -414,10 +414,17 @@ namespace DCT.Outwar.World
                 }
 
                 // Send request
-                if (!LoadRoom(node, 0))
+                if (!TryRoom(node, 0))
                 {
                     // bad room link
                     CoreUI.Instance.LogPanel.Log("Room " + node + " is inaccessible");
+                    /*
+                    if (i < nodes.Count - 1)
+                    {
+                        // move to next room in list
+                        PathfindTo(nodes[i + 1]);
+                    }
+                    */
                     continue;
                 }
                 CoreUI.Instance.UpdateProgressbar(i + 1, nodes.Count);
@@ -430,14 +437,19 @@ namespace DCT.Outwar.World
 
         end:
             CoreUI.Instance.UpdateProgressbar(0, 0);
-            CoreUI.Instance.LogPanel.Log(mAccount.Name + " movement ended");
+            CoreUI.Instance.LogPanel.Log(mAccount.Name + " path ended");
         }
         /// <summary>
         /// Attempts to move to a room as per specific id#
         /// </summary>
         /// <param name="id">Room id to move to</param>
-        private bool LoadRoom(int id, int tries)
+        private bool TryRoom(int id, int tries)
         {
+            if (id == mLocation.Id)
+            {
+                return true;
+            }
+
             string url;
             if (string.IsNullOrEmpty(url = mLocation[id]))
             {
@@ -468,7 +480,7 @@ namespace DCT.Outwar.World
                         // Note: error report here is not necessary because specific cases are handled in LoadRoom
                         return false;
                     }
-                    return LoadRoom(id, tries);
+                    return TryRoom(id, tries);
                 case 2:
                     // error without override, ie. key
                     CoreUI.Instance.LogPanel.Log("Move E: Need key");
