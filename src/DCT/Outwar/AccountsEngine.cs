@@ -90,8 +90,7 @@ namespace DCT.Outwar
             HttpSocket.DefaultInstance.Cookie = null;
             string toPost = "login_username=" + user
                                            + "&login_password=" + pass
-                                           + (remember ? "&remember=1" : string.Empty)
-                                           + "&submit=Login";
+                                           + (remember ? "&remember=1" : string.Empty);
             //string loginpage = HttpSocket.DefaultInstance.Get("http://sigil.outwar.com");
             //if(loginpage.Contains("tempSec"))
             //{
@@ -99,11 +98,11 @@ namespace DCT.Outwar
             //    tmp = Parser.RemoveRange(tmp, "<", ">").Replace("\"", "").Replace("'", "");
             //    toPost += "&tempSec=" + tmp;
             //}
-            HttpSocket.DefaultInstance.Post("http://outwar.com/myaccount.php", toPost);
+            HttpSocket.DefaultInstance.Post("http://sigil.outwar.com/myaccount.php", toPost);
 
             for (int i = 1; i <= Server.NUM_SERVERS; i++)
             {
-                string svrlist = HttpSocket.DefaultInstance.Get("http://outwar.com/accounts.php?ac_serverid=" + i);
+                string svrlist = HttpSocket.DefaultInstance.Get("http://outwar.com/accounts.php?ac_serverid=" + i);                
                 AddAccountsFromSource(svrlist);
             }
 
