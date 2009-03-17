@@ -500,6 +500,19 @@ namespace DCT.Outwar.World
             }
         }
 
+        internal void Spider()
+        {
+            const string AREA = "Kix Woods";
+
+            // start in this room
+            this.RefreshRoom();
+
+            // 
+            Stack<int> s = new Stack<int>();
+
+            this.Location.Links
+        }
+
         internal void Train()
         {
             if (!mAccount.NeedsLevel)
