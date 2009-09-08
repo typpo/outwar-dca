@@ -11,24 +11,10 @@ namespace DCT.Outwar.World
     {
         private bool mAttacked;
         private bool mInitialized;
-
-        private bool mTrainer;
-        internal bool IsTrainer
-        {
-            get { return mTrainer; }
-        }
-        private bool mTalkable;
-        internal bool IsTalkable
-        {
-            get { return mTalkable; }
-        }
+        internal bool IsTrainer { get; private set; }
+        internal bool IsTalkable { get; private set; }
         private bool mQuit;
-
-        private bool mAttacking;
-        internal bool Attacking
-        {
-            get { return mAttacking; }
-        }
+        internal bool Attacking { get; private set; }
 
         private bool FilterOK
         {
@@ -57,8 +43,8 @@ namespace DCT.Outwar.World
         internal Mob(string name, string url, string attackurl, bool isQuest, bool isTrainer, Room room) : base(name, url, room)
         {
             mAttackUrl = attackurl;
-            mTalkable = isQuest;
-            mTrainer = isTrainer;
+            IsTalkable = isQuest;
+            IsTrainer = isTrainer;
         }
 
         internal void Initialize()
@@ -247,11 +233,11 @@ namespace DCT.Outwar.World
                 mQuit = true;
                 return false;
             }
-            if (mTrainer && CoreUI.Instance.Settings.AutoTrain)
+            if (IsTrainer && CoreUI.Instance.Settings.AutoTrain)
             {
                 Train();
             }
-            if (mTalkable && (CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests))
+            if (IsTalkable && (CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests))
             {
                 Talk();
             }
@@ -303,7 +289,7 @@ namespace DCT.Outwar.World
                 return;
             }
 
-            mAttacking = true;
+            Attacking = true;
 
             CoreUI.Instance.LogPanel.Log("Attacking " + mName + " (" + mId + ") in rm. " + mRoom.Id);
 
@@ -313,7 +299,7 @@ namespace DCT.Outwar.World
             }
             EvaluateOutcome(mRoom.Mover.Socket.Get(mAttackUrl));
 
-            mAttacking = false;
+            Attacking = false;
         }
 
         private void AttackCallback(IAsyncResult ar)

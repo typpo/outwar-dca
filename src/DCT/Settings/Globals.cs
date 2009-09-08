@@ -2,45 +2,20 @@ namespace DCT.Settings
 {
     internal class Globals
     {
-        private static bool mAttackOn;
-        private static bool mAttackMode;
-        private static bool mTerminate;
-        private static long mExpGained;
-        private static long mExpGainedTotal;
-        internal static bool AttackOn
-        {
-            get { return mAttackOn; }
-            set { mAttackOn = value; }
-        }
-        internal static bool AttackMode
-        {
-            get { return mAttackMode; }
-            set { mAttackMode = value; }
-        }
-        internal static bool Terminate
-        {
-            get { return mTerminate; }
-            set { mTerminate = value; }
-        }
-        internal static long ExpGained
-        {
-            get { return mExpGained; }
-            set { mExpGained = value; }
-        }
-        internal static long ExpGainedTotal
-        {
-            get { return mExpGainedTotal; }
-            set { mExpGainedTotal = value; }
-        }
+        internal static bool AttackOn { get; set; }
+        internal static bool AttackMode { get; set; }
+        internal static bool Terminate { get; set; }
+        internal static long ExpGained { get; set; }
+        internal static long ExpGainedTotal { get; set; }
 
         static Globals()
         {
-            mAttackOn = false;
-            mAttackMode = false;
-            mTerminate = false;
+            AttackOn = false;
+            AttackMode = false;
+            Terminate = false;
 
-            mExpGained = 0;
-            mExpGainedTotal = 0;
+            ExpGained = 0;
+            ExpGainedTotal = 0;
         }
     }
 }

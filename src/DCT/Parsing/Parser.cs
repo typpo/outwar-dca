@@ -5,22 +5,16 @@ namespace DCT.Parsing
     internal class Parser
     {
         internal const string ERR_CONST = "ERROR";
-
-        private string mStr;
-        internal string String
-        {
-            get { return mStr; }
-            set { mStr = value; }
-        }
+        internal string String { get; set; }
 
         internal Parser(string whole)
         {
-            mStr = whole;
+            String = whole;
         }
 
         internal int Count(string sub)
         {
-            return Count(mStr, sub);
+            return Count(String, sub);
         }
 
         internal static int Count(string whole, string sub)
@@ -36,7 +30,7 @@ namespace DCT.Parsing
 
         internal void CutLeading(string sub)
         {
-            mStr = CutLeading(mStr, sub);
+            String = CutLeading(String, sub);
         }
 
         internal static string CutLeading(string whole, string cutoff)
@@ -53,7 +47,7 @@ namespace DCT.Parsing
 
         internal void CutTrailing(string cutoff)
         {
-            mStr = CutTrailing(mStr, cutoff);
+            String = CutTrailing(String, cutoff);
         }
 
         internal static string CutTrailing(string whole, string cutoff)
@@ -70,7 +64,7 @@ namespace DCT.Parsing
 
         internal void RemoveRange(string start, string end)
         {
-            mStr = RemoveRange(mStr, start, end);
+            String = RemoveRange(String, start, end);
         }
 
         internal static string RemoveRange(string whole, string start, string end)
@@ -91,7 +85,7 @@ namespace DCT.Parsing
 
         internal string Parse(string start, string end)
         {
-            return Parse(mStr, start, end);
+            return Parse(String, start, end);
         }
 
         internal static string Parse(string whole, string start, string end)
@@ -110,7 +104,7 @@ namespace DCT.Parsing
 
         internal string[] MultiParse(string start, string end)
         {
-            return MultiParse(mStr, start, end);
+            return MultiParse(String, start, end);
         }
 
         internal static string[] MultiParse(string whole, string start, string end)

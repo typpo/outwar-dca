@@ -6,17 +6,8 @@ namespace DCT.Outwar
 {
     internal class AccountsEngine
     {
-        private string mRgSessId;
-        internal string RgSessId
-        {
-            get { return mRgSessId; }
-        }
-
-        private List<Account> mAccounts;
-        internal List<Account> Accounts
-        {
-            get { return mAccounts; }
-        }
+        internal string RgSessId { get; private set; }
+        internal List<Account> Accounts { get; private set; }
 
         private int mMainIndex;
 
@@ -24,36 +15,36 @@ namespace DCT.Outwar
         {
             get
             {
-                if (mAccounts.Count < 1)
+                if (Accounts.Count < 1)
                 {
                     return null;
                 }
                 else
                 {
-                    return mAccounts[mMainIndex];
+                    return Accounts[mMainIndex];
                 }
             }
         }
 
         internal AccountsEngine()
         {
-            mAccounts = new List<Account>();
+            Accounts = new List<Account>();
             mMainIndex = 0;
         }
 
         internal Account this[int i]
         {
-            get { return mAccounts[i]; }
+            get { return Accounts[i]; }
         }
 
         internal int Count
         {
-            get { return mAccounts.Count; }
+            get { return Accounts.Count; }
         }
 
         internal void SetMain(Account a)
         {
-            mMainIndex = mAccounts.IndexOf(a);
+            mMainIndex = Accounts.IndexOf(a);
         }
 
         internal void SetMain(int index)
@@ -63,25 +54,25 @@ namespace DCT.Outwar
 
         internal Account Last
         {
-            get { return mAccounts[mAccounts.Count - 1]; }
+            get { return Accounts[Accounts.Count - 1]; }
         }
 
         internal Account Add(string name, int id, ServerName server)
         {
             OutwarHttpSocket socket = new OutwarHttpSocket();
             Account a = new Account(socket, name, id, server);
-            mAccounts.Add(a);
+            Accounts.Add(a);
             return a;
         }
 
         internal void Remove(Account a)
         {
-            mAccounts.Remove(a);
+            Accounts.Remove(a);
         }
 
         internal void Remove(int index)
         {
-            mAccounts.RemoveAt(index);
+            Accounts.RemoveAt(index);
         }
 
         internal void Login(string user, string pass, bool remember)
@@ -108,7 +99,7 @@ namespace DCT.Outwar
 
             if (HttpSocket.DefaultInstance.HasCookie)
             {
-                mRgSessId = HttpSocket.DefaultInstance.Cookie.Substring(11, HttpSocket.DefaultInstance.Cookie.IndexOf(";") - 11);
+                RgSessId = HttpSocket.DefaultInstance.Cookie.Substring(11, HttpSocket.DefaultInstance.Cookie.IndexOf(";") - 11);
             }
             HttpSocket.DefaultInstance.UserAgent = "Typpo DCAA Client";
         }

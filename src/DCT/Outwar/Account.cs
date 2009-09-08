@@ -6,36 +6,11 @@ namespace DCT.Outwar
 {
     internal class Account
     {
-        private string mRet;
-        internal string Ret
-        {
-            get { return mRet; }
-            set { mRet = value; }
-        }
-
-        private OutwarHttpSocket mSocket;
-        internal OutwarHttpSocket Socket
-        {
-            get { return mSocket; }
-        }
-
-        private Mover mMover;
-        internal Mover Mover
-        {
-            get { return mMover; }
-        }
-
-        private ServerName mServer;
-        internal ServerName Server
-        {
-            get { return mServer; }
-        }
-
-        private string mName;
-        internal string Name
-        {
-            get { return mName; }
-        }
+        internal string Ret { get; set; }
+        internal OutwarHttpSocket Socket { get; private set; }
+        internal Mover Mover { get; private set; }
+        internal ServerName Server { get; private set; }
+        internal string Name { get; private set; }
 
         private int mRage;
         internal int Rage
@@ -48,41 +23,31 @@ namespace DCT.Outwar
         {
             get { return mLevel; }
         }
-
-        private long mId;
-        internal long Id
-        {
-            get { return mId; }
-        }
+        internal long Id { get; private set; }
 
         private long mExp;
         internal long Exp
         {
             get { return mExp; }
         }
-
-        private bool mNeedsLevel;
-        internal bool NeedsLevel
-        {
-            get { return mNeedsLevel; }
-        }
+        internal bool NeedsLevel { get; private set; }
 
 
         internal Account(OutwarHttpSocket socket, string name, int id, ServerName server)
         {
-            mSocket = socket;
-            mSocket.Account = this;
-            mName = name;
-            mId = id;
-            mServer = server;
+            Socket = socket;
+            Socket.Account = this;
+            Name = name;
+            Id = id;
+            Server = server;
 
             mRage = 0;
             mLevel = 0;
             mExp = 0;
-            mNeedsLevel = false;
+            NeedsLevel = false;
 
-            mSocket = socket;
-            mMover = new Mover(this, mSocket);
+            Socket = socket;
+            Mover = new Mover(this, Socket);
         }
 
         internal void GetStats(string source)
@@ -95,9 +60,9 @@ namespace DCT.Outwar
             long.TryParse(mm.Parse("EXP:</b> ", "</div>").Trim().Replace(",", ""), out mExp);
 
             if (source.Contains("LEVEL!"))
-                mNeedsLevel = true;
+                NeedsLevel = true;
             else
-                mNeedsLevel = false;
+                NeedsLevel = false;
         }
     }
 }

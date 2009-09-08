@@ -4,45 +4,21 @@ namespace DCT.Pathfinding
 {
     internal class MappedMob : IComparable
     {
-        private string mName;
-        internal string Name
-        {
-            get { return mName; }
-        }
-
-        private int mRoom;
-        internal int Room
-        {
-            get { return mRoom; }
-        }
-
-        private long mId;
-        internal long Id
-        {
-            get { return mId; }
-        }
-
-        private long mLevel;
-        internal long Level
-        {
-            get { return mLevel; }
-        }
-
-        private long mRage;
-        internal long Rage
-        {
-            get { return mRage; }
-        }
+        internal string Name { get; private set; }
+        internal int Room { get; private set; }
+        internal long Id { get; private set; }
+        internal long Level { get; private set; }
+        internal long Rage { get; private set; }
 
         internal MappedMob(string token)
         {
             string[] parts = token.Split(new char[] {';'});
 
-            mName = parts[0];
-            mId = int.Parse(parts[1]);
-            mRoom = int.Parse(parts[2]);
-            mLevel = long.Parse(parts[3]);
-            mRage = long.Parse(parts[4]);
+            Name = parts[0];
+            Id = int.Parse(parts[1]);
+            Room = int.Parse(parts[2]);
+            Level = long.Parse(parts[3]);
+            Rage = long.Parse(parts[4]);
         }
 
         public int CompareTo(object other)
@@ -52,7 +28,7 @@ namespace DCT.Pathfinding
                 throw new Exception("Invalid mob compare type: " + other.GetType());
             }
             MappedMob mb = (MappedMob) other;
-            return mName.CompareTo(mb.Name);
+            return Name.CompareTo(mb.Name);
         }
     }
 }

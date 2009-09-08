@@ -9,44 +9,19 @@ namespace DCT.Outwar.World
 {
     internal class Room
     {
-        private Mover mMover;
-        internal Mover Mover
-        {
-            get { return mMover; }
-        }
+        internal Mover Mover { get; private set; }
         internal int Id
         {
             get { return mId; }
         }
-        internal string Name
-        {
-            get { return mName; }
-            set { mName = value; }
-        }
-        internal bool Trained
-        {
-            get { return mTrained; }
-        }
+        internal string Name { get; set; }
+        internal bool Trained { get; private set; }
         private int mId;
-        private string mUrl;
-        internal string Url
-        {
-            get { return mUrl; }
-        }
-        private string mName;
+        internal string Url { get; private set; }
         // TODO this should not be here
-        private bool mTrained;
         private string mSource;
-        private List<string> mLinks;
-        internal List<string> Links
-        {
-            get { return mLinks; }
-        }
-        private List<Mob> mMobs;
-        internal List<Mob> Mobs
-        {
-            get { return mMobs; }
-        }
+        internal List<string> Links { get; private set; }
+        internal List<Mob> Mobs { get; private set; }
 
         internal Room(Mover mover, string url)
         {
@@ -58,11 +33,11 @@ namespace DCT.Outwar.World
                     int.TryParse(tmp, out mId);
                 }
             }
-            mUrl = url;
-            mMover = mover;
+            Url = url;
+            Mover = mover;
 
-            mTrained = false;
-            mLinks = new List<string>();
+            Trained = false;
+            Links = new List<string>();
         }
 
         /// <summary>
@@ -72,7 +47,7 @@ namespace DCT.Outwar.World
         internal int Load()
         {
             // load source from url
-            mSource = mMover.Socket.Get(mUrl);
+            mSource = Mover.Socket.Get(Url);
 
             Parser p = new Parser(mSource);
             if (mSource.Contains("Error #301"))
@@ -95,7 +70,7 @@ namespace DCT.Outwar.World
                         return 3;
                     }
                 }
-                mName = p.Parse("'font-size:9pt;color:black'><b>- ", " -");
+                Name = p.Parse("'font-size:9pt;color:black'><b>- ", " -");
             }
 
             EnumRooms();
@@ -109,7 +84,7 @@ namespace DCT.Outwar.World
                 EnumMobs();
 
                 if (CoreUI.Instance.Settings.AutoTrain)
-                    mTrained = Train();
+                    Trained = Train();
                 if (CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests)
                     Quest();
             }
@@ -126,7 +101,7 @@ namespace DCT.Outwar.World
         {
             get
             {
-                foreach (string url in mLinks)
+                foreach (string url in Links)
                 {
                     if (url.Contains("room=" + id + "&"))
                     {
@@ -145,7 +120,7 @@ namespace DCT.Outwar.World
             {
                 Load();
             }
-            mMobs = new List<Mob>();
+            Mobs = new List<Mob>();
 
             foreach (string s in Parser.MultiParse(mSource, "<div style=\"border-bottom:1px solid black;\"", "</div>"))
             {
@@ -194,7 +169,7 @@ namespace DCT.Outwar.World
                     continue;
                 }
 
-                mMobs.Add(new Mob(name, url, attackurl, quest, trainer, this));
+                Mobs.Add(new Mob(name, url, attackurl, quest, trainer, this));
             }
         }
 
@@ -205,27 +180,27 @@ namespace DCT.Outwar.World
             for (int i = 0; i < tokens.Length; i++)
             {
                 string url = tokens[i].Replace("\">", "").Replace(" ", "").Replace("/", "").ToLower().Trim();
-                if (url.StartsWith("world.php") && !mLinks.Contains(url))
+                if (url.StartsWith("world.php") && !Links.Contains(url))
                 {
-                    mLinks.Add(url);
+                    Links.Add(url);
                 }
             }
         }
 
         internal void Attack()
         {
-            if (mMobs == null)
+            if (Mobs == null)
             {
                 EnumMobs();
             }
-            if (mMobs.Count < 1)
+            if (Mobs.Count < 1)
             {
                 return;
             }
 
-            for (int i = 0; i < mMobs.Count; i++)
+            for (int i = 0; i < Mobs.Count; i++)
             {
-                Mob mob = mMobs[i];
+                Mob mob = Mobs[i];
                 if (!Globals.AttackOn || !Globals.AttackMode)
                 {
                     return;
@@ -245,9 +220,9 @@ namespace DCT.Outwar.World
             }
             // TODO should be done with callback
             CoreUI.Instance.LogPanel.Log("Waiting for Outwar to respond...");
-            for (int i = 0; i < mMobs.Count; i++)
+            for (int i = 0; i < Mobs.Count; i++)
             {
-                Mob mob = mMobs[i];
+                Mob mob = Mobs[i];
                 while (mob.Attacking)
                 {
                     ThreadEngine.Sleep(10);
@@ -257,13 +232,13 @@ namespace DCT.Outwar.World
 
         internal void AttackMob(int id)
         {
-            if (mMobs == null || mMobs.Count < 1)
+            if (Mobs == null || Mobs.Count < 1)
             {
                 return;
             }
 
             // TODO mMobs should be in a dictionary by id
-            foreach (Mob mb in mMobs)
+            foreach (Mob mb in Mobs)
             {
                 if (mb.Id == id)
                 {
@@ -285,12 +260,12 @@ namespace DCT.Outwar.World
 
         internal bool Train()
         {
-            if (mMobs == null || mMobs.Count < 1)
+            if (Mobs == null || Mobs.Count < 1)
             {
                 return false;
             }
 
-            foreach (Mob mb in mMobs)
+            foreach (Mob mb in Mobs)
             {
                 if (mb.IsTrainer)
                 {
@@ -303,7 +278,7 @@ namespace DCT.Outwar.World
 
         internal void Quest()
         {
-            foreach (Mob mb in mMobs)
+            foreach (Mob mb in Mobs)
             {
                 if (mb.IsTalkable)
                 {

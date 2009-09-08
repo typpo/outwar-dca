@@ -17,106 +17,64 @@ namespace DCT.UI
 {
     public partial class CoreUI : Form
     {
-        private static CoreUI mInstance;
-        public static CoreUI Instance
-        {
-            get { return mInstance; }
-        }
+        public static CoreUI Instance { get; private set; }
 
-        private string mChanges;
-        internal string Changes
-        {
-            set { mChanges = value; }
-        }
+        internal string Changes { private get; set; }
 
-        internal MainPanel MainPanel
-        {
-            get { return mMainPanel; }
-        }
+        internal MainPanel MainPanel { get; private set; }
 
-        internal LogPanel LogPanel
-        {
-            get { return mLogPanel; }
-        }
+        internal LogPanel LogPanel { get; private set; }
 
-        internal AccountsPanel AccountsPanel
-        {
-            get { return mAccountsPanel; }
-        }
+        internal AccountsPanel AccountsPanel { get; private set; }
 
-        internal ChatUI ChatPanel
-        {
-            get { return mChat; }
-        }
+        internal ChatUI ChatPanel { get; private set; }
 
-        internal RoomsPanel RoomsPanel
-        {
-            get { return mRoomsPanel; }
-        }
+        internal RoomsPanel RoomsPanel { get; private set; }
 
-        internal MobsPanel MobsPanel
-        {
-            get { return mMobsPanel; }
-        }
+        internal MobsPanel MobsPanel { get; private set; }
 
-        internal RaidsPanel RaidsPanel
-        {
-            get { return mRaidsPanel; }
-        }
-
-        private UserEditable mSettings;
-        public UserEditable Settings
-        {
-            get { return mSettings; }
-        }
-
-        private MainPanel mMainPanel;
-        private AccountsPanel mAccountsPanel;
-        private LogPanel mLogPanel;
+        internal RaidsPanel RaidsPanel { get; private set; }
+        public UserEditable Settings { get; private set; }
         private AttackPanel mAttackPanel;
         private FiltersPanel mFiltersPanel;
-        private RoomsPanel mRoomsPanel;
-        private MobsPanel mMobsPanel;
-        private RaidsPanel mRaidsPanel;
         private TrainPanel mTrainPanel;
         private QuestsPanel mQuestsPanel;
-        private ChatUI mChat;
 
         public CoreUI()
         {
             InitializeComponent();
 
-            mAccountsPanel = new AccountsPanel(this);
-            mAccountsPanel.Dock = DockStyle.Fill;
-            splitLeftRight.Panel1.Controls.Add(mAccountsPanel);
+            AccountsPanel = new AccountsPanel(this);
+            AccountsPanel.Dock = DockStyle.Fill;
+            splitLeftRight.Panel1.Controls.Add(AccountsPanel);
 
-            mLogPanel = new LogPanel();
-            mLogPanel.Dock = DockStyle.Fill;
-            splitLeftRight2.Panel2.Controls.Add(mLogPanel);
+            LogPanel = new LogPanel();
+            LogPanel.Dock = DockStyle.Fill;
+            splitLeftRight2.Panel2.Controls.Add(LogPanel);
 
             mAttackPanel = new AttackPanel(this);
             mAttackPanel.Dock = DockStyle.Fill;
             tabs.TabPages[0].Controls.Add(mAttackPanel);
 
-            mMainPanel = new MainPanel(this);
-            mMainPanel.Dock = DockStyle.Fill;
-            splitLeftRight2.Panel1.Controls.Add(mMainPanel);
+            MainPanel = new MainPanel(this);
+            MainPanel.Dock = DockStyle.Fill;
+            splitLeftRight2.Panel1.Controls.Add(MainPanel);
 
             mFiltersPanel = new FiltersPanel(this);
             mFiltersPanel.Dock = DockStyle.Fill;
             tabs.TabPages[1].Controls.Add(mFiltersPanel);
 
-            mRoomsPanel = new RoomsPanel(this);
-            mRoomsPanel.Dock = DockStyle.Fill;
-            tabs.TabPages[2].Controls.Add(mRoomsPanel);
+            RoomsPanel = new RoomsPanel(this);
+            RoomsPanel.Dock = DockStyle.Fill;
+            tabs.TabPages[2].Controls.Add(RoomsPanel);
 
-            mMobsPanel = new MobsPanel(this);
-            mMobsPanel.Dock = DockStyle.Fill;
-            tabs.TabPages[3].Controls.Add(mMobsPanel);
+            MobsPanel = new MobsPanel(this);
+            MobsPanel.Dock = DockStyle.Fill;
+            tabs.TabPages[3].Controls.Add(MobsPanel);
 
-            mRaidsPanel = new RaidsPanel(this);
-            mRaidsPanel.Dock = DockStyle.Fill;
-            tabs.TabPages[4].Controls.Add(mRaidsPanel);
+            RaidsPanel = new RaidsPanel(this);
+            RaidsPanel.Dock = DockStyle.Fill;
+            tabs.TabPages[4].Controls.Add(RaidsPanel);
 
             mTrainPanel = new TrainPanel(this);
             mTrainPanel.Dock = DockStyle.Fill;
@@ -126,19 +84,19 @@ namespace DCT.UI
             mQuestsPanel.Dock = DockStyle.Fill;
             tabs.TabPages[6].Controls.Add(mQuestsPanel);
 
-            mChat = new ChatUI(this);
-            mChat.Dock = DockStyle.Fill;
-            tabs.TabPages[7].Controls.Add(mChat);
+            ChatPanel = new ChatUI(this);
+            ChatPanel.Dock = DockStyle.Fill;
+            tabs.TabPages[7].Controls.Add(ChatPanel);
             
-            mInstance = this;
-            mSettings = ConfigSerializer.ReadFile("config.xml");
+            Instance = this;
+            Settings = ConfigSerializer.ReadFile("config.xml");
 
             this.Text = "Typpo's DC Tool - [www.typpo.us] - v" + Version.Id;
 
             foreach (string s in Server.NamesList)
             {
                 ListViewGroup grp = new ListViewGroup(s);
-                mAccountsPanel.Groups.Add(grp);
+                AccountsPanel.Groups.Add(grp);
             }
         }
 
@@ -156,11 +114,11 @@ namespace DCT.UI
             RegistryUtil.Load();
             IniWriter.Get();
             SyncSettings();
-            mMobsPanel.CalcMobRage();
-            mChat.Init();
+            MobsPanel.CalcMobRage();
+            ChatPanel.Init();
 
-            mLogPanel.Log("Started.");
-            mLogPanel.LogAttack("No attacks yet...");
+            LogPanel.Log("Started.");
+            LogPanel.LogAttack("No attacks yet...");
         }
 
         private void CoreUI_FormClosing(object sender, FormClosingEventArgs e)
@@ -169,11 +127,11 @@ namespace DCT.UI
             Globals.AttackMode = false;
             Globals.Terminate = true;
 
-            if (mRoomsPanel.Rooms.Count > 0)
+            if (RoomsPanel.Rooms.Count > 0)
             {
                 RegistryUtil.Save();
                 IniWriter.Save();
-                ConfigSerializer.WriteFile("config.xml", mSettings);
+                ConfigSerializer.WriteFile("config.xml", Settings);
             }
 
             // clean up notifyicon
@@ -190,9 +148,9 @@ namespace DCT.UI
 
         private void BuildViews()
         {
-            mRoomsPanel.BuildView();
-            mMobsPanel.BuildView();
-            mRaidsPanel.BuildView();
+            RoomsPanel.BuildView();
+            MobsPanel.BuildView();
+            RaidsPanel.BuildView();
         }
 
         internal void UpdateDisplay()
@@ -205,19 +163,19 @@ namespace DCT.UI
 
             lblMisc.Text = "Experience gained: " + Globals.ExpGained;
 
-            if (mAccountsPanel.Engine.MainAccount != null)
+            if (AccountsPanel.Engine.MainAccount != null)
             {
-                mMainPanel.StatusText =
-                    string.Format("Exp: {0:n0}      Rage: {1:n0}", mAccountsPanel.Engine.MainAccount.Exp,
-                                  mAccountsPanel.Engine.MainAccount.Rage);
+                MainPanel.StatusText =
+                    string.Format("Exp: {0:n0}      Rage: {1:n0}", AccountsPanel.Engine.MainAccount.Exp,
+                                  AccountsPanel.Engine.MainAccount.Rage);
 
-                Account a = mAccountsPanel.Engine.MainAccount;
-                int i = mAccountsPanel.Engine.Accounts.IndexOf(a);
-                mAccountsPanel.Accounts[i].SubItems[0].Text = a.Name;
-                mAccountsPanel.Accounts[i].SubItems[1].Text = a.Mover.Location == null ? "-" : a.Mover.Location.Id.ToString();
-                mAccountsPanel.Accounts[i].SubItems[2].Text = a.Mover.MobsAttacked.ToString();
-                mAccountsPanel.Accounts[i].SubItems[3].Text = a.Mover.ExpGained.ToString();
-                mAccountsPanel.Accounts[i].SubItems[4].Text = a.Mover.MobsAttacked == 0 ? "-" : (a.Mover.ExpGained / a.Mover.MobsAttacked).ToString();
+                Account a = AccountsPanel.Engine.MainAccount;
+                int i = AccountsPanel.Engine.Accounts.IndexOf(a);
+                AccountsPanel.Accounts[i].SubItems[0].Text = a.Name;
+                AccountsPanel.Accounts[i].SubItems[1].Text = a.Mover.Location == null ? "-" : a.Mover.Location.Id.ToString();
+                AccountsPanel.Accounts[i].SubItems[2].Text = a.Mover.MobsAttacked.ToString();
+                AccountsPanel.Accounts[i].SubItems[3].Text = a.Mover.ExpGained.ToString();
+                AccountsPanel.Accounts[i].SubItems[4].Text = a.Mover.MobsAttacked == 0 ? "-" : (a.Mover.ExpGained / a.Mover.MobsAttacked).ToString();
                 //mAccountsPanel.Accounts[i].SubItems[5].Text = a.Mover.MobsAttacked == 0 ? "-" : (a.Mover.RageUsed / a.Mover.MobsAttacked).ToString();
             }
         }
@@ -247,9 +205,9 @@ namespace DCT.UI
         private delegate void ToggleHandler(bool on);
         internal void Toggle(bool on)
         {
-            if (mChat.StatusLabel.Text.StartsWith("Not"))
+            if (ChatPanel.StatusLabel.Text.StartsWith("Not"))
             {
-                mLogPanel.Log("E: Not connected to authorization server.");
+                LogPanel.Log("E: Not connected to authorization server.");
                 Application.Exit();
                 return;
             }
@@ -260,13 +218,13 @@ namespace DCT.UI
                 return;
             }
             // ACCOUNTS
-            mAccountsPanel.ChangeAllowed = on;
+            AccountsPanel.ChangeAllowed = on;
 
             // ADVENTURES
-            mRaidsPanel.MoveEnabled = on;
+            RaidsPanel.MoveEnabled = on;
 
             // MOVE TAB
-            mRoomsPanel.PathfindEnabled = on;
+            RoomsPanel.PathfindEnabled = on;
             
             // TRAINING TAB
             mTrainPanel.TrainEnabled = on;
@@ -282,17 +240,17 @@ namespace DCT.UI
 
             Toggle(!on);
 
-            mMainPanel.AttackingOn = on;
+            MainPanel.AttackingOn = on;
             Globals.AttackMode = on;
 
-            if (mMainPanel.CountdownTimer != null && on)
+            if (MainPanel.CountdownTimer != null && on)
             {
-                mMainPanel.CountdownTimer.Stop();
+                MainPanel.CountdownTimer.Stop();
             }
 
-            if (mChat.StatusLabel.Text.StartsWith("Not"))
+            if (ChatPanel.StatusLabel.Text.StartsWith("Not"))
             {
-                mLogPanel.Log("E: Not connected to authorization server.");
+                LogPanel.Log("E: Not connected to authorization server.");
                 Application.Exit();
                 return;
             }
@@ -300,55 +258,55 @@ namespace DCT.UI
 
         private void SyncSettings()
         {
-            clearLogsPeriodicallyToolStripMenuItem.Checked = mSettings.ClearLogs;
-            showSystrayIconWhenOpenToolStripMenuItem.Checked = mSettings.NotifyVisible;
+            clearLogsPeriodicallyToolStripMenuItem.Checked = Settings.ClearLogs;
+            showSystrayIconWhenOpenToolStripMenuItem.Checked = Settings.NotifyVisible;
 
-            mAccountsPanel.Username = mSettings.LastUsername;
-            mAccountsPanel.Password = mSettings.LastPassword;
+            AccountsPanel.Username = Settings.LastUsername;
+            AccountsPanel.Password = Settings.LastPassword;
 
-            foreach (string str in mSettings.MobFilters)
+            foreach (string str in Settings.MobFilters)
             {
                 mFiltersPanel.FiltersText = str + "\r\n";
             }
 
-            mAttackPanel.StopAtRage = mSettings.StopAtRage;
-            mAttackPanel.RageLimit = mSettings.RageLimit;
-            mAttackPanel.ReturnToStart = mSettings.ReturnToStart;
+            mAttackPanel.StopAtRage = Settings.StopAtRage;
+            mAttackPanel.RageLimit = Settings.RageLimit;
+            mAttackPanel.ReturnToStart = Settings.ReturnToStart;
             // TODO buh
-            mSettings.Fly = false;            
-            mAttackPanel.Fly = mSettings.Fly;
-            mMainPanel.UseCountdown = mSettings.UseCountdownTimer;
-            mMainPanel.UseHourTimer = mSettings.UseHourTimer;
-            mMainPanel.CountdownValue = mSettings.CycleInterval;
+            Settings.Fly = false;            
+            mAttackPanel.Fly = Settings.Fly;
+            MainPanel.UseCountdown = Settings.UseCountdownTimer;
+            MainPanel.UseHourTimer = Settings.UseHourTimer;
+            MainPanel.CountdownValue = Settings.CycleInterval;
 
-            mMainPanel.SyncAttackMode();
+            MainPanel.SyncAttackMode();
 
-            if (mSettings.AlertQuests)
+            if (Settings.AlertQuests)
                 mQuestsPanel.AlertQuest = true;
-            else if (mSettings.AutoQuest)
+            else if (Settings.AutoQuest)
                 mQuestsPanel.AutoQuest = true;
             else
                 mQuestsPanel.NothingQuest = true;
 
-            mTrainPanel.AutoTrain = mSettings.AutoTrain;
+            mTrainPanel.AutoTrain = Settings.AutoTrain;
 
-            mFiltersPanel.FiltersEnabled = mSettings.FilterMobs;
+            mFiltersPanel.FiltersEnabled = Settings.FilterMobs;
 
-            mAttackPanel.LevelMax = mSettings.LvlLimit;
-            mAttackPanel.LevelMin = mSettings.LvlLimitMin;
-            mAttackPanel.StopAtRage = mSettings.StopAtRage;
+            mAttackPanel.LevelMax = Settings.LvlLimit;
+            mAttackPanel.LevelMin = Settings.LvlLimitMin;
+            mAttackPanel.StopAtRage = Settings.StopAtRage;
 
             try
             {
-                mAttackPanel.ThreadDelay = mSettings.Delay;
+                mAttackPanel.ThreadDelay = Settings.Delay;
             }
             catch (ArgumentOutOfRangeException)
             {
-                mSettings.Delay = 0;
-                mAttackPanel.ThreadDelay = mSettings.Delay;
+                Settings.Delay = 0;
+                mAttackPanel.ThreadDelay = Settings.Delay;
             }
 
-            mAttackPanel.Variance = mSettings.Variance;
+            mAttackPanel.Variance = Settings.Variance;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -358,14 +316,14 @@ namespace DCT.UI
                 + ".\n\nThis particular copy of the program has gained you "
                 + (Globals.ExpGained + Globals.ExpGainedTotal) + " EXP."
                 +
-                (mAccountsPanel.Engine.MainAccount == null
+                (AccountsPanel.Engine.MainAccount == null
                      ? string.Empty
-                     : "\n\n" + mAccountsPanel.Engine.MainAccount.Name + " has been attacking mobs for an average of "
+                     : "\n\n" + AccountsPanel.Engine.MainAccount.Name + " has been attacking mobs for an average of "
                        +
-                       (mAccountsPanel.Engine.MainAccount.Mover.MobsAttacked < 1
+                       (AccountsPanel.Engine.MainAccount.Mover.MobsAttacked < 1
                             ? "N/A"
-                            : (mAccountsPanel.Engine.MainAccount.Mover.ExpGained
-                               / mAccountsPanel.Engine.MainAccount.Mover.MobsAttacked).ToString()) + " exp per attack.")
+                            : (AccountsPanel.Engine.MainAccount.Mover.ExpGained
+                               / AccountsPanel.Engine.MainAccount.Mover.MobsAttacked).ToString()) + " exp per attack.")
                 , "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -380,7 +338,7 @@ namespace DCT.UI
             f.Controls.Add(t);
             t.Dock = DockStyle.Fill;
             t.Multiline = true;
-            t.Text = mChanges.Replace("\n", "\r\n");
+            t.Text = Changes.Replace("\n", "\r\n");
             t.ScrollBars = ScrollBars.Both;
             t.ReadOnly = true;
             f.Show();
@@ -389,13 +347,13 @@ namespace DCT.UI
         private void exportLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Toggle(false);
-            mLogPanel.Export();
+            LogPanel.Export();
             Toggle(true);
         }
 
         private void clearLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            mLogPanel.Clear();
+            LogPanel.Clear();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -405,14 +363,14 @@ namespace DCT.UI
 
         private void openInBrowserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (mAccountsPanel.Engine.MainAccount == null)
+            if (AccountsPanel.Engine.MainAccount == null)
             {
                 MessageBox.Show("You haven't logged in on an account yet.", "Open In Browser", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             try
             {
-                Process.Start("http://" + mAccountsPanel.Engine.MainAccount.Server + ".outwar.com/?rg_sess_id=" + mAccountsPanel.Engine.RgSessId);
+                Process.Start("http://" + AccountsPanel.Engine.MainAccount.Server + ".outwar.com/?rg_sess_id=" + AccountsPanel.Engine.RgSessId);
             }
             catch { }   // firefox crash
         }
@@ -447,10 +405,10 @@ namespace DCT.UI
 
         private void mNotifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            if (!this.Visible && mAccountsPanel.Engine.MainAccount != null)
+            if (!this.Visible && AccountsPanel.Engine.MainAccount != null)
             {
                 mNotifyIcon.ShowBalloonTip(1000, "Account Stats",
-                    string.Format("Exp: {0:n0}\nRage: {1:n0}\nExp Gained: {2:n0}\n{3}\n\nDouble-click to open", mAccountsPanel.Engine.MainAccount.Exp, mAccountsPanel.Engine.MainAccount.Rage, Globals.ExpGained, mMainPanel.TimeLeft)
+                    string.Format("Exp: {0:n0}\nRage: {1:n0}\nExp Gained: {2:n0}\n{3}\n\nDouble-click to open", AccountsPanel.Engine.MainAccount.Exp, AccountsPanel.Engine.MainAccount.Rage, Globals.ExpGained, MainPanel.TimeLeft)
                     , ToolTipIcon.Info);
             }
             else
@@ -479,7 +437,7 @@ namespace DCT.UI
             else
             {
                 Show();
-                if (!mSettings.NotifyVisible)
+                if (!Settings.NotifyVisible)
                     mNotifyIcon.Visible = false;
             }
         }
@@ -501,7 +459,7 @@ namespace DCT.UI
 
         private void showSystrayIconWhenOpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            mNotifyIcon.Visible = mSettings.NotifyVisible = showSystrayIconWhenOpenToolStripMenuItem.Checked;
+            mNotifyIcon.Visible = Settings.NotifyVisible = showSystrayIconWhenOpenToolStripMenuItem.Checked;
         }
     }
 }

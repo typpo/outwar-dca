@@ -6,218 +6,88 @@ namespace DCT.Settings
     [XmlRoot("UserEditable")]
     public class UserEditable
     {
-        private string[] mMobFilters;
         [XmlArrayItem("Filter", typeof(string))]
-        public string[] MobFilters
-        {
-            get { return mMobFilters; }
-            set { mMobFilters = value; }
-        }
-
-        private bool mFly;
+        public string[] MobFilters { get; set; }
         [XmlElement("Fly")]
-        public bool Fly
-        {
-            get { return mFly; }
-            set { mFly = value; }
-        }
-
-        private bool mNotifyVisible;
+        public bool Fly { get; set; }
         [XmlElement("NotifyVisible")]
-        public bool NotifyVisible
-        {
-            get { return mNotifyVisible; }
-            set { mNotifyVisible = value; }
-        }
-
-        private bool mClearLogs;
+        public bool NotifyVisible { get; set; }
         [XmlElement("ClearLogs")]
-        public bool ClearLogs
-        {
-            get { return mClearLogs; }
-            set { mClearLogs = value; }
-        }
-
-        private bool mAutoTeleport;
+        public bool ClearLogs { get; set; }
         [XmlElement("AutoTeleport")]
-        public bool AutoTeleport
-        {
-            get { return mAutoTeleport; }
-            set { mAutoTeleport = value; }
-        }
-
-        private bool mAlertQuests;
+        public bool AutoTeleport { get; set; }
         [XmlElement("AlertQuests")]
-        public bool AlertQuests
-        {
-            get { return mAlertQuests; }
-            set { mAlertQuests = value; }
-        }
-        private bool mAutoTrain;
+        public bool AlertQuests { get; set; }
         [XmlElement("AutoTrain")]
-        public bool AutoTrain
-        {
-            get { return mAutoTrain; }
-            set { mAutoTrain = value; }
-        }
-        private bool mAutoQuest;
+        public bool AutoTrain { get; set; }
         [XmlElement("AutoQuest")]
-        public bool AutoQuest
-        {
-            get { return mAutoQuest; }
-            set { mAutoQuest = value; }
-        }
-        private bool mFilterMobs;
+        public bool AutoQuest { get; set; }
         [XmlElement("FilterMobs")]
-        public bool FilterMobs
-        {
-            get { return mFilterMobs; }
-            set { mFilterMobs = value; }
-        }
-        private bool mUseCountdownTimer;
+        public bool FilterMobs { get; set; }
         [XmlElement("UseCountdownTimer")]
-        public bool UseCountdownTimer
-        {
-            get { return mUseCountdownTimer; }
-            set { mUseCountdownTimer = value; }
-        }
-        private bool mUseHourTimer;
+        public bool UseCountdownTimer { get; set; }
         [XmlElement("UseHourTimer")]
-        public bool UseHourTimer
-        {
-            get { return mUseHourTimer; }
-            set { mUseHourTimer = value; }
-        }
-        private bool mVariance;
+        public bool UseHourTimer { get; set; }
         [XmlElement("Variance")]
-        public bool Variance
-        {
-            get { return mVariance; }
-            set { mVariance = value; }
-        }
-        private bool mReturnToStart;
+        public bool Variance { get; set; }
         [XmlElement("ReturnToStart")]
-        public bool ReturnToStart
-        {
-            get { return mReturnToStart; }
-            set { mReturnToStart = value; }
-        }
-
-        private int mAttackMode;
+        public bool ReturnToStart { get; set; }
         [XmlElement("AttackMode")]
-        public int AttackMode
-        {
-            get { return mAttackMode; }
-            set { mAttackMode = value; }
-        }
-
-        private int mDelay;
+        public int AttackMode { get; set; }
         [XmlElement("Delay")]
-        public int Delay
-        {
-            get { return mDelay; }
-            set { mDelay = value; }
-        }
-        private int mMaxThreads;
+        public int Delay { get; set; }
         [XmlIgnore()]
-        public int MaxThreads
-        {
-            get { return mMaxThreads; }
-            set { mMaxThreads = value; }
-        }
-        private int mRageLimit;
+        public int MaxThreads { get; set; }
         [XmlElement("RageLimit")]
-        public int RageLimit
-        {
-            get { return mRageLimit; }
-            set { mRageLimit = value; }
-        }
-        private int mStopAtRage;
+        public int RageLimit { get; set; }
         [XmlElement("StopAtRage")]
-        public int StopAtRage
-        {
-            get { return mStopAtRage; }
-            set { mStopAtRage = value; }
-        }
-        private int mCycleInterval;
+        public int StopAtRage { get; set; }
         [XmlElement("CycleInterval")]
-        public int CycleInterval
-        {
-            get { return mCycleInterval; }
-            set { mCycleInterval = value; }
-        }
-
-        private long mLvlLimitMin;
+        public int CycleInterval { get; set; }
         [XmlElement("LvlLimitMin")]
-        public long LvlLimitMin
-        {
-            get { return mLvlLimitMin; }
-            set { mLvlLimitMin = value; }
-        }
-        private long mLvlLimit;
+        public long LvlLimitMin { get; set; }
         [XmlElement("LvlLimit")]
-        public long LvlLimit
-        {
-            get { return mLvlLimit; }
-            set { mLvlLimit = value; }
-        }
-        private int mTimeout;
+        public long LvlLimit { get; set; }
         [XmlElement("Timeout")]
-        public int Timeout
-        {
-            get { return mTimeout; }
-            set { mTimeout = value; }
-        }
-
-        private string mLastUsername;
+        public int Timeout { get; set; }
         [XmlElement("LastUsername")]
-        public string LastUsername
-        {
-            get { return mLastUsername; }
-            set { mLastUsername = value; }
-        }
-
-        private string mLastPassword;
+        public string LastUsername { get; set; }
         [XmlElement("LastPassword")]
-        public string LastPassword
-        {
-            get { return mLastPassword; }
-            set { mLastPassword = value; }
-        }
+        public string LastPassword { get; set; }
 
         public UserEditable()
         {
-            mMobFilters = new string[0];
+            MobFilters = new string[0];
 
-            mNotifyVisible = true;
+            NotifyVisible = true;
 
-            mFly = false;
-            mAutoTeleport = true;
+            Fly = false;
+            AutoTeleport = true;
 
-            mClearLogs = true;
-            mAutoTrain = false;
-            mVariance = true;
+            ClearLogs = true;
+            AutoTrain = false;
+            Variance = true;
 
-            mAlertQuests = false;
-            mAutoQuest = false;
+            AlertQuests = false;
+            AutoQuest = false;
 
-            mFilterMobs = false;
+            FilterMobs = false;
 
-            mUseCountdownTimer = true;
-            mUseHourTimer = false;
+            UseCountdownTimer = true;
+            UseHourTimer = false;
 
-            mAttackMode = 1;
+            AttackMode = 1;
 
-            mLvlLimitMin = 0;
-            mLvlLimit = 35;
-            mRageLimit = 30;
-            mStopAtRage = 0;
-            mDelay = 0;
-            mTimeout = 15000;
-            mMaxThreads = 5;
-            mCycleInterval = 40;
+            LvlLimitMin = 0;
+            LvlLimit = 35;
+            RageLimit = 30;
+            StopAtRage = 0;
+            Delay = 0;
+            Timeout = 15000;
+            MaxThreads = 5;
+            CycleInterval = 40;
 
-            mLastUsername = mLastPassword = string.Empty;
+            LastUsername = LastPassword = string.Empty;
         }
     }
 }

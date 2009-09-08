@@ -8,43 +8,26 @@ namespace DCT.Threading
     {
         private const int DEFAULT_MAX = 5;
         private const int DEFAULT_DELAY = 100;
-
-        private static ThreadEngine mDefaultInstance;
-        internal static ThreadEngine DefaultInstance
-        {
-            get { return mDefaultInstance; }
-        }
+        internal static ThreadEngine DefaultInstance { get; private set; }
 
         internal static void Sleep(int ms)
         {
             Thread.Sleep(ms);
         }
-
-        private int mMax;
-        internal int Max
-        {
-            get { return mMax; }
-            set { mMax = value; }
-        }
-
-        private int mDelay;
-        internal int Delay
-        {
-            get { return mDelay; }
-            set { mDelay = value; }
-        }
+        internal int Max { get; set; }
+        internal int Delay { get; set; }
 
         private Queue<Thread> mThreads;
 
         static ThreadEngine()
         {
-            mDefaultInstance = new ThreadEngine(DEFAULT_MAX, DEFAULT_DELAY);
+            DefaultInstance = new ThreadEngine(DEFAULT_MAX, DEFAULT_DELAY);
         }
 
         internal ThreadEngine(int max, int delay)
         {
-            mMax = max;
-            mDelay = delay;
+            Max = max;
+            Delay = delay;
             mThreads = new Queue<Thread>();
         }
 
@@ -131,7 +114,7 @@ namespace DCT.Threading
 
         private void Process(int num, bool block)
         {
-            Thread[] places = new Thread[mMax];
+            Thread[] places = new Thread[Max];
             for (int i = 0; i < num; i++)
             {
                 if (mThreads.Count == 0)
@@ -152,7 +135,7 @@ namespace DCT.Threading
                     Application.DoEvents();
                 }
 
-                Thread.Sleep(mDelay);
+                Thread.Sleep(Delay);
                 Application.DoEvents();
             }
 

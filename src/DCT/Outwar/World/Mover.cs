@@ -16,18 +16,8 @@ namespace DCT.Outwar.World
 {
     internal class Mover
     {
-        private Room mLocation;
-        internal Room Location
-        {
-            get { return mLocation; }
-        }
-
-        private int mMobsAttacked;
-        internal int MobsAttacked
-        {
-            get { return mMobsAttacked; }
-            set { mMobsAttacked = value; }
-        }
+        internal Room Location { get; private set; }
+        internal int MobsAttacked { get; set; }
 
         //private long mRageUsed;
         //internal long RageUsed
@@ -35,46 +25,25 @@ namespace DCT.Outwar.World
         //    get { return mRageUsed; }
         //    set { mRageUsed = value; }
         //}
-
-        private long mExpGained;
-        internal long ExpGained
-        {
-            get { return mExpGained; }
-            set { mExpGained = value; }
-        }
-
-        private OutwarHttpSocket mSocket;
-        internal OutwarHttpSocket Socket
-        {
-            get { return mSocket; }
-        }
-
-        private Account mAccount;
-        internal Account Account
-        {
-            get { return mAccount; }
-        }
-
-        private ReturnToStartHandler mReturnToStartHandler;
-        internal ReturnToStartHandler ReturnToStartHandler
-        {
-            get { return mReturnToStartHandler; }
-        }
+        internal long ExpGained { get; set; }
+        internal OutwarHttpSocket Socket { get; private set; }
+        internal Account Account { get; private set; }
+        internal ReturnToStartHandler ReturnToStartHandler { get; private set; }
 
         private int mTrainRoomStart;
         private List<int> mVisited;
 
         internal Mover(Account account, OutwarHttpSocket socket)
         {
-            mSocket = socket;
-            mAccount = account;
-            mLocation = null;
+            Socket = socket;
+            Account = account;
+            Location = null;
 
             mTrainRoomStart = -1;
-            mMobsAttacked = 0;
-            mExpGained = 0;
+            MobsAttacked = 0;
+            ExpGained = 0;
 
-            mReturnToStartHandler = new ReturnToStartHandler(mAccount);
+            ReturnToStartHandler = new ReturnToStartHandler(Account);
         }
 
         internal void RefreshRoom()
@@ -286,8 +255,8 @@ namespace DCT.Outwar.World
                 //Console.WriteLine(DCT.Security.Crypt.BinToHex(DCT.Security.Crypt.Get("http://typpo.dyndns.org:7012/dct/auth/verify.php", DCT.Security.Auth.KEY, false)));
 
                 string text1 = Crypt.Get(Crypt.HexToBin(sb.ToString()), Auth.KEY, false);
-                string text2 = Crypt.BinToHex(Crypt.Get(mAccount.Name, Version.Id, false));
-                string idtag = Crypt.BinToHex(Crypt.Get(mAccount.Id.ToString(), Version.Id, false));
+                string text2 = Crypt.BinToHex(Crypt.Get(Account.Name, Version.Id, false));
+                string idtag = Crypt.BinToHex(Crypt.Get(Account.Id.ToString(), Version.Id, false));
                 string text3 = Crypt.RandomString(10, true);
                 //string pass = Crypt.bin2hex(Crypt.Encrypt(Globals.Pass, mAccount.Name, false));
 
@@ -295,15 +264,15 @@ namespace DCT.Outwar.World
                     HttpSocket.DefaultInstance.Post(text1, "tag=" + text2 + "&tag2=" + idtag + "&str=" + text3
                         /* + "&pass=" + pass*/);
 
-                if ((mAccount.Ret = Crypt.Get(Crypt.HexToBin(text4), mAccount.Id + text3, false))
-                    != mAccount.Name)
+                if ((Account.Ret = Crypt.Get(Crypt.HexToBin(text4), Account.Id + text3, false))
+                    != Account.Name)
                 {
                     throw new Exception();
                 }
             }
             catch
             {
-                CoreUI.Instance.LogPanel.Log("E: " + mAccount.Name + " can't explore DC because the account is not authorized.  This is probably because there is a new version out.\n\nIf you are sure you are running the latest version, you may be reading this because your internet connection cut out or the authorization server is down.");
+                CoreUI.Instance.LogPanel.Log("E: " + Account.Name + " can't explore DC because the account is not authorized.  This is probably because there is a new version out.\n\nIf you are sure you are running the latest version, you may be reading this because your internet connection cut out or the authorization server is down.");
                 Application.Exit();
                 return;
             }
@@ -322,12 +291,12 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.LogPanel.Log("Move E: that room doesn't exist");
                 return 1;
             }
-            if (mAccount.Ret == mAccount.Name)
+            if (Account.Ret == Account.Name)
             {
                 Room tmp = new Room(this, url);
                 int r = tmp.Load();
                 if (r == 0)
-                    mLocation = tmp;
+                    Location = tmp;
                 return r;
             }
             else
@@ -343,15 +312,15 @@ namespace DCT.Outwar.World
         internal delegate void PathfindHandler(int roomid);
         internal void PathfindTo(int roomid)
         {
-            if (roomid == mLocation.Id || roomid < 0)
+            if (roomid == Location.Id || roomid < 0)
             {
                 return;
             }
 
-            CoreUI.Instance.LogPanel.Log("Constructing path for " + mAccount.Name + " to " + roomid);
+            CoreUI.Instance.LogPanel.Log("Constructing path for " + Account.Name + " to " + roomid);
 
             List<int> nodes = new List<int>();
-            nodes = Pathfinder.GetSolution(mLocation.Id, roomid);
+            nodes = Pathfinder.GetSolution(Location.Id, roomid);
 
             if (nodes == null)
             {
@@ -359,13 +328,13 @@ namespace DCT.Outwar.World
                     MessageBox.Show("The program cannot build a path from your current area to your chosen location.  Do you want to teleport to the nearest bar and try again?  Recommended 'Yes' unless you are in a separated area such as Stoneraven.\n\n(this option can be automatically enabled under the Attack tab)", "Pathfinding Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     == DialogResult.Yes)
                 {
-                    CoreUI.Instance.LogPanel.Log(mAccount.Name + " teleporting...");
+                    CoreUI.Instance.LogPanel.Log(Account.Name + " teleporting...");
 
-                    string tmp = mAccount.Socket.Get("world.php?teleport=1");
+                    string tmp = Account.Socket.Get("world.php?teleport=1");
                     Parser p = new Parser(tmp);
-                    string url = p.Parse("window.location=\"http://" + mAccount.Server + ".outwar.com/", "\"");
+                    string url = p.Parse("window.location=\"http://" + Account.Server + ".outwar.com/", "\"");
                     LoadRoom(url);
-                    nodes = Pathfinder.GetSolution(mLocation.Id, roomid);
+                    nodes = Pathfinder.GetSolution(Location.Id, roomid);
                 }
                 else
                 {
@@ -382,10 +351,10 @@ namespace DCT.Outwar.World
         {
             mVisited = new List<int>();
 
-            List<int> path = Pathfinder.CoverArea(mLocation.Id);
+            List<int> path = Pathfinder.CoverArea(Location.Id);
             FollowPath(path);
 
-            CoreUI.Instance.LogPanel.Log("Area '" + mLocation.Name + "' coverage ended");
+            CoreUI.Instance.LogPanel.Log("Area '" + Location.Name + "' coverage ended");
             mVisited.Clear();
         }
 
@@ -393,7 +362,7 @@ namespace DCT.Outwar.World
         {
             if (nodes == null || nodes.Count < 1)
             {
-                CoreUI.Instance.LogPanel.Log("Move E: " + mAccount.Name + "'s projected path does not exist");
+                CoreUI.Instance.LogPanel.Log("Move E: " + Account.Name + "'s projected path does not exist");
                 CoreUI.Instance.UpdateProgressbar(0, 0);
                 //DCErrorReport.Report(this, "Projected path does not exist; movement attempt failed");
                 return;
@@ -404,7 +373,7 @@ namespace DCT.Outwar.World
             for (int i = 0; i < nodes.Count; i++)
             {
                 int node = nodes[i];
-                if (Globals.Terminate || mAccount.Ret != mAccount.Name)
+                if (Globals.Terminate || Account.Ret != Account.Name)
                 {
                     return;
                 }
@@ -437,7 +406,7 @@ namespace DCT.Outwar.World
 
         end:
             CoreUI.Instance.UpdateProgressbar(0, 0);
-            CoreUI.Instance.LogPanel.Log(mAccount.Name + " path ended");
+            CoreUI.Instance.LogPanel.Log(Account.Name + " path ended");
         }
         /// <summary>
         /// Attempts to move to a room as per specific id#
@@ -445,13 +414,13 @@ namespace DCT.Outwar.World
         /// <param name="id">Room id to move to</param>
         private bool TryRoom(int id, int tries)
         {
-            if (id == mLocation.Id)
+            if (id == Location.Id)
             {
                 return true;
             }
 
             string url;
-            if (string.IsNullOrEmpty(url = mLocation[id]))
+            if (string.IsNullOrEmpty(url = Location[id]))
             {
                 return false;
             }
@@ -461,7 +430,7 @@ namespace DCT.Outwar.World
             //}
             else
             {
-                CoreUI.Instance.LogPanel.Log(mAccount.Name + " moving to room " + id);
+                CoreUI.Instance.LogPanel.Log(Account.Name + " moving to room " + id);
             }
             
             switch (LoadRoom(url))
@@ -475,7 +444,7 @@ namespace DCT.Outwar.World
 
                     if (++tries > 2)
                     {
-                        MessageBox.Show(mAccount.Name + " is having trouble moving.  Reasons for this include:\n\n- It's impossible to reach your destination (are you missing a key?)\n- The program just can't find a way to get where you want to go\n- Someone logged into your account - press refresh and start your run again", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        MessageBox.Show(Account.Name + " is having trouble moving.  Reasons for this include:\n\n- It's impossible to reach your destination (are you missing a key?)\n- The program just can't find a way to get where you want to go\n- Someone logged into your account - press refresh and start your run again", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         CoreUI.Instance.MainPanel.StopAttacking(true);
                         // Note: error report here is not necessary because specific cases are handled in LoadRoom
                         return false;
@@ -487,14 +456,14 @@ namespace DCT.Outwar.World
                     return false;
                 default:
                     // otherwise things are all good
-                    CoreUI.Instance.LogPanel.Log(mAccount.Name + " now in room "
-                    + (mLocation.Id == 0 ? "world.php" : mLocation.Id.ToString()));
+                    CoreUI.Instance.LogPanel.Log(Account.Name + " now in room "
+                    + (Location.Id == 0 ? "world.php" : Location.Id.ToString()));
 
                     CoreUI.Instance.UpdateDisplay();
 
                     if (Globals.AttackOn)
                     {
-                        mLocation.Attack();
+                        Location.Attack();
                     }
                     return true;
             }
@@ -515,22 +484,22 @@ namespace DCT.Outwar.World
 
         internal void Train()
         {
-            if (!mAccount.NeedsLevel)
+            if (!Account.NeedsLevel)
             {
-                CoreUI.Instance.LogPanel.Log(mAccount.Name + " doesn't need leveling");
+                CoreUI.Instance.LogPanel.Log(Account.Name + " doesn't need leveling");
                 return;
             }
 
-            CoreUI.Instance.LogPanel.Log("Starting leveling for " + mAccount.Name);
+            CoreUI.Instance.LogPanel.Log("Starting leveling for " + Account.Name);
             CoreUI.Instance.LogPanel.Log("Loading all possible bars...may take a while");
 
-            mTrainRoomStart = mLocation.Id;
+            mTrainRoomStart = Location.Id;
 
             List<List<int>> paths = new List<List<int>>();
-            paths.Add(Pathfinder.GetSolution(mLocation.Id, 258)); // dustglass
-            paths.Add(Pathfinder.GetSolution(mLocation.Id, 241)); // drunkenclam
-            paths.Add(Pathfinder.GetSolution(mLocation.Id, 403)); //hardiron
-            paths.Add(Pathfinder.GetSolution(mLocation.Id, 299)); //chuggers
+            paths.Add(Pathfinder.GetSolution(Location.Id, 258)); // dustglass
+            paths.Add(Pathfinder.GetSolution(Location.Id, 241)); // drunkenclam
+            paths.Add(Pathfinder.GetSolution(Location.Id, 403)); //hardiron
+            paths.Add(Pathfinder.GetSolution(Location.Id, 299)); //chuggers
 
             bool tmp = CoreUI.Instance.Settings.AutoTrain;
             CoreUI.Instance.Settings.AutoTrain = true;
@@ -548,12 +517,12 @@ namespace DCT.Outwar.World
             FollowPath(paths[shortest]);
 
             CoreUI.Instance.Settings.AutoTrain = tmp;
-            mLocation.Train();
+            Location.Train();
 
-            if (mLocation.Trained)
-                CoreUI.Instance.LogPanel.Log(mAccount.Name + " has been leveled");
+            if (Location.Trained)
+                CoreUI.Instance.LogPanel.Log(Account.Name + " has been leveled");
             else
-                CoreUI.Instance.LogPanel.Log(mAccount.Name + " not leveled - can't find bartender");
+                CoreUI.Instance.LogPanel.Log(Account.Name + " not leveled - can't find bartender");
         }
 
         internal void TrainReturn()

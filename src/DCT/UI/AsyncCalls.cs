@@ -15,7 +15,7 @@ namespace DCT.UI
         private void SetupHandler()
         {
             AttackingType type;
-            switch (mSettings.AttackMode)
+            switch (Settings.AttackMode)
             {
                 case 0:
                     type = AttackingType.Single;
@@ -29,20 +29,20 @@ namespace DCT.UI
             }
 
             List<Account> accounts = new List<Account>();
-            if (mAccountsPanel.CheckedIndices.Count > 0)
+            if (AccountsPanel.CheckedIndices.Count > 0)
             {
-                foreach (int i in mAccountsPanel.CheckedIndices)
+                foreach (int i in AccountsPanel.CheckedIndices)
                 {
-                    accounts.Add(mAccountsPanel.Engine[i]);
+                    accounts.Add(AccountsPanel.Engine[i]);
                 }
             }
-            else if (mAccountsPanel.FocusedAccount != null)
+            else if (AccountsPanel.FocusedAccount != null)
             {
-                accounts.Add(mAccountsPanel.Engine[mAccountsPanel.FocusedAccount.Index]);
+                accounts.Add(AccountsPanel.Engine[AccountsPanel.FocusedAccount.Index]);
             }
             else if(mAccountsPanel.Engine.Count > 0)
             {
-                accounts.Add(mAccountsPanel.Engine[0]);
+                accounts.Add(AccountsPanel.Engine[0]);
             }
 
             AttackHandler.Set(accounts, type);
@@ -58,27 +58,27 @@ namespace DCT.UI
         {
             Globals.AttackOn = true;
 
-            mAccountsPanel.Engine.MainAccount.Mover.CoverArea();
+            AccountsPanel.Engine.MainAccount.Mover.CoverArea();
 
             if (!Globals.AttackMode)
             {
-                mLogPanel.Log("Single-area coverage quit");
-                mMainPanel.StopAttacking(true);
+                LogPanel.Log("Single-area coverage quit");
+                MainPanel.StopAttacking(true);
             }
         }
 
         internal void AttackAreas()
         {
-            if (mRoomsPanel.CheckedRooms.Count < 1)
+            if (RoomsPanel.CheckedRooms.Count < 1)
             {
-                mLogPanel.Log("E: Choose at least 1 area to cover");
+                LogPanel.Log("E: Choose at least 1 area to cover");
                 return;
             }
 
             Dictionary<int, string> rooms = new Dictionary<int, string>();
-            foreach (int i in mRoomsPanel.CheckedIndices)
+            foreach (int i in RoomsPanel.CheckedIndices)
             {
-                rooms.Add(int.Parse(mRoomsPanel.Rooms[i].SubItems[1].Text), mRoomsPanel.Rooms[i].Text);
+                rooms.Add(int.Parse(RoomsPanel.Rooms[i].SubItems[1].Text), RoomsPanel.Rooms[i].Text);
             }
 
             SetupHandler();
@@ -89,7 +89,7 @@ namespace DCT.UI
         {
             // TODO shouldn't need room name as string...
 
-            Account mAccount = mAccountsPanel.Engine.MainAccount;
+            Account mAccount = AccountsPanel.Engine.MainAccount;
             List<string> done = new List<string>();
             foreach (int rm in rooms.Keys)
             {
@@ -110,32 +110,32 @@ namespace DCT.UI
 
                 Globals.AttackOn = true;
 
-                mAccountsPanel.Engine.MainAccount.Mover.CoverArea();
+                AccountsPanel.Engine.MainAccount.Mover.CoverArea();
 
                 if (!Globals.AttackOn || !Globals.AttackMode)
                     goto quit;
             }
             return;
             quit:
-            mLogPanel.Log("Multi-area coverage quit");
-            mMainPanel.StopAttacking(true);
+            LogPanel.Log("Multi-area coverage quit");
+            MainPanel.StopAttacking(true);
         }
 
         internal void AttackMobs()
         {
-            if (mMobsPanel.CheckedIndices.Count < 1)
+            if (MobsPanel.CheckedIndices.Count < 1)
             {
-                mLogPanel.Log("E: Choose at least 1 mob to attack");
+                LogPanel.Log("E: Choose at least 1 mob to attack");
                 return;
             }
 
             Dictionary<int, int> mobs = new Dictionary<int, int>();
-            foreach (int i in mMobsPanel.CheckedIndices)
+            foreach (int i in MobsPanel.CheckedIndices)
             {
-                int key = int.Parse(mMobsPanel.Mobs[i].SubItems[1].Text);
+                int key = int.Parse(MobsPanel.Mobs[i].SubItems[1].Text);
                 if (!mobs.ContainsKey(key))
                 {
-                    mobs.Add(key, int.Parse(mMobsPanel.Mobs[i].SubItems[2].Text));
+                    mobs.Add(key, int.Parse(MobsPanel.Mobs[i].SubItems[2].Text));
                 }
             }
 
@@ -145,7 +145,7 @@ namespace DCT.UI
 
         internal void DoAttackMobs(Dictionary<int, int> mobs)
         {
-            Account mAccount = mAccountsPanel.Engine.MainAccount;
+            Account mAccount = AccountsPanel.Engine.MainAccount;
 
             foreach (int mb in mobs.Keys)
             {
@@ -164,12 +164,12 @@ namespace DCT.UI
                 if (!Globals.AttackOn || !Globals.AttackMode)
                     goto quit;
 
-                mAccountsPanel.Engine.MainAccount.Mover.Location.AttackMob(mb);
+                AccountsPanel.Engine.MainAccount.Mover.Location.AttackMob(mb);
             }
             return;
             quit:
-            mLogPanel.Log("Mob coverage quit");
-            mMainPanel.StopAttacking(true);
+            LogPanel.Log("Mob coverage quit");
+            MainPanel.StopAttacking(true);
         }
 
         #endregion
@@ -178,14 +178,14 @@ namespace DCT.UI
 
         internal void InvokePathfind(int room)
         {
-            if (mAccountsPanel.CheckedIndices.Count < 1)
+            if (AccountsPanel.CheckedIndices.Count < 1)
             {
-                mLogPanel.Log("E: Check the accounts you want to move");
+                LogPanel.Log("E: Check the accounts you want to move");
                 return;
             }
             if (!Pathfinder.Exists(room))
             {
-                mLogPanel.Log("E: Select a room that exists in the map database");
+                LogPanel.Log("E: Select a room that exists in the map database");
                 return;
             }
 
@@ -194,13 +194,13 @@ namespace DCT.UI
 
         internal void InvokeAdventures(int room)
         {
-            if (mAccountsPanel.CheckedIndices.Count < 1)
+            if (AccountsPanel.CheckedIndices.Count < 1)
             {
-                mLogPanel.Log("E: Check the accounts you want to move.");
+                LogPanel.Log("E: Check the accounts you want to move.");
             }
-            else if (mRaidsPanel.FocusedRaid == null)
+            else if (RaidsPanel.FocusedRaid == null)
             {
-                mLogPanel.Log("E: Choose an adventure to move to.");
+                LogPanel.Log("E: Choose an adventure to move to.");
             }
 
             InvokeBulkMove(room);
@@ -222,7 +222,7 @@ namespace DCT.UI
             //}
             // TODO stagger
             Toggle(false);
-            foreach (int index in mAccountsPanel.CheckedIndices)
+            foreach (int index in AccountsPanel.CheckedIndices)
             {
                 PathfindHandler d = new PathfindHandler(DoPathfind);
                 d.BeginInvoke(index, room, new AsyncCallback(PathfindCallback), d);
@@ -242,8 +242,8 @@ namespace DCT.UI
 
         private void DoPathfind(int accountIndex, int room)
         {
-            mAccountsPanel.Engine[accountIndex].Mover.RefreshRoom();
-            mAccountsPanel.Engine[accountIndex].Mover.PathfindTo(room);
+            AccountsPanel.Engine[accountIndex].Mover.RefreshRoom();
+            AccountsPanel.Engine[accountIndex].Mover.PathfindTo(room);
         }
 
         #endregion
@@ -252,19 +252,19 @@ namespace DCT.UI
 
         internal void InvokeTraining(bool returnToStart)
         {
-            if (mAccountsPanel.CheckedIndices.Count < 1)
+            if (AccountsPanel.CheckedIndices.Count < 1)
             {
-                mLogPanel.Log("E: Check the accounts you want to move");
+                LogPanel.Log("E: Check the accounts you want to move");
                 return;
             }
 
             Toggle(false);
 
-            foreach (int index in mAccountsPanel.CheckedIndices)
+            foreach (int index in AccountsPanel.CheckedIndices)
             {
-                mAccountsPanel.Engine[index].Mover.RefreshRoom();
-                mAccountsPanel.Engine[index].Mover.ReturnToStartHandler.SetOriginal();
-                DCT.Threading.ThreadEngine.DefaultInstance.Enqueue(mAccountsPanel.Engine[index].Mover.Train);
+                AccountsPanel.Engine[index].Mover.RefreshRoom();
+                AccountsPanel.Engine[index].Mover.ReturnToStartHandler.SetOriginal();
+                DCT.Threading.ThreadEngine.DefaultInstance.Enqueue(AccountsPanel.Engine[index].Mover.Train);
             }
 
             // TODO this needs to go
@@ -272,9 +272,9 @@ namespace DCT.UI
 
             if (returnToStart)
             {
-                foreach (int index in mAccountsPanel.CheckedIndices)
+                foreach (int index in AccountsPanel.CheckedIndices)
                 {
-                    mAccountsPanel.Engine[index].Mover.ReturnToStartHandler.InvokeReturn();
+                    AccountsPanel.Engine[index].Mover.ReturnToStartHandler.InvokeReturn();
                     // TODO not necessary to thread this - it already is threaded
                     //InvokeReturn(index);
                 }

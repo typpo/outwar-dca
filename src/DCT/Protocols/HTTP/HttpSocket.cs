@@ -39,37 +39,13 @@ namespace DCT.Protocols.Http
                     return mIP;
             }
         }
-
-        private bool mRedirect;
-        internal bool Redirect
-        {
-            get { return mRedirect; }
-            set { mRedirect = value; }
-        }
-
-        private int mTimeout;
-        internal int Timeout
-        {
-            get { return mTimeout; }
-            set { mTimeout = value; }
-        }
-
-        private string mUserAgent;
-        internal string UserAgent
-        {
-            get { return mUserAgent; }
-            set { mUserAgent = value; }
-        }
-
-        private string mCookie;
-        internal string Cookie
-        {
-            get { return mCookie; }
-            set { mCookie = value; }
-        }
+        internal bool Redirect { get; set; }
+        internal int Timeout { get; set; }
+        internal string UserAgent { get; set; }
+        internal string Cookie { get; set; }
         internal bool HasCookie
         {
-            get { return !string.IsNullOrEmpty(mCookie); }
+            get { return !string.IsNullOrEmpty(Cookie); }
         }
 
         private static readonly string[] USER_AGENTS = {
@@ -90,11 +66,11 @@ namespace DCT.Protocols.Http
 
         internal HttpSocket()
         {
-            mTimeout = CoreUI.Instance.Settings.Timeout;
+            Timeout = CoreUI.Instance.Settings.Timeout;
 
-            mRedirect = true;
-            mCookie = string.Empty;
-            mUserAgent = USER_AGENTS[Randomizer.Random.Next(USER_AGENTS.Length)];
+            Redirect = true;
+            Cookie = string.Empty;
+            UserAgent = USER_AGENTS[Randomizer.Random.Next(USER_AGENTS.Length)];
         }
         internal string Get(string url)
         {
@@ -131,7 +107,7 @@ namespace DCT.Protocols.Http
                     sr.Close();
                     response.Close();
 
-                    if (string.IsNullOrEmpty(mCookie))
+                    if (string.IsNullOrEmpty(Cookie))
                     {
                         StringBuilder full = new StringBuilder();
                         string[] cookieA = response.Headers.GetValues("Set-Cookie");
@@ -142,7 +118,7 @@ namespace DCT.Protocols.Http
                                 full.Append(cookieA[j].Substring(0, cookieA[j].IndexOf(";") + 1));
                         }
 
-                        mCookie = full.ToString();
+                        Cookie = full.ToString();
                     }
 
                     return ret;
@@ -162,14 +138,14 @@ namespace DCT.Protocols.Http
             //request.CachePolicy = CACHE_POLICY;
             request.Timeout = CoreUI.Instance.Settings.Timeout;//mTimeout;
 
-            if (!string.IsNullOrEmpty(mCookie))
+            if (!string.IsNullOrEmpty(Cookie))
             {
-                request.Headers.Add("Cookie: " + mCookie);
+                request.Headers.Add("Cookie: " + Cookie);
             }
 
-            request.UserAgent = mUserAgent;
+            request.UserAgent = UserAgent;
             request.ContentType = "application/x-www-form-urlencoded";
-            request.AllowAutoRedirect = mRedirect;
+            request.AllowAutoRedirect = Redirect;
 
             return request;
         }

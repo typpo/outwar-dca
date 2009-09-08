@@ -6,25 +6,20 @@ namespace DCT.Protocols.Http
 {
     internal class OutwarHttpSocket : HttpSocket
     {
-        private Account mAccount;
-        internal Account Account
-        {
-            get { return mAccount; }
-            set { mAccount = value; }
-        }
+        internal Account Account { get; set; }
 
         protected override string Request(string url, string write)
         {
-            if (mAccount == null)
+            if (Account == null)
             {
                 throw new Exception("Attempted HTTP request before account was assigned.");
             }
 
-            string ret = base.Request("http://" + mAccount.Server + ".outwar.com/" + url, write);
+            string ret = base.Request("http://" + Account.Server + ".outwar.com/" + url, write);
             ret = Parser.RemoveRange(ret, "<!--", "-->");
             if (Settings.Globals.AttackMode && ret.Contains(".outwar.com"))
             {
-                mAccount.GetStats(ret);
+                Account.GetStats(ret);
             }
             return ret;
         }

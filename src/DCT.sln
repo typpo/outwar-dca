@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual C# Express 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCT", "DCT\DCT.csproj", "{AC24DB62-B169-4418-9029-A49308BAD649}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCT.Deployment", "DCT.Deployment\DCT.Deployment.csproj", "{CBABE95F-64B0-407C-87FB-795FB52A9E7C}"

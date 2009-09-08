@@ -5,39 +5,25 @@ namespace DCT.Pathfinding
 {
     internal class MappedRoom : IComparable
     {
-        private int mId;
-        internal int Id
-        {
-            get { return mId; }
-        }
-
-        private string mName;
-        internal string Name
-        {
-            get { return mName; }
-        }
-
-        private List<int> mNeighbors;
-        internal List<int> Neighbors
-        {
-            get { return mNeighbors; }
-        }
+        internal int Id { get; private set; }
+        internal string Name { get; private set; }
+        internal List<int> Neighbors { get; private set; }
 
         internal MappedRoom(int id)
         {
-            mId = id;
+            Id = id;
         }
 
         internal MappedRoom(string token)
         {
-            mNeighbors = new List<int>();
+            Neighbors = new List<int>();
 
             string[] tmp = token.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries);
-            mId = int.Parse(tmp[0]);
-            mName = tmp[tmp.Length - 1];
+            Id = int.Parse(tmp[0]);
+            Name = tmp[tmp.Length - 1];
             for (int i = 1; i < tmp.Length - 1; i++)
             {
-                mNeighbors.Add(int.Parse(tmp[i]));
+                Neighbors.Add(int.Parse(tmp[i]));
             }
         }
 
@@ -45,7 +31,7 @@ namespace DCT.Pathfinding
         {
             if (other.GetType() == typeof(MappedRoom))
             {
-                return mId.CompareTo(((MappedRoom)other).mId);
+                return Id.CompareTo(((MappedRoom)other).Id);
             }
             throw new Exception("Invalid room compare type: " + other.GetType());
         }
