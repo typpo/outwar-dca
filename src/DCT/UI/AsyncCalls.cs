@@ -40,7 +40,7 @@ namespace DCT.UI
             {
                 accounts.Add(AccountsPanel.Engine[AccountsPanel.FocusedAccount.Index]);
             }
-            else if(mAccountsPanel.Engine.Count > 0)
+            else if(AccountsPanel.Engine.Count > 0)
             {
                 accounts.Add(AccountsPanel.Engine[0]);
             }

@@ -31,7 +31,6 @@ namespace DCT.UI
             this.grpConnections = new System.Windows.Forms.GroupBox();
             this.pnl = new System.Windows.Forms.Panel();
             this.lnkAccountsCheckAll = new System.Windows.Forms.LinkLabel();
-            this.chkRemember = new System.Windows.Forms.CheckBox();
             this.lnkAccountsUncheckAll = new System.Windows.Forms.LinkLabel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.lnkAccountsInvert = new System.Windows.Forms.LinkLabel();
@@ -66,7 +65,6 @@ namespace DCT.UI
             // pnl
             // 
             this.pnl.Controls.Add(this.lnkAccountsCheckAll);
-            this.pnl.Controls.Add(this.chkRemember);
             this.pnl.Controls.Add(this.lnkAccountsUncheckAll);
             this.pnl.Controls.Add(this.btnRefresh);
             this.pnl.Controls.Add(this.lnkAccountsInvert);
@@ -77,9 +75,9 @@ namespace DCT.UI
             this.pnl.Controls.Add(this.label1);
             this.pnl.Controls.Add(this.label2);
             this.pnl.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnl.Location = new System.Drawing.Point(3, 311);
+            this.pnl.Location = new System.Drawing.Point(3, 329);
             this.pnl.Name = "pnl";
-            this.pnl.Size = new System.Drawing.Size(230, 125);
+            this.pnl.Size = new System.Drawing.Size(230, 107);
             this.pnl.TabIndex = 13;
             // 
             // lnkAccountsCheckAll
@@ -92,18 +90,6 @@ namespace DCT.UI
             this.lnkAccountsCheckAll.TabStop = true;
             this.lnkAccountsCheckAll.Text = "Check All";
             this.lnkAccountsCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAccountsCheckAll_LinkClicked);
-            // 
-            // chkRemember
-            // 
-            this.chkRemember.AutoSize = true;
-            this.chkRemember.Checked = true;
-            this.chkRemember.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRemember.Location = new System.Drawing.Point(12, 72);
-            this.chkRemember.Name = "chkRemember";
-            this.chkRemember.Size = new System.Drawing.Size(94, 17);
-            this.chkRemember.TabIndex = 12;
-            this.chkRemember.Text = "Remember me";
-            this.chkRemember.UseVisualStyleBackColor = true;
             // 
             // lnkAccountsUncheckAll
             // 
@@ -119,7 +105,7 @@ namespace DCT.UI
             // btnRefresh
             // 
             this.btnRefresh.Enabled = false;
-            this.btnRefresh.Location = new System.Drawing.Point(85, 93);
+            this.btnRefresh.Location = new System.Drawing.Point(79, 75);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(61, 23);
             this.btnRefresh.TabIndex = 11;
@@ -141,7 +127,7 @@ namespace DCT.UI
             // btnLogout
             // 
             this.btnLogout.Enabled = false;
-            this.btnLogout.Location = new System.Drawing.Point(152, 93);
+            this.btnLogout.Location = new System.Drawing.Point(146, 75);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(61, 23);
             this.btnLogout.TabIndex = 10;
@@ -151,7 +137,7 @@ namespace DCT.UI
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(18, 93);
+            this.btnLogin.Location = new System.Drawing.Point(12, 75);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(61, 23);
             this.btnLogin.TabIndex = 9;
@@ -209,7 +195,7 @@ namespace DCT.UI
             this.lvAccounts.Location = new System.Drawing.Point(3, 16);
             this.lvAccounts.MultiSelect = false;
             this.lvAccounts.Name = "lvAccounts";
-            this.lvAccounts.Size = new System.Drawing.Size(224, 295);
+            this.lvAccounts.Size = new System.Drawing.Size(224, 313);
             this.lvAccounts.TabIndex = 1;
             this.lvAccounts.UseCompatibleStateImageBehavior = false;
             this.lvAccounts.View = System.Windows.Forms.View.Details;
@@ -256,7 +242,6 @@ namespace DCT.UI
         #endregion
 
         private System.Windows.Forms.GroupBox grpConnections;
-        private System.Windows.Forms.CheckBox chkRemember;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnLogin;

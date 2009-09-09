@@ -15,7 +15,7 @@ namespace DCT.Pathfinding
             string[] parts = token.Split(new char[] {';'});
 
             Name = parts[0];
-            Id = int.Parse(parts[1]);
+            Id = long.Parse(parts[1]);
             Room = int.Parse(parts[2]);
             Level = long.Parse(parts[3]);
             Rage = long.Parse(parts[4]);

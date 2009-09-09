@@ -479,7 +479,7 @@ namespace DCT.Outwar.World
             // 
             Stack<int> s = new Stack<int>();
 
-            this.Location.Links
+            //this.Location.Links
         }
 
         internal void Train()

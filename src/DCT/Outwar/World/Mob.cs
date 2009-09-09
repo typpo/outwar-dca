@@ -381,7 +381,7 @@ namespace DCT.Outwar.World
             if (src.Contains("found a"))
             {
                 string f = Parser.Parse(src, "found a ", "<br>");
-                CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + " found a " + f);
+                CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + (f.Length < 30 ? " found a " + f : " found an item"));
             }
             if (src.Contains("has gained "))
             {

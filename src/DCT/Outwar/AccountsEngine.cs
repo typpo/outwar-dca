@@ -75,13 +75,11 @@ namespace DCT.Outwar
             Accounts.RemoveAt(index);
         }
 
-        internal void Login(string user, string pass, bool remember)
+        internal void Login(string user, string pass)
         {
             HttpSocket.DefaultInstance.UserAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:0.9.4) Gecko/20011019 Netscape6/6.2";
             HttpSocket.DefaultInstance.Cookie = null;
-            string toPost = "login_username=" + user
-                                           + "&login_password=" + pass
-                                           + (remember ? "&remember=1" : string.Empty);
+            string toPost = "login_username=" + user + "&login_password=" + pass;
             //string loginpage = HttpSocket.DefaultInstance.Get("http://sigil.outwar.com");
             //if(loginpage.Contains("tempSec"))
             //{

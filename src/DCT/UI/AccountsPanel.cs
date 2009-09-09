@@ -176,7 +176,6 @@ namespace DCT.UI
 
             txtUsername.Enabled = false;
             txtPassword.Enabled = false;
-            chkRemember.Enabled = false;
             btnLogin.Enabled = false;
             btnLogout.Enabled = false;
 
@@ -224,7 +223,6 @@ namespace DCT.UI
 
             txtUsername.Enabled = true;
             txtPassword.Enabled = true;
-            chkRemember.Enabled = true;
             btnLogout.Enabled = true;
             btnRefresh.Enabled = true;
         }
@@ -238,7 +236,7 @@ namespace DCT.UI
         private int DoLogin()
         {
             int orig = mEngine.Count;
-            mEngine.Login(txtUsername.Text, txtPassword.Text, chkRemember.Checked);
+            mEngine.Login(txtUsername.Text, txtPassword.Text);
 
             return mEngine.Count - orig;
         }
