@@ -79,7 +79,6 @@ namespace DCT.Outwar
         {
             HttpSocket.DefaultInstance.UserAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:0.9.4) Gecko/20011019 Netscape6/6.2";
             HttpSocket.DefaultInstance.Cookie = null;
-            string toPost = "login_username=" + user + "&login_password=" + pass;
             //string loginpage = HttpSocket.DefaultInstance.Get("http://sigil.outwar.com");
             //if(loginpage.Contains("tempSec"))
             //{
@@ -87,6 +86,7 @@ namespace DCT.Outwar
             //    tmp = Parser.RemoveRange(tmp, "<", ">").Replace("\"", "").Replace("'", "");
             //    toPost += "&tempSec=" + tmp;
             //}
+            string toPost = "login_username=" + user + "&login_password=" + pass;
             HttpSocket.DefaultInstance.Post("http://sigil.outwar.com/myaccount.php", toPost);
 
             for (int i = 1; i <= Server.NUM_SERVERS; i++)

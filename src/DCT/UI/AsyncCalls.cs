@@ -197,10 +197,12 @@ namespace DCT.UI
             if (AccountsPanel.CheckedIndices.Count < 1)
             {
                 LogPanel.Log("E: Check the accounts you want to move.");
+                return;
             }
             else if (RaidsPanel.FocusedRaid == null)
             {
                 LogPanel.Log("E: Choose an adventure to move to.");
+                return;
             }
 
             InvokeBulkMove(room);
