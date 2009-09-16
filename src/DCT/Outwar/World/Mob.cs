@@ -27,10 +27,19 @@ namespace DCT.Outwar.World
 
                 foreach (string mob in CoreUI.Instance.Settings.MobFilters)
                 {
-                    if (mName.ToLower().Contains(mob.ToLower()))
+                    if (mob.StartsWith("!"))
+                    {
+                        if (mName.ToLower().Contains(mob.Substring(1).ToLower()))
+                            return false;
                         return true;
+                    }
+                    else
+                    {
+                        if (mName.ToLower().Contains(mob.ToLower()))
+                            return true;
+                        return false;
+                    }
                 }
-                return false;
             }
         }
 
