@@ -9,6 +9,8 @@ namespace DCT.Pathfinding
         internal string Name { get; private set; }
         internal List<int> Neighbors { get; private set; }
 
+        internal bool isNull { get; private set; }
+
         internal MappedRoom(int id)
         {
             Id = id;
@@ -25,12 +27,16 @@ namespace DCT.Pathfinding
             {
                 Neighbors.Add(int.Parse(tmp[i]));
             }
+
+            isNull = Neighbors.Count == 0;
         }
 
         public int CompareTo(object other)
         {
             if (other.GetType() == typeof(MappedRoom))
             {
+                if (isNull)
+                    return Convert.ToInt32(!((MappedRoom)other).isNull);
                 return Id.CompareTo(((MappedRoom)other).Id);
             }
             throw new Exception("Invalid room compare type: " + other.GetType());

@@ -289,6 +289,7 @@ namespace DCT.Pathfinding
             string map;
             int i = 0;
             mRooms = new List<MappedRoom>();
+            MappedRoom mr;
             while (mRooms.Count < 1 && i < 2)
             {
                 map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(urlSb.ToString()), keySb.ToString(), false));
@@ -298,7 +299,9 @@ namespace DCT.Pathfinding
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
                         continue;
-                    mRooms.Add(new MappedRoom(token));
+                    mr = new MappedRoom(token);
+                    if (!mr.isNull)
+                        mRooms.Add(new MappedRoom(token));
                 }
                 i++;
             }
@@ -308,6 +311,7 @@ namespace DCT.Pathfinding
 
             i = 0;
             mMobs = new List<MappedMob>();
+            MappedMob mm;
             while (mMobs.Count < 1 && i < 2)
             {
                 map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_MOBS), KEY_MOBS, false));
@@ -317,7 +321,9 @@ namespace DCT.Pathfinding
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
                         continue;
-                    mMobs.Add(new MappedMob(token));
+                    mm = new MappedMob(token);
+                    if (!mm.isNull)
+                        mMobs.Add(mm);
                 }
                 i++;
             }
