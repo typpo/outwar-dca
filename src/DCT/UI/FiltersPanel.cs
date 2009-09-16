@@ -86,7 +86,7 @@ namespace DCT.UI
                 string input;
                 while ((input = myFile.ReadLine()) != null)
                 {
-                    FiltersText = input + "\r\n";
+                    FiltersText += input + "\r\n";
                 }
 
                 myFile.Close();
