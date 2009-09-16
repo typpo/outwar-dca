@@ -75,7 +75,7 @@ namespace DCT.Outwar.World
             mInitialized = true;
         }
 
-        private bool TestRage(bool rageLimit)
+        private bool TestRage(bool useRageLimit)
         {
             if (!IsInRoom)
             {
@@ -87,10 +87,17 @@ namespace DCT.Outwar.World
             {
                 mSkipLoad = true;
 
-                if ((rageLimit && CoreUI.Instance.Settings.RageLimit != 0 && m.Rage > CoreUI.Instance.Settings.RageLimit)
-                    || m.Rage > mRoom.Mover.Account.Rage
-                    || mRoom.Mover.Account.Rage - m.Rage < CoreUI.Instance.Settings.StopBelowRage)
+                if ((useRageLimit && CoreUI.Instance.Settings.RageLimit != 0 && m.Rage > CoreUI.Instance.Settings.RageLimit)
+                    || m.Rage > mRoom.Mover.Account.Rage)
                 {
+                    return false;
+                }
+                else if (mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
+                {
+                    // go to next account
+                    CoreUI.Instance.LogPanel.Log("Reached rage limit, stopping attacks");
+                    mQuit = true;
+                    Globals.AttackOn = false;
                     return false;
                 }
             }

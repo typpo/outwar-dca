@@ -164,7 +164,6 @@ namespace DCT.UI
                 AccountsPanel.Engine.MainAccount.Mover.Location.AttackMob(mb);
                 if (!Globals.AttackOn)
                 {
-                    LogPanel.Log("Got my britches.");
                     return;
                 }
             }
