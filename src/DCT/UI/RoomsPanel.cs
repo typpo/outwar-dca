@@ -27,26 +27,14 @@ namespace DCT.UI
             get { return lvPathfind.CheckedIndices; }
         }
 
-        internal ListViewItem FocusedRoom
+        internal ListViewItem SelectedRoom
         {
-            get { return lvPathfind.FocusedItem; }
+            get { return lvPathfind.SelectedItems[0]; }
         }
 
         internal int PathfindId
         {
             get { return (int)numPathfindId.Value; }
-        }
-
-        internal bool PathfindById
-        {
-            get { return optPathfindID.Checked; }
-            set { optPathfindID.Checked = value; }
-        }
-
-        internal bool PathfindByChoice
-        {
-            get { return optPathfindChoose.Checked; }
-            set  { optPathfindChoose.Checked = value;}
         }
 
         internal bool PathfindEnabled
@@ -111,17 +99,7 @@ namespace DCT.UI
 
         private void btnPathfind_Click(object sender, EventArgs e)
         {
-            int room;
-            if (PathfindById)
-            {
-                room = PathfindId;
-            }
-            else // take from listview
-            {
-                room = int.Parse(FocusedRoom.SubItems[1].Text);
-            }
-
-            mUI.InvokePathfind(room);
+            mUI.InvokePathfind(int.Parse(SelectedRoom.SubItems[1].Text));
         }
 
         private void lnkUncheckRooms_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -134,7 +112,6 @@ namespace DCT.UI
 
         private void lnkLoadRooms_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
             string s = FileIO.LoadFileToString("Import Rooms");
             if (s == null)
             {
@@ -186,7 +163,7 @@ namespace DCT.UI
             }
         }
 
-        private void RoomsPanel_Click(object sender, EventArgs e)
+        private void lvPathfind_Click(object sender, EventArgs e)
         {
             numPathfindId.Value = int.Parse(lvPathfind.SelectedItems[0].SubItems[1].Text);
         }
