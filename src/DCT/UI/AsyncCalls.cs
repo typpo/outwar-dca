@@ -185,7 +185,7 @@ namespace DCT.UI
             }
             if (!Pathfinder.Exists(room))
             {
-                LogPanel.Log("E: Select a room that exists in the map database");
+                LogPanel.Log("E: Select a room that exists in the map database.  If you are moving to a mob, its room information may be invalid.");
                 return;
             }
 

@@ -42,6 +42,7 @@ namespace DCT.UI
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.btnMobGo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lnkMobSave
@@ -108,7 +109,6 @@ namespace DCT.UI
             this.cmbPotionMobs.Size = new System.Drawing.Size(115, 21);
             this.cmbPotionMobs.TabIndex = 12;
             this.cmbPotionMobs.Text = "Choose a potion...";
-            this.cmbPotionMobs.SelectedIndexChanged += new System.EventHandler(this.cmbPotionMobs_SelectedIndexChanged);
             // 
             // lnkMobLoad
             // 
@@ -174,10 +174,21 @@ namespace DCT.UI
             this.columnHeader7.Text = "Rage";
             this.columnHeader7.Width = 80;
             // 
+            // btnMobGo
+            // 
+            this.btnMobGo.Location = new System.Drawing.Point(309, 3);
+            this.btnMobGo.Name = "btnMobGo";
+            this.btnMobGo.Size = new System.Drawing.Size(110, 23);
+            this.btnMobGo.TabIndex = 18;
+            this.btnMobGo.Text = "Move to selected";
+            this.btnMobGo.UseVisualStyleBackColor = true;
+            this.btnMobGo.Click += new System.EventHandler(this.btnMobGo_Click);
+            // 
             // MobsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnMobGo);
             this.Controls.Add(this.lnkMobSave);
             this.Controls.Add(this.lnkMobsSelect);
             this.Controls.Add(this.btnMobRage);
@@ -210,5 +221,6 @@ namespace DCT.UI
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.Button btnMobGo;
     }
 }

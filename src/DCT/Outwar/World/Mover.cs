@@ -428,10 +428,10 @@ namespace DCT.Outwar.World
             //{
             //    CoreUI.Instance.LogPanel.Log(mAccount.Name + " flying to room " + id);
             //}
-            else
-            {
-                CoreUI.Instance.LogPanel.Log(Account.Name + " moving to room " + id);
-            }
+            //else
+            //{
+            //    CoreUI.Instance.LogPanel.Log(Account.Name + " moving to room " + id);
+            //}
             
             switch (LoadRoom(url))
             {

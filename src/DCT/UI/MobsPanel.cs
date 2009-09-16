@@ -214,9 +214,14 @@ namespace DCT.UI
             lvMobs.Sort();
         }
 
-        private void cmbPotionMobs_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnMobGo_Click(object sender, EventArgs e)
         {
-
+            ListViewItem item = lvMobs.SelectedItems[0];
+            if (lvMobs.SelectedItems.Count > 1)
+            {
+                mUI.LogPanel.Log(string.Format("Moving to {0} in room {1}", item.SubItems[0].Text, item.SubItems[2].Text));
+            }
+            mUI.InvokePathfind(int.Parse(item.SubItems[2].Text));
         }
     }
 }
