@@ -165,6 +165,8 @@ namespace DCT.UI
                     goto quit;
 
                 AccountsPanel.Engine.MainAccount.Mover.Location.AttackMob(mb);
+                if (!Globals.AttackOn)
+                    return;
             }
             return;
             quit:

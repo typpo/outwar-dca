@@ -89,7 +89,7 @@ namespace DCT.Outwar.World
 
                 if ((rageLimit && CoreUI.Instance.Settings.RageLimit != 0 && m.Rage > CoreUI.Instance.Settings.RageLimit)
                     || m.Rage > mRoom.Mover.Account.Rage
-                    || mRoom.Mover.Account.Rage - m.Rage < CoreUI.Instance.Settings.StopAtRage)
+                    || mRoom.Mover.Account.Rage - m.Rage < CoreUI.Instance.Settings.StopBelowRage)
                 {
                     return false;
                 }
@@ -179,7 +179,16 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.LogPanel.Log("You don't have enough rage to attack " + mName + " (" + mRage + " > "
                                     + mRoom.Mover.Account.Rage + ")");
             }
-            else if (mRoom.Mover.Account.Rage < CoreUI.Instance.Settings.StopAtRage)
+            else if (mRoom.Mover.Account.Rage < CoreUI.Instance.Settings.StopBelowRage || mRoom.Mover.Account.Rage < 1)
+            {
+                // go to next account
+                CoreUI.Instance.LogPanel.Log("Reached rage limit, stopping attacks");
+                mQuit = true;
+                Globals.AttackOn = false;
+
+            }
+                /*
+            else if (mRoom.Mover.Account.Rage < CoreUI.Instance.Settings.StopBelowRage)
             {
                 mQuit = true;
                 CoreUI.Instance.LogPanel.Log("Not enough rage to attack " + mName + " with " + mRage
@@ -191,6 +200,7 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.LogPanel.Log("Can't attack " + mName + ", you're out of rage");
                 Globals.AttackOn = false; // TODO: stop it
             }
+                 * */
         }
 
         private void TestAttack()
@@ -247,7 +257,7 @@ namespace DCT.Outwar.World
                 || (!test && !TestRage(false))
                 )
             {
-                CoreUI.Instance.LogPanel.Log(mName + " preeliminated - does not meet specifications.");
+                CoreUI.Instance.LogPanel.Log(mName + " does not meet specifications.");
                 mQuit = true;
                 return false;
             }

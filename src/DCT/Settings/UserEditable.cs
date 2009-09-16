@@ -41,7 +41,7 @@ namespace DCT.Settings
         [XmlElement("RageLimit")]
         public int RageLimit { get; set; }
         [XmlElement("StopAtRage")]
-        public int StopAtRage { get; set; }
+        public int StopBelowRage { get; set; }
         [XmlElement("CycleInterval")]
         public int CycleInterval { get; set; }
         [XmlElement("LvlLimitMin")]
@@ -81,7 +81,7 @@ namespace DCT.Settings
             LvlLimitMin = 0;
             LvlLimit = 35;
             RageLimit = 30;
-            StopAtRage = 0;
+            StopBelowRage = 0;
             Delay = 0;
             Timeout = 15000;
             MaxThreads = 5;

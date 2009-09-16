@@ -100,7 +100,7 @@ namespace DCT.UI
 
         private void numRageStop_ValueChanged(object sender, EventArgs e)
         {
-            mUI.Settings.StopAtRage = (int)numRageStop.Value;
+            mUI.Settings.StopBelowRage = (int)numRageStop.Value;
         }
 
         private void numTimeout_ValueChanged(object sender, EventArgs e)

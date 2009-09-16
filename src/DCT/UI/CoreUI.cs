@@ -269,7 +269,7 @@ namespace DCT.UI
                 mFiltersPanel.FiltersText = str + "\r\n";
             }
 
-            mAttackPanel.StopAtRage = Settings.StopAtRage;
+            mAttackPanel.StopAtRage = Settings.StopBelowRage;
             mAttackPanel.RageLimit = Settings.RageLimit;
             mAttackPanel.ReturnToStart = Settings.ReturnToStart;
             // TODO buh
@@ -294,7 +294,7 @@ namespace DCT.UI
 
             mAttackPanel.LevelMax = Settings.LvlLimit;
             mAttackPanel.LevelMin = Settings.LvlLimitMin;
-            mAttackPanel.StopAtRage = Settings.StopAtRage;
+            mAttackPanel.StopAtRage = Settings.StopBelowRage;
 
             try
             {
