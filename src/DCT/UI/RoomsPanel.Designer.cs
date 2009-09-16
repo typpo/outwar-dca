@@ -110,8 +110,8 @@ namespace DCT.UI
             this.lvPathfind.TabIndex = 13;
             this.lvPathfind.UseCompatibleStateImageBehavior = false;
             this.lvPathfind.View = System.Windows.Forms.View.Details;
+            this.lvPathfind.SelectedIndexChanged += new System.EventHandler(this.lvPathfind_SelectedIndexChanged);
             this.lvPathfind.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvPathfind_ColumnClick);
-            this.lvPathfind.Click += new System.EventHandler(this.lvPathfind_Click);
             // 
             // columnHeader2
             // 

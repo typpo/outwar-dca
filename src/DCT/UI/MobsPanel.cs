@@ -216,12 +216,31 @@ namespace DCT.UI
 
         private void btnMobGo_Click(object sender, EventArgs e)
         {
+            if (lvMobs.SelectedItems.Count < 1)
+            {
+                mUI.LogPanel.Log("E: No mob selected.");
+                return;
+            }
             ListViewItem item = lvMobs.SelectedItems[0];
             if (lvMobs.SelectedItems.Count > 1)
             {
                 mUI.LogPanel.Log(string.Format("Moving to {0} in room {1}", item.SubItems[0].Text, item.SubItems[2].Text));
             }
             mUI.InvokePathfind(int.Parse(item.SubItems[2].Text));
+        }
+
+        private void lvMobs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvMobs.SelectedItems.Count < 1)
+            {
+                btnMobGo.Text = "Go to selection";
+                return;
+            }
+            string txt = lvMobs.SelectedItems[0].SubItems[0].Text;
+            if (txt.StartsWith("A "))
+                txt = txt.Substring(2);
+            btnMobGo.Text = string.Format("Go to {0}", txt);
+
         }
     }
 }

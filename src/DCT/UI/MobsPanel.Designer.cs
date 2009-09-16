@@ -149,6 +149,7 @@ namespace DCT.UI
             this.lvMobs.TabIndex = 9;
             this.lvMobs.UseCompatibleStateImageBehavior = false;
             this.lvMobs.View = System.Windows.Forms.View.Details;
+            this.lvMobs.SelectedIndexChanged += new System.EventHandler(this.lvMobs_SelectedIndexChanged);
             this.lvMobs.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvMobs_ColumnClick);
             // 
             // columnHeader3
@@ -176,11 +177,12 @@ namespace DCT.UI
             // 
             // btnMobGo
             // 
+            this.btnMobGo.AutoEllipsis = true;
             this.btnMobGo.Location = new System.Drawing.Point(309, 3);
             this.btnMobGo.Name = "btnMobGo";
             this.btnMobGo.Size = new System.Drawing.Size(110, 23);
             this.btnMobGo.TabIndex = 18;
-            this.btnMobGo.Text = "Move to selected";
+            this.btnMobGo.Text = "Go to selection";
             this.btnMobGo.UseVisualStyleBackColor = true;
             this.btnMobGo.Click += new System.EventHandler(this.btnMobGo_Click);
             // 

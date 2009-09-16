@@ -27,11 +27,6 @@ namespace DCT.UI
             get { return lvPathfind.CheckedIndices; }
         }
 
-        internal ListViewItem SelectedRoom
-        {
-            get { return lvPathfind.SelectedItems[0]; }
-        }
-
         internal int PathfindId
         {
             get { return (int)numPathfindId.Value; }
@@ -99,7 +94,7 @@ namespace DCT.UI
 
         private void btnPathfind_Click(object sender, EventArgs e)
         {
-            mUI.InvokePathfind(int.Parse(SelectedRoom.SubItems[1].Text));
+            mUI.InvokePathfind((int)numPathfindId.Value);
         }
 
         private void lnkUncheckRooms_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -163,8 +158,10 @@ namespace DCT.UI
             }
         }
 
-        private void lvPathfind_Click(object sender, EventArgs e)
+        private void lvPathfind_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (lvPathfind.SelectedItems.Count < 1)
+                return;
             numPathfindId.Value = int.Parse(lvPathfind.SelectedItems[0].SubItems[1].Text);
         }
     }
