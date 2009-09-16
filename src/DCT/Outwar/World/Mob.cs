@@ -179,7 +179,7 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.LogPanel.Log("You don't have enough rage to attack " + mName + " (" + mRage + " > "
                                     + mRoom.Mover.Account.Rage + ")");
             }
-            else if (mRoom.Mover.Account.Rage < CoreUI.Instance.Settings.StopBelowRage || mRoom.Mover.Account.Rage < 1)
+            else if (mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
             {
                 // go to next account
                 CoreUI.Instance.LogPanel.Log("Reached rage limit, stopping attacks");
