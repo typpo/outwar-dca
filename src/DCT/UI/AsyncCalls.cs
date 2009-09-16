@@ -161,12 +161,12 @@ namespace DCT.UI
 
                 Globals.AttackOn = true;
 
-                if (!Globals.AttackOn || !Globals.AttackMode)
-                    goto quit;
-
                 AccountsPanel.Engine.MainAccount.Mover.Location.AttackMob(mb);
                 if (!Globals.AttackOn)
+                {
+                    LogPanel.Log("Got my britches.");
                     return;
+                }
             }
             return;
             quit:
