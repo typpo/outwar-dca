@@ -36,9 +36,9 @@ namespace DCT.UI
             this.lvPathfind = new System.Windows.Forms.ListView();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.optPathfindID = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
             this.lnkUncheckRooms = new System.Windows.Forms.LinkLabel();
+            this.optPathfindID = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.numPathfindId)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,6 +107,7 @@ namespace DCT.UI
             0,
             0,
             0});
+            this.numPathfindId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numPathfindId_KeyDown);
             // 
             // lvPathfind
             // 
@@ -135,16 +136,6 @@ namespace DCT.UI
             this.columnHeader1.Text = "ID";
             this.columnHeader1.Width = 125;
             // 
-            // optPathfindID
-            // 
-            this.optPathfindID.AutoSize = true;
-            this.optPathfindID.Location = new System.Drawing.Point(84, 6);
-            this.optPathfindID.Name = "optPathfindID";
-            this.optPathfindID.Size = new System.Drawing.Size(77, 17);
-            this.optPathfindID.TabIndex = 9;
-            this.optPathfindID.Text = "Room ID#:";
-            this.optPathfindID.UseVisualStyleBackColor = true;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -165,6 +156,16 @@ namespace DCT.UI
             this.lnkUncheckRooms.Text = "Uncheck All";
             this.lnkUncheckRooms.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkUncheckRooms_LinkClicked);
             // 
+            // optPathfindID
+            // 
+            this.optPathfindID.AutoSize = true;
+            this.optPathfindID.Location = new System.Drawing.Point(84, 6);
+            this.optPathfindID.Name = "optPathfindID";
+            this.optPathfindID.Size = new System.Drawing.Size(77, 17);
+            this.optPathfindID.TabIndex = 9;
+            this.optPathfindID.Text = "Room ID#:";
+            this.optPathfindID.UseVisualStyleBackColor = true;
+            // 
             // RoomsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,6 +181,7 @@ namespace DCT.UI
             this.Controls.Add(this.lnkUncheckRooms);
             this.Name = "RoomsPanel";
             this.Size = new System.Drawing.Size(426, 262);
+            this.Click += new System.EventHandler(this.RoomsPanel_Click);
             ((System.ComponentModel.ISupportInitialize)(this.numPathfindId)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -196,8 +198,8 @@ namespace DCT.UI
         private System.Windows.Forms.ListView lvPathfind;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.RadioButton optPathfindID;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.LinkLabel lnkUncheckRooms;
+        private System.Windows.Forms.RadioButton optPathfindID;
     }
 }

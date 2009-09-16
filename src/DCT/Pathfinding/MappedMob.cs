@@ -37,7 +37,7 @@ namespace DCT.Pathfinding
             }
             MappedMob mb = (MappedMob) other;
             if (isNull)
-                return (int)!mb.isNull;
+                return Convert.ToInt32(!mb.isNull);
 
             return Name.CompareTo(mb.Name);
         }

@@ -177,5 +177,18 @@ namespace DCT.UI
             }
             return i;
         }
+
+        private void numPathfindId_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                btnPathfind_Click(null, null);
+            }
+        }
+
+        private void RoomsPanel_Click(object sender, EventArgs e)
+        {
+            numPathfindId.Value = int.Parse(lvPathfind.SelectedItems[0].SubItems[1].Text);
+        }
     }
 }
