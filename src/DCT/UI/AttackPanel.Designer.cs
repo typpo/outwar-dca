@@ -254,7 +254,7 @@ namespace DCT.UI
             0,
             0});
             this.numRageStop.Name = "numRageStop";
-            this.numRageStop.Size = new System.Drawing.Size(44, 18);
+            this.numRageStop.Size = new System.Drawing.Size(58, 18);
             this.numRageStop.TabIndex = 3;
             this.numRageStop.Value = new decimal(new int[] {
             1000,

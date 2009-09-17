@@ -7,13 +7,15 @@ namespace DCT.Pathfinding
 {
     internal class ReturnToStartHandler
     {
+        private const int NULL_ROOM = -1;
+
         private int mOriginalRoom;
         private Account mAccount;
 
         internal ReturnToStartHandler(Account a)
         {
             mAccount = a;
-            mOriginalRoom = 0;
+            mOriginalRoom = NULL_ROOM;
         }
 
         internal void SetOriginal()
@@ -23,7 +25,7 @@ namespace DCT.Pathfinding
 
         internal void InvokeReturn()
         {
-            if (mOriginalRoom == 0)
+            if (mOriginalRoom == NULL_ROOM)
             {
                 return;
             }
@@ -33,7 +35,7 @@ namespace DCT.Pathfinding
             Mover.PathfindHandler d = new Mover.PathfindHandler(mAccount.Mover.PathfindTo);
             d.BeginInvoke(mOriginalRoom, new AsyncCallback(PathfindCallback), d);
 
-            mOriginalRoom = 0;
+            mOriginalRoom = NULL_ROOM;
         }
 
         private void PathfindCallback(IAsyncResult ar)

@@ -470,7 +470,7 @@ namespace DCT.Pathfinding
 
             mShortest = new Hashtable();
 
-            // BFS search
+            // Best First Search
             do
             {
                 roomList = paths.Dequeue();

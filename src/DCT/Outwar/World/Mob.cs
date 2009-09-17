@@ -40,6 +40,7 @@ namespace DCT.Outwar.World
                         return false;
                     }
                 }
+                return true;
             }
         }
 
