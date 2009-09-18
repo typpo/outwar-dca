@@ -136,11 +136,19 @@ namespace DCT.Outwar.World
                 if (s.Contains("Spawned by"))
                 {
                     name = string.Format("*{0}*", p.Parse("\">*", " ["));
+                    if (name.Contains("<"))
+                    {
+                        // TODO this is a bandaid fix re: a bug with the parser.  It will pick up html from killed spawn mobs
+                        continue;
+                    }
                     spawn = true;
                     // log spawn sighting, but don't attack it if we shouldn't
-                    CoreUI.Instance.SpawnsPanel.Log(string.Format("Sighted {0} in room {1}", name, mId));
-                    if (!CoreUI.Instance.Settings.AttackSpawns)
-                        continue;
+                    if (Globals.AttackOn)
+                    {
+                        CoreUI.Instance.SpawnsPanel.Log(string.Format("Sighted {0} in room {1}", name, mId));
+                        if (!CoreUI.Instance.Settings.AttackSpawns)
+                            continue;
+                    }
                 }
                 else
                 {

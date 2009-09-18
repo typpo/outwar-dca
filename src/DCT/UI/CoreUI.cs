@@ -402,6 +402,16 @@ namespace DCT.UI
             LogPanel.Clear();
         }
 
+        private void exportSpawnLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SpawnsPanel.Export();
+        }
+
+        private void clearSpawnLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SpawnsPanel.Clear();
+        }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();

@@ -104,7 +104,7 @@ namespace DCT.Outwar.World
                 {
                     return false;
                 }
-                else if (mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage) && !(IsSpawn && CoreUI.Instance.Settings.IgnoreSpawnRage))
+                else if (mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
                 {
                     // TODO this all needs cleaning
                     // go to next account
@@ -199,10 +199,8 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.LogPanel.Log("You don't have enough rage to attack " + mName + " (" + mRage + " > "
                                     + mRoom.Mover.Account.Rage + ")");
             }
-            else if (mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage) && !(IsSpawn && CoreUI.Instance.Settings.IgnoreSpawnRage))
+            else if (mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
             {
-                // TODO spawn mobs will still be attacked even at 1 rage
-
                 // go to next account
                 CoreUI.Instance.LogPanel.Log(string.Format("Stopping attacks on {0}, reached rage limit", mRoom.Mover.Account.Name));
                 mQuit = true;
@@ -239,7 +237,7 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.LogPanel.Log(mName + "'s level is too low (" + mLevel + " < " + CoreUI.Instance.Settings.LvlLimitMin
                                     + ")");
             }
-            else if (mRage > CoreUI.Instance.Settings.RageLimit && CoreUI.Instance.Settings.RageLimit != 0)
+            else if (mRage > CoreUI.Instance.Settings.RageLimit && CoreUI.Instance.Settings.RageLimit != 0 && !(IsSpawn && CoreUI.Instance.Settings.IgnoreSpawnRage))
             {
                 mQuit = true;
                 CoreUI.Instance.LogPanel.Log(mName + " requires too much rage (" + mRage + "), over the rage limit");
@@ -415,13 +413,20 @@ namespace DCT.Outwar.World
             // spawn handling and logging
             if (src.Contains("steps out of the shadows"))
             {
-                CoreUI.Instance.SpawnsPanel.Log(string.Format("Spawned a mob in room {1}", mRoom.Id));
+                CoreUI.Instance.SpawnsPanel.Log(string.Format("Spawned a mob in room {0}", mRoom.Id));
 
                 if (CoreUI.Instance.Settings.AttackSpawns)
                 {
                     // attack the spawn mob
-                    CoreUI.Instance.SpawnsPanel.Log(string.Format("Attacking spawns in room {1}", mRoom.Id));
-                    mRoom.AttackSpawns();
+                    CoreUI.Instance.SpawnsPanel.Log(string.Format("Attacking spawns in room {0}", mRoom.Id));
+                    if (mRoom.Load() != 0)
+                    {
+                        CoreUI.Instance.SpawnsPanel.Log(string.Format("Room {0} reload failed", mRoom.Id));
+                    }
+                    else
+                    {
+                        mRoom.AttackSpawns();
+                    }
                 }
             }
             if (IsSpawn)

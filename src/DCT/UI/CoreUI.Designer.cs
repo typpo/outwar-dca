@@ -40,6 +40,9 @@ namespace DCT.UI
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.exportLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.exportSpawnLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearSpawnLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +62,7 @@ namespace DCT.UI
             this.tabRooms = new System.Windows.Forms.TabPage();
             this.tabMobs = new System.Windows.Forms.TabPage();
             this.tabJoiner = new System.Windows.Forms.TabPage();
+            this.tabSpawns = new System.Windows.Forms.TabPage();
             this.tabTrainer = new System.Windows.Forms.TabPage();
             this.tabQuests = new System.Windows.Forms.TabPage();
             this.tabChat = new System.Windows.Forms.TabPage();
@@ -66,7 +70,6 @@ namespace DCT.UI
             this.mNotifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabSpawns = new System.Windows.Forms.TabPage();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.splitLeftRight.Panel2.SuspendLayout();
@@ -124,6 +127,9 @@ namespace DCT.UI
             this.toolStripMenuItem3,
             this.exportLogToolStripMenuItem,
             this.clearLogToolStripMenuItem,
+            this.toolStripMenuItem5,
+            this.exportSpawnLogToolStripMenuItem,
+            this.clearSpawnLogToolStripMenuItem,
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -133,45 +139,64 @@ namespace DCT.UI
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(123, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(157, 22);
             this.toolStripMenuItem2.Text = "About";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // changesToolStripMenuItem
             // 
             this.changesToolStripMenuItem.Name = "changesToolStripMenuItem";
-            this.changesToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.changesToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.changesToolStripMenuItem.Text = "Changes";
             this.changesToolStripMenuItem.Click += new System.EventHandler(this.changesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(120, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(154, 6);
             // 
             // exportLogToolStripMenuItem
             // 
             this.exportLogToolStripMenuItem.Name = "exportLogToolStripMenuItem";
-            this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.exportLogToolStripMenuItem.Text = "Export log";
             this.exportLogToolStripMenuItem.Click += new System.EventHandler(this.exportLogToolStripMenuItem_Click);
             // 
             // clearLogToolStripMenuItem
             // 
             this.clearLogToolStripMenuItem.Name = "clearLogToolStripMenuItem";
-            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.clearLogToolStripMenuItem.Text = "Clear log";
             this.clearLogToolStripMenuItem.Click += new System.EventHandler(this.clearLogToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(154, 6);
+            // 
+            // exportSpawnLogToolStripMenuItem
+            // 
+            this.exportSpawnLogToolStripMenuItem.Name = "exportSpawnLogToolStripMenuItem";
+            this.exportSpawnLogToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.exportSpawnLogToolStripMenuItem.Text = "Export spawn log";
+            this.exportSpawnLogToolStripMenuItem.Click += new System.EventHandler(this.exportSpawnLogToolStripMenuItem_Click);
+            // 
+            // clearSpawnLogToolStripMenuItem
+            // 
+            this.clearSpawnLogToolStripMenuItem.Name = "clearSpawnLogToolStripMenuItem";
+            this.clearSpawnLogToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.clearSpawnLogToolStripMenuItem.Text = "Clear spawn log";
+            this.clearSpawnLogToolStripMenuItem.Click += new System.EventHandler(this.clearSpawnLogToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(120, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(154, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -347,6 +372,15 @@ namespace DCT.UI
             this.tabJoiner.Text = "Raids";
             this.tabJoiner.UseVisualStyleBackColor = true;
             // 
+            // tabSpawns
+            // 
+            this.tabSpawns.Location = new System.Drawing.Point(4, 22);
+            this.tabSpawns.Name = "tabSpawns";
+            this.tabSpawns.Size = new System.Drawing.Size(423, 262);
+            this.tabSpawns.TabIndex = 12;
+            this.tabSpawns.Text = "Spawns";
+            this.tabSpawns.UseVisualStyleBackColor = true;
+            // 
             // tabTrainer
             // 
             this.tabTrainer.Location = new System.Drawing.Point(4, 22);
@@ -408,15 +442,6 @@ namespace DCT.UI
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
-            // 
-            // tabSpawns
-            // 
-            this.tabSpawns.Location = new System.Drawing.Point(4, 22);
-            this.tabSpawns.Name = "tabSpawns";
-            this.tabSpawns.Size = new System.Drawing.Size(423, 262);
-            this.tabSpawns.TabIndex = 12;
-            this.tabSpawns.Text = "Spawns";
-            this.tabSpawns.UseVisualStyleBackColor = true;
             // 
             // CoreUI
             // 
@@ -490,5 +515,8 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showSystrayIconWhenOpenToolStripMenuItem;
         private System.Windows.Forms.TabPage tabSpawns;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem exportSpawnLogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearSpawnLogToolStripMenuItem;
     }
 }

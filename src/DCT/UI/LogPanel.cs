@@ -72,7 +72,7 @@ namespace DCT.UI
 
             try
             {
-                lstLog.Items.Insert(0, "[" + DateTime.Now.ToString("T") + "] " + txt);
+                lstLog.Items.Insert(0, string.Format("[{0}] {1}", DateTime.Now.ToString("T"), txt));
                 if (txt.StartsWith("E:"))
                 {
                     MessageBox.Show(txt.Substring(2), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -97,7 +97,7 @@ namespace DCT.UI
                 MessageBox.Show(txt.Replace("E: ", ""), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            lstAttacks.Items.Insert(0, "[" + DateTime.Now.ToString("T") + "] " + txt);
+            lstAttacks.Items.Insert(0, string.Format("[{0}] {1}", DateTime.Now.ToString("T"), txt));
         }
     }
 }
