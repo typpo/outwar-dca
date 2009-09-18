@@ -196,14 +196,14 @@ namespace DCT.UI
             // numRageLimit
             // 
             this.numRageLimit.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numRageLimit.Location = new System.Drawing.Point(79, 65);
+            this.numRageLimit.Location = new System.Drawing.Point(71, 64);
             this.numRageLimit.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
             this.numRageLimit.Name = "numRageLimit";
-            this.numRageLimit.Size = new System.Drawing.Size(68, 18);
+            this.numRageLimit.Size = new System.Drawing.Size(50, 18);
             this.numRageLimit.TabIndex = 2;
             this.numRageLimit.Value = new decimal(new int[] {
             30,
@@ -217,9 +217,9 @@ namespace DCT.UI
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(14, 66);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(65, 13);
+            this.label13.Size = new System.Drawing.Size(53, 13);
             this.label13.TabIndex = 16;
-            this.label13.Text = "Attack up to";
+            this.label13.Text = "Use up to";
             // 
             // numLevelMin
             // 
@@ -303,11 +303,11 @@ namespace DCT.UI
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(146, 66);
+            this.label14.Location = new System.Drawing.Point(122, 66);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(28, 13);
+            this.label14.Size = new System.Drawing.Size(79, 13);
             this.label14.TabIndex = 18;
-            this.label14.Text = "rage";
+            this.label14.Text = "rage per attack";
             // 
             // chkAutoTeleport
             // 

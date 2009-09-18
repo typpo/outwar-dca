@@ -14,6 +14,8 @@ namespace DCT.UI
     {
         private const int mScrollback = 200;
 
+        internal bool Connected { get; private set; }
+
         internal Label StatusLabel
         {
             get { return lblChatOnline; }
@@ -219,6 +221,7 @@ namespace DCT.UI
         void mClient_OnDisconnected(object sender, EventArgs e)
         {
             AddText("*** You have been disconnected");
+            Connected = false;
         }
 
         void mClient_OnDevoice(object sender, DevoiceEventArgs e)
@@ -243,6 +246,7 @@ namespace DCT.UI
         {
             AddText("*** Contacted server");
             UpdateNames();
+            Connected = true;
         }
 
         void mClient_OnChannelNotice(object sender, IrcEventArgs e)
@@ -275,6 +279,7 @@ namespace DCT.UI
 
         private void Quit()
         {
+            Connected = false;
             mClient.Disconnect();
         }
 
@@ -442,8 +447,24 @@ namespace DCT.UI
             }
 
             txtChat.Text += txt + "\r\n";
+            ScrollToBottom();
+
+            // if chat tab is not selected, mark for new messages
+            if (Connected && mUI.SelectedTabIndex != CoreUI.CHAT_TABINDEX)
+            {
+                mUI.Tabs.TabPages[CoreUI.CHAT_TABINDEX].Text = "Chat (*)";
+            }
+        }
+
+        internal void ScrollToBottom()
+        {
             txtChat.SelectionStart = txtChat.Text.Length;
             txtChat.ScrollToCaret();
+
+            if (txtChat.SelectionLength == 0)   // don't interrupt user copying something
+            {
+                txtChatType.Focus();
+            }
         }
 
         private void lstChat_Click(object sender, EventArgs e)

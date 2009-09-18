@@ -17,6 +17,19 @@ namespace DCT.UI
 {
     public partial class CoreUI : Form
     {
+        internal const int CHAT_TABINDEX = 7;
+
+        internal int SelectedTabIndex
+        {
+            get { return tabs.SelectedIndex; }
+        }
+
+        internal TabControl Tabs
+        {
+            get { return tabs; }
+        }
+
+
         public static CoreUI Instance { get; private set; }
 
         internal string Changes { private get; set; }
@@ -34,7 +47,9 @@ namespace DCT.UI
         internal MobsPanel MobsPanel { get; private set; }
 
         internal RaidsPanel RaidsPanel { get; private set; }
+
         public UserEditable Settings { get; private set; }
+
         private AttackPanel mAttackPanel;
         private FiltersPanel mFiltersPanel;
         private TrainPanel mTrainPanel;
@@ -460,6 +475,15 @@ namespace DCT.UI
         private void showSystrayIconWhenOpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             mNotifyIcon.Visible = Settings.NotifyVisible = showSystrayIconWhenOpenToolStripMenuItem.Checked;
+        }
+
+        private void tabs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SelectedTabIndex == CHAT_TABINDEX) // chat
+            {
+                Tabs.TabPages[CHAT_TABINDEX].Text = "Chat";
+                ChatPanel.ScrollToBottom();
+            }
         }
     }
 }
