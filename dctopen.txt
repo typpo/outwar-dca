@@ -4,8 +4,20 @@ Use at your own risk/discretion, and enjoy.
  
 Change History:
 
-8/10/09:
-Small fixes
+Release 3.1.11 (9/17/09):
+- Consolidated room selection and room id#
+- Added "move to mob" button in Mobs tab
+- Stop at rage changed to "Stop below rage" and is smarter now
+- Set up ignore filters by putting a ! in front (eg., a filter of "!mobname" will NOT attack "mobname")
+- Fixed filter load/saving bugs
+- Filters tab has a flag (*) if filters are enabled
+- Chat tab has a flag (*) if there are new chat messages
+- Cleaned up a bunch of things (removed flying, map building error checks, scrolling in chat, etc.)
+
+Coming soon: spawn/orb hunting support?
+
+Release 3.1.10 (9/10/09):
+- Small fixes
 
 7/31/09:
 With a lot of help from KeyserSoze, many issues with the map were fixed, including areas such as Subways, Sewers, Kix.  Also, Kix mobs have been added.
