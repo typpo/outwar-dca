@@ -1,8 +1,17 @@
- >> Typpo's DC Tool - Latest Version: 3.1.11a << 
+ >> Typpo's DC Tool - Latest Version: 3.1.12 << 
 
 Use at your own risk/discretion, and enjoy.
  
 Change History:
+
+Release 3.1.12 (9/18/09):
+- Fixed filter issue
+- Fixed a rage limit bug that required refresh
+- Timer can be set to 0 (instantly restart)
+- Mob attacking is more efficiently (sorted by ID)
+- Added support for spawns
+- Added spawn tab with options and log
+- Added "Attack Rooms" option.  This will attack ONLY the rooms that are checked, rather than their areas and is more conducive to camping spawns or attacking large areas
 
 Release 3.1.11a (9/17/09):
 - Consolidated room selection and room id#
@@ -63,8 +72,8 @@ Temporarily delayed
 End Changes 
 
 Info for the autoupdater: 
-<ver>3.1..11a</ver> 
-<url>http://typpo.us/DCT 3.1.11a.exe</url>
+<ver>3.1..12</ver> 
+<url>http://typpo.us/DCT 3.1.12.exe</url>
  
 <chan>#typpo</chan> 
 <svr>typpo.dyndns.org</svr>

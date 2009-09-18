@@ -486,18 +486,20 @@ namespace DCT.Outwar.World
             }
             else
             {
-                string tmp;
+                //string tmp;
                 if (src.StartsWith("ERROR"))
                 {
                     CoreUI.Instance.LogPanel.LogAttack("Attack E occurred in Connection: " + src);
                 }
+                    /*
                 else if ((tmp = Parser.Parse(src, "ERROR:</b></font> ", "<br>")) == "ERROR")
                 {
                     CoreUI.Instance.LogPanel.LogAttack("Attack E: An unknown error occurred");
                 }
+                    */
                 else
                 {
-                    CoreUI.Instance.LogPanel.LogAttack("Attack E (server-side): " + tmp);
+                    CoreUI.Instance.LogPanel.LogAttack("Attack E (server-side)");
                 }
             }
 
