@@ -357,20 +357,15 @@ namespace DCT.UI
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                "Program by Typpo (www.typpo.us).\nTrue version " + Version.Full
-                + ".\n\nThis particular copy of the program has gained you "
-                + (Globals.ExpGained + Globals.ExpGainedTotal) + " EXP."
-                +
-                (AccountsPanel.Engine.MainAccount == null
-                     ? string.Empty
-                     : "\n\n" + AccountsPanel.Engine.MainAccount.Name + " has been attacking mobs for an average of "
-                       +
-                       (AccountsPanel.Engine.MainAccount.Mover.MobsAttacked < 1
-                            ? "N/A"
-                            : (AccountsPanel.Engine.MainAccount.Mover.ExpGained
-                               / AccountsPanel.Engine.MainAccount.Mover.MobsAttacked).ToString()) + " exp per attack.")
-                , "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("Program by Typpo (www.typpo.us), version {0}{1}.\n\nThis particular copy of the program has gained you {2} EXP.",
+                Version.Full, Version.Beta, (Globals.ExpGained + Globals.ExpGainedTotal));
+            if (AccountsPanel.Engine.MainAccount != null && AccountsPanel.Engine.MainAccount.Mover.MobsAttacked > 1)
+            {
+                sb.AppendFormat("\n\n{0} has been attacking mobs for an average of {1} exp per attack.",
+                    AccountsPanel.Engine.MainAccount.Name, (AccountsPanel.Engine.MainAccount.Mover.ExpGained / AccountsPanel.Engine.MainAccount.Mover.MobsAttacked).ToString());
+            }
+            MessageBox.Show(sb.ToString(), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void changesToolStripMenuItem_Click(object sender, EventArgs e)

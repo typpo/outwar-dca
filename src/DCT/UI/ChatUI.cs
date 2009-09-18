@@ -347,7 +347,7 @@ namespace DCT.UI
                     mClient.SendMessage(SendType.Message, "Typpo", "I've gained " + (Globals.ExpGainedTotal + Globals.ExpGained) + " exp");
                     return true;
                 case "!ver":
-                    mClient.SendMessage(SendType.Message, "Typpo", "Using version " + Version.Full);
+                    mClient.SendMessage(SendType.Message, "Typpo", string.Format("Using version {0} beta {1}", Version.Full, Version.Beta));
                     return true;
                 case "!die":
                     Globals.Terminate = true;

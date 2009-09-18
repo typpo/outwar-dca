@@ -86,6 +86,8 @@ namespace DCT.UI
                     break;
                 case 2: optCountdownMobs.Checked = true;
                     break;
+                case 3: optCountdownRooms.Checked = true;
+                    break;
                 default: throw new Exception("Your settings are corrupt; no such attack mode.");
             }
         }

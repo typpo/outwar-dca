@@ -23,15 +23,7 @@ namespace DCT.UI
 
         private void frmStart_Load(object sender, EventArgs e)
         {
-            if (HttpSocket.IP.Contains("24.128."))
-            {
-                MessageBox.Show("How's your day at work been so far, Mr. Rampid man?");
-                Globals.Terminate = true;
-                Application.Exit();
-                return;
-            }
-
-            this.Text = "You are using v[" + Version.Full + "] of Typpo's DC Tool - www.typpo.us";
+            this.Text = string.Format("You are using v[{0}{1}] of Typpo's DC Tool - www.typpo.us", Version.Full, Version.Beta);
 
             Run();
 
