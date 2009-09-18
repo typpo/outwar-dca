@@ -35,6 +35,20 @@ namespace DCT.UI
         {
             txtFilters.Enabled = chkFilter.Checked;
             CoreUI.Instance.Settings.FilterMobs = chkFilter.Checked;
+
+            UpdateTab();
+        }
+
+        internal void UpdateTab()
+        {
+            if (CoreUI.Instance.Settings.FilterMobs)
+            {
+                mUI.Tabs.TabPages[CoreUI.FILTERS_TABINDEX].Text = "Filters (*)";
+            }
+            else
+            {
+                mUI.Tabs.TabPages[CoreUI.FILTERS_TABINDEX].Text = "Filters";
+            }
         }
 
         private void txtFilters_TextChanged(object sender, EventArgs e)

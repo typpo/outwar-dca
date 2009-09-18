@@ -17,6 +17,7 @@ namespace DCT.UI
 {
     public partial class CoreUI : Form
     {
+        internal const int FILTERS_TABINDEX = 1;
         internal const int CHAT_TABINDEX = 7;
 
         internal int SelectedTabIndex
@@ -306,6 +307,7 @@ namespace DCT.UI
             mTrainPanel.AutoTrain = Settings.AutoTrain;
 
             mFiltersPanel.FiltersEnabled = Settings.FilterMobs;
+            mFiltersPanel.UpdateTab();
 
             mAttackPanel.LevelMax = Settings.LvlLimit;
             mAttackPanel.LevelMin = Settings.LvlLimitMin;
