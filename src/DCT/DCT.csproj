@@ -202,6 +202,12 @@
     <Compile Include="UI\RoomsPanel.Designer.cs">
       <DependentUpon>RoomsPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\SpawnsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\SpawnsPanel.Designer.cs">
+      <DependentUpon>SpawnsPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\TrainPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -286,6 +292,10 @@
     <EmbeddedResource Include="UI\RoomsPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>RoomsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SpawnsPanel.resx">
+      <DependentUpon>SpawnsPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\StartDialog.resx">
       <SubType>Designer</SubType>

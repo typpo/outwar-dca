@@ -10,7 +10,7 @@ namespace DCT.UI
 {
     public partial class AttackPanel : UserControl
     {
-        internal int StopAtRage
+        internal int StopBelowRage
         {
             get { return (int)numRageStop.Value; }
             set { numRageStop.Value = value; }

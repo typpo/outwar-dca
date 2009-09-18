@@ -17,8 +17,15 @@ namespace DCT.UI
 {
     public partial class CoreUI : Form
     {
+        internal const int TABINDEX_ATTACK = 0;
         internal const int TABINDEX_FILTERS = 1;
-        internal const int TABINDEX_CHAT = 7;
+        internal const int TABINDEX_ROOMS = 2;
+        internal const int TABINDEX_MOBS = 3;
+        internal const int TABINDEX_RAIDS = 4;
+        internal const int TABINDEX_SPAWNS = 5;
+        internal const int TABINDEX_TRAINER = 6;
+        internal const int TABINDEX_QUESTS = 7;
+        internal const int TABINDEX_CHAT = 8;
 
         internal int SelectedTabIndex
         {
@@ -49,6 +56,8 @@ namespace DCT.UI
 
         internal RaidsPanel RaidsPanel { get; private set; }
 
+        internal SpawnsPanel SpawnsPanel { get; private set; }
+
         public UserEditable Settings { get; private set; }
 
         private AttackPanel mAttackPanel;
@@ -70,7 +79,7 @@ namespace DCT.UI
 
             mAttackPanel = new AttackPanel(this);
             mAttackPanel.Dock = DockStyle.Fill;
-            tabs.TabPages[0].Controls.Add(mAttackPanel);
+            tabs.TabPages[TABINDEX_ATTACK].Controls.Add(mAttackPanel);
 
             MainPanel = new MainPanel(this);
             MainPanel.Dock = DockStyle.Fill;
@@ -78,31 +87,35 @@ namespace DCT.UI
 
             mFiltersPanel = new FiltersPanel(this);
             mFiltersPanel.Dock = DockStyle.Fill;
-            tabs.TabPages[1].Controls.Add(mFiltersPanel);
+            tabs.TabPages[TABINDEX_FILTERS].Controls.Add(mFiltersPanel);
 
             RoomsPanel = new RoomsPanel(this);
             RoomsPanel.Dock = DockStyle.Fill;
-            tabs.TabPages[2].Controls.Add(RoomsPanel);
+            tabs.TabPages[TABINDEX_ROOMS].Controls.Add(RoomsPanel);
 
             MobsPanel = new MobsPanel(this);
             MobsPanel.Dock = DockStyle.Fill;
-            tabs.TabPages[3].Controls.Add(MobsPanel);
+            tabs.TabPages[TABINDEX_MOBS].Controls.Add(MobsPanel);
 
             RaidsPanel = new RaidsPanel(this);
             RaidsPanel.Dock = DockStyle.Fill;
-            tabs.TabPages[4].Controls.Add(RaidsPanel);
+            tabs.TabPages[TABINDEX_RAIDS].Controls.Add(RaidsPanel);
+
+            SpawnsPanel = new SpawnsPanel(this);
+            SpawnsPanel.Dock = DockStyle.Fill;
+            tabs.TabPages[TABINDEX_SPAWNS].Controls.Add(SpawnsPanel);
 
             mTrainPanel = new TrainPanel(this);
             mTrainPanel.Dock = DockStyle.Fill;
-            tabs.TabPages[5].Controls.Add(mTrainPanel);
+            tabs.TabPages[TABINDEX_TRAINER].Controls.Add(mTrainPanel);
 
             mQuestsPanel = new QuestsPanel(this);
             mQuestsPanel.Dock = DockStyle.Fill;
-            tabs.TabPages[6].Controls.Add(mQuestsPanel);
+            tabs.TabPages[TABINDEX_QUESTS].Controls.Add(mQuestsPanel);
 
             ChatPanel = new ChatUI(this);
             ChatPanel.Dock = DockStyle.Fill;
-            tabs.TabPages[7].Controls.Add(ChatPanel);
+            tabs.TabPages[TABINDEX_CHAT].Controls.Add(ChatPanel);
             
             Instance = this;
             Settings = ConfigSerializer.ReadFile("config.xml");
@@ -274,25 +287,32 @@ namespace DCT.UI
 
         private void SyncSettings()
         {
+            // Menu bar
+
             clearLogsPeriodicallyToolStripMenuItem.Checked = Settings.ClearLogs;
             showSystrayIconWhenOpenToolStripMenuItem.Checked = Settings.NotifyVisible;
 
+            // Login panel
+
             AccountsPanel.Username = Settings.LastUsername;
             AccountsPanel.Password = Settings.LastPassword;
+
+            // Filters panel
 
             foreach (string str in Settings.MobFilters)
             {
                 mFiltersPanel.FiltersText += str + "\r\n";
             }
 
-            mAttackPanel.StopAtRage = Settings.StopBelowRage;
-            mAttackPanel.RageLimit = Settings.RageLimit;
-            mAttackPanel.ReturnToStart = Settings.ReturnToStart;
+            // Main panel
+
             MainPanel.UseCountdown = Settings.UseCountdownTimer;
             MainPanel.UseHourTimer = Settings.UseHourTimer;
             MainPanel.CountdownValue = Settings.CycleInterval;
 
             MainPanel.SyncAttackMode();
+
+            // Quests panel
 
             if (Settings.AlertQuests)
                 mQuestsPanel.AlertQuest = true;
@@ -301,14 +321,22 @@ namespace DCT.UI
             else
                 mQuestsPanel.NothingQuest = true;
 
+            // Training panel
+
             mTrainPanel.AutoTrain = Settings.AutoTrain;
+
+            // Filters panel
 
             mFiltersPanel.FiltersEnabled = Settings.FilterMobs;
             mFiltersPanel.UpdateTab();
 
+            // Attack panel
+
             mAttackPanel.LevelMax = Settings.LvlLimit;
             mAttackPanel.LevelMin = Settings.LvlLimitMin;
-            mAttackPanel.StopAtRage = Settings.StopBelowRage;
+            mAttackPanel.StopBelowRage = Settings.StopBelowRage;
+            mAttackPanel.RageLimit = Settings.RageLimit;
+            mAttackPanel.ReturnToStart = Settings.ReturnToStart;
 
             try
             {
@@ -321,6 +349,10 @@ namespace DCT.UI
             }
 
             mAttackPanel.Variance = Settings.Variance;
+
+            // Spawns panel
+            SpawnsPanel.AttackSpawns = Settings.AttackSpawns;
+            SpawnsPanel.IgnoreSpawnRage = Settings.IgnoreSpawnRage;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -478,10 +510,15 @@ namespace DCT.UI
 
         private void tabs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SelectedTabIndex == TABINDEX_CHAT) // chat
+            switch (SelectedTabIndex)
             {
-                Tabs.TabPages[TABINDEX_CHAT].Text = "Chat";
-                ChatPanel.ScrollToBottom();
+                case TABINDEX_SPAWNS:
+                    Tabs.TabPages[TABINDEX_SPAWNS].Text = "Spawns";
+                    break;
+                case TABINDEX_CHAT:
+                    Tabs.TabPages[TABINDEX_CHAT].Text = "Chat";
+                    ChatPanel.ScrollToBottom();
+                    break;
             }
         }
     }

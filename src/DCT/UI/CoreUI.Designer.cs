@@ -66,6 +66,7 @@ namespace DCT.UI
             this.mNotifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabSpawns = new System.Windows.Forms.TabPage();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.splitLeftRight.Panel2.SuspendLayout();
@@ -287,6 +288,7 @@ namespace DCT.UI
             this.tabs.Controls.Add(this.tabRooms);
             this.tabs.Controls.Add(this.tabMobs);
             this.tabs.Controls.Add(this.tabJoiner);
+            this.tabs.Controls.Add(this.tabSpawns);
             this.tabs.Controls.Add(this.tabTrainer);
             this.tabs.Controls.Add(this.tabQuests);
             this.tabs.Controls.Add(this.tabChat);
@@ -407,6 +409,15 @@ namespace DCT.UI
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
+            // tabSpawns
+            // 
+            this.tabSpawns.Location = new System.Drawing.Point(4, 22);
+            this.tabSpawns.Name = "tabSpawns";
+            this.tabSpawns.Size = new System.Drawing.Size(423, 262);
+            this.tabSpawns.TabIndex = 12;
+            this.tabSpawns.Text = "Spawns";
+            this.tabSpawns.UseVisualStyleBackColor = true;
+            // 
             // CoreUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -478,5 +489,6 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showSystrayIconWhenOpenToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabSpawns;
     }
 }

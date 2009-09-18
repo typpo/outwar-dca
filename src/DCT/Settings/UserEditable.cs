@@ -48,6 +48,10 @@ namespace DCT.Settings
         public long LvlLimit { get; set; }
         [XmlElement("Timeout")]
         public int Timeout { get; set; }
+        [XmlElement("AttackSpawns")]
+        public bool AttackSpawns { get; set; }
+        [XmlElement("IgnoreSpawnRage")]
+        public bool IgnoreSpawnRage { get; set; }
         [XmlElement("LastUsername")]
         public string LastUsername { get; set; }
         [XmlElement("LastPassword")]
@@ -83,6 +87,9 @@ namespace DCT.Settings
             Timeout = 15000;
             MaxThreads = 5;
             CycleInterval = 40;
+
+            AttackSpawns = false;
+            IgnoreSpawnRage = true;
 
             LastUsername = LastPassword = string.Empty;
         }
