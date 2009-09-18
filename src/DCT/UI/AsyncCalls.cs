@@ -138,6 +138,22 @@ namespace DCT.UI
                     mobs.Add(key, int.Parse(MobsPanel.Mobs[i].SubItems[2].Text));
                 }
             }
+            
+            // sort by value - ie., sort by room number
+            List<KeyValuePair<int, int>> sortinglist =
+                    new List<KeyValuePair<int, int>>(mobs);
+            sortinglist.Sort(
+              delegate(
+                KeyValuePair<int, int> first,
+                KeyValuePair<int, int> second)
+              {
+                  return second.Value.CompareTo(first.Value);
+              }
+              );
+            // Clear the dictionary and repopulate it from the List
+            mobs.Clear();
+            foreach (KeyValuePair<int, int> kvp in sortinglist)
+                mobs.Add(kvp.Key, kvp.Value);
 
             SetupHandler();
             AttackHandler.BeginMobs(mobs);
