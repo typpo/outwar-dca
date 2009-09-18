@@ -26,22 +26,49 @@ namespace DCT.Outwar.World
                     return true;
                 }
 
-                foreach (string mob in CoreUI.Instance.Settings.MobFilters)
+
+                // a mob should get through:
+                // If there are only normal filters, then ONLY if it matches
+                // If there are only ignore filters, then ONLY if it doesn't match
+                // If there are normal and ignore filters, then ignore the ignore filters and let it through only if it matches
+
+                bool ignorefilter = false;
+                bool passedignore = true;
+                bool normalfilter = false;
+                bool passednormal = true;
+
+                foreach (string str in CoreUI.Instance.Settings.MobFilters)
                 {
-                    if (mob.StartsWith("!"))
+                    if (str.StartsWith("!"))
                     {
-                        if (mName.ToLower().Contains(mob.Substring(1)))
-                            return false;
-                        continue;
+                        ignorefilter = true;
+                        if (mName.ToLower().Contains(str.Substring(1)))
+                            passedignore = false;
                     }
                     else
                     {
-                        if (mName.ToLower().Contains(mob))
-                            continue;
-                        return false;
+                        normalfilter = true;
+                        if (mName.ToLower().Contains(str))
+                            return true;    // matches, so return true unconditionally
+                        else
+                            passednormal = false;
                     }
                 }
-                return true;
+
+                if (ignorefilter && normalfilter)
+                {
+                    return passednormal;
+                }
+                else if (ignorefilter)
+                {
+                    return passedignore;
+                }
+                else if (normalfilter)
+                {
+                    // this should never happen
+                }
+
+                return false;
             }
         }
 
