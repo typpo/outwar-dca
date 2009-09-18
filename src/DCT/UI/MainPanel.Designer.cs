@@ -122,11 +122,6 @@ namespace DCT.UI
             0,
             0,
             0});
-            this.numCountdown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.numCountdown.Name = "numCountdown";
             this.numCountdown.Size = new System.Drawing.Size(43, 18);
             this.numCountdown.TabIndex = 30;
