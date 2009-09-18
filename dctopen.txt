@@ -1,0 +1,59 @@
+ >> Typpo's DC Tool - Latest Version: 3.1.10 << 
+
+Use at your own risk/discretion, and enjoy.
+ 
+Change History:
+
+8/10/09:
+Small fixes
+
+7/31/09:
+With a lot of help from KeyserSoze, many issues with the map were fixed, including areas such as Subways, Sewers, Kix.  Also, Kix mobs have been added.
+
+4/18/09:
+Fixed a problematic room link in Kix woods
+
+Release 3.1.9a (3/25/09):
+- Disabled "Remember Me" option
+- Added Kix Woods (rooms only).  Admittedly needs some work.  To report a pathfinding error, go to File > Export Log and upload at www.typpo.us/upload
+
+1/15/09:
+Sorry for the downtime..happy new year
+
+Release 3.1.9 (7/10/08):
+- This room is accessible
+
+Release 3.1.8f (7/8/08):
+- Bugfix for pathfinding crashing error
+
+Release 3.1.8e (7/7/08):
+- Update for Quiver
+- Unfortunately, program internals are rolled back.  Please make me aware of big problems through chat.
+
+Release 3.1.8b/c (4/27/08):
+- Mob attacking fix, maybe
+- Other small changes
+
+4/26/08:
+- Updated for Eyes of Burn expansion
+
+Release 3.1.9 (4/15/08):
+- Average exp gain in accounts list
+- Removed room hashing code (more efficient)
+- Removed statuses (more efficient)
+- Chat scrollbars
+- Better room key handling
+- Random finish room option
+- Automatic reporting for move errors
+
+Temporarily delayed
+
+End Changes 
+
+Info for the autoupdater: 
+<ver>3.1..10</ver> 
+<url>http://typpo.us/DCT 3.1.10.exe</url>
+ 
+<chan>#typpo</chan> 
+<svr>typpo.dyndns.org</svr>
+<port>1942</port> 
