@@ -8,8 +8,6 @@ namespace DCT.Settings
     {
         [XmlArrayItem("Filter", typeof(string))]
         public string[] MobFilters { get; set; }
-        [XmlElement("Fly")]
-        public bool Fly { get; set; }
         [XmlElement("NotifyVisible")]
         public bool NotifyVisible { get; set; }
         [XmlElement("ClearLogs")]
@@ -61,7 +59,6 @@ namespace DCT.Settings
 
             NotifyVisible = true;
 
-            Fly = false;
             AutoTeleport = true;
 
             ClearLogs = true;

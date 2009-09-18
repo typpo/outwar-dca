@@ -450,9 +450,9 @@ namespace DCT.UI
             ScrollToBottom();
 
             // if chat tab is not selected, mark for new messages
-            if (Connected && mUI.SelectedTabIndex != CoreUI.CHAT_TABINDEX)
+            if (Connected && mUI.SelectedTabIndex != CoreUI.TABINDEX_CHAT)
             {
-                mUI.Tabs.TabPages[CoreUI.CHAT_TABINDEX].Text = "Chat (*)";
+                mUI.Tabs.TabPages[CoreUI.TABINDEX_CHAT].Text = "Chat (*)";
             }
         }
 

@@ -17,8 +17,8 @@ namespace DCT.UI
 {
     public partial class CoreUI : Form
     {
-        internal const int FILTERS_TABINDEX = 1;
-        internal const int CHAT_TABINDEX = 7;
+        internal const int TABINDEX_FILTERS = 1;
+        internal const int TABINDEX_CHAT = 7;
 
         internal int SelectedTabIndex
         {
@@ -288,9 +288,6 @@ namespace DCT.UI
             mAttackPanel.StopAtRage = Settings.StopBelowRage;
             mAttackPanel.RageLimit = Settings.RageLimit;
             mAttackPanel.ReturnToStart = Settings.ReturnToStart;
-            // TODO buh
-            Settings.Fly = false;            
-            mAttackPanel.Fly = Settings.Fly;
             MainPanel.UseCountdown = Settings.UseCountdownTimer;
             MainPanel.UseHourTimer = Settings.UseHourTimer;
             MainPanel.CountdownValue = Settings.CycleInterval;
@@ -481,9 +478,9 @@ namespace DCT.UI
 
         private void tabs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SelectedTabIndex == CHAT_TABINDEX) // chat
+            if (SelectedTabIndex == TABINDEX_CHAT) // chat
             {
-                Tabs.TabPages[CHAT_TABINDEX].Text = "Chat";
+                Tabs.TabPages[TABINDEX_CHAT].Text = "Chat";
                 ChatPanel.ScrollToBottom();
             }
         }

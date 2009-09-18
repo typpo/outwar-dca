@@ -46,12 +46,6 @@ namespace DCT.UI
             set { chkVariance.Checked = value; }
         }
 
-        internal bool Fly
-        {
-            get { return chkFly.Checked; }
-            set { chkFly.Checked = value; }
-        }
-
         internal bool ReturnToStart
         {
             get { return chkReturnToStart.Checked; }
@@ -121,11 +115,6 @@ namespace DCT.UI
         private void chkAutoTeleport_CheckedChanged(object sender, EventArgs e)
         {
             mUI.Settings.AutoTeleport = chkAutoTeleport.Checked;
-        }
-
-        private void mFly_CheckedChanged(object sender, EventArgs e)
-        {
-            mUI.Settings.Fly = chkFly.Checked;
         }
 
         private void chkReturnToStart_CheckedChanged_1(object sender, EventArgs e)

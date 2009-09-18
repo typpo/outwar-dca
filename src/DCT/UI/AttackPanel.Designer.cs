@@ -30,7 +30,6 @@ namespace DCT.UI
         {
             this.grpSettings = new System.Windows.Forms.GroupBox();
             this.chkReturnToStart = new System.Windows.Forms.CheckBox();
-            this.chkFly = new System.Windows.Forms.CheckBox();
             this.chkVariance = new System.Windows.Forms.CheckBox();
             this.numThreadDelay = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
@@ -59,7 +58,6 @@ namespace DCT.UI
             // grpSettings
             // 
             this.grpSettings.Controls.Add(this.chkReturnToStart);
-            this.grpSettings.Controls.Add(this.chkFly);
             this.grpSettings.Controls.Add(this.chkVariance);
             this.grpSettings.Controls.Add(this.numThreadDelay);
             this.grpSettings.Controls.Add(this.label9);
@@ -97,24 +95,12 @@ namespace DCT.UI
             this.chkReturnToStart.UseVisualStyleBackColor = true;
             this.chkReturnToStart.CheckedChanged += new System.EventHandler(this.chkReturnToStart_CheckedChanged_1);
             // 
-            // chkFly
-            // 
-            this.chkFly.AutoSize = true;
-            this.chkFly.Enabled = false;
-            this.chkFly.Location = new System.Drawing.Point(227, 85);
-            this.chkFly.Name = "chkFly";
-            this.chkFly.Size = new System.Drawing.Size(107, 17);
-            this.chkFly.TabIndex = 36;
-            this.chkFly.Text = "Save hashes (fly)";
-            this.chkFly.UseVisualStyleBackColor = true;
-            this.chkFly.CheckedChanged += new System.EventHandler(this.mFly_CheckedChanged);
-            // 
             // chkVariance
             // 
             this.chkVariance.AutoSize = true;
             this.chkVariance.Checked = true;
             this.chkVariance.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkVariance.Location = new System.Drawing.Point(227, 108);
+            this.chkVariance.Location = new System.Drawing.Point(227, 95);
             this.chkVariance.Name = "chkVariance";
             this.chkVariance.Size = new System.Drawing.Size(154, 17);
             this.chkVariance.TabIndex = 8;
@@ -360,7 +346,6 @@ namespace DCT.UI
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckBox chkAutoTeleport;
-        private System.Windows.Forms.CheckBox chkFly;
         private System.Windows.Forms.CheckBox chkReturnToStart;
 
     }

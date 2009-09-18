@@ -43,11 +43,11 @@ namespace DCT.UI
         {
             if (CoreUI.Instance.Settings.FilterMobs)
             {
-                mUI.Tabs.TabPages[CoreUI.FILTERS_TABINDEX].Text = "Filters (*)";
+                mUI.Tabs.TabPages[CoreUI.TABINDEX_FILTERS].Text = "Filters (*)";
             }
             else
             {
-                mUI.Tabs.TabPages[CoreUI.FILTERS_TABINDEX].Text = "Filters";
+                mUI.Tabs.TabPages[CoreUI.TABINDEX_FILTERS].Text = "Filters";
             }
         }
 
