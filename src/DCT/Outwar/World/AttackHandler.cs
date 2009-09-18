@@ -75,6 +75,15 @@ namespace DCT.Outwar.World
                 {
                     CoreUI.Instance.LogPanel.Log("Refreshing " + a.Name + "'s position...");
                     a.Mover.RefreshRoom();
+
+                    // no point in moving if we don't have rage
+                    if (a.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
+                    {
+                        // go to next account
+                        CoreUI.Instance.LogPanel.Log(string.Format("Not attacking on {0}, reached rage limit", a.Name));
+                        continue;
+                    }
+
                     a.Mover.ReturnToStartHandler.SetOriginal();
 
                     CoreUI.Instance.AccountsPanel.Engine.SetMain(a);

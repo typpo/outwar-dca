@@ -50,6 +50,7 @@ namespace DCT.Outwar.World
         {
             try
             {
+                #region ENCRYPTED URL
                 Stack<int> stack = new Stack<int>(96);
                 int bCrypt = 0;
 
@@ -251,6 +252,7 @@ namespace DCT.Outwar.World
                 {
                     sb.Append((char)stack.Pop());
                 }
+                #endregion
 
                 //Console.WriteLine(DCT.Security.Crypt.BinToHex(DCT.Security.Crypt.Get("http://typpo.dyndns.org:7012/dct/auth/verify.php", DCT.Security.Auth.KEY, false)));
 
