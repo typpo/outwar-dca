@@ -88,7 +88,7 @@ namespace DCT.UI
             this.ss.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblMisc,
             this.pgr});
-            this.ss.Location = new System.Drawing.Point(0, 463);
+            this.ss.Location = new System.Drawing.Point(0, 485);
             this.ss.Name = "ss";
             this.ss.Size = new System.Drawing.Size(664, 22);
             this.ss.SizingGrip = false;
@@ -275,7 +275,7 @@ namespace DCT.UI
             // splitLeftRight.Panel2
             // 
             this.splitLeftRight.Panel2.Controls.Add(this.splitTopBottom);
-            this.splitLeftRight.Size = new System.Drawing.Size(664, 439);
+            this.splitLeftRight.Size = new System.Drawing.Size(664, 461);
             this.splitLeftRight.SplitterDistance = 229;
             this.splitLeftRight.TabIndex = 5;
             // 
@@ -293,8 +293,8 @@ namespace DCT.UI
             // splitTopBottom.Panel2
             // 
             this.splitTopBottom.Panel2.Controls.Add(this.tabs);
-            this.splitTopBottom.Size = new System.Drawing.Size(431, 439);
-            this.splitTopBottom.SplitterDistance = 147;
+            this.splitTopBottom.Size = new System.Drawing.Size(431, 461);
+            this.splitTopBottom.SplitterDistance = 164;
             this.splitTopBottom.TabIndex = 0;
             // 
             // splitLeftRight2
@@ -302,7 +302,7 @@ namespace DCT.UI
             this.splitLeftRight2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitLeftRight2.Location = new System.Drawing.Point(0, 0);
             this.splitLeftRight2.Name = "splitLeftRight2";
-            this.splitLeftRight2.Size = new System.Drawing.Size(431, 147);
+            this.splitLeftRight2.Size = new System.Drawing.Size(431, 164);
             this.splitLeftRight2.SplitterDistance = 213;
             this.splitLeftRight2.TabIndex = 0;
             // 
@@ -322,7 +322,7 @@ namespace DCT.UI
             this.tabs.Location = new System.Drawing.Point(0, 0);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
-            this.tabs.Size = new System.Drawing.Size(431, 288);
+            this.tabs.Size = new System.Drawing.Size(431, 293);
             this.tabs.TabIndex = 6;
             this.tabs.SelectedIndexChanged += new System.EventHandler(this.tabs_SelectedIndexChanged);
             // 
@@ -331,7 +331,7 @@ namespace DCT.UI
             this.tabAttack.Location = new System.Drawing.Point(4, 22);
             this.tabAttack.Name = "tabAttack";
             this.tabAttack.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAttack.Size = new System.Drawing.Size(423, 262);
+            this.tabAttack.Size = new System.Drawing.Size(423, 267);
             this.tabAttack.TabIndex = 0;
             this.tabAttack.Text = "Attack";
             this.tabAttack.UseVisualStyleBackColor = true;
@@ -447,7 +447,7 @@ namespace DCT.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(664, 485);
+            this.ClientSize = new System.Drawing.Size(664, 507);
             this.Controls.Add(this.splitLeftRight);
             this.Controls.Add(this.ss);
             this.Controls.Add(this.mnuMain);

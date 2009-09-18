@@ -44,6 +44,7 @@ namespace DCT.UI
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnStartTimer = new System.Windows.Forms.ToolStripButton();
             this.lblTimeLeft = new System.Windows.Forms.ToolStripLabel();
+            this.optCountdownRooms = new System.Windows.Forms.RadioButton();
             this.pnlAttack.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCountdown)).BeginInit();
             this.pnl.SuspendLayout();
@@ -53,6 +54,7 @@ namespace DCT.UI
             // pnlAttack
             // 
             this.pnlAttack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAttack.Controls.Add(this.optCountdownRooms);
             this.pnlAttack.Controls.Add(this.chkHourTimer);
             this.pnlAttack.Controls.Add(this.optCountdownMobs);
             this.pnlAttack.Controls.Add(this.optCountdownMulti);
@@ -61,13 +63,13 @@ namespace DCT.UI
             this.pnlAttack.Controls.Add(this.chkCountdownTimer);
             this.pnlAttack.Location = new System.Drawing.Point(3, 28);
             this.pnlAttack.Name = "pnlAttack";
-            this.pnlAttack.Size = new System.Drawing.Size(208, 96);
+            this.pnlAttack.Size = new System.Drawing.Size(208, 116);
             this.pnlAttack.TabIndex = 32;
             // 
             // chkHourTimer
             // 
             this.chkHourTimer.AutoSize = true;
-            this.chkHourTimer.Location = new System.Drawing.Point(16, 77);
+            this.chkHourTimer.Location = new System.Drawing.Point(16, 94);
             this.chkHourTimer.Name = "chkHourTimer";
             this.chkHourTimer.Size = new System.Drawing.Size(162, 17);
             this.chkHourTimer.TabIndex = 42;
@@ -116,7 +118,7 @@ namespace DCT.UI
             // numCountdown
             // 
             this.numCountdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numCountdown.Location = new System.Drawing.Point(98, 59);
+            this.numCountdown.Location = new System.Drawing.Point(98, 76);
             this.numCountdown.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -135,7 +137,7 @@ namespace DCT.UI
             // chkCountdownTimer
             // 
             this.chkCountdownTimer.AutoSize = true;
-            this.chkCountdownTimer.Location = new System.Drawing.Point(16, 59);
+            this.chkCountdownTimer.Location = new System.Drawing.Point(16, 76);
             this.chkCountdownTimer.Name = "chkCountdownTimer";
             this.chkCountdownTimer.Size = new System.Drawing.Size(170, 17);
             this.chkCountdownTimer.TabIndex = 43;
@@ -151,13 +153,13 @@ namespace DCT.UI
             this.pnl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl.Location = new System.Drawing.Point(0, 0);
             this.pnl.Name = "pnl";
-            this.pnl.Size = new System.Drawing.Size(216, 144);
+            this.pnl.Size = new System.Drawing.Size(216, 166);
             this.pnl.TabIndex = 34;
             // 
             // lblExpRage
             // 
             this.lblExpRage.AutoSize = true;
-            this.lblExpRage.Location = new System.Drawing.Point(101, 127);
+            this.lblExpRage.Location = new System.Drawing.Point(99, 147);
             this.lblExpRage.Name = "lblExpRage";
             this.lblExpRage.Size = new System.Drawing.Size(16, 13);
             this.lblExpRage.TabIndex = 35;
@@ -224,13 +226,26 @@ namespace DCT.UI
             this.lblTimeLeft.Size = new System.Drawing.Size(65, 22);
             this.lblTimeLeft.Text = "Time left: N/A";
             // 
+            // optCountdownRooms
+            // 
+            this.optCountdownRooms.AutoSize = true;
+            this.optCountdownRooms.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.optCountdownRooms.Location = new System.Drawing.Point(3, 54);
+            this.optCountdownRooms.Name = "optCountdownRooms";
+            this.optCountdownRooms.Size = new System.Drawing.Size(79, 16);
+            this.optCountdownRooms.TabIndex = 44;
+            this.optCountdownRooms.TabStop = true;
+            this.optCountdownRooms.Text = "Attack rooms";
+            this.optCountdownRooms.UseVisualStyleBackColor = true;
+            this.optCountdownRooms.CheckedChanged += new System.EventHandler(this.optCountdownRooms_CheckedChanged);
+            // 
             // MainPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnl);
             this.Name = "MainPanel";
-            this.Size = new System.Drawing.Size(216, 144);
+            this.Size = new System.Drawing.Size(216, 166);
             this.pnlAttack.ResumeLayout(false);
             this.pnlAttack.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCountdown)).EndInit();
@@ -259,5 +274,6 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel lblTimeLeft;
         private System.Windows.Forms.ToolStripButton btnStartTimer;
+        private System.Windows.Forms.RadioButton optCountdownRooms;
     }
 }

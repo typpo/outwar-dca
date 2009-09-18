@@ -203,7 +203,10 @@ namespace DCT.Outwar.World
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Attack all the mobs in this room
+        /// </summary>
         internal void Attack()
         {
             if (Mobs == null)

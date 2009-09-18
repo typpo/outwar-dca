@@ -114,6 +114,15 @@ namespace DCT.UI
             }
         }
 
+
+        private void optCountdownRooms_CheckedChanged(object sender, EventArgs e)
+        {
+            if (optCountdownRooms.Checked)
+            {
+                mUI.Settings.AttackMode = 3;
+            }
+        }
+
         private void btnStartTimer_Click(object sender, EventArgs e)
         {
             if (mUI.AccountsPanel.Accounts.Count < 1)
@@ -127,18 +136,7 @@ namespace DCT.UI
                 return;
             }
 
-            switch (mCountdownType)
-            {
-                case AttackingType.Single:
-                Countdown(AttackingType.Single);
-                    break;
-                case AttackingType.Multi:
-                Countdown(AttackingType.Multi);
-                    break;
-                case AttackingType.Mobs:
-                Countdown(AttackingType.Mobs);
-                    break;
-            }
+            Countdown(mCountdownType);
         }
 
         private delegate void CountdownHandler(AttackingType type);
@@ -203,6 +201,9 @@ namespace DCT.UI
                     break;
                 case AttackingType.Mobs:
                     mUI.AttackMobs();
+                    break;
+                case AttackingType.Rooms:
+                    mUI.AttackRooms();
                     break;
             }
         }
@@ -282,7 +283,8 @@ namespace DCT.UI
             {
                 case 0: mUI.AttackArea(); break;
                 case 1: mUI.AttackAreas(); break;
-                default: mUI.AttackMobs(); break;
+                case 2: mUI.AttackMobs(); break;
+                case 3: mUI.AttackRooms(); break;
             }
         }
 
@@ -290,7 +292,6 @@ namespace DCT.UI
         {
             StopAttacking(true);
         }
-
 
         private delegate void StopAttackingHandler(bool timeroff);
 

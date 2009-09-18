@@ -12,7 +12,7 @@ namespace DCT.UI
     {
         #region Attacking
 
-        private void SetupHandler()
+        private void SetUpHandler()
         {
             AttackingType type;
             switch (Settings.AttackMode)
@@ -23,8 +23,11 @@ namespace DCT.UI
                 case 1:
                     type = AttackingType.Multi;
                     break;
-                default:
+                case 2:
                     type = AttackingType.Mobs;
+                    break;
+                default:
+                    type = AttackingType.Rooms;
                     break;
             }
 
@@ -50,7 +53,7 @@ namespace DCT.UI
 
         internal void AttackArea()
         {
-            SetupHandler();
+            SetUpHandler();
             AttackHandler.BeginArea();
         }
 
@@ -81,7 +84,7 @@ namespace DCT.UI
                 rooms.Add(int.Parse(RoomsPanel.Rooms[i].SubItems[1].Text), RoomsPanel.Rooms[i].Text);
             }
 
-            SetupHandler();
+            SetUpHandler();
             AttackHandler.BeginMultiArea(rooms);
         }
 
@@ -171,7 +174,7 @@ namespace DCT.UI
                 }
             }
 
-            SetupHandler();
+            SetUpHandler();
             AttackHandler.BeginMobs(mobs);
         }
 
@@ -201,6 +204,49 @@ namespace DCT.UI
             }
             return;
             quit:
+            LogPanel.Log("Mob coverage quit");
+            MainPanel.StopAttacking(true);
+        }
+
+        internal void AttackRooms()
+        {
+            List<int> rooms = new List<int>();
+            foreach (int i in RoomsPanel.CheckedIndices)
+            {
+                rooms.Add(int.Parse(RoomsPanel.Rooms[i].SubItems[1].Text));
+            }
+            rooms.Sort();
+
+            SetUpHandler();
+            AttackHandler.BeginRooms(rooms);
+        }
+
+        internal void DoAttackRooms(List<int> rooms)
+        {
+            Account mAccount = AccountsPanel.Engine.MainAccount;
+
+            foreach (int rm in rooms)
+            {
+                if (!Globals.AttackMode || mAccount.Mover.Location == null)
+                    goto quit;
+
+                Globals.AttackOn = false;
+
+                mAccount.Mover.PathfindTo(rm);
+
+                if (!Globals.AttackMode)
+                    goto quit;
+
+                Globals.AttackOn = true;
+
+                AccountsPanel.Engine.MainAccount.Mover.Location.Attack();
+                if (!Globals.AttackOn)
+                {
+                    return;
+                }
+            }
+            return;
+        quit:
             LogPanel.Log("Mob coverage quit");
             MainPanel.StopAttacking(true);
         }

@@ -11,8 +11,9 @@ namespace DCT.Outwar.World
         private static List<Account> mAccounts;
         private static AttackingType mType;
 
-        private static Dictionary<int, string> mRooms = new Dictionary<int, string>();
+        private static Dictionary<int, string> mAreas = new Dictionary<int, string>();
         private static Dictionary<int, int> mMobs = new Dictionary<int, int>();
+        private static List<int> mRooms = new List<int>();
 
         internal static void Set(List<Account> accounts, AttackingType type)
         {
@@ -27,13 +28,19 @@ namespace DCT.Outwar.World
 
         internal static void BeginMultiArea(Dictionary<int, string> rooms)
         {
-            mRooms = rooms;
+            mAreas = rooms;
             StartRun();
         }
 
         internal static void BeginMobs(Dictionary<int, int> mobs)
         {
             mMobs = mobs;
+            StartRun();
+        }
+
+        internal static void BeginRooms(List<int> rooms)
+        {
+            mRooms = rooms;
             StartRun();
         }
 
@@ -93,10 +100,13 @@ namespace DCT.Outwar.World
                             CoreUI.Instance.DoAttackArea();
                             break;
                         case AttackingType.Multi:
-                            CoreUI.Instance.DoAttackMultiAreas(mRooms);
+                            CoreUI.Instance.DoAttackMultiAreas(mAreas);
                             break;
                         case AttackingType.Mobs:
                             CoreUI.Instance.DoAttackMobs(mMobs);
+                            break;
+                        case AttackingType.Rooms:
+                            CoreUI.Instance.DoAttackRooms(mRooms);
                             break;
                     }
                     CoreUI.Instance.LogPanel.Log(a.Name + " attack coverage complete");
@@ -130,7 +140,7 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.MainPanel.Countdown(mType);
             }
 
-            mRooms.Clear();
+            mAreas.Clear();
             mMobs.Clear();
         }
     }
