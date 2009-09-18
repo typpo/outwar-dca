@@ -53,8 +53,13 @@ namespace DCT.UI
 
         private void txtFilters_TextChanged(object sender, EventArgs e)
         {
-            CoreUI.Instance.Settings.MobFilters =
-                txtFilters.Text.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] ss = txtFilters.Text.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            // trim spaces
+            foreach (string s in ss)
+            {
+                s = s.Trim();
+            }
+            CoreUI.Instance.Settings.MobFilters = ss;
         }
 
         private void btnFilterSave_Click(object sender, EventArgs e)
