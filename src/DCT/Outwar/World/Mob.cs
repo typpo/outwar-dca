@@ -104,8 +104,9 @@ namespace DCT.Outwar.World
                 {
                     return false;
                 }
-                else if (mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
+                else if (mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage) && !(IsSpawn && CoreUI.Instance.Settings.IgnoreSpawnRage))
                 {
+                    // TODO this all needs cleaning
                     // go to next account
                     CoreUI.Instance.LogPanel.Log(string.Format("Stopping attacks on {0}, reached rage limit", mRoom.Mover.Account.Name));
                     mQuit = true;
@@ -198,8 +199,10 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.LogPanel.Log("You don't have enough rage to attack " + mName + " (" + mRage + " > "
                                     + mRoom.Mover.Account.Rage + ")");
             }
-            else if (mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
+            else if (mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage) && !(IsSpawn && CoreUI.Instance.Settings.IgnoreSpawnRage))
             {
+                // TODO spawn mobs will still be attacked even at 1 rage
+
                 // go to next account
                 CoreUI.Instance.LogPanel.Log(string.Format("Stopping attacks on {0}, reached rage limit", mRoom.Mover.Account.Name));
                 mQuit = true;
@@ -404,19 +407,33 @@ namespace DCT.Outwar.World
             }
 
             // ALL GOOD
+
+            // bookkeeping
             mAttacked = true;
             mRoom.Mover.MobsAttacked++;
 
+            // spawn handling and logging
+            if (src.Contains("steps out of the shadows"))
+            {
+                CoreUI.Instance.SpawnsPanel.Log(string.Format("Spawned a mob in room {1}", mRoom.Id));
+
+                if (CoreUI.Instance.Settings.AttackSpawns)
+                {
+                    // attack the spawn mob
+                    CoreUI.Instance.SpawnsPanel.Log(string.Format("Attacking spawns in room {1}", mRoom.Id));
+                    mRoom.AttackSpawns();
+                }
+            }
+            if (IsSpawn)
+            {
+                CoreUI.Instance.SpawnsPanel.Log(string.Format("Attacked {0}", Name));
+            }
+
+            // other outcome handling
             if (src.Contains("found a"))
             {
                 string f = Parser.Parse(src, "found a ", "<br>");
                 CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + (f.Length < 30 ? " found a " + f : " found an item"));
-            }
-            if (src.Contains("steps out of the shadows"))
-            {
-                CoreUI.Instance.LogPanel.LogAttack(string.Format("You spawned a mob in room {1}", mRoom.Id));
-
-                // TODO reattack world.php
             }
             if (src.Contains("has gained "))
             {

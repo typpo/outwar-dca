@@ -10,13 +10,13 @@ namespace DCT.Outwar.World
     internal class Room
     {
         internal Mover Mover { get; private set; }
+        private int mId;
         internal int Id
         {
             get { return mId; }
         }
         internal string Name { get; set; }
         internal bool Trained { get; private set; }
-        private int mId;
         internal string Url { get; private set; }
         // TODO this should not be here
         private string mSource;
@@ -137,6 +137,10 @@ namespace DCT.Outwar.World
                 {
                     name = string.Format("*{0}*", p.Parse("\">*", " ["));
                     spawn = true;
+                    // log spawn sighting, but don't attack it if we shouldn't
+                    CoreUI.Instance.SpawnsPanel.Log(string.Format("Sighted {0} in room {1}", name, mId));
+                    if (!CoreUI.Instance.Settings.AttackSpawns)
+                        continue;
                 }
                 else
                 {
@@ -247,19 +251,48 @@ namespace DCT.Outwar.World
             {
                 if (mb.Id == id)
                 {
-                    if (mb.Attack(false) && CoreUI.Instance.Settings.Delay != 0)
-                    {
-                        int delay = CoreUI.Instance.Settings.Delay
-                            +
-                            (CoreUI.Instance.Settings.Variance
-                                 ? (CoreUI.Instance.Settings.Delay / 100) * Randomizer.Random.Next(51) * Randomizer.RandomPosNeg()
-                                 : 0);
-
-                        CoreUI.Instance.LogPanel.Log("Waiting for delay: " + delay + " ms");
-                        ThreadEngine.Sleep(delay);
-                    }
+                    AttackMob(mb);
                     return;
                 }
+            }
+        }
+
+        internal void AttackMob(string name)
+        {
+            foreach (Mob mb in Mobs)
+            {
+                if (mb.Name == name)
+                {
+                    AttackMob(mb);
+                    return;
+                }
+            }
+        }
+
+        internal void AttackSpawns()
+        {
+            foreach (Mob mb in Mobs)
+            {
+                if (mb.IsSpawn)
+                {
+                    AttackMob(mb);
+                    return;
+                }
+            }
+        }
+
+        private static void AttackMob(Mob mb)
+        {
+            if (mb.Attack(false) && CoreUI.Instance.Settings.Delay != 0)
+            {
+                int delay = CoreUI.Instance.Settings.Delay
+                    +
+                    (CoreUI.Instance.Settings.Variance
+                         ? (CoreUI.Instance.Settings.Delay / 100) * Randomizer.Random.Next(51) * Randomizer.RandomPosNeg()
+                         : 0);
+
+                CoreUI.Instance.LogPanel.Log("Waiting for delay: " + delay + " ms");
+                ThreadEngine.Sleep(delay);
             }
         }
 
