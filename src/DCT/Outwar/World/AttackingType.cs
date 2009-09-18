@@ -4,6 +4,7 @@ namespace DCT.Outwar.World
     {
         Multi,
         Single,
-        Mobs
+        Mobs,
+        Rooms
     }
 }

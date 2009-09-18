@@ -55,9 +55,9 @@ namespace DCT.UI
         {
             string[] ss = txtFilters.Text.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             // trim spaces
-            foreach (string s in ss)
+            for(int i = 0; i < ss.Length; i++)
             {
-                s = s.Trim();
+                ss[i] = ss[i].Trim().ToLower();
             }
             CoreUI.Instance.Settings.MobFilters = ss;
         }

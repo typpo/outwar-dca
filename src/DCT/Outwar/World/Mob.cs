@@ -30,13 +30,13 @@ namespace DCT.Outwar.World
                 {
                     if (mob.StartsWith("!"))
                     {
-                        if (mName.ToLower().Contains(mob.Substring(1).ToLower()))
+                        if (mName.ToLower().Contains(mob.Substring(1)))
                             return false;
                         continue;
                     }
                     else
                     {
-                        if (mName.ToLower().Contains(mob.ToLower()))
+                        if (mName.ToLower().Contains(mob))
                             continue;
                         return false;
                     }
