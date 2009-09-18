@@ -137,7 +137,14 @@ namespace DCT.UI
 
         private void lnkMobsSelect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            int i = SelectMobsByName(InputBox.Prompt("Mob Selection", "Check all mobs with the following name:"));
+            int i = 0;
+            string input = InputBox.Prompt("Mob Selection", "Check all mobs with the following names (separated by commas):");
+            if (string.IsNullOrEmpty(input))
+                return;
+            foreach (string s in input.Split(new char[] { ',' }))
+            {
+                i += SelectMobsByName(s.Trim());
+            }
             MessageBox.Show("Selected " + i + " mobs.", "Select Mobs", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

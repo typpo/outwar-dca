@@ -13,8 +13,9 @@ namespace DCT.Outwar.World
         private bool mInitialized;
         internal bool IsTrainer { get; private set; }
         internal bool IsTalkable { get; private set; }
-        private bool mQuit;
+        internal bool IsSpawn { get; private set; }
         internal bool Attacking { get; private set; }
+        private bool mQuit;
 
         private bool FilterOK
         {
@@ -50,11 +51,12 @@ namespace DCT.Outwar.World
         private bool mSkipLoad;
         private string mAttackUrl;
 
-        internal Mob(string name, string url, string attackurl, bool isQuest, bool isTrainer, Room room) : base(name, url, room)
+        internal Mob(string name, string url, string attackurl, bool isQuest, bool isTrainer, bool isSpawn, Room room) : base(name, url, room)
         {
             mAttackUrl = attackurl;
             IsTalkable = isQuest;
             IsTrainer = isTrainer;
+            IsSpawn = isSpawn;
         }
 
         internal void Initialize()
@@ -409,6 +411,12 @@ namespace DCT.Outwar.World
             {
                 string f = Parser.Parse(src, "found a ", "<br>");
                 CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + (f.Length < 30 ? " found a " + f : " found an item"));
+            }
+            if (src.Contains("steps out of the shadows"))
+            {
+                CoreUI.Instance.LogPanel.LogAttack(string.Format("You spawned a mob in room {1}", mRoom.Id));
+
+                // TODO reattack world.php
             }
             if (src.Contains("has gained "))
             {

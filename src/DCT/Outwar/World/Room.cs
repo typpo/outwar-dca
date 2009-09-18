@@ -128,19 +128,20 @@ namespace DCT.Outwar.World
 
                 string url = "mob.php?" + p.Parse("mob.php?", "\"");
                 string name;
+                string attackurl = string.Empty;
+                bool trainer = false;
+                bool quest = false;
+                bool spawn = false;
+
                 if (s.Contains("Spawned by"))
                 {
                     name = string.Format("*{0}*", p.Parse("\">*", " ["));
-
-                    // TODO isspawned flag, then go back and check
+                    spawn = true;
                 }
                 else
                 {
                     name = Parser.Parse(Parser.CutLeading(s, url + "\">"), "\">", " [");
                 }
-                string attackurl = string.Empty;
-                bool trainer = false;
-                bool quest = false;
 
                 if (s.Contains("newattack.php"))
                 {
@@ -173,7 +174,7 @@ namespace DCT.Outwar.World
                     continue;
                 }
 
-                Mobs.Add(new Mob(name, url, attackurl, quest, trainer, this));
+                Mobs.Add(new Mob(name, url, attackurl, quest, trainer, spawn, this));
             }
         }
 
