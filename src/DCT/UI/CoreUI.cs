@@ -282,7 +282,7 @@ namespace DCT.UI
 
             foreach (string str in Settings.MobFilters)
             {
-                mFiltersPanel.FiltersText = str + "\r\n";
+                mFiltersPanel.FiltersText += str + "\r\n";
             }
 
             mAttackPanel.StopAtRage = Settings.StopBelowRage;
