@@ -129,7 +129,7 @@ namespace DCT.UI
                 return;
             }
 
-            Dictionary<int, int> mobs = new Dictionary<int, int>();
+            /*
             foreach (int i in MobsPanel.CheckedIndices)
             {
                 int key = int.Parse(MobsPanel.Mobs[i].SubItems[1].Text);
@@ -138,10 +138,21 @@ namespace DCT.UI
                     mobs.Add(key, int.Parse(MobsPanel.Mobs[i].SubItems[2].Text));
                 }
             }
+            */
             
             // sort by value - ie., sort by room number
             List<KeyValuePair<int, int>> sortinglist =
-                    new List<KeyValuePair<int, int>>(mobs);
+                    new List<KeyValuePair<int, int>>();
+            foreach (int i in MobsPanel.CheckedIndices)
+            {
+                int key = int.Parse(MobsPanel.Mobs[i].SubItems[1].Text);
+                int val = int.Parse(MobsPanel.Mobs[i].SubItems[2].Text);
+                KeyValuePair<int,int> kvp = new KeyValuePair<int,int>(key, val);
+                if (!sortinglist.Contains(kvp))
+                {
+                    sortinglist.Add(kvp);
+                }
+            }
             sortinglist.Sort(
               delegate(
                 KeyValuePair<int, int> first,
@@ -151,9 +162,14 @@ namespace DCT.UI
               }
               );
             // Clear the dictionary and repopulate it from the List
-            mobs.Clear();
+            Dictionary<int, int> mobs = new Dictionary<int, int>();
             foreach (KeyValuePair<int, int> kvp in sortinglist)
-                mobs.Add(kvp.Key, kvp.Value);
+            {
+                if (!mobs.ContainsKey(kvp.Key))
+                {
+                    mobs.Add(kvp.Key, kvp.Value);
+                }
+            }
 
             SetupHandler();
             AttackHandler.BeginMobs(mobs);

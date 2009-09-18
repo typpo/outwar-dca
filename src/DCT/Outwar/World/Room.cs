@@ -130,7 +130,7 @@ namespace DCT.Outwar.World
                 string name;
                 if (s.Contains("Spawned by"))
                 {
-                    name = string.Format("*{0}*", p.Parse("<font color=\"#CCCCCC\">*", " ["));
+                    name = string.Format("*{0}*", p.Parse("\">*", " ["));
 
                     // TODO isspawned flag, then go back and check
                 }

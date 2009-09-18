@@ -416,12 +416,16 @@ namespace DCT.Outwar.World
                 {
                     Globals.ExpGained += mExpGained;
                     mRoom.Mover.ExpGained += mExpGained;
-                    CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + " beat " + mName + ", gained " + mExpGained + " exp");
+                    CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} beat {1}, gained {2} exp", mRoom.Mover.Account.Name, mName, mExpGained));
                 }
+            }
+            else if (src.Contains("has weakened"))
+            {
+                CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} lost to {1}", mRoom.Mover.Account.Name, mName));
             }
             else if (src.Contains("var battle_result"))
             {
-                CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + " attacked " + mName);
+                CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} beat {1}", mRoom.Mover.Account.Name, mName));
             }
             else
             {
