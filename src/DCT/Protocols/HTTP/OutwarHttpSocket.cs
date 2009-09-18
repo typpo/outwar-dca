@@ -17,7 +17,7 @@ namespace DCT.Protocols.Http
 
             string ret = base.Request("http://" + Account.Server + ".outwar.com/" + url, write);
             ret = Parser.RemoveRange(ret, "<!--", "-->");
-            if (Settings.Globals.AttackMode && ret.Contains(".outwar.com"))
+            if (ret.Contains(".outwar.com"))
             {
                 Account.GetStats(ret);
             }

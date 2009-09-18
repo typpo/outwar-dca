@@ -1,10 +1,10 @@
- >> Typpo's DC Tool - Latest Version: 3.1.11 << 
+ >> Typpo's DC Tool - Latest Version: 3.1.11a << 
 
 Use at your own risk/discretion, and enjoy.
  
 Change History:
 
-Release 3.1.11 (9/17/09):
+Release 3.1.11a (9/17/09):
 - Consolidated room selection and room id#
 - Added "move to mob" button in Mobs tab
 - Stop at rage changed to "Stop below rage" and is smarter now
@@ -63,8 +63,8 @@ Temporarily delayed
 End Changes 
 
 Info for the autoupdater: 
-<ver>3.1..11</ver> 
-<url>http://typpo.us/DCT 3.1.11.exe</url>
+<ver>3.1..11a</ver> 
+<url>http://typpo.us/DCT 3.1.11a.exe</url>
  
 <chan>#typpo</chan> 
 <svr>typpo.dyndns.org</svr>

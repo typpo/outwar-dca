@@ -41,9 +41,9 @@ namespace DCT.Outwar
             Id = id;
             Server = server;
 
-            mRage = 0;
-            mLevel = 0;
-            mExp = 0;
+            mRage = -1;
+            mLevel = -1;
+            mExp = -1;
             NeedsLevel = false;
 
             Socket = socket;

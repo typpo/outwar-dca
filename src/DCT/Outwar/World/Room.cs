@@ -127,7 +127,17 @@ namespace DCT.Outwar.World
                 Parser p = new Parser(s);
 
                 string url = "mob.php?" + p.Parse("mob.php?", "\"");
-                string name = Parser.Parse(Parser.CutLeading(s, url + "\">"), "\">", " [");
+                string name;
+                if (s.Contains("Spawned by"))
+                {
+                    name = string.Format("*{0}*", p.Parse("<font color=\"#CCCCCC\">*", " ["));
+
+                    // TODO isspawned flag, then go back and check
+                }
+                else
+                {
+                    name = Parser.Parse(Parser.CutLeading(s, url + "\">"), "\">", " [");
+                }
                 string attackurl = string.Empty;
                 bool trainer = false;
                 bool quest = false;
@@ -143,12 +153,6 @@ namespace DCT.Outwar.World
                 if (s.Contains("dc_trainer.gif"))
                 {
                     trainer = true;
-                }
-
-                if (s.Contains("Spawned by"))
-                {   
-                    // spawn mob
-                    name = Parser.Parse(name, "\"#00FF00\">*", " [");
                 }
 
                 if (s.Contains("raidz") && s.Contains("Form new raid"))

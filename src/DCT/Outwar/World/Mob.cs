@@ -31,12 +31,12 @@ namespace DCT.Outwar.World
                     {
                         if (mName.ToLower().Contains(mob.Substring(1).ToLower()))
                             return false;
-                        return true;
+                        continue;
                     }
                     else
                     {
                         if (mName.ToLower().Contains(mob.ToLower()))
-                            return true;
+                            continue;
                         return false;
                     }
                 }
