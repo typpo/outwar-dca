@@ -1,4 +1,4 @@
- >> Typpo's DC Tool - Latest Version: 3.1.10 << 
+ >> Typpo's DC Tool - Latest Version: 3.1.11 << 
 
 Use at your own risk/discretion, and enjoy.
  
@@ -63,8 +63,8 @@ Temporarily delayed
 End Changes 
 
 Info for the autoupdater: 
-<ver>3.1..10</ver> 
-<url>http://typpo.us/DCT 3.1.10.exe</url>
+<ver>3.1..11</ver> 
+<url>http://typpo.us/DCT 3.1.11.exe</url>
  
 <chan>#typpo</chan> 
 <svr>typpo.dyndns.org</svr>
