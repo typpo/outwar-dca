@@ -8,7 +8,7 @@ Release 3.1.12 (9/18/09):
 - Fixed filter issue
 - Fixed a rage limit bug that required refresh
 - Timer can be set to 0 (instantly restart)
-- Mob attacking is more efficiently (sorted by ID)
+- Mob attacking is more efficient (sorted by room ID)
 - Added support for spawns
 - Added spawn tab with options and log
 - Added "Attack Rooms" option.  This will attack ONLY the rooms that are checked, rather than their areas and is more conducive to camping spawns or attacking large areas

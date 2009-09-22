@@ -180,6 +180,7 @@ namespace DCT.UI
             RoomsPanel.BuildView();
             MobsPanel.BuildView();
             RaidsPanel.BuildView();
+            SpawnsPanel.BuildView();
         }
 
         internal void UpdateDisplay()
@@ -285,7 +286,7 @@ namespace DCT.UI
             }
         }
 
-        private void SyncSettings()
+        internal void SyncSettings()
         {
             // Menu bar
 

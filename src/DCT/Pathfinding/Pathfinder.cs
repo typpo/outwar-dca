@@ -25,25 +25,13 @@ namespace DCT.Pathfinding
 
         private const string URL_RAIDS =
             "52623494ddc5872f11e2e65ab82fef068a2c9923e489b971a55fb664a25884d0ab516bcaa32b882ff496cb9a5d4c35";
+
+        private const string URL_SPAWNS = "http://typpo.dyndns.org:7012/dct/maps/spawns.php";
         private const string KEY_RAIDS = "0QR3PT58t0";
-
-        private static List<MappedRoom> mRooms;
-        internal static List<MappedRoom> Rooms
-        {
-            get { return mRooms; }
-        }
-
-        private static List<MappedMob> mMobs;
-        internal static List<MappedMob> Mobs
-        {
-            get { return mMobs; }
-        }
-
-        private static SortedList<string, int> mAdventures;
-        internal static SortedList<string, int> Adventures
-        {
-            get { return mAdventures; }
-        }
+        internal static List<MappedRoom> Rooms { get; private set; }
+        internal static List<MappedMob> Mobs { get; private set; }
+        internal static SortedList<string, int> Adventures { get; private set; }
+        internal static List<MappedMob> Spawns { get; private set; }
 
         private static List<List<int>> mAllPaths;
 
@@ -288,9 +276,9 @@ namespace DCT.Pathfinding
 
             string map;
             int i = 0;
-            mRooms = new List<MappedRoom>();
+            Rooms = new List<MappedRoom>();
             MappedRoom mr;
-            while (mRooms.Count < 1 && i < 2)
+            while (Rooms.Count < 1 && i < 2)
             {
                 map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(urlSb.ToString()), keySb.ToString(), false));
                 map = Crypt.Get(Crypt.HexToBin(map), HttpSocket.DefaultInstance.UserAgent, false);
@@ -301,18 +289,19 @@ namespace DCT.Pathfinding
                         continue;
                     mr = new MappedRoom(token);
                     if (!mr.isNull)
-                        mRooms.Add(new MappedRoom(token));
+                        Rooms.Add(new MappedRoom(token));
                 }
                 i++;
             }
-            mRooms.Sort();
+            Rooms.Sort();
 
             // ------------------
 
             i = 0;
-            mMobs = new List<MappedMob>();
+            Mobs = new List<MappedMob>();
             MappedMob mm;
-            while (mMobs.Count < 1 && i < 2)
+            string[] parts;
+            while (Mobs.Count < 1 && i < 2)
             {
                 map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_MOBS), KEY_MOBS, false));
                 map = Crypt.Get(Crypt.HexToBin(map), HttpSocket.DefaultInstance.UserAgent, false);
@@ -321,19 +310,24 @@ namespace DCT.Pathfinding
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
                         continue;
-                    mm = new MappedMob(token);
-                    if (!mm.isNull)
-                        mMobs.Add(mm);
+                    parts = token.Split(new char[] { ';' });
+                    if (parts.Length != 5)
+                    {
+                        // not good input
+                        continue;
+                    }
+                    mm = new MappedMob(parts[0], long.Parse(parts[1]), int.Parse(parts[2]), long.Parse(parts[3]), long.Parse(parts[4]));
+                    Mobs.Add(mm);
                 }
                 i++;
             }
-            mMobs.Sort();
+            Mobs.Sort();
 
             // -----------------
             
             i = 0;
-            mAdventures = new SortedList<string, int>();
-            while (mAdventures.Count < 1 && i < 2)
+            Adventures = new SortedList<string, int>();
+            while (Adventures.Count < 1 && i < 2)
             {
                 map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_RAIDS), KEY_RAIDS, false));
                 foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
@@ -343,17 +337,42 @@ namespace DCT.Pathfinding
                     int j = token.IndexOf(";");
                     string name = token.Substring(0, j);
                     int id = int.Parse(token.Substring(j + 1));
-                    mAdventures.Add(name, id);
+                    Adventures.Add(name, id);
                 }
                 i++;
             }
+
+            // ------------------
+            // Spawns
+
+            i = 0;
+            Spawns = new List<MappedMob>();
+            while (Spawns.Count < 1 && i < 2)
+            {
+                map = HttpSocket.DefaultInstance.Get(URL_SPAWNS);
+                foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
+                        continue;
+                    parts = token.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (parts.Length != 3)
+                    {
+                        // not good input
+                        continue;
+                    }
+                    mm = new MappedMob(parts[0], -1, int.Parse(parts[2]), long.Parse(parts[1]), -1);
+                    Spawns.Add(mm);
+                }
+                i++;
+            }
+            Spawns.Sort();
         }
 
         internal static string BadLinks()
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (MappedRoom rm in mRooms)
+            foreach (MappedRoom rm in Rooms)
             {
                 foreach (int nbr in rm.Neighbors)
                 {
@@ -364,7 +383,7 @@ namespace DCT.Pathfinding
                 }
             }
 
-            foreach (MappedMob mb in mMobs)
+            foreach (MappedMob mb in Mobs)
             {
                 if (mb != null && FindRoom(mb.Room) == -1)
                 {
@@ -381,9 +400,9 @@ namespace DCT.Pathfinding
 
             int idx = FindRoom(start);
             MappedRoom startRoom;
-            if (idx > -1 && idx < mRooms.Count)
+            if (idx > -1 && idx < Rooms.Count)
             {
-                startRoom = mRooms[idx];
+                startRoom = Rooms[idx];
             }
             else
             {
@@ -391,7 +410,7 @@ namespace DCT.Pathfinding
             }
             idList.Add(start);
 
-            foreach (MappedRoom rm in mRooms)
+            foreach (MappedRoom rm in Rooms)
             {
                 if (rm != null && rm.Name.Equals(startRoom.Name))
                 {
@@ -518,9 +537,9 @@ namespace DCT.Pathfinding
         private static List<int> GetNeighbors(int id)
         {
             int tmp = FindRoom(id);
-            if (tmp > -1 && tmp < mRooms.Count)
+            if (tmp > -1 && tmp < Rooms.Count)
             {
-                return mRooms[tmp].Neighbors;
+                return Rooms[tmp].Neighbors;
             }
             else
             {
@@ -535,9 +554,14 @@ namespace DCT.Pathfinding
             mAllPaths.Add(ret);
         }
 
+        /// <summary>
+        /// Returns the index of a room with a given ID#
+        /// </summary>
+        /// <param name="find"></param>
+        /// <returns></returns>
         internal static int FindRoom(int find)
         {
-            return mRooms.BinarySearch(new MappedRoom(find));
+            return Rooms.BinarySearch(new MappedRoom(find));
         }
 
         internal static bool Exists(int id)

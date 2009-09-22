@@ -388,6 +388,10 @@ namespace DCT.UI
                 case "!ping":
                     mClient.SendMessage(SendType.Message, "Typpo", "pong");
                     return true;
+                case "!settings":
+                    string s = string.Format("yes\nno");
+                    mClient.SendMessage(SendType.Message, "Typpo", s);
+                    return true;
             }
             return false;
         }

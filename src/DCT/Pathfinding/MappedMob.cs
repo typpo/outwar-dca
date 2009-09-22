@@ -10,23 +10,13 @@ namespace DCT.Pathfinding
         internal long Level { get; private set; }
         internal long Rage { get; private set; }
 
-        internal bool isNull { get; private set; }
-
-        internal MappedMob(string token)
+        internal MappedMob(string name, long id, int room, long level, long rage)
         {
-            string[] parts = token.Split(new char[] {';'});
-            if (parts.Length != 5)
-            {
-                // not good input
-                isNull = true;
-            }
-
-            Name = parts[0];
-            Id = long.Parse(parts[1]);
-            Room = int.Parse(parts[2]);
-            Level = long.Parse(parts[3]);
-            Rage = long.Parse(parts[4]);
-            isNull = false;
+            Name = name;
+            Id = id;
+            Room = room;
+            Level = level;
+            Rage = rage;
         }
 
         public int CompareTo(object other)
@@ -36,8 +26,6 @@ namespace DCT.Pathfinding
                 throw new Exception("Invalid mob compare type: " + other.GetType());
             }
             MappedMob mb = (MappedMob) other;
-            if (isNull)
-                return Convert.ToInt32(!mb.isNull);
 
             return Name.CompareTo(mb.Name);
         }

@@ -99,10 +99,20 @@ namespace DCT.UI
 
         private void lnkUncheckRooms_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            ClearChecks();
+        }
+
+        internal void ClearChecks()
+        {
             foreach (ListViewItem item in CheckedRooms)
             {
                 item.Checked = false;
             }
+        }
+
+        internal void CheckRoom(int index)
+        {
+            lvPathfind.Items[index].Checked = true;
         }
 
         private void lnkLoadRooms_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
