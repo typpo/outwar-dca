@@ -473,22 +473,15 @@ namespace DCT.Outwar.World
 
         internal void Spider()
         {
-            CoreUI.Instance.ToggleAttack(true);
-
             // start in this room
             this.RefreshRoom();
 
             Stack<int> s = new Stack<int>();
-            // populate stack
-            foreach (int id in Location.Links.Keys)
-            {
-                s.Push(id);
-            }
+            List<int> completed = new List<int>();
 
             // start spidering
 
-
-            while (s.Count > 0 && Globals.AttackMode)
+            do
             {
                 // make sure links of current room are in rooms db
                 List<MappedRoom> rooms = Pathfinder.Rooms.FindAll(delegate(MappedRoom rm)
@@ -501,17 +494,20 @@ namespace DCT.Outwar.World
                     // should only be one match
                     CoreUI.Instance.LogPanel.Log(string.Format("Potential duplicate room {0}", Location.Id));
                 }
-
                 if (rooms.Count < 1)
                 {
                     // new room
-                    MappedRoom mr = new MappedRoom(Location.Id, Location.Name, (System.Collections.Generic.List<int>)Location.Links.Keys);
+                    List<int> l = new List<int>();
+                    foreach (int k in Location.Links.Keys)
+                        l.Add(k);
+                    MappedRoom mr = new MappedRoom(Location.Id, Location.Name, l);
                     Pathfinder.Rooms.Add(mr);
+                    rooms.Add(mr);
 
                     CoreUI.Instance.LogPanel.Log(string.Format("Added new room {0}", Location.Id));
                 }
 
-                // add links
+                // add links (starting w/ partial map)
                 foreach (MappedRoom rm in rooms)
                 {
                     foreach (int id in Location.Links.Keys)
@@ -524,9 +520,10 @@ namespace DCT.Outwar.World
                     }
                 }
 
+                completed.Add(Location.Id);
                 foreach (int id in Location.Links.Keys)
                 {
-                    if (!s.Contains(id))
+                    if (!s.Contains(id) && !completed.Contains(id))
                     {
                         s.Push(id);
                     }
@@ -534,7 +531,7 @@ namespace DCT.Outwar.World
 
                 // move to top of stack
                 PathfindTo(s.Pop());
-            }
+            } while (s.Count > 0 && Globals.AttackMode);
         }
 
         internal void Train()

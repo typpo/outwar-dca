@@ -171,7 +171,7 @@ namespace DCT.UI
             if (Pathfinder.Rooms.Count == 0)
             {
                 mUI.LogPanel.Log("E: You are either using an incorrect version of the program or the program was unable to reach the map server.  Make sure your antivirus, antispyware, firewall, router, etc. are not blocking the program's connection to the internet.");
-                return;
+                //return;
             }
 
             txtUsername.Enabled = false;

@@ -247,7 +247,7 @@ namespace DCT.UI
             }
             return;
         quit:
-            LogPanel.Log("Mob coverage quit");
+            LogPanel.Log("Rooms coverage quit");
             MainPanel.StopAttacking(true);
         }
 

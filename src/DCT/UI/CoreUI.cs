@@ -517,5 +517,15 @@ namespace DCT.UI
                     break;
             }
         }
+
+        private void spiderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToggleAttack(true);
+
+            ThreadEngine.DefaultInstance.Do(new ThreadEngine.ThreadHandler(AccountsPanel.Engine.MainAccount.Mover.Spider));
+
+
+            ToggleAttack(false);
+        }
     }
 }

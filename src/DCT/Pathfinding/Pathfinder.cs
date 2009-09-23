@@ -46,6 +46,7 @@ namespace DCT.Pathfinding
             //Console.WriteLine(Crypt.BinToHex(Crypt.Get("http://typpo.dyndns.org:7012/dct/maps/mobs.php", KEY_MOBS, false)));
             //Console.WriteLine(Crypt.BinToHex(Crypt.Get("http://typpo.dyndns.org:7012/dct/maps/raids.php", KEY_RAIDS, false)));
 
+            #region Encryption
             Stack<int> stack = new Stack<int>(94);
             int bCrypt = 0;
 
@@ -274,6 +275,8 @@ namespace DCT.Pathfinding
                 keySb.Append((char)stack.Pop());
             }
 
+            #endregion
+
             string map;
             int i = 0;
             Rooms = new List<MappedRoom>();
@@ -281,6 +284,7 @@ namespace DCT.Pathfinding
             string name;
             int id;
             string[] tmp;
+            //*
             while (Rooms.Count < 1 && i < 2)
             {
                 map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(urlSb.ToString()), keySb.ToString(), false));
@@ -309,6 +313,7 @@ namespace DCT.Pathfinding
                 i++;
             }
             Rooms.Sort();
+            //*/
 
             // ------------------
 

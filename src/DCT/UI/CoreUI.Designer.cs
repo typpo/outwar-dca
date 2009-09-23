@@ -70,6 +70,8 @@ namespace DCT.UI
             this.mNotifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spiderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.splitLeftRight.Panel2.SuspendLayout();
@@ -112,7 +114,8 @@ namespace DCT.UI
             this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.actionsToolStripMenuItem,
-            this.preferencesToolStripMenuItem});
+            this.preferencesToolStripMenuItem,
+            this.debugToolStripMenuItem});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
             this.mnuMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -340,7 +343,7 @@ namespace DCT.UI
             // 
             this.tabFilters.Location = new System.Drawing.Point(4, 22);
             this.tabFilters.Name = "tabFilters";
-            this.tabFilters.Size = new System.Drawing.Size(423, 262);
+            this.tabFilters.Size = new System.Drawing.Size(423, 267);
             this.tabFilters.TabIndex = 7;
             this.tabFilters.Text = "Filters";
             this.tabFilters.UseVisualStyleBackColor = true;
@@ -349,7 +352,7 @@ namespace DCT.UI
             // 
             this.tabRooms.Location = new System.Drawing.Point(4, 22);
             this.tabRooms.Name = "tabRooms";
-            this.tabRooms.Size = new System.Drawing.Size(423, 262);
+            this.tabRooms.Size = new System.Drawing.Size(423, 267);
             this.tabRooms.TabIndex = 5;
             this.tabRooms.Text = "Rooms";
             this.tabRooms.UseVisualStyleBackColor = true;
@@ -358,7 +361,7 @@ namespace DCT.UI
             // 
             this.tabMobs.Location = new System.Drawing.Point(4, 22);
             this.tabMobs.Name = "tabMobs";
-            this.tabMobs.Size = new System.Drawing.Size(423, 262);
+            this.tabMobs.Size = new System.Drawing.Size(423, 267);
             this.tabMobs.TabIndex = 9;
             this.tabMobs.Text = "Mobs";
             this.tabMobs.UseVisualStyleBackColor = true;
@@ -367,7 +370,7 @@ namespace DCT.UI
             // 
             this.tabJoiner.Location = new System.Drawing.Point(4, 22);
             this.tabJoiner.Name = "tabJoiner";
-            this.tabJoiner.Size = new System.Drawing.Size(423, 262);
+            this.tabJoiner.Size = new System.Drawing.Size(423, 267);
             this.tabJoiner.TabIndex = 11;
             this.tabJoiner.Text = "Raids";
             this.tabJoiner.UseVisualStyleBackColor = true;
@@ -376,7 +379,7 @@ namespace DCT.UI
             // 
             this.tabSpawns.Location = new System.Drawing.Point(4, 22);
             this.tabSpawns.Name = "tabSpawns";
-            this.tabSpawns.Size = new System.Drawing.Size(423, 262);
+            this.tabSpawns.Size = new System.Drawing.Size(423, 267);
             this.tabSpawns.TabIndex = 12;
             this.tabSpawns.Text = "Spawns";
             this.tabSpawns.UseVisualStyleBackColor = true;
@@ -385,7 +388,7 @@ namespace DCT.UI
             // 
             this.tabTrainer.Location = new System.Drawing.Point(4, 22);
             this.tabTrainer.Name = "tabTrainer";
-            this.tabTrainer.Size = new System.Drawing.Size(423, 262);
+            this.tabTrainer.Size = new System.Drawing.Size(423, 267);
             this.tabTrainer.TabIndex = 6;
             this.tabTrainer.Text = "Trainer";
             this.tabTrainer.UseVisualStyleBackColor = true;
@@ -394,7 +397,7 @@ namespace DCT.UI
             // 
             this.tabQuests.Location = new System.Drawing.Point(4, 22);
             this.tabQuests.Name = "tabQuests";
-            this.tabQuests.Size = new System.Drawing.Size(423, 262);
+            this.tabQuests.Size = new System.Drawing.Size(423, 267);
             this.tabQuests.TabIndex = 8;
             this.tabQuests.Text = "Quests";
             this.tabQuests.UseVisualStyleBackColor = true;
@@ -403,7 +406,7 @@ namespace DCT.UI
             // 
             this.tabChat.Location = new System.Drawing.Point(4, 22);
             this.tabChat.Name = "tabChat";
-            this.tabChat.Size = new System.Drawing.Size(423, 262);
+            this.tabChat.Size = new System.Drawing.Size(423, 267);
             this.tabChat.TabIndex = 10;
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
@@ -442,6 +445,21 @@ namespace DCT.UI
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
+            // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.spiderToolStripMenuItem});
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.debugToolStripMenuItem.Text = "Debug";
+            // 
+            // spiderToolStripMenuItem
+            // 
+            this.spiderToolStripMenuItem.Name = "spiderToolStripMenuItem";
+            this.spiderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.spiderToolStripMenuItem.Text = "Spider";
+            this.spiderToolStripMenuItem.Click += new System.EventHandler(this.spiderToolStripMenuItem_Click);
             // 
             // CoreUI
             // 
@@ -518,5 +536,7 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem exportSpawnLogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearSpawnLogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spiderToolStripMenuItem;
     }
 }
