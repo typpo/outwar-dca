@@ -1,12 +1,19 @@
- >> Typpo's DC Tool - Latest Version: 3.1.12 << 
+ >> Typpo's DC Tool - Latest Version: 3.1.13 << 
 
 Use at your own risk/discretion, and enjoy.
  
 Change History:
 
+Release 3.1.13 (9/22/09):
+- Fixed rage limit bug
+- Added spawn list in spawn tab
+- Added "Camp Selected" option for selected spawns
+- Program won't shut down if chat is down
+
+Lots of map/mob updates
+
 Release 3.1.12 (9/18/09):
 - Fixed filter issue
-- Fixed a rage limit bug that required refresh
 - Timer can be set to 0 (instantly restart)
 - Mob attacking is more efficient (sorted by room ID)
 - Added support for spawns
@@ -72,8 +79,8 @@ Temporarily delayed
 End Changes 
 
 Info for the autoupdater: 
-<ver>3.1..12</ver> 
-<url>http://typpo.us/DCT 3.1.12.exe</url>
+<ver>3.1..13</ver> 
+<url>http://typpo.us/DCT 3.1.13.exe</url>
  
 <chan>#typpo</chan> 
 <svr>typpo.dyndns.org</svr>
