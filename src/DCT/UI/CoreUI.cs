@@ -235,13 +235,6 @@ namespace DCT.UI
         private delegate void ToggleHandler(bool on);
         internal void Toggle(bool on)
         {
-            if (ChatPanel.StatusLabel.Text.StartsWith("Not"))
-            {
-                LogPanel.Log("E: Not connected to authorization server.");
-                Application.Exit();
-                return;
-            }
-
             if (InvokeRequired)
             {
                 Invoke(new ToggleHandler(Toggle), on);
@@ -258,6 +251,9 @@ namespace DCT.UI
             
             // TRAINING TAB
             mTrainPanel.TrainEnabled = on;
+
+            // SPAWN TAB
+            SpawnsPanel.CampEnabled = on;
         }
 
         internal void ToggleAttack(bool on)
@@ -277,13 +273,6 @@ namespace DCT.UI
             {
                 MainPanel.CountdownTimer.Stop();
             }
-
-            if (ChatPanel.StatusLabel.Text.StartsWith("Not"))
-            {
-                LogPanel.Log("E: Not connected to authorization server.");
-                Application.Exit();
-                return;
-            }
         }
 
         internal void SyncSettings()
@@ -300,6 +289,7 @@ namespace DCT.UI
 
             // Filters panel
 
+            mFiltersPanel.FiltersText = string.Empty;
             foreach (string str in Settings.MobFilters)
             {
                 mFiltersPanel.FiltersText += str + "\r\n";

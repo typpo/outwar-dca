@@ -84,7 +84,7 @@ namespace DCT.Outwar.World
                     a.Mover.RefreshRoom();
 
                     // no point in moving if we don't have rage
-                    if (a.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage) && a.Mover.Account.Rage > -1)
+                    if (a.Mover.Account.Rage > -1 && a.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
                     {
                         // go to next account
                         CoreUI.Instance.LogPanel.Log(string.Format("Not attacking on {0}, reached rage limit", a.Name));

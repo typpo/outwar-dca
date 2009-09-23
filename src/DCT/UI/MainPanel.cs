@@ -212,13 +212,6 @@ namespace DCT.UI
 
         private void t_Started(object sender, EventArgs e)
         {
-            if (mUI.ChatPanel.StatusLabel.Text.StartsWith("Not"))
-            {
-                mUI.LogPanel.Log("E: Not connected to authorization server.");
-                Application.Exit();
-                return;
-            }
-
             UpdateCountdown();
         }
 
