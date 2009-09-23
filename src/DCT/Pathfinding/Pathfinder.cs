@@ -310,7 +310,7 @@ namespace DCT.Pathfinding
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
                         continue;
-                    parts = token.Split(new char[] { ';' });
+                    parts = token.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                     if (parts.Length != 5)
                     {
                         // not good input

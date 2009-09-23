@@ -281,6 +281,11 @@ namespace DCT.UI
 
         private void btnAttackStart_Click(object sender, EventArgs e)
         {
+            StartAttacking();
+        }
+
+        internal void StartAttacking()
+        {
             switch (mUI.Settings.AttackMode)
             {
                 case 0: mUI.AttackArea(); break;
