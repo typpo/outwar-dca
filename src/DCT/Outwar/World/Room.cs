@@ -20,7 +20,7 @@ namespace DCT.Outwar.World
         internal string Url { get; private set; }
         // TODO this should not be here
         private string mSource;
-        internal List<string> Links { get; private set; }
+        internal SortedList<int, string> Links { get; private set; }
         internal List<Mob> Mobs { get; private set; }
 
         internal Room(Mover mover, string url)
@@ -37,7 +37,7 @@ namespace DCT.Outwar.World
             Mover = mover;
 
             Trained = false;
-            Links = new List<string>();
+            Links = new SortedList<int, string>();
         }
 
         /// <summary>
@@ -101,14 +101,8 @@ namespace DCT.Outwar.World
         {
             get
             {
-                foreach (string url in Links)
-                {
-                    if (url.Contains("room=" + id + "&"))
-                    {
-                        return url;
-                    }
-                }
-
+                if (Links.ContainsKey(id))
+                    return Links[id];
                 return null;
             }
         }
@@ -195,12 +189,17 @@ namespace DCT.Outwar.World
         {
             // TODO just parse all world links...
             string[] tokens = Parser.MultiParse(mSource, "<a href=\"", "\"");
+            string url;
+            int id;
             for (int i = 0; i < tokens.Length; i++)
             {
-                string url = tokens[i].Replace("\">", "").Replace(" ", "").Replace("/", "").ToLower().Trim();
-                if (url.StartsWith("world.php") && !Links.Contains(url))
+                url = tokens[i].Replace("\">", "").Replace(" ", "").Replace("/", "").ToLower().Trim();
+                if (url.StartsWith("world.php"))
                 {
-                    Links.Add(url);
+                    if (!int.TryParse(Parser.Parse(url, "room=", "&"), out id))
+                        continue;
+                    if (!Links.ContainsKey(id))
+                        Links.Add(id, url);
                 }
             }
         }

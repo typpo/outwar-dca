@@ -333,9 +333,10 @@ namespace DCT.Outwar.World
                     CoreUI.Instance.LogPanel.Log(Account.Name + " teleporting...");
 
                     string tmp = Account.Socket.Get("world.php?teleport=1");
-                    Parser p = new Parser(tmp);
-                    string url = p.Parse("window.location=\"http://" + Account.Server + ".outwar.com/", "\"");
-                    LoadRoom(url);
+                    //Parser p = new Parser(tmp);
+                    //string url = p.Parse("window.location=\"http://" + Account.Server + ".outwar.com/", "\"");
+                    //LoadRoom(url);
+                    RefreshRoom();
                     nodes = Pathfinder.GetSolution(Location.Id, roomid);
                 }
                 else
@@ -472,15 +473,68 @@ namespace DCT.Outwar.World
 
         internal void Spider()
         {
-            const string AREA = "Kix Woods";
+            CoreUI.Instance.ToggleAttack(true);
 
             // start in this room
             this.RefreshRoom();
 
-            // 
             Stack<int> s = new Stack<int>();
+            // populate stack
+            foreach (int id in Location.Links.Keys)
+            {
+                s.Push(id);
+            }
 
-            //this.Location.Links
+            // start spidering
+
+
+            while (s.Count > 0 && Globals.AttackMode)
+            {
+                // make sure links of current room are in rooms db
+                List<MappedRoom> rooms = Pathfinder.Rooms.FindAll(delegate(MappedRoom rm)
+                {
+                    return rm.Id == Location.Id;
+                });
+
+                if (rooms.Count > 1)
+                {
+                    // should only be one match
+                    CoreUI.Instance.LogPanel.Log(string.Format("Potential duplicate room {0}", Location.Id));
+                }
+
+                if (rooms.Count < 1)
+                {
+                    // new room
+                    MappedRoom mr = new MappedRoom(Location.Id, Location.Name, (System.Collections.Generic.List<int>)Location.Links.Keys);
+                    Pathfinder.Rooms.Add(mr);
+
+                    CoreUI.Instance.LogPanel.Log(string.Format("Added new room {0}", Location.Id));
+                }
+
+                // add links
+                foreach (MappedRoom rm in rooms)
+                {
+                    foreach (int id in Location.Links.Keys)
+                    {
+                        if (!rm.Neighbors.Contains(id))
+                        {
+                            rm.Neighbors.Add(id);
+                            CoreUI.Instance.LogPanel.Log(string.Format("Added link {0} from {1}", id, Location.Id));
+                        }
+                    }
+                }
+
+                foreach (int id in Location.Links.Keys)
+                {
+                    if (!s.Contains(id))
+                    {
+                        s.Push(id);
+                    }
+                }
+
+                // move to top of stack
+                PathfindTo(s.Pop());
+            }
         }
 
         internal void Train()
@@ -492,7 +546,7 @@ namespace DCT.Outwar.World
             }
 
             CoreUI.Instance.LogPanel.Log("Starting leveling for " + Account.Name);
-            CoreUI.Instance.LogPanel.Log("Loading all possible bars...may take a while");
+            CoreUI.Instance.LogPanel.Log("Loading all possible bars...");
 
             mTrainRoomStart = Location.Id;
 

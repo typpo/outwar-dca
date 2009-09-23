@@ -277,7 +277,10 @@ namespace DCT.Pathfinding
             string map;
             int i = 0;
             Rooms = new List<MappedRoom>();
-            MappedRoom mr;
+            List<int> nbrs;
+            string name;
+            int id;
+            string[] tmp;
             while (Rooms.Count < 1 && i < 2)
             {
                 map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(urlSb.ToString()), keySb.ToString(), false));
@@ -287,9 +290,21 @@ namespace DCT.Pathfinding
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
                         continue;
-                    mr = new MappedRoom(token);
-                    if (!mr.isNull)
-                        Rooms.Add(new MappedRoom(token));
+
+                    tmp = token.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (!int.TryParse(tmp[0], out id))
+                    {
+                        continue;
+                    }
+                    name = tmp[tmp.Length - 1];
+                    nbrs = new List<int>();
+                    for (int j = 1; j < tmp.Length - 1; j++)
+                    {
+                        nbrs.Add(int.Parse(tmp[j]));
+                    }
+                    if (nbrs.Count < 1)
+                        continue;
+                    Rooms.Add(new MappedRoom(id, name, nbrs));
                 }
                 i++;
             }
@@ -335,8 +350,8 @@ namespace DCT.Pathfinding
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
                         continue;
                     int j = token.IndexOf(";");
-                    string name = token.Substring(0, j);
-                    int id = int.Parse(token.Substring(j + 1));
+                    name = token.Substring(0, j);
+                    id = int.Parse(token.Substring(j + 1));
                     Adventures.Add(name, id);
                 }
                 i++;
@@ -561,7 +576,7 @@ namespace DCT.Pathfinding
         /// <returns></returns>
         internal static int FindRoom(int find)
         {
-            return Rooms.BinarySearch(new MappedRoom(find));
+            return Rooms.BinarySearch(new MappedRoom(find, null, null));
         }
 
         internal static bool Exists(int id)
