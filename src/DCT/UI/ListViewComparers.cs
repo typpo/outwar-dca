@@ -99,4 +99,42 @@ namespace DCT.UI
             return returnVal;
         }
     }
+
+    internal class SpawnsViewItemComparer : ListViewItemComparer
+    {
+        internal SpawnsViewItemComparer(int column, SortOrder order)
+            : base(column, order)
+        {
+        }
+
+        public override int Compare(object x, object y)
+        {
+            int returnVal;
+            string xx = ((ListViewItem)x).SubItems[col].Text,
+                   yy = ((ListViewItem)y).SubItems[col].Text;
+
+            if (col != 0)
+            {
+                int xn = int.Parse(xx),
+                    yn = int.Parse(yy);
+
+                if (xn < yn)
+                    returnVal = -1;
+                else if (xn == yn)
+                    returnVal = 0;
+                else
+                    returnVal = 1;
+            }
+            else
+            {
+                returnVal = String.Compare(xx,
+                                           yy);
+            }
+
+            if (order == SortOrder.Descending)
+                returnVal *= -1;
+
+            return returnVal;
+        }
+    }
 }

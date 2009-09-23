@@ -62,9 +62,6 @@ namespace DCT.UI
         private int mSortColumn;
         private void lvPathfind_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            //mRoomsTab.ListView.ListViewItemSorter = new ListViewItemComparer(e.Column);
-            //mRoomsTab.ListView.Sort();
-
             // Determine whether the column is the same as the last column clicked.
             if (e.Column != mSortColumn)
             {
