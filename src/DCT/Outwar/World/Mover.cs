@@ -448,7 +448,6 @@ namespace DCT.Outwar.World
                     {
                         MessageBox.Show(Account.Name + " is having trouble moving.  Reasons for this include:\n\n- It's impossible to reach your destination (are you missing a key?)\n- The program just can't find a way to get where you want to go\n- Someone logged into your account - press refresh and start your run again", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         CoreUI.Instance.MainPanel.StopAttacking(true);
-                        // Note: error report here is not necessary because specific cases are handled in LoadRoom
                         return false;
                     }
                     return TryRoom(id, tries);
