@@ -440,15 +440,15 @@ namespace DCT.Outwar.World
             // spawn handling and logging
             if (src.Contains("steps out of the shadows"))
             {
-                CoreUI.Instance.SpawnsPanel.Log(string.Format("Spawned a mob in room {0}", mRoom.Id));
+                CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} spawned a mob in room {1}", mRoom.Mover.Account.Name, mRoom.Id));
 
                 if (CoreUI.Instance.Settings.AttackSpawns)
                 {
                     // attack the spawn mob
-                    CoreUI.Instance.SpawnsPanel.Log(string.Format("Attacking spawns in room {0}", mRoom.Id));
+                    CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} attacking spawns in room {1}", mRoom.Mover.Account.Name, mRoom.Id));
                     if (mRoom.Load() != 0)
                     {
-                        CoreUI.Instance.SpawnsPanel.Log(string.Format("Room {0} reload failed", mRoom.Id));
+                        CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} room {1} reload failed", mRoom.Mover.Account.Name, mRoom.Id));
                     }
                     else
                     {
@@ -458,7 +458,7 @@ namespace DCT.Outwar.World
             }
             if (IsSpawn)
             {
-                CoreUI.Instance.SpawnsPanel.Log(string.Format("Attacked {0}", Name));
+                CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} attacked {1}", mRoom.Mover.Account.Name, Name));
                 CoreUI.Instance.SpawnsPanel.Attacked(mRoom.Id);
             }
 

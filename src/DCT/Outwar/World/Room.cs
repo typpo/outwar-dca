@@ -145,7 +145,7 @@ namespace DCT.Outwar.World
                     // log spawn sighting, but don't attack it if we shouldn't
                     if (Globals.AttackOn)
                     {
-                        CoreUI.Instance.SpawnsPanel.Log(string.Format("Sighted {0} in room {1}", name, mId));
+                        CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} sighted {1} in room {2}", Mover.Account.Name, name, mId));
                         CoreUI.Instance.SpawnsPanel.Sighted(mId);
                         if (!CoreUI.Instance.Settings.AttackSpawns)
                             continue;
