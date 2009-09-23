@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Windows.Forms;
 
+// TODO this is stupid
+
 namespace DCT.UI
 {
     internal abstract class ListViewItemComparer : IComparer

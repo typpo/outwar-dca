@@ -9,26 +9,38 @@ namespace DCT.Settings
 {
     internal class IniWriter
     {
+        private const string STR_SavedSpawnsini = "savedSpawns.ini";
+        private const string STR_SavedRaidsini = "savedRaids.ini";
+        private const string STR_SavedMobsini = "savedMobs.ini";
+        private const string STR_SavedRoomsini = "savedRooms.ini";
+
         internal static void Save()
         {
             try
             {
-                StreamWriter sw = new StreamWriter("savedRooms.ini");
+                StreamWriter sw = new StreamWriter(STR_SavedRoomsini);
                 foreach (ListViewItem item in CoreUI.Instance.RoomsPanel.CheckedRooms)
                     sw.WriteLine(item.SubItems[1].Text);
 
                 sw.Flush();
                 sw.Close();
 
-                sw = new StreamWriter("savedMobs.ini");
+                sw = new StreamWriter(STR_SavedMobsini);
                 foreach (ListViewItem item in CoreUI.Instance.MobsPanel.CheckedMobs)
                     sw.WriteLine(item.SubItems[1].Text);
 
                 sw.Flush();
                 sw.Close();
 
-                sw = new StreamWriter("savedRaids.ini");
+                sw = new StreamWriter(STR_SavedRaidsini);
                 foreach (ListViewItem item in CoreUI.Instance.RaidsPanel.CheckedRaids)
+                    sw.WriteLine(item.SubItems[1].Text);
+
+                sw.Flush();
+                sw.Close();
+
+                sw = new StreamWriter(STR_SavedSpawnsini);
+                foreach (ListViewItem item in CoreUI.Instance.SpawnsPanel.CheckedSpawns)
                     sw.WriteLine(item.SubItems[1].Text);
 
                 sw.Flush();
@@ -41,59 +53,80 @@ namespace DCT.Settings
 
         internal static void Get()
         {
-            if (!File.Exists("savedMobs.ini")
-                ||  !File.Exists("savedRooms.ini") || !File.Exists("savedRaids.ini"))
-            {
-                return;
-            }
-
             FileStream fs = null;
 
             try
             {
                 string input;
+                StreamReader sr;
 
-                StreamReader sr = new StreamReader("savedRooms.ini");
-                while ((input = sr.ReadLine()) != null)
+                if (File.Exists(STR_SavedRoomsini))
                 {
-                    foreach (ListViewItem item in CoreUI.Instance.RoomsPanel.Rooms)
+                    sr = new StreamReader(STR_SavedRoomsini);
+                    while ((input = sr.ReadLine()) != null)
                     {
-                        if (item.SubItems[1].Text == input)
+                        foreach (ListViewItem item in CoreUI.Instance.RoomsPanel.Rooms)
                         {
-                            item.Checked = true;
-                            break;
+                            if (item.SubItems[1].Text == input)
+                            {
+                                item.Checked = true;
+                                break;
+                            }
                         }
                     }
+                    sr.Close();
                 }
-                sr.Close();
 
-                sr = new StreamReader("savedMobs.ini");
-                while ((input = sr.ReadLine()) != null)
+                if (File.Exists(STR_SavedMobsini))
                 {
-                    foreach (ListViewItem item in CoreUI.Instance.MobsPanel.Mobs)
+                    sr = new StreamReader(STR_SavedMobsini);
+                    while ((input = sr.ReadLine()) != null)
                     {
-                        if (item.SubItems[1].Text == input)
+                        foreach (ListViewItem item in CoreUI.Instance.MobsPanel.Mobs)
                         {
-                            item.Checked = true;
-                            break;
+                            if (item.SubItems[1].Text == input)
+                            {
+                                item.Checked = true;
+                                break;
+                            }
                         }
                     }
+                    sr.Close();
                 }
-                sr.Close();
 
-                sr = new StreamReader("savedRaids.ini");
-                while ((input = sr.ReadLine()) != null)
+                if (File.Exists(STR_SavedRaidsini))
                 {
-                    foreach (ListViewItem item in CoreUI.Instance.RaidsPanel.Raids)
+                    sr = new StreamReader(STR_SavedRaidsini);
+                    while ((input = sr.ReadLine()) != null)
                     {
-                        if (item.SubItems[1].Text == input)
+                        foreach (ListViewItem item in CoreUI.Instance.RaidsPanel.Raids)
                         {
-                            item.Checked = true;
-                            break;
+                            if (item.SubItems[1].Text == input)
+                            {
+                                item.Checked = true;
+                                break;
+                            }
                         }
                     }
+                    sr.Close();
                 }
-                sr.Close();
+
+                if (File.Exists(STR_SavedSpawnsini))
+                {
+                    sr = new StreamReader(STR_SavedSpawnsini);
+                    while ((input = sr.ReadLine()) != null)
+                    {
+                        foreach (ListViewItem item in CoreUI.Instance.SpawnsPanel.Spawns)
+                        {
+                            if (item.SubItems[1].Text == input)
+                            {
+                                item.Checked = true;
+                                break;
+                            }
+                        }
+                    }
+                    sr.Close();
+                }
             }
             finally
             {
