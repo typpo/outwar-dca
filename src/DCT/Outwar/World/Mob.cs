@@ -131,7 +131,7 @@ namespace DCT.Outwar.World
                 {
                     return false;
                 }
-                else if (mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
+                else if (mRoom.Mover.Account.Rage > -1 && mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
                 {
                     // TODO this all needs cleaning
                     // go to next account
@@ -226,7 +226,7 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.LogPanel.Log("You don't have enough rage to attack " + mName + " (" + mRage + " > "
                                     + mRoom.Mover.Account.Rage + ")");
             }
-            else if (mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
+            else if (mRoom.Mover.Account.Rage > -1 && mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
             {
                 // go to next account
                 CoreUI.Instance.LogPanel.Log(string.Format("Stopping attacks on {0}, reached rage limit", mRoom.Mover.Account.Name));
