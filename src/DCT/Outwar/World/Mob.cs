@@ -459,6 +459,7 @@ namespace DCT.Outwar.World
             if (IsSpawn)
             {
                 CoreUI.Instance.SpawnsPanel.Log(string.Format("Attacked {0}", Name));
+                CoreUI.Instance.SpawnsPanel.Attacked(mRoom.Id);
             }
 
             // other outcome handling

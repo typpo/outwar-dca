@@ -146,6 +146,7 @@ namespace DCT.Outwar.World
                     if (Globals.AttackOn)
                     {
                         CoreUI.Instance.SpawnsPanel.Log(string.Format("Sighted {0} in room {1}", name, mId));
+                        CoreUI.Instance.SpawnsPanel.Sighted(mId);
                         if (!CoreUI.Instance.Settings.AttackSpawns)
                             continue;
                     }
