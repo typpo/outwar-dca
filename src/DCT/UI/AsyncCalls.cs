@@ -315,8 +315,6 @@ namespace DCT.UI
             PathfindHandler d = (PathfindHandler) ar.AsyncState;
             d.EndInvoke(ar);
             Toggle(true);
-
-            //mBulkCounter++;
         }
 
         private delegate void PathfindHandler(int accountIndex, int room);

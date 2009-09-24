@@ -60,6 +60,11 @@ namespace DCT.Outwar.World
                 // need a key
                 return 2;
             }
+            else if (mSource.Contains("Rampid Gaming Login"))
+            {
+                // logged out
+                return 4;
+            }
             else
             {
                 if (mId == 0)

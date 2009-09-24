@@ -32,6 +32,12 @@ namespace DCT.UI
             get { return lvMobs.FocusedItem; }
         }
 
+        internal bool MobsEnabled
+        {
+            get { return btnMobGo.Enabled; }
+            set { btnMobGo.Enabled = false; }
+        }
+
         private CoreUI mUI;
 
         internal MobsPanel(CoreUI ui)

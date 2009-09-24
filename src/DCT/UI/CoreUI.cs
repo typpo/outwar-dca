@@ -254,6 +254,9 @@ namespace DCT.UI
 
             // SPAWN TAB
             SpawnsPanel.CampEnabled = on;
+
+            // MOB TAB
+            MobsPanel.MobsEnabled = on;
         }
 
         internal void ToggleAttack(bool on)

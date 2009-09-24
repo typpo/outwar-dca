@@ -46,7 +46,7 @@ namespace DCT.Outwar.World
             ReturnToStartHandler = new ReturnToStartHandler(Account);
         }
 
-        internal void RefreshRoom()
+        internal bool RefreshRoom()
         {
             try
             {
@@ -270,15 +270,22 @@ namespace DCT.Outwar.World
                     != Account.Name)
                 {
                     throw new Exception();
+                    return false;
                 }
             }
             catch
             {
                 CoreUI.Instance.LogPanel.Log("E: " + Account.Name + " can't explore DC because the account is not authorized.  This is probably because there is a new version out.\n\nIf you are sure you are running the latest version, you may be reading this because your internet connection cut out or the authorization server is down.");
                 Application.Exit();
-                return;
+                return false;
             }
-            LoadRoom("world.php");
+            if (LoadRoom("world.php") == 4)
+            {
+                MessageBox.Show("You logged onto Outwar and booted the program.  Hitting the \"Refresh\" button may solve this.\n\nTo correctly access your account while the program is running, go to Actions > Open in browser.",
+                    "Account Booted", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
         }
 
         /// <summary>

@@ -81,7 +81,8 @@ namespace DCT.Outwar.World
                 foreach (Account a in mAccounts)
                 {
                     CoreUI.Instance.LogPanel.Log("Refreshing " + a.Name + "'s position...");
-                    a.Mover.RefreshRoom();
+                    if (!a.Mover.RefreshRoom())
+                        return;
 
                     // no point in moving if we don't have rage
                     if (a.Mover.Account.Rage > -1 && a.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
