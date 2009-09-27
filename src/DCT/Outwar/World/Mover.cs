@@ -321,7 +321,7 @@ namespace DCT.Outwar.World
         internal delegate void PathfindHandler(int roomid);
         internal void PathfindTo(int roomid)
         {
-            if (roomid == Location.Id || roomid < 0)
+            if (Location == null || roomid == Location.Id || roomid < 0)
             {
                 return;
             }

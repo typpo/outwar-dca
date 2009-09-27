@@ -5,7 +5,7 @@ Change History:
 Release 3.1.13a (9/23/09):
 - Spawn drops now reported in spawn log
 
-Will fix rage limit issue
+Rage limit issue is caused by you logging in to Outwar with your browser and booting the program.
 
 Release 3.1.13 (9/22/09):
 - Added spawn list in spawn tab

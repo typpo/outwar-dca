@@ -35,7 +35,7 @@ namespace DCT.UI
         internal bool MobsEnabled
         {
             get { return btnMobGo.Enabled; }
-            set { btnMobGo.Enabled = false; }
+            set { btnMobGo.Enabled = value; }
         }
 
         private CoreUI mUI;

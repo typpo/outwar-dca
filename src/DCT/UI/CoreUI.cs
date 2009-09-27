@@ -377,6 +377,8 @@ namespace DCT.UI
             t.ScrollBars = ScrollBars.Both;
             t.ReadOnly = true;
             f.Show();
+
+            t.SelectionLength = 0;
         }
 
         private void exportLogToolStripMenuItem_Click(object sender, EventArgs e)
