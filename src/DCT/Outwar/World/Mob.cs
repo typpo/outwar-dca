@@ -465,8 +465,8 @@ namespace DCT.Outwar.World
             // other outcome handling
             if (src.Contains("found a"))
             {
-                string f = Parser.Parse(src, "found a ", "<br>");
-                CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + (f.Length < 30 ? " found a " + f : " found an item"));
+                string f = Parser.Parse(src, string.Format("{0} found ", mRoom.Mover.Account.Name), "<br>");
+                CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + (f.Length < 30 ? " found " + f : " found an item"));
                 if (IsSpawn && f.Length < 30)
                 {
                     CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found a {1}", mRoom.Mover.Account.Name, f));
