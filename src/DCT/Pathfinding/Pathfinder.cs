@@ -608,5 +608,25 @@ namespace DCT.Pathfinding
         {
             return FindRoom(id) > -1;
         }
+
+        internal static void ExportRooms()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach(MappedRoom rm in Rooms)
+                sb.AppendFormat("{0}\n", rm.ToString());
+
+            FileIO.SaveFileFromString("Export Rooms", "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
+                                      "DCT Rooms " + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second, sb.ToString());
+        }
+
+        internal static void ExportMobs()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (MappedMob mb in Mobs)
+                sb.AppendFormat("{0}\n", mb.ToString());
+ 
+            FileIO.SaveFileFromString("Export Mobs", "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
+                                      "DCT Mobs " + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second, sb.ToString());
+        }
     }
 }

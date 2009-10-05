@@ -528,8 +528,11 @@ namespace DCT.UI
         {
             ToggleAttack(true);
 
-            ThreadEngine.DefaultInstance.Do(new ThreadEngine.ThreadHandler(AccountsPanel.Engine.MainAccount.Mover.Spider));
+            ThreadEngine.DefaultInstance.DoParameterized(new ThreadEngine.ParameterizedThreadHandler(
+                AccountsPanel.Engine.MainAccount.Mover.Spider),
+                InputBox.Prompt("Spider", "Enter bound.  Press cancel for boundless."));
 
+            CoreUI.Instance.BuildViews();
 
             ToggleAttack(false);
         }
@@ -542,12 +545,12 @@ namespace DCT.UI
 
         private void exportRoomsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Pathfinder.ExportRooms();
         }
 
         private void exportMobsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Pathfinder.ExportMobs();
         }
     }
 }

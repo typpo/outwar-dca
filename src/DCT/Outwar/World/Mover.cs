@@ -478,8 +478,9 @@ namespace DCT.Outwar.World
             }
         }
 
-        internal void Spider()
+        internal void Spider(object p_bound)
         {
+            string bound = p_bound == null ? string.Empty : ((string)p_bound).ToLower();
             // should probably update UI as well
             CoreUI.Instance.Settings.AutoTeleport = false;
 
@@ -528,6 +529,11 @@ namespace DCT.Outwar.World
                     foreach (MappedRoom rm in rooms)
                     {
                         rm.Name = Location.Name;
+                        if (bound != string.Empty && bound != rm.Name.ToLower())
+                        {
+                            completed.Add(Location.Id);
+                            continue;
+                        }
                         foreach (int id in Location.Links.Keys)
                         {
                             if (!rm.Neighbors.Contains(id))
@@ -556,6 +562,7 @@ namespace DCT.Outwar.World
                 }
 
                 // add mobs
+                Location.EnumMobs();
                 foreach (Mob mb in Location.Mobs)
                 {
                     mb.Initialize();
@@ -576,7 +583,6 @@ namespace DCT.Outwar.World
                     completed.Add(next);
             } while (Globals.AttackMode);
 
-            CoreUI.Instance.BuildViews();
             MessageBox.Show("Done spidering");
         }
 
