@@ -19,6 +19,11 @@ namespace DCT.Pathfinding
             Rage = rage;
         }
 
+        public string ToString()
+        {
+            return string.Format("{0};{1};{2};{3};{4};", Name, Id, Room, Level, Rage);
+        }
+
         public int CompareTo(object other)
         {
             if(other.GetType() != typeof(MappedMob))

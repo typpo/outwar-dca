@@ -27,6 +27,12 @@ namespace DCT.UI
         internal const int TABINDEX_QUESTS = 7;
         internal const int TABINDEX_CHAT = 8;
 
+        internal bool DebugVisible
+        {
+            get { return debugToolStripMenuItem.Visible; }
+            set { debugToolStripMenuItem.Visible = value; }
+        }
+
         internal int SelectedTabIndex
         {
             get { return tabs.SelectedIndex; }
@@ -36,7 +42,6 @@ namespace DCT.UI
         {
             get { return tabs; }
         }
-
 
         public static CoreUI Instance { get; private set; }
 

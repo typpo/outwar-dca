@@ -16,6 +16,16 @@ namespace DCT.Pathfinding
             Neighbors = nbrs;
         }
 
+        public string ToString()
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.AppendFormat("{0},", Id);
+            foreach (int nbr in Neighbors)
+                sb.AppendFormat("{0},", nbr);
+            sb.AppendFormat("{0}", Name);
+            return sb.ToString();
+        }
+
         public int CompareTo(object other)
         {
             if (other.GetType() == typeof(MappedRoom))

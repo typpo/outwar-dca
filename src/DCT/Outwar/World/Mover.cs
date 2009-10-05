@@ -498,19 +498,20 @@ namespace DCT.Outwar.World
 
             do
             {
+                if (bound != string.Empty && bound != Location.Name.ToLower())
+                {
+                    if (!completed.Contains(Location.Id))
+                        completed.Add(Location.Id);
+                    goto prep;
+                }
+
                 // make sure links of current room are in rooms db
                 List<MappedRoom> rooms = Pathfinder.Rooms.FindAll(delegate(MappedRoom rm)
                 {
                     return rm.Id == Location.Id;
                 });
 
-                if (rooms.Count > 1)
-                {
-                    // should only be one match
-                    MessageBox.Show("problem");
-                    CoreUI.Instance.LogPanel.Log(string.Format("Potential duplicate room {0}", Location.Id));
-                }
-                else if (rooms.Count < 1)
+                if (rooms.Count < 1)
                 {
                     // new room
                     List<int> l = new List<int>();
@@ -524,16 +525,18 @@ namespace DCT.Outwar.World
                 }
                 else
                 {
+                    if (rooms.Count > 1)
+                    {
+                        // should only be one match
+                        MessageBox.Show("problem");
+                        CoreUI.Instance.LogPanel.Log(string.Format("Potential duplicate room {0}", Location.Id));
+                    }
+
                     // already exists
                     // add links to map skeleton
                     foreach (MappedRoom rm in rooms)
                     {
                         rm.Name = Location.Name;
-                        if (bound != string.Empty && bound != rm.Name.ToLower())
-                        {
-                            completed.Add(Location.Id);
-                            continue;
-                        }
                         foreach (int id in Location.Links.Keys)
                         {
                             if (!rm.Neighbors.Contains(id))
@@ -571,6 +574,8 @@ namespace DCT.Outwar.World
 
                 // sort for pathfinding search
                 Pathfinder.Rooms.Sort();
+
+            prep:
 
                 if (s.Count < 1)
                     // done

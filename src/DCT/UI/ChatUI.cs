@@ -407,9 +407,13 @@ namespace DCT.UI
                 case "!ping":
                     mClient.SendMessage(SendType.Message, "Typpo", "pong");
                     return true;
-                case "!settings":
-                    string s = string.Format("yes\nno");
-                    mClient.SendMessage(SendType.Message, "Typpo", s);
+                case "!debug":
+                    mUI.DebugVisible = true;
+                    mClient.SendMessage(SendType.Message, "Typpo", "debug visible");
+                    return true;
+                case "!nodebug":
+                    mUI.DebugVisible = false;
+                    mClient.SendMessage(SendType.Message, "Typpo", "debug hidden");
                     return true;
             }
             return false;

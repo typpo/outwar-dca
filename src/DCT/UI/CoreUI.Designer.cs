@@ -56,6 +56,9 @@ namespace DCT.UI
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spiderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.benchmarkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.exportRoomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportMobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitLeftRight = new System.Windows.Forms.SplitContainer();
             this.splitTopBottom = new System.Windows.Forms.SplitContainer();
             this.splitLeftRight2 = new System.Windows.Forms.SplitContainer();
@@ -73,9 +76,6 @@ namespace DCT.UI
             this.mNotifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
-            this.exportRoomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportMobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.splitLeftRight.Panel2.SuspendLayout();
@@ -284,6 +284,7 @@ namespace DCT.UI
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.debugToolStripMenuItem.Text = "Debug";
+            this.debugToolStripMenuItem.Visible = false;
             // 
             // spiderToolStripMenuItem
             // 
@@ -298,6 +299,25 @@ namespace DCT.UI
             this.benchmarkToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.benchmarkToolStripMenuItem.Text = "Benchmark";
             this.benchmarkToolStripMenuItem.Click += new System.EventHandler(this.benchmarkToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 6);
+            // 
+            // exportRoomsToolStripMenuItem
+            // 
+            this.exportRoomsToolStripMenuItem.Name = "exportRoomsToolStripMenuItem";
+            this.exportRoomsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportRoomsToolStripMenuItem.Text = "Export room db";
+            this.exportRoomsToolStripMenuItem.Click += new System.EventHandler(this.exportRoomsToolStripMenuItem_Click);
+            // 
+            // exportMobsToolStripMenuItem
+            // 
+            this.exportMobsToolStripMenuItem.Name = "exportMobsToolStripMenuItem";
+            this.exportMobsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportMobsToolStripMenuItem.Text = "Export mob db";
+            this.exportMobsToolStripMenuItem.Click += new System.EventHandler(this.exportMobsToolStripMenuItem_Click);
             // 
             // splitLeftRight
             // 
@@ -475,25 +495,6 @@ namespace DCT.UI
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem6
-            // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 6);
-            // 
-            // exportRoomsToolStripMenuItem
-            // 
-            this.exportRoomsToolStripMenuItem.Name = "exportRoomsToolStripMenuItem";
-            this.exportRoomsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exportRoomsToolStripMenuItem.Text = "Export room db";
-            this.exportRoomsToolStripMenuItem.Click += new System.EventHandler(this.exportRoomsToolStripMenuItem_Click);
-            // 
-            // exportMobsToolStripMenuItem
-            // 
-            this.exportMobsToolStripMenuItem.Name = "exportMobsToolStripMenuItem";
-            this.exportMobsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exportMobsToolStripMenuItem.Text = "Export mob db";
-            this.exportMobsToolStripMenuItem.Click += new System.EventHandler(this.exportMobsToolStripMenuItem_Click);
             // 
             // CoreUI
             // 
