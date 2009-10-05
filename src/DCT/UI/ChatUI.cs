@@ -12,9 +12,13 @@ namespace DCT.UI
 {
     public partial class ChatUI : UserControl
     {
-        private const int mScrollback = 200;
+        private const int CHAT_SCROLLBACK = 200;
+        private const int FLOOD_QTY = 5;
+        private const int FLOOD_PERIOD = 15;
+        private int mNumMsgs;
+        private DateTime mSentTime;
 
-        internal bool Connected { get; private set; }
+        internal bool Connected { get; private set; } 
 
         internal Label StatusLabel
         {
@@ -315,6 +319,21 @@ namespace DCT.UI
         {
             if (mClient.IsConnected && e.KeyData == Keys.Enter)
             {
+                if (mNumMsgs == 0)
+                    // set initial time
+                    mSentTime = DateTime.Now;
+                if (++mNumMsgs >= FLOOD_QTY)
+                {
+                    TimeSpan ts = DateTime.Now - mSentTime;
+                    if (ts.Seconds <= FLOOD_PERIOD)
+                    {
+                        // done
+                        txtChatType.Enabled = false;
+                        AddText("*** Chat disabled for flooding");
+                    }                        
+                    return;
+                }
+
                 HandleInput(txtChatType.Text.Trim());
                 txtChatType.Text = string.Empty;
             }
@@ -442,11 +461,11 @@ namespace DCT.UI
             }
 
             // scrollback ends somewhere
-            if (txtChat.Lines.Length > mScrollback * 2)
+            if (txtChat.Lines.Length > CHAT_SCROLLBACK * 2)
             {
-                int i = txtChat.Lines.Length - mScrollback;
+                int i = txtChat.Lines.Length - CHAT_SCROLLBACK;
                 string[] tmp = new string[i];
-                Array.Copy(txtChat.Lines, mScrollback, tmp, 0, i);
+                Array.Copy(txtChat.Lines, CHAT_SCROLLBACK, tmp, 0, i);
                 txtChat.Lines = tmp;
             }
 
