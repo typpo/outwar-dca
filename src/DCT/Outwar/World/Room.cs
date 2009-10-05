@@ -55,7 +55,7 @@ namespace DCT.Outwar.World
                 // hash error
                 return 1;
             }
-            else if (mSource.Contains("you must be carrying"))
+            else if (mSource.Contains("you must be carrying") || mSource.Contains("cast on you to enter this room."))
             {
                 // need a key
                 return 2;

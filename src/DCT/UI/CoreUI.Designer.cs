@@ -53,6 +53,9 @@ namespace DCT.UI
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearLogsPeriodicallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSystrayIconWhenOpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spiderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.benchmarkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitLeftRight = new System.Windows.Forms.SplitContainer();
             this.splitTopBottom = new System.Windows.Forms.SplitContainer();
             this.splitLeftRight2 = new System.Windows.Forms.SplitContainer();
@@ -70,8 +73,9 @@ namespace DCT.UI
             this.mNotifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.spiderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.exportRoomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportMobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.splitLeftRight.Panel2.SuspendLayout();
@@ -269,6 +273,32 @@ namespace DCT.UI
             this.showSystrayIconWhenOpenToolStripMenuItem.Text = "Show systray icon when open";
             this.showSystrayIconWhenOpenToolStripMenuItem.Click += new System.EventHandler(this.showSystrayIconWhenOpenToolStripMenuItem_Click);
             // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.spiderToolStripMenuItem,
+            this.benchmarkToolStripMenuItem,
+            this.toolStripMenuItem6,
+            this.exportRoomsToolStripMenuItem,
+            this.exportMobsToolStripMenuItem});
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.debugToolStripMenuItem.Text = "Debug";
+            // 
+            // spiderToolStripMenuItem
+            // 
+            this.spiderToolStripMenuItem.Name = "spiderToolStripMenuItem";
+            this.spiderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.spiderToolStripMenuItem.Text = "Spider";
+            this.spiderToolStripMenuItem.Click += new System.EventHandler(this.spiderToolStripMenuItem_Click);
+            // 
+            // benchmarkToolStripMenuItem
+            // 
+            this.benchmarkToolStripMenuItem.Name = "benchmarkToolStripMenuItem";
+            this.benchmarkToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.benchmarkToolStripMenuItem.Text = "Benchmark";
+            this.benchmarkToolStripMenuItem.Click += new System.EventHandler(this.benchmarkToolStripMenuItem_Click);
+            // 
             // splitLeftRight
             // 
             this.splitLeftRight.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -446,20 +476,24 @@ namespace DCT.UI
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
-            // debugToolStripMenuItem
+            // toolStripMenuItem6
             // 
-            this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.spiderToolStripMenuItem});
-            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.debugToolStripMenuItem.Text = "Debug";
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 6);
             // 
-            // spiderToolStripMenuItem
+            // exportRoomsToolStripMenuItem
             // 
-            this.spiderToolStripMenuItem.Name = "spiderToolStripMenuItem";
-            this.spiderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.spiderToolStripMenuItem.Text = "Spider";
-            this.spiderToolStripMenuItem.Click += new System.EventHandler(this.spiderToolStripMenuItem_Click);
+            this.exportRoomsToolStripMenuItem.Name = "exportRoomsToolStripMenuItem";
+            this.exportRoomsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportRoomsToolStripMenuItem.Text = "Export room db";
+            this.exportRoomsToolStripMenuItem.Click += new System.EventHandler(this.exportRoomsToolStripMenuItem_Click);
+            // 
+            // exportMobsToolStripMenuItem
+            // 
+            this.exportMobsToolStripMenuItem.Name = "exportMobsToolStripMenuItem";
+            this.exportMobsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportMobsToolStripMenuItem.Text = "Export mob db";
+            this.exportMobsToolStripMenuItem.Click += new System.EventHandler(this.exportMobsToolStripMenuItem_Click);
             // 
             // CoreUI
             // 
@@ -538,5 +572,9 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripMenuItem clearSpawnLogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spiderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem benchmarkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem exportRoomsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportMobsToolStripMenuItem;
     }
 }

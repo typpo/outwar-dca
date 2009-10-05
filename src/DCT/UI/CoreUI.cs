@@ -175,7 +175,7 @@ namespace DCT.UI
             Process.GetCurrentProcess().Kill();
         }
 
-        private void BuildViews()
+        internal void BuildViews()
         {
             RoomsPanel.BuildView();
             MobsPanel.BuildView();
@@ -531,6 +531,22 @@ namespace DCT.UI
 
 
             ToggleAttack(false);
+        }
+
+        private void benchmarkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(Pathfinder.Benchmark));
+            t.Start(1000);
+        }
+
+        private void exportRoomsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exportMobsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

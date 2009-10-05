@@ -449,7 +449,7 @@ namespace DCT.Outwar.World
                 case 1:
                     // error with override, meaning we STOP and try again
 
-                    CoreUI.Instance.LogPanel.Log("Move E: Room hash invalid");
+                    CoreUI.Instance.LogPanel.Log("Move E: Could not enter room");
                     RefreshRoom();
 
                     if (++tries > 2)
@@ -480,6 +480,13 @@ namespace DCT.Outwar.World
 
         internal void Spider()
         {
+            // should probably update UI as well
+            CoreUI.Instance.Settings.AutoTeleport = false;
+
+            // temporary
+            Pathfinder.Rooms.Clear();
+            Pathfinder.Mobs.Clear();
+
             // start in this room
             this.RefreshRoom();
 
@@ -499,9 +506,10 @@ namespace DCT.Outwar.World
                 if (rooms.Count > 1)
                 {
                     // should only be one match
+                    MessageBox.Show("problem");
                     CoreUI.Instance.LogPanel.Log(string.Format("Potential duplicate room {0}", Location.Id));
                 }
-                if (rooms.Count < 1)
+                else if (rooms.Count < 1)
                 {
                     // new room
                     List<int> l = new List<int>();
@@ -509,36 +517,67 @@ namespace DCT.Outwar.World
                         l.Add(k);
                     MappedRoom mr = new MappedRoom(Location.Id, Location.Name, l);
                     Pathfinder.Rooms.Add(mr);
-                    rooms.Add(mr);
+                    //rooms.Add(mr);
 
                     CoreUI.Instance.LogPanel.Log(string.Format("Added new room {0}", Location.Id));
                 }
-
-                // add links (starting w/ partial map)
-                foreach (MappedRoom rm in rooms)
+                else
                 {
-                    foreach (int id in Location.Links.Keys)
+                    // already exists
+                    // add links to map skeleton
+                    foreach (MappedRoom rm in rooms)
                     {
-                        if (!rm.Neighbors.Contains(id))
+                        rm.Name = Location.Name;
+                        foreach (int id in Location.Links.Keys)
                         {
-                            rm.Neighbors.Add(id);
-                            CoreUI.Instance.LogPanel.Log(string.Format("Added link {0} from {1}", id, Location.Id));
+                            if (!rm.Neighbors.Contains(id))
+                            {
+                                rm.Neighbors.Add(id);
+                                CoreUI.Instance.LogPanel.Log(string.Format("Added link {0} from {1}", id, Location.Id));
+                            }
                         }
                     }
                 }
 
-                completed.Add(Location.Id);
+                // bookkeeping
+                if (!completed.Contains(Location.Id))
+                    completed.Add(Location.Id);
                 foreach (int id in Location.Links.Keys)
                 {
                     if (!s.Contains(id) && !completed.Contains(id))
                     {
+                        Console.WriteLine("Adding link {0}->{1}", Location.Id, id);
+                        List<int> nbrslist = new List<int>();
+                        nbrslist.Add(Location.Id);
+                        MappedRoom mr = new MappedRoom(id, string.Empty, nbrslist);
+                        Pathfinder.Rooms.Add(mr);
                         s.Push(id);
                     }
                 }
 
+                // add mobs
+                foreach (Mob mb in Location.Mobs)
+                {
+                    mb.Initialize();
+                    Pathfinder.Mobs.Add(new MappedMob(mb.Name, mb.Id, Location.Id, mb.Level, mb.Rage));
+                }
+
+                // sort for pathfinding search
+                Pathfinder.Rooms.Sort();
+
+                if (s.Count < 1)
+                    // done
+                    break;
+
                 // move to top of stack
-                PathfindTo(s.Pop());
-            } while (s.Count > 0 && Globals.AttackMode);
+                int next = s.Pop();
+                PathfindTo(next);
+                if(!completed.Contains(next))
+                    completed.Add(next);
+            } while (Globals.AttackMode);
+
+            CoreUI.Instance.BuildViews();
+            MessageBox.Show("Done spidering");
         }
 
         internal void Train()

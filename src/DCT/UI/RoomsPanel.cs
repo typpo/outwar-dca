@@ -48,6 +48,7 @@ namespace DCT.UI
 
         internal void BuildView()
         {
+            lvPathfind.Items.Clear();
             foreach (MappedRoom rm in Pathfinder.Rooms)
             {
                 if (rm != null)

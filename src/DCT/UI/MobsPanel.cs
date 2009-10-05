@@ -48,6 +48,7 @@ namespace DCT.UI
 
         internal void BuildView()
         {
+            lvMobs.Items.Clear();
             foreach (MappedMob mb in Pathfinder.Mobs)
             {
                 if (mb != null)

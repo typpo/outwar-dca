@@ -284,7 +284,7 @@ namespace DCT.Pathfinding
             string name;
             int id;
             string[] tmp;
-            //*
+            /*
             while (Rooms.Count < 1 && i < 2)
             {
                 map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(urlSb.ToString()), keySb.ToString(), false));
@@ -459,6 +459,26 @@ namespace DCT.Pathfinding
             return ret;
         }
 
+        internal static void Benchmark(object n)
+        {
+            long total = 0;
+            int j = (int)n;
+            Console.WriteLine("Running...");
+            for (int i = 0; i < j; i++)
+            {
+                int a = 0, b = 0;
+                while (!Exists(a = Randomizer.Random.Next(1, Rooms.Count)));
+                while (!Exists(a = Randomizer.Random.Next(1, Rooms.Count)));
+
+                DateTime startTime = DateTime.Now;
+                GetPath(a, b);
+                DateTime stopTime = DateTime.Now;
+                TimeSpan duration = stopTime - startTime;
+                total += duration.Milliseconds;
+            }
+            Console.WriteLine(string.Format("Ran {0} tests, average {1}", j, total / j));
+        }
+
         internal static List<int> GetSolution(int start, int finish)
         {
             mAllPaths = new List<List<int>>();
@@ -557,7 +577,7 @@ namespace DCT.Pathfinding
         private static List<int> GetNeighbors(int id)
         {
             int tmp = FindRoom(id);
-            if (tmp > -1 && tmp < Rooms.Count)
+            if (tmp > -1)
             {
                 return Rooms[tmp].Neighbors;
             }

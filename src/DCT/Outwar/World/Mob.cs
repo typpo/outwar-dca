@@ -75,6 +75,18 @@ namespace DCT.Outwar.World
         private int mExpGained;
         private long mRage, mLevel;
 
+        internal long Level
+        {
+            get { return mLevel; }
+            set { mLevel = value; }
+        }
+
+        internal long Rage
+        {
+            get { return mRage; }
+            set { mRage = value; }
+        }
+
         private bool mSkipLoad;
         private string mAttackUrl;
 

@@ -47,6 +47,7 @@ namespace DCT.UI
 
         internal void BuildView()
         {
+            lvAdventures.Items.Clear();
             SortedList<string, int> l = Pathfinder.Adventures;
             for (int i = 0; i < l.Count; i++)
             {
