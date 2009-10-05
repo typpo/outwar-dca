@@ -164,7 +164,6 @@ namespace DCT.UI
 
         void mClient_OnQuit(object sender, QuitEventArgs e)
         {
-            //AddText(string.Format("*** {0} has quit ({1})", e.Who, e.QuitMessage));
             UpdateNames();
         }
 
@@ -183,7 +182,6 @@ namespace DCT.UI
 
         void mClient_OnPart(object sender, PartEventArgs e)
         {
-            //AddText(string.Format("*** {0} parted ({1})", e.Who, e.PartMessage));
             UpdateNames();
         }
 
@@ -207,7 +205,6 @@ namespace DCT.UI
 
         void mClient_OnJoin(object sender, JoinEventArgs e)
         {
-            //AddText(string.Format("*** {0} has joined", e.Who));
             UpdateNames();
         }
 
@@ -289,6 +286,9 @@ namespace DCT.UI
 
         private void UpdateNames()
         {
+            if (mUI.Tabs.SelectedIndex != CoreUI.TABINDEX_CHAT)
+                return;
+
             if (InvokeRequired)
             {
                 Invoke(new MethodInvoker(UpdateNames));
