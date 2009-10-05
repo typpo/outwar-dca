@@ -284,16 +284,16 @@ namespace DCT.UI
             mClient.Disconnect();
         }
 
-        private void UpdateNames()
+        internal void UpdateNames()
         {
-            if (mUI.Tabs.SelectedIndex != CoreUI.TABINDEX_CHAT)
-                return;
-
             if (InvokeRequired)
             {
                 Invoke(new MethodInvoker(UpdateNames));
                 return;
             }
+
+            if (mUI.Tabs.SelectedIndex != CoreUI.TABINDEX_CHAT)
+                return;
 
             Channel c = mClient.GetChannel(mChannel);
             if (c == null)

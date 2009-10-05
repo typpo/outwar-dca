@@ -519,6 +519,7 @@ namespace DCT.UI
                 case TABINDEX_CHAT:
                     Tabs.TabPages[TABINDEX_CHAT].Text = "Chat";
                     ChatPanel.ScrollToBottom();
+                    ChatPanel.UpdateNames();
                     break;
             }
         }
