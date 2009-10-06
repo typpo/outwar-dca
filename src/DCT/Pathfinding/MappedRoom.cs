@@ -16,7 +16,7 @@ namespace DCT.Pathfinding
             Neighbors = nbrs;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.AppendFormat("{0},", Id);

@@ -1,6 +1,13 @@
- >> Typpo's DC Tool - Latest Version: 3.1.13a << 
+ >> Typpo's DC Tool - Latest Version: 3.1.14 << 
  
 Change History:
+
+Release 3.1.14 (?):
+- Fixed drop parsing
+- Program informs you if you've booted it from Outwar
+- Added Sundernian rooms/mobs. More soon.
+- Chat list won't update unless you're chatting
+- A lot of debugging changes
 
 Release 3.1.13a (9/23/09):
 - Spawn drops now reported in spawn log
@@ -43,8 +50,8 @@ With a lot of help from KeyserSoze, many issues with the map were fixed, includi
 End Changes 
 
 Info for the autoupdater: 
-<ver>3.1..13a</ver> 
-<url>http://typpo.us/DCT 3.1.13a.exe</url>
+<ver>3.1..14</ver> 
+<url>http://typpo.us/DCT 3.1.14.exe</url>
  
 <chan>#typpo</chan> 
 <svr>typpo.dyndns.org</svr>

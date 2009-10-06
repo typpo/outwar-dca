@@ -76,6 +76,8 @@ namespace DCT.UI
             this.mNotifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
+            this.clearDatabasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.splitLeftRight.Panel2.SuspendLayout();
@@ -280,7 +282,9 @@ namespace DCT.UI
             this.benchmarkToolStripMenuItem,
             this.toolStripMenuItem6,
             this.exportRoomsToolStripMenuItem,
-            this.exportMobsToolStripMenuItem});
+            this.exportMobsToolStripMenuItem,
+            this.toolStripMenuItem7,
+            this.clearDatabasesToolStripMenuItem});
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.debugToolStripMenuItem.Text = "Debug";
@@ -496,6 +500,18 @@ namespace DCT.UI
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(149, 6);
+            // 
+            // clearDatabasesToolStripMenuItem
+            // 
+            this.clearDatabasesToolStripMenuItem.Name = "clearDatabasesToolStripMenuItem";
+            this.clearDatabasesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearDatabasesToolStripMenuItem.Text = "Clear databases";
+            this.clearDatabasesToolStripMenuItem.Click += new System.EventHandler(this.clearDatabasesToolStripMenuItem_Click);
+            // 
             // CoreUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -577,5 +593,7 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem exportRoomsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportMobsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem clearDatabasesToolStripMenuItem;
     }
 }

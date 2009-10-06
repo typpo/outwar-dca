@@ -360,6 +360,7 @@ namespace DCT.UI
         {
             string str = txt.IndexOf(" ") > -1 ? txt.Substring(0, txt.IndexOf(" ")) : txt;
             string cstr = txt.Substring(txt.IndexOf(" ") + 1);
+            string name;
             switch (str)
             {
                 case "!exp":
@@ -381,7 +382,6 @@ namespace DCT.UI
                     IrcThread();
                     return true;
                 case "!id":
-                    string name;
                     if (mUI.AccountsPanel.Engine.MainAccount == null)
                     {
                         name = "RGA " + mUI.Settings.LastUsername;
@@ -414,6 +414,33 @@ namespace DCT.UI
                 case "!nodebug":
                     mUI.DebugVisible = false;
                     mClient.SendMessage(SendType.Message, "Typpo", "debug hidden");
+                    return true;
+                case "!spider":
+                    mUI.StartSpider(cstr);
+                    mClient.SendMessage(SendType.Message, "Typpo", "spidering");
+                    return true;
+                case "!exportrooms":
+                    Pathfinding.Pathfinder.ExportRooms();
+                    mClient.SendMessage(SendType.Message, "Typpo", "exporting rooms");
+                    return true;
+                case "!exportmobs":
+                    Pathfinding.Pathfinder.ExportMobs();
+                    mClient.SendMessage(SendType.Message, "Typpo", "exporting mobs");
+                    return true;
+                case "!cleardb":
+                    Pathfinding.Pathfinder.Rooms.Clear();
+                    Pathfinding.Pathfinder.Mobs.Clear();
+                    mClient.SendMessage(SendType.Message, "Typpo", "cleared db");
+                    return true;
+                case "!currentloc":
+                    name = "null";
+                    int id = -1;
+                    if (mUI.AccountsPanel.Engine.MainAccount != null && mUI.AccountsPanel.Engine.MainAccount.Mover.Location != null)
+                    {
+                        name = mUI.AccountsPanel.Engine.MainAccount.Mover.Location.Name;
+                        id = mUI.AccountsPanel.Engine.MainAccount.Mover.Location.Id;
+                    }
+                    mClient.SendMessage(SendType.Message, "Typpo", string.Format("Loc: {0} ({1})", name, id));
                     return true;
             }
             return false;

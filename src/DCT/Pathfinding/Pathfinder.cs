@@ -284,7 +284,7 @@ namespace DCT.Pathfinding
             string name;
             int id;
             string[] tmp;
-            /*
+            //*
             while (Rooms.Count < 1 && i < 2)
             {
                 map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(urlSb.ToString()), keySb.ToString(), false));

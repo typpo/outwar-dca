@@ -19,7 +19,7 @@ namespace DCT.Pathfinding
             Rage = rage;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return string.Format("{0};{1};{2};{3};{4};", Name, Id, Room, Level, Rage);
         }

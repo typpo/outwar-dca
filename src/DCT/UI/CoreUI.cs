@@ -531,11 +531,15 @@ namespace DCT.UI
 
         private void spiderToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            StartSpider(InputBox.Prompt("Spider", "Enter bound.  Press cancel for boundless."));
+        }
+
+        internal void StartSpider(string str)
+        {
             ToggleAttack(true);
 
             ThreadEngine.DefaultInstance.DoParameterized(new ThreadEngine.ParameterizedThreadHandler(
-                AccountsPanel.Engine.MainAccount.Mover.Spider),
-                InputBox.Prompt("Spider", "Enter bound.  Press cancel for boundless."));
+                AccountsPanel.Engine.MainAccount.Mover.Spider), str);
 
             CoreUI.Instance.BuildViews();
 
@@ -556,6 +560,12 @@ namespace DCT.UI
         private void exportMobsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Pathfinder.ExportMobs();
+        }
+
+        private void clearDatabasesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Pathfinder.Rooms.Clear();
+            Pathfinder.Mobs.Clear();
         }
     }
 }
