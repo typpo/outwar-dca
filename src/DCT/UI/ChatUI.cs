@@ -325,7 +325,7 @@ namespace DCT.UI
                 if (++mNumMsgs >= FLOOD_QTY)
                 {
                     TimeSpan ts = DateTime.Now - mSentTime;
-                    if (ts.Seconds <= FLOOD_PERIOD)
+                    if (ts.Days * 60 * 60 * 24 + ts.Hours * 60 * 60 + ts.Minutes * 60 + ts.Seconds <= FLOOD_PERIOD)
                     {
                         // done
                         txtChatType.Enabled = false;

@@ -1,6 +1,13 @@
- >> Typpo's DC Tool - Latest Version: 3.1.14 << 
+ >> Typpo's DC Tool - Latest Version: 3.1.14a << 
  
 Change History:
+
+Badlands Zhul mobs have been added.
+
+Release 3.1.14a (10/6/09):
+- Chat lock bug
+- Chat focus problem
+- Raised item name limit
 
 Release 3.1.14 (10/5/09):
 - Fixed drop parsing
@@ -52,8 +59,8 @@ With a lot of help from KeyserSoze, many issues with the map were fixed, includi
 End Changes 
 
 Info for the autoupdater: 
-<ver>3.1..14</ver> 
-<url>http://typpo.us/DCT 3.1.14.exe</url>
+<ver>3.1..14a</ver> 
+<url>http://typpo.us/DCT 3.1.14a.exe</url>
  
 <chan>#typpo</chan> 
 <svr>typpo.dyndns.org</svr>
