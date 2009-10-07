@@ -9,6 +9,8 @@ namespace DCT.Outwar.World
 {
     internal class Mob : Occupier
     {
+        private const int MAX_ITEM_LEN = 45;
+
         private bool mAttacked;
         private bool mInitialized;
         internal bool IsTrainer { get; private set; }
@@ -478,10 +480,10 @@ namespace DCT.Outwar.World
             if (src.Contains("found a"))
             {
                 string f = Parser.Parse(src, string.Format("{0} found ", mRoom.Mover.Account.Name), "<br>");
-                CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + (f.Length < 30 ? " found " + f : " found an item"));
-                if (IsSpawn && f.Length < 30)
+                CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + (f.Length < MAX_ITEM_LEN ? " found " + f : " found an item"));
+                if (IsSpawn && f.Length < MAX_ITEM_LEN)
                 {
-                    CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found a {1}", mRoom.Mover.Account.Name, f));
+                    CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
                 }
             }
             if (src.Contains("has gained "))

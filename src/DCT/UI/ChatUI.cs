@@ -317,7 +317,7 @@ namespace DCT.UI
 
         private void txtChatType_KeyDown(object sender, KeyEventArgs e)
         {
-            if (mClient.IsConnected && e.KeyData == Keys.Enter)
+            if (mClient.IsConnected && e.KeyData == Keys.Enter && txtChatType.Text != string.Empty)
             {
                 if (mNumMsgs == 0)
                     // set initial time
@@ -330,8 +330,9 @@ namespace DCT.UI
                         // done
                         txtChatType.Enabled = false;
                         AddText("*** Chat disabled for flooding");
-                    }                        
-                    return;
+                        return;
+                    }
+                    mNumMsgs = 0;
                 }
 
                 HandleInput(txtChatType.Text.Trim());
@@ -515,7 +516,7 @@ namespace DCT.UI
             txtChat.SelectionStart = txtChat.Text.Length;
             txtChat.ScrollToCaret();
 
-            if (txtChat.SelectionLength == 0)   // don't interrupt user copying something
+            if (txtChat.SelectionLength == 0 && mUI.Tabs.SelectedIndex == CoreUI.TABINDEX_CHAT)   // don't interrupt user copying something, or another window
             {
                 txtChatType.Focus();
             }
