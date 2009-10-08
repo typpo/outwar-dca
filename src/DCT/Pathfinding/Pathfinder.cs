@@ -14,6 +14,8 @@ namespace DCT.Pathfinding
 {
     internal static class Pathfinder
     {
+
+        private const string MUTEX_NAME = "DCT_PATHFINDER_MUTEX";
         // q
         //private const string URL_ROOMS =
         //    "f5b57b6c048faa5bdc468e8caef8e0b3becc046212ae840dbadd4f30556b8a9337f2856bc94275ff7bee5d";
@@ -36,6 +38,23 @@ namespace DCT.Pathfinding
         private static List<List<int>> mAllPaths;
 
         internal static void BuildMap()
+        {
+            using (System.Threading.Mutex mutex = new System.Threading.Mutex(false, MUTEX_NAME))
+            {
+                if (!mutex.WaitOne(0, true))
+                {
+                    System.Windows.Forms.MessageBox.Show("Can't build multiple maps at once.", "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                    System.Windows.Forms.Application.Exit();
+                    return;
+                }
+                else
+                {
+                    DoBuildMap();
+                }
+            }
+        }
+
+        private static void DoBuildMap()
         {
             /*
             f5b57b6c048faa5bdc468e8caee9eaf2aad0182b0fbd8e44a2891d6b556288976bb09674d50076be64eb5ed78cb7ce
@@ -287,8 +306,8 @@ namespace DCT.Pathfinding
             //*
             while (Rooms.Count < 1 && i < 2)
             {
-                map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(urlSb.ToString()), keySb.ToString(), false));
-                map = Crypt.Get(Crypt.HexToBin(map), HttpSocket.DefaultInstance.UserAgent, false);
+                //map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(urlSb.ToString()), keySb.ToString(), false));
+                map = HttpSocket.DefaultInstance.Get("http://typpo.us/rooms.php"); //Crypt.Get(Crypt.HexToBin(map), HttpSocket.DefaultInstance.UserAgent, false);
 
                 foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
                 {
@@ -323,9 +342,9 @@ namespace DCT.Pathfinding
             string[] parts;
             while (Mobs.Count < 1 && i < 2)
             {
-                map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_MOBS), KEY_MOBS, false));
-                map = Crypt.Get(Crypt.HexToBin(map), HttpSocket.DefaultInstance.UserAgent, false);
-
+                //map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_MOBS), KEY_MOBS, false));
+                //map = Crypt.Get(Crypt.HexToBin(map), HttpSocket.DefaultInstance.UserAgent, false);
+                map = HttpSocket.DefaultInstance.Get("http://typpo.us/mobs.php");
                 foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
@@ -344,12 +363,13 @@ namespace DCT.Pathfinding
             Mobs.Sort();
 
             // -----------------
-            
+
             i = 0;
             Adventures = new SortedList<string, int>();
             while (Adventures.Count < 1 && i < 2)
             {
-                map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_RAIDS), KEY_RAIDS, false));
+                //map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_RAIDS), KEY_RAIDS, false));
+                map = HttpSocket.DefaultInstance.Get("http://typpo.us/raids.php");
                 foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
@@ -369,7 +389,8 @@ namespace DCT.Pathfinding
             Spawns = new List<MappedMob>();
             while (Spawns.Count < 1 && i < 2)
             {
-                map = HttpSocket.DefaultInstance.Get(URL_SPAWNS);
+                //map = HttpSocket.DefaultInstance.Get(URL_SPAWNS);
+                map = HttpSocket.DefaultInstance.Get("http://typpo.us/spawns.php");
                 foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))

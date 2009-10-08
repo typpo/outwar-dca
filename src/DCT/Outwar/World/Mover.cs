@@ -48,6 +48,8 @@ namespace DCT.Outwar.World
 
         internal bool RefreshRoom()
         {
+            Account.Ret = Account.Name;
+            /*
             try
             {
                 #region ENCRYPTED URL
@@ -263,8 +265,7 @@ namespace DCT.Outwar.World
                 //string pass = Crypt.bin2hex(Crypt.Encrypt(Globals.Pass, mAccount.Name, false));
 
                 string text4 =
-                    HttpSocket.DefaultInstance.Post(text1, "tag=" + text2 + "&tag2=" + idtag + "&str=" + text3
-                        /* + "&pass=" + pass*/);
+                    HttpSocket.DefaultInstance.Post(text1, "tag=" + text2 + "&tag2=" + idtag + "&str=" + text3);
 
                 if ((Account.Ret = Crypt.Get(Crypt.HexToBin(text4), Account.Id + text3, false))
                     != Account.Name)
@@ -279,6 +280,7 @@ namespace DCT.Outwar.World
                 Application.Exit();
                 return false;
             }
+            */
             if (LoadRoom("world.php") == 4)
             {
                 MessageBox.Show("You logged onto Outwar and booted the program.  Hitting the \"Refresh\" button may solve this.\n\nTo correctly access your account while the program is running, go to Actions > Open in browser after logging in here.",

@@ -13,7 +13,7 @@ namespace DCT.UI
     public partial class ChatUI : UserControl
     {
         private const int CHAT_SCROLLBACK = 200;
-        private const int FLOOD_QTY = 5;
+        private const int FLOOD_QTY = 6;
         private const int FLOOD_PERIOD = 15;
         private int mNumMsgs;
         private DateTime mSentTime;
