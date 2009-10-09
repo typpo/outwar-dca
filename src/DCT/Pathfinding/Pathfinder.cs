@@ -14,7 +14,6 @@ namespace DCT.Pathfinding
 {
     internal static class Pathfinder
     {
-
         private const string MUTEX_NAME = "DCT_PATHFINDER_MUTEX";
         // q
         //private const string URL_ROOMS =

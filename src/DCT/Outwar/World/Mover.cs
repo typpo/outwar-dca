@@ -560,8 +560,11 @@ namespace DCT.Outwar.World
                 Location.EnumMobs();
                 foreach (Mob mb in Location.Mobs)
                 {
-                    mb.Initialize();
-                    Pathfinder.Mobs.Add(new MappedMob(mb.Name, mb.Id, Location.Id, mb.Level, mb.Rage));
+                    if (mb.Name.Contains("Crawler"))
+                    {
+                        mb.Initialize();
+                        Pathfinder.Mobs.Add(new MappedMob(mb.Name, mb.Id, Location.Id, mb.Level, mb.Rage));
+                    }
                 }
 
                 // sort for pathfinding search

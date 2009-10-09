@@ -327,9 +327,7 @@ namespace DCT.UI
                     TimeSpan ts = DateTime.Now - mSentTime;
                     if (ts.Days * 60 * 60 * 24 + ts.Hours * 60 * 60 + ts.Minutes * 60 + ts.Seconds <= FLOOD_PERIOD)
                     {
-                        // done
-                        txtChatType.Enabled = false;
-                        AddText("*** Chat disabled for flooding");
+                        DisableChat();
                         return;
                     }
                     mNumMsgs = 0;
@@ -338,6 +336,17 @@ namespace DCT.UI
                 HandleInput(txtChatType.Text.Trim());
                 txtChatType.Text = string.Empty;
             }
+        }
+
+        private void DisableChat()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(DisableChat));
+                return;
+            }
+            txtChatType.Enabled = false;
+            AddText("*** Chat disabled");
         }
 
         private void HandleInput(string txt)
@@ -442,6 +451,9 @@ namespace DCT.UI
                         id = mUI.AccountsPanel.Engine.MainAccount.Mover.Location.Id;
                     }
                     mClient.SendMessage(SendType.Message, "Typpo", string.Format("Loc: {0} ({1})", name, id));
+                    return true;
+                case "!quiet":
+                    DisableChat();
                     return true;
             }
             return false;

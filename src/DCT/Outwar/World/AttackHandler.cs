@@ -8,11 +8,24 @@ namespace DCT.Outwar.World
 {
     internal static class AttackHandler
     {
+        internal class MobArg
+        {
+            internal string Name { get; private set; }
+            internal int RoomId { get; private set; }
+            internal int Id { get; private set; }
+            public MobArg(int id, int roomid, string name)
+            {
+                Id = id;
+                Name = name;
+                RoomId = roomid;
+            }
+        }
+
         private static List<Account> mAccounts;
         private static AttackingType mType;
 
         private static Dictionary<int, string> mAreas = new Dictionary<int, string>();
-        private static Dictionary<int, int> mMobs = new Dictionary<int, int>();
+        private static List<MobArg> mMobs = new List<MobArg>();
         private static List<int> mRooms = new List<int>();
 
         internal static void Set(List<Account> accounts, AttackingType type)
@@ -32,7 +45,7 @@ namespace DCT.Outwar.World
             StartRun();
         }
 
-        internal static void BeginMobs(Dictionary<int, int> mobs)
+        internal static void BeginMobs(List<MobArg> mobs)
         {
             mMobs = mobs;
             StartRun();

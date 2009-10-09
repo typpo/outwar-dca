@@ -1,8 +1,11 @@
- >> Typpo's DC Tool - Latest Version: 3.1.14d << 
+ >> Typpo's DC Tool - Latest Version: 3.1.15 << 
  
 Change History:
 
-Badlands Zhul mobs have been added.  Sorry for downtime, moved servers and should be improved.  Shadow Crawlers probably mapped bythe 8th.
+Badlands Zhul mobs have been added.  Shadow Crawlers should work.  Moved servers, caused some downtime but should be improved.
+
+Release 3.1.15 (10/8/09):
+- Added support for user spawns (various Kix quest mobs, Shadow Crawlers)
 
 Release 3.1.14a (10/6/09):
 - Chat lock bug
@@ -59,8 +62,8 @@ With a lot of help from KeyserSoze, many issues with the map were fixed, includi
 End Changes 
 
 Info for the autoupdater: 
-<ver>3.1..14d</ver> 
-<url>http://typpo.us/DCT 3.1.14d.exe</url>
+<ver>3.1..15</ver> 
+<url>http://typpo.us/DCT 3.1.15.exe</url>
  
 <chan>#typpo</chan> 
 <svr>typpo.dyndns.org</svr>

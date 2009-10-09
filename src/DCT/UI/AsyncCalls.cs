@@ -144,59 +144,58 @@ namespace DCT.UI
             */
             
             // sort by value - ie., sort by room number
-            List<KeyValuePair<int, int>> sortinglist =
-                    new List<KeyValuePair<int, int>>();
+            List<AttackHandler.MobArg> mobs = new List<AttackHandler.MobArg>();
             foreach (int i in MobsPanel.CheckedIndices)
             {
-                int key = int.Parse(MobsPanel.Mobs[i].SubItems[1].Text);
-                int val = int.Parse(MobsPanel.Mobs[i].SubItems[2].Text);
-                KeyValuePair<int,int> kvp = new KeyValuePair<int,int>(key, val);
-                if (!sortinglist.Contains(kvp))
+                int id = int.Parse(MobsPanel.Mobs[i].SubItems[1].Text);
+                int room = int.Parse(MobsPanel.Mobs[i].SubItems[2].Text);
+                string name = MobsPanel.Mobs[i].SubItems[0].Text;
+                AttackHandler.MobArg arg = new AttackHandler.MobArg(id, room, name);
+                if (!mobs.Contains(arg))
                 {
-                    sortinglist.Add(kvp);
+                    mobs.Add(arg);
                 }
             }
-            sortinglist.Sort(
+            mobs.Sort(
               delegate(
-                KeyValuePair<int, int> first,
-                KeyValuePair<int, int> second)
+                AttackHandler.MobArg first,
+                AttackHandler.MobArg second)
               {
-                  return second.Value.CompareTo(first.Value);
+                  return second.RoomId.CompareTo(first.RoomId);
               }
               );
-            // Clear the dictionary and repopulate it from the List
-            Dictionary<int, int> mobs = new Dictionary<int, int>();
-            foreach (KeyValuePair<int, int> kvp in sortinglist)
-            {
-                if (!mobs.ContainsKey(kvp.Key))
-                {
-                    mobs.Add(kvp.Key, kvp.Value);
-                }
-            }
 
             SetUpHandler();
             AttackHandler.BeginMobs(mobs);
         }
 
-        internal void DoAttackMobs(Dictionary<int, int> mobs)
+        internal void DoAttackMobs(List<AttackHandler.MobArg> mobs)
         {
             Account mAccount = AccountsPanel.Engine.MainAccount;
 
-            foreach (int mb in mobs.Keys)
+            foreach (AttackHandler.MobArg arg in mobs)
             {
                 if (!Globals.AttackMode || mAccount.Mover.Location == null)
                     goto quit;
 
                 Globals.AttackOn = false;
 
-                mAccount.Mover.PathfindTo(mobs[mb]);
+                mAccount.Mover.PathfindTo(arg.RoomId);
 
                 if (!Globals.AttackMode)
                     goto quit;
 
                 Globals.AttackOn = true;
 
-                AccountsPanel.Engine.MainAccount.Mover.Location.AttackMob(mb);
+                if (arg.Id < 0)
+                {
+                    // userspawn
+                    AccountsPanel.Engine.MainAccount.Mover.Location.AttackMob(arg.Name);
+                }
+                else
+                {
+                    AccountsPanel.Engine.MainAccount.Mover.Location.AttackMob(arg.Id);
+                }
                 if (!Globals.AttackOn)
                 {
                     return;
