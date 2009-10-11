@@ -66,7 +66,7 @@ namespace DCT.UI
             if (!Globals.AttackMode)
             {
                 LogPanel.Log("Single-area coverage quit");
-                MainPanel.StopAttacking(true);
+                StopAttacking(true);
             }
         }
 
@@ -121,7 +121,7 @@ namespace DCT.UI
             return;
             quit:
             LogPanel.Log("Multi-area coverage quit");
-            MainPanel.StopAttacking(true);
+            StopAttacking(true);
         }
 
         internal void AttackMobs()
@@ -204,7 +204,7 @@ namespace DCT.UI
             return;
             quit:
             LogPanel.Log("Mob coverage quit");
-            MainPanel.StopAttacking(true);
+            StopAttacking(true);
         }
 
         internal void AttackRooms()
@@ -247,7 +247,7 @@ namespace DCT.UI
             return;
         quit:
             LogPanel.Log("Rooms coverage quit");
-            MainPanel.StopAttacking(true);
+            StopAttacking(true);
         }
 
         #endregion

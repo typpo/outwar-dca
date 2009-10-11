@@ -151,7 +151,7 @@ namespace DCT.Outwar.World
 
             if (CoreUI.Instance.Settings.UseCountdownTimer || CoreUI.Instance.Settings.UseHourTimer)
             {
-                CoreUI.Instance.MainPanel.Countdown(mType);
+                CoreUI.Instance.Countdown(mType);
             }
 
             mAreas.Clear();

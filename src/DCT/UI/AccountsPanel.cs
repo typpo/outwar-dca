@@ -156,7 +156,7 @@ namespace DCT.UI
             }
 
             mUI.LogPanel.Log("Logging out...");
-            mUI.MainPanel.StopAttacking(false);
+            mUI.StopAttacking(false);
             HttpSocket.DefaultInstance.Get("http://outwar.com/index.php?cmd=logout");
             HttpSocket.DefaultInstance.Cookie = null;
             mEngine.Accounts.Clear();

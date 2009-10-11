@@ -27,6 +27,8 @@ namespace DCT.UI
         internal const int TABINDEX_QUESTS = 7;
         internal const int TABINDEX_CHAT = 8;
 
+        private const string TS_ATTACKMODE_PREFIX = "Attack mode: ";
+
         internal bool DebugVisible
         {
             get { return debugToolStripMenuItem.Visible; }
@@ -274,12 +276,12 @@ namespace DCT.UI
 
             Toggle(!on);
 
-            MainPanel.AttackingOn = on;
+            AttackingOn = on;
             Globals.AttackMode = on;
 
-            if (MainPanel.CountdownTimer != null && on)
+            if (CountdownTimer != null && on)
             {
-                MainPanel.CountdownTimer.Stop();
+                CountdownTimer.Stop();
             }
         }
 
@@ -309,7 +311,7 @@ namespace DCT.UI
             MainPanel.UseHourTimer = Settings.UseHourTimer;
             MainPanel.CountdownValue = Settings.CycleInterval;
 
-            MainPanel.SyncAttackMode();
+            SyncAttackMode();
 
             // Quests panel
 
@@ -352,6 +354,25 @@ namespace DCT.UI
             // Spawns panel
             SpawnsPanel.AttackSpawns = Settings.AttackSpawns;
             SpawnsPanel.IgnoreSpawnRage = Settings.IgnoreSpawnRage;
+        }
+
+        /// <summary>
+        /// Sets option buttons as per AttackMode setting
+        /// </summary>
+        internal void SyncAttackMode()
+        {
+            switch (Settings.AttackMode)
+            {
+                case 0: chkCurrentArea.Checked = true;
+                    break;
+                case 1: chkMultiArea.Checked = true;
+                    break;
+                case 2: chkMobs.Checked = true;
+                    break;
+                case 3: chkRooms.Checked = true;
+                    break;
+                default: throw new Exception("Your settings are corrupt; no such attack mode.");
+            }
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -460,7 +481,7 @@ namespace DCT.UI
             if (!this.Visible && AccountsPanel.Engine.MainAccount != null)
             {
                 mNotifyIcon.ShowBalloonTip(1000, "Account Stats",
-                    string.Format("Exp: {0:n0}\nRage: {1:n0}\nExp Gained: {2:n0}\n{3}\n\nDouble-click to open", AccountsPanel.Engine.MainAccount.Exp, AccountsPanel.Engine.MainAccount.Rage, Globals.ExpGained, MainPanel.TimeLeft)
+                    string.Format("Exp: {0:n0}\nRage: {1:n0}\nExp Gained: {2:n0}\n{3}\n\nDouble-click to open", AccountsPanel.Engine.MainAccount.Exp, AccountsPanel.Engine.MainAccount.Rage, Globals.ExpGained, TimeLeft)
                     , ToolTipIcon.Info);
             }
             else
@@ -567,5 +588,211 @@ namespace DCT.UI
             Pathfinder.Rooms.Clear();
             Pathfinder.Mobs.Clear();
         }
+
+        #region TOOLSTRIP
+
+        private void chkCurrentArea_CheckedChanged(object sender, EventArgs e)
+        {
+            lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "current area");
+            Settings.AttackMode = 0;
+        }
+
+        private void chkMultiArea_CheckedChanged(object sender, EventArgs e)
+        {
+            lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "multi area");
+            Settings.AttackMode = 1;
+        }
+
+        private void chkMobs_CheckedChanged(object sender, EventArgs e)
+        {
+            lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "mobs");
+            Settings.AttackMode = 2;
+        }
+
+        private void chkRooms_CheckedChanged(object sender, EventArgs e)
+        {
+            lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "rooms");
+            Settings.AttackMode = 3;
+        }
+
+        #endregion
+
+        #region TS BUTTONS
+
+        internal string TimeLeft
+        {
+            get { return lblTimeLeft.Text; }
+        }
+
+        internal bool AttackingOn
+        {
+            get { return btnStart.Enabled; }
+            set
+            {
+                btnStart.Enabled = !value;
+                btnStop.Enabled = value;
+                btnStartTimer.Enabled = !value;
+            }
+        }
+
+        internal CountDownTimer CountdownTimer
+        {
+            get { return mCountdownTimer; }
+        }
+
+        private CountDownTimer mCountdownTimer;
+        private AttackingType mCountdownType;
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            StartAttacking();
+        }
+
+        internal void StartAttacking()
+        {
+            switch (Settings.AttackMode)
+            {
+                case 0: AttackArea(); break;
+                case 1: AttackAreas(); break;
+                case 2: AttackMobs(); break;
+                case 3: AttackRooms(); break;
+            }
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            StopAttacking(true);
+        }
+
+        private delegate void StopAttackingHandler(bool timeroff);
+        internal void StopAttacking(bool timeroff)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new StopAttackingHandler(StopAttacking), timeroff);
+                return;
+            }
+
+            if (Globals.AttackOn || Globals.AttackMode)
+            {
+                Globals.AttackOn = false;
+                ToggleAttack(false);
+
+                if (timeroff)
+                {
+                    MainPanel.UseCountdown = false;
+                    MainPanel.UseHourTimer = false;
+                }
+            }
+        }
+
+        private void btnStartTimer_Click(object sender, EventArgs e)
+        {
+            if (AccountsPanel.Accounts.Count < 1)
+            {
+                MessageBox.Show("You need to login before setting a timer.", "Start Timer", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return;
+            }
+            else if (!Settings.UseCountdownTimer && !Settings.UseHourTimer)
+            {
+                MessageBox.Show("Choose a timer.", "Start Timer", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return;
+            }
+
+            Countdown(mCountdownType);
+        }
+
+        private delegate void CountdownHandler(AttackingType type);
+
+        internal void Countdown(AttackingType type)
+        {
+            // pass to UI thread
+            if (InvokeRequired)
+            {
+                Invoke(new CountdownHandler(Countdown), type);
+                return;
+            }
+
+            int countFor;
+            if (Settings.UseCountdownTimer)
+            {
+                countFor = ((int)MainPanel.CountdownValue) * 60;
+            }
+            else
+            {
+                countFor = SecondsUntilHour();
+            }
+
+            mCountdownTimer = new CountDownTimer(countFor);
+
+            mCountdownTimer.Interval = 1000;
+            mCountdownTimer.Tick += new EventHandler(t_Tick);
+            mCountdownTimer.Started += new EventHandler(t_Started);
+            mCountdownTimer.Stopped += new EventHandler(t_Stopped);
+            mCountdownType = type;
+
+            mCountdownTimer.Start();
+
+            if (Settings.ClearLogs)
+                LogPanel.ClearMost();
+        }
+
+        internal int SecondsUntilHour()
+        {
+            return (61 - DateTime.Now.Minute) * 60;
+        }
+
+        private void t_Stopped(object sender, EventArgs e)
+        {
+            if (Globals.AttackMode || !(Settings.UseCountdownTimer || Settings.UseHourTimer))
+            {
+                return;
+            }
+
+            Toggle(false);
+            ToggleAttack(true);
+
+            lblTimeLeft.Text = "Time left: 0:00";
+
+            switch (mCountdownType)
+            {
+                case AttackingType.Single:
+                    AttackArea();
+                    break;
+                case AttackingType.Multi:
+                    AttackAreas();
+                    break;
+                case AttackingType.Mobs:
+                    AttackMobs();
+                    break;
+                case AttackingType.Rooms:
+                    AttackRooms();
+                    break;
+            }
+        }
+
+        private void t_Started(object sender, EventArgs e)
+        {
+            UpdateCountdown();
+        }
+
+        private void t_Tick(object sender, EventArgs e)
+        {
+            UpdateCountdown();
+        }
+
+        private void UpdateCountdown()
+        {
+            int s = mCountdownTimer.CurrentCountdown;
+            string s2 = (s % 60).ToString();
+            lblTimeLeft.Text = "Time left: " + (s / 60) + ":" + (s2.Length == 1 ? "0" + s2 : s2);
+
+            if (!Settings.UseCountdownTimer && !Settings.UseHourTimer)
+            {
+                mCountdownTimer.Stop();
+            }
+        }
+
+        #endregion
     }
 }

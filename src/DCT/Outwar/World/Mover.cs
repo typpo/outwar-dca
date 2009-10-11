@@ -344,7 +344,7 @@ namespace DCT.Outwar.World
                 }
                 else
                 {
-                    CoreUI.Instance.MainPanel.StopAttacking(true);
+                    CoreUI.Instance.StopAttacking(true);
                     return;
                 }
                 //DCErrorReport.Report(this, "Null nodes path (unfamiliar location); teleport attempt possible");
@@ -451,7 +451,7 @@ namespace DCT.Outwar.World
                     if (++tries > 2)
                     {
                         MessageBox.Show(Account.Name + " is having trouble moving.  Reasons for this include:\n\n- It's impossible to reach your destination (are you missing a key?)\n- The program just can't find a way to get where you want to go\n- Someone logged into your account - press refresh and start your run again", "Moving Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                        CoreUI.Instance.MainPanel.StopAttacking(true);
+                        CoreUI.Instance.StopAttacking(true);
                         return false;
                     }
                     return TryRoom(id, tries);
