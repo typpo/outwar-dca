@@ -61,6 +61,8 @@ namespace DCT.UI
             this.exportMobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
             this.clearDatabasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
+            this.writeSerializeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.mNotifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,8 +92,7 @@ namespace DCT.UI
             this.tabTrainer = new System.Windows.Forms.TabPage();
             this.tabQuests = new System.Windows.Forms.TabPage();
             this.tabChat = new System.Windows.Forms.TabPage();
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
-            this.writeSerializeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.mNotifyMenu.SuspendLayout();
@@ -351,6 +352,18 @@ namespace DCT.UI
             this.clearDatabasesToolStripMenuItem.Text = "Clear databases";
             this.clearDatabasesToolStripMenuItem.Click += new System.EventHandler(this.clearDatabasesToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(149, 6);
+            // 
+            // writeSerializeToolStripMenuItem
+            // 
+            this.writeSerializeToolStripMenuItem.Name = "writeSerializeToolStripMenuItem";
+            this.writeSerializeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.writeSerializeToolStripMenuItem.Text = "Write serialize";
+            this.writeSerializeToolStripMenuItem.Click += new System.EventHandler(this.writeSerializeToolStripMenuItem_Click);
+            // 
             // mNotifyIcon
             // 
             this.mNotifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
@@ -403,7 +416,7 @@ namespace DCT.UI
             // 
             this.chkCurrentArea.CheckOnClick = true;
             this.chkCurrentArea.Name = "chkCurrentArea";
-            this.chkCurrentArea.Size = new System.Drawing.Size(140, 22);
+            this.chkCurrentArea.Size = new System.Drawing.Size(152, 22);
             this.chkCurrentArea.Text = "Current area";
             this.chkCurrentArea.CheckedChanged += new System.EventHandler(this.chkCurrentArea_CheckedChanged);
             // 
@@ -411,7 +424,7 @@ namespace DCT.UI
             // 
             this.chkMultiArea.CheckOnClick = true;
             this.chkMultiArea.Name = "chkMultiArea";
-            this.chkMultiArea.Size = new System.Drawing.Size(140, 22);
+            this.chkMultiArea.Size = new System.Drawing.Size(152, 22);
             this.chkMultiArea.Text = "Multiple areas";
             this.chkMultiArea.CheckedChanged += new System.EventHandler(this.chkMultiArea_CheckedChanged);
             // 
@@ -421,7 +434,7 @@ namespace DCT.UI
             this.chkMobs.CheckOnClick = true;
             this.chkMobs.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMobs.Name = "chkMobs";
-            this.chkMobs.Size = new System.Drawing.Size(140, 22);
+            this.chkMobs.Size = new System.Drawing.Size(152, 22);
             this.chkMobs.Text = "Mobs";
             this.chkMobs.CheckedChanged += new System.EventHandler(this.chkMobs_CheckedChanged);
             // 
@@ -429,7 +442,7 @@ namespace DCT.UI
             // 
             this.chkRooms.CheckOnClick = true;
             this.chkRooms.Name = "chkRooms";
-            this.chkRooms.Size = new System.Drawing.Size(140, 22);
+            this.chkRooms.Size = new System.Drawing.Size(152, 22);
             this.chkRooms.Text = "Rooms";
             this.chkRooms.CheckedChanged += new System.EventHandler(this.chkRooms_CheckedChanged);
             // 
@@ -468,7 +481,8 @@ namespace DCT.UI
             this.btnStartTimer,
             this.lblTimeLeft,
             this.toolStripSeparator1,
-            this.lblAttackMode});
+            this.lblAttackMode,
+            this.toolStripComboBox1});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.ShowItemToolTips = false;
@@ -638,17 +652,11 @@ namespace DCT.UI
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
             // 
-            // toolStripMenuItem8
+            // toolStripComboBox1
             // 
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(149, 6);
-            // 
-            // writeSerializeToolStripMenuItem
-            // 
-            this.writeSerializeToolStripMenuItem.Name = "writeSerializeToolStripMenuItem";
-            this.writeSerializeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.writeSerializeToolStripMenuItem.Text = "Write serialize";
-            this.writeSerializeToolStripMenuItem.Click += new System.EventHandler(this.writeSerializeToolStripMenuItem_Click);
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 25);
+            this.toolStripComboBox1.Text = "Attack mode: mobs";
             // 
             // CoreUI
             // 
@@ -750,5 +758,6 @@ namespace DCT.UI
         private System.Windows.Forms.TabPage tabChat;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
         private System.Windows.Forms.ToolStripMenuItem writeSerializeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
     }
 }

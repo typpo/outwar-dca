@@ -328,6 +328,7 @@
     </Compile>
     <Compile Include="Util\Randomizer.cs" />
     <Compile Include="Settings\ConfigSerializer.cs" />
+    <Compile Include="Util\StringValueAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Misc\Bad.ico" />

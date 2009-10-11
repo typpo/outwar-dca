@@ -90,7 +90,7 @@ namespace DCT.Settings
             UseCountdownTimer = true;
             UseHourTimer = false;
 
-            AttackMode = 1;
+            AttackMode = 2;
 
             LvlLimitMin = 0;
             LvlLimit = 35;

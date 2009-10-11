@@ -600,6 +600,7 @@ namespace DCT.UI
         {
             if (chkCurrentArea.Checked)
             {
+                chkRooms.Checked = chkMobs.Checked = chkMultiArea.Checked = false;
                 lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "current area");
                 Settings.AttackMode = 0;
             }
