@@ -2,15 +2,11 @@ using DCT.Util;
 
 namespace DCT.Outwar.World
 {
-    internal enum AttackingType
+    public enum AttackingType
     {
-        [StringValue("multi area")]
-        Multi,
-        [StringValue("current area")]
-        Single,
-        [StringValue("mobs")]
+        CurrentArea,
+        MultiArea,
         Mobs,
-        [StringValue("rooms")]
         Rooms
     }
 }

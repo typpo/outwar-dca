@@ -363,13 +363,13 @@ namespace DCT.UI
         {
             switch (Settings.AttackMode)
             {
-                case 0: chkCurrentArea.Checked = true;
+                case AttackingType.CurrentArea: chkCurrentArea.Checked = true;
                     break;
-                case 1: chkMultiArea.Checked = true;
+                case AttackingType.MultiArea: chkMultiArea.Checked = true;
                     break;
-                case 2: chkMobs.Checked = true;
+                case AttackingType.Mobs: chkMobs.Checked = true;
                     break;
-                case 3: chkRooms.Checked = true;
+                case AttackingType.Rooms: chkRooms.Checked = true;
                     break;
                 default: throw new Exception("Your settings are corrupt; no such attack mode.");
             }
@@ -602,7 +602,7 @@ namespace DCT.UI
             {
                 chkRooms.Checked = chkMobs.Checked = chkMultiArea.Checked = false;
                 lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "current area");
-                Settings.AttackMode = 0;
+                Settings.AttackMode = AttackingType.CurrentArea;
             }
         }
 
@@ -611,7 +611,7 @@ namespace DCT.UI
             if (chkMultiArea.Checked)
             {
                 lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "multi area");
-                Settings.AttackMode = 1;
+                Settings.AttackMode = AttackingType.MultiArea;
             }
         }
 
@@ -620,7 +620,7 @@ namespace DCT.UI
             if (chkMobs.Checked)
             {
                 lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "mobs");
-                Settings.AttackMode = 2;
+                Settings.AttackMode = AttackingType.Mobs;
             }
         }
 
@@ -629,7 +629,7 @@ namespace DCT.UI
             if (chkRooms.Checked)
             {
                 lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "rooms");
-                Settings.AttackMode = 3;
+                Settings.AttackMode = AttackingType.Rooms;
             }
         }
 
@@ -691,10 +691,10 @@ namespace DCT.UI
             }
             switch (Settings.AttackMode)
             {
-                case 0: AttackArea(); break;
-                case 1: AttackAreas(); break;
-                case 2: AttackMobs(); break;
-                case 3: AttackRooms(); break;
+                case AttackingType.CurrentArea: AttackArea(); break;
+                case AttackingType.MultiArea: AttackAreas(); break;
+                case AttackingType.Mobs: AttackMobs(); break;
+                case AttackingType.Rooms: AttackRooms(); break;
             }
         }
 
@@ -821,10 +821,10 @@ namespace DCT.UI
 
             switch (mCountdownType)
             {
-                case AttackingType.Single:
+                case AttackingType.CurrentArea:
                     AttackArea();
                     break;
-                case AttackingType.Multi:
+                case AttackingType.MultiArea:
                     AttackAreas();
                     break;
                 case AttackingType.Mobs:

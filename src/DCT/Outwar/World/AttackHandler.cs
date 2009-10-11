@@ -67,7 +67,7 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.LogPanel.LogAttack("E: You must enter an account first");
                 return;
             }
-            else if (CoreUI.Instance.Settings.AttackMode != 2 && CoreUI.Instance.Settings.FilterMobs && CoreUI.Instance.Settings.MobFilters.Length < 1)
+            else if (CoreUI.Instance.Settings.AttackMode != AttackingType.Mobs && CoreUI.Instance.Settings.FilterMobs && CoreUI.Instance.Settings.MobFilters.Length < 1)
             {
                 CoreUI.Instance.LogPanel.LogAttack("E: You have filters enabled but you haven't set them.  Nothing will be attacked with these settings - turn filtering off.");
                 return;
@@ -110,10 +110,10 @@ namespace DCT.Outwar.World
                     CoreUI.Instance.AccountsPanel.Engine.SetMain(a);
                     switch (mType)
                     {
-                        case AttackingType.Single:
+                        case AttackingType.CurrentArea:
                             CoreUI.Instance.DoAttackArea();
                             break;
-                        case AttackingType.Multi:
+                        case AttackingType.MultiArea:
                             CoreUI.Instance.DoAttackMultiAreas(mAreas);
                             break;
                         case AttackingType.Mobs:

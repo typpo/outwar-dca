@@ -14,23 +14,6 @@ namespace DCT.UI
 
         private void SetUpHandler()
         {
-            AttackingType type;
-            switch (Settings.AttackMode)
-            {
-                case 0:
-                    type = AttackingType.Single;
-                    break;
-                case 1:
-                    type = AttackingType.Multi;
-                    break;
-                case 2:
-                    type = AttackingType.Mobs;
-                    break;
-                default:
-                    type = AttackingType.Rooms;
-                    break;
-            }
-
             List<Account> accounts = new List<Account>();
             if (AccountsPanel.CheckedIndices.Count > 0)
             {
@@ -48,7 +31,7 @@ namespace DCT.UI
                 accounts.Add(AccountsPanel.Engine[0]);
             }
 
-            AttackHandler.Set(accounts, type);
+            AttackHandler.Set(accounts, Settings.AttackMode);
         }
 
         internal void AttackArea()

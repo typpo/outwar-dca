@@ -31,7 +31,7 @@ namespace DCT.Settings
         [XmlElement("ReturnToStart")]
         public bool ReturnToStart { get; set; }
         [XmlElement("AttackMode")]
-        public int AttackMode { get; set; }
+        public DCT.Outwar.World.AttackingType AttackMode { get; set; }
         [XmlElement("Delay")]
         public int Delay { get; set; }
         [XmlIgnore()]
@@ -90,7 +90,7 @@ namespace DCT.Settings
             UseCountdownTimer = true;
             UseHourTimer = false;
 
-            AttackMode = 2;
+            AttackMode = DCT.Outwar.World.AttackingType.Mobs;
 
             LvlLimitMin = 0;
             LvlLimit = 35;
