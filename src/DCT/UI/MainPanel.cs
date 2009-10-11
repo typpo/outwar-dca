@@ -13,8 +13,85 @@ namespace DCT.UI
 {
     public partial class MainPanel : UserControl
     {
+        private const int STOPAFTERTIME_OFFSET = 30;    // in seconds
 
-        internal bool UseCountdown
+        internal int StopAfterCounter { get; set; }
+
+        internal void SetStopAfterCounter()
+        {
+            StopAfterCounter = 0;
+        }
+
+        internal bool StopAfterCounterFinished
+        {
+            get { return StopAfterCounter > StopAfterVal; }
+        }
+
+        internal void SetStopAfterTime()
+        {
+            StopAfterTime = DateTime.Now;
+        }
+
+        internal DateTime StopAfterTime { get; set; }
+
+        internal bool StopAfterTimeFinished
+        {
+            get
+            {
+                TimeSpan ts = DateTime.Now - StopAfterTime.Add(new TimeSpan(0,0,STOPAFTERTIME_OFFSET));
+                int minutes = ts.Days * 24 * 60 + ts.Hours * 60 + ts.Minutes;
+                return minutes > StopAfterVal;
+            }
+        }
+
+        internal bool StopAfter
+        {
+            get { return chkStopAfter.Enabled; }
+            set { chkStopAfter.Checked = value; }
+        }
+
+        internal int StopAfterVal
+        {
+            get { return (int)numStopAfter.Value; }
+            set { numStopAfter.Value = value; }
+        }
+
+        internal UserEditable.StopAfterType StopAfterMode
+        {
+
+            // TODO should be dynamic
+            get
+            {
+                switch (cmbStopAfter.Text)
+                {
+                    case "runs":
+                        return UserEditable.StopAfterType.Runs;
+                    case "minutes":
+                        return UserEditable.StopAfterType.Minutes;
+                }
+                mUI.LogPanel.Log("E: No such StopAfterMode, defaulted to Runs");
+                return UserEditable.StopAfterType.Runs;
+            }
+            set
+            {
+                switch (value)
+                {
+                    case UserEditable.StopAfterType.Minutes:
+                        cmbStopAfter.Text = "minutes";
+                        break;
+                    case UserEditable.StopAfterType.Runs:
+                        cmbStopAfter.Text = "runs";
+                        break;
+                }
+            }
+        }
+
+        internal bool RunCountdown
+        {
+            get { return chkCountdownTimer.Checked || chkHourTimer.Checked; }
+        }
+
+        internal bool UseCountdownTimer
         {
             get { return chkCountdownTimer.Checked; }
             set { chkCountdownTimer.Checked = value; }
@@ -53,32 +130,26 @@ namespace DCT.UI
         // TODO switch to only one global
         private void chkCountdownTimer_CheckedChanged(object sender, EventArgs e)
         {
-            bool b = chkCountdownTimer.Checked;
-            if (b)
+            mUI.Settings.UseCountdownTimer = chkCountdownTimer.Checked;
+            if (mUI.Settings.UseCountdownTimer)
             {
                 if (mUI.CountdownTimer != null)
                 {
                     mUI.CountdownTimer.CurrentCountdown = ((int)numCountdown.Value) * 60;
                 }
-                chkHourTimer.Checked = mUI.Settings.UseHourTimer = !b;
-
             }
-            mUI.Settings.UseCountdownTimer = b;
         }
 
         private void chkHourTimer_CheckedChanged(object sender, EventArgs e)
         {
-            bool b = chkHourTimer.Checked;
-            if (b)
+            mUI.Settings.UseHourTimer = chkHourTimer.Checked;
+            if (mUI.Settings.UseHourTimer)
             {
                 if (mUI.CountdownTimer != null)
                 {
                     mUI.CountdownTimer.CurrentCountdown = mUI.SecondsUntilHour();
                 }
-                chkCountdownTimer.Checked = mUI.Settings.UseCountdownTimer = !b;
-
             }
-            mUI.Settings.UseHourTimer = b;
         }
 
         private void numCountdown_ValueChanged(object sender, EventArgs e)
@@ -88,6 +159,16 @@ namespace DCT.UI
             {
                 mUI.CountdownTimer.CurrentCountdown = ((int)numCountdown.Value) * 60;
             }
+        }
+
+        private void chkStopAfter_CheckedChanged(object sender, EventArgs e)
+        {
+            mUI.Settings.StopAfter = numStopAfter.Enabled = cmbStopAfter.Enabled = chkStopAfter.Checked;
+            if (mUI.Settings.StopAfter)
+            {
+                mUI.Settings.StopAfterMode = StopAfterMode;
+            }
+            mUI.Settings.StopAfterVal = (int)numStopAfter.Value;
         }
     }
 }

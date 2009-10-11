@@ -57,6 +57,19 @@ namespace DCT.Settings
         [XmlElement("LastPassword")]
         public string LastPassword { get; set; }
 
+        public enum StopAfterType
+        {
+            Runs,
+            Minutes
+        }
+
+        [XmlElement("StopAfter")]
+        public bool StopAfter { get; set; }
+        [XmlElement("StopAfterVal")]
+        public int StopAfterVal { get; set; }
+        [XmlElement("StopAfterMode")]
+        public StopAfterType StopAfterMode { get; set; }
+
         public UserEditable()
         {
             MobFilters = new string[0];
@@ -92,6 +105,10 @@ namespace DCT.Settings
             IgnoreSpawnRage = true;
 
             LastUsername = LastPassword = string.Empty;
+
+            StopAfter = false;
+            StopAfterVal = 1;
+            StopAfterMode = StopAfterType.Runs;
         }
     }
 }

@@ -307,7 +307,7 @@ namespace DCT.UI
 
             // Main panel
 
-            MainPanel.UseCountdown = Settings.UseCountdownTimer;
+            MainPanel.UseCountdownTimer = Settings.UseCountdownTimer;
             MainPanel.UseHourTimer = Settings.UseHourTimer;
             MainPanel.CountdownValue = Settings.CycleInterval;
 
@@ -589,30 +589,47 @@ namespace DCT.UI
             Pathfinder.Mobs.Clear();
         }
 
+        private void writeSerializeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigSerializer.WriteFile("config.xml", Settings);
+        }
+
         #region TOOLSTRIP
 
         private void chkCurrentArea_CheckedChanged(object sender, EventArgs e)
         {
-            lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "current area");
-            Settings.AttackMode = 0;
+            if (chkCurrentArea.Checked)
+            {
+                lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "current area");
+                Settings.AttackMode = 0;
+            }
         }
 
         private void chkMultiArea_CheckedChanged(object sender, EventArgs e)
         {
-            lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "multi area");
-            Settings.AttackMode = 1;
+            if (chkMultiArea.Checked)
+            {
+                lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "multi area");
+                Settings.AttackMode = 1;
+            }
         }
 
         private void chkMobs_CheckedChanged(object sender, EventArgs e)
         {
-            lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "mobs");
-            Settings.AttackMode = 2;
+            if (chkMobs.Checked)
+            {
+                lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "mobs");
+                Settings.AttackMode = 2;
+            }
         }
 
         private void chkRooms_CheckedChanged(object sender, EventArgs e)
         {
-            lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "rooms");
-            Settings.AttackMode = 3;
+            if (chkRooms.Checked)
+            {
+                lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "rooms");
+                Settings.AttackMode = 3;
+            }
         }
 
         #endregion
@@ -650,6 +667,27 @@ namespace DCT.UI
 
         internal void StartAttacking()
         {
+            if (Settings.StopAfter)
+            {
+                // intialize stopafter thing
+                switch (Settings.StopAfterMode)
+                {
+                    case UserEditable.StopAfterType.Minutes:
+                        MainPanel.SetStopAfterTime();
+                        break;
+                    case UserEditable.StopAfterType.Runs:
+                        MainPanel.SetStopAfterCounter();
+                        MainPanel.StopAfterCounter++;
+                        break;
+                }
+
+                // if there is no countdown set, then we set an internal countdown of 0
+                if (!MainPanel.RunCountdown)
+                {
+                    MainPanel.UseCountdownTimer = true;
+                    MainPanel.CountdownValue = 0;
+                }
+            }
             switch (Settings.AttackMode)
             {
                 case 0: AttackArea(); break;
@@ -665,6 +703,10 @@ namespace DCT.UI
         }
 
         private delegate void StopAttackingHandler(bool timeroff);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="timeroff">true if timer should be disabled</param>
         internal void StopAttacking(bool timeroff)
         {
             if (InvokeRequired)
@@ -680,7 +722,7 @@ namespace DCT.UI
 
                 if (timeroff)
                 {
-                    MainPanel.UseCountdown = false;
+                    MainPanel.UseCountdownTimer = false;
                     MainPanel.UseHourTimer = false;
                 }
             }
@@ -754,6 +796,28 @@ namespace DCT.UI
 
             lblTimeLeft.Text = "Time left: 0:00";
 
+            if (Settings.StopAfter)
+            {
+                switch (Settings.StopAfterMode)
+                {
+                    case UserEditable.StopAfterType.Minutes:
+                        if (MainPanel.StopAfterTimeFinished)
+                        {
+                            LogPanel.Log(string.Format("Reached time limit of {0} minutes", Settings.StopAfterVal));
+                            StopAttacking(true);
+                        }
+                        break;
+                    case UserEditable.StopAfterType.Runs:
+                        if (MainPanel.StopAfterCounterFinished)
+                        {
+                            LogPanel.Log(string.Format("Reached {0} runs", Settings.StopAfterVal));
+                            StopAttacking(true);
+                        }
+                        MainPanel.StopAfterCounter++;
+                        break;
+                }
+            }
+
             switch (mCountdownType)
             {
                 case AttackingType.Single:
@@ -794,5 +858,6 @@ namespace DCT.UI
         }
 
         #endregion
+
     }
 }

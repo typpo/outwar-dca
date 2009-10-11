@@ -55,6 +55,12 @@ namespace DCT.Pathfinding
 
         private static void DoBuildMap()
         {
+            Rooms = new List<MappedRoom>();
+            Mobs = new List<MappedMob>();
+            Spawns = new List<MappedMob>();
+            Adventures = new SortedList<string, int>();
+            return;
+
             /*
             f5b57b6c048faa5bdc468e8caee9eaf2aad0182b0fbd8e44a2891d6b556288976bb09674d50076be64eb5ed78cb7ce
             12cafa06a6d89aa2b3cce105d6efb42fb2dd2ae47c631cc7c20da361de1b934c98b8a90fe434d6883383744a9285
@@ -297,7 +303,6 @@ namespace DCT.Pathfinding
 
             string map;
             int i = 0;
-            Rooms = new List<MappedRoom>();
             List<int> nbrs;
             string name;
             int id;
@@ -336,7 +341,6 @@ namespace DCT.Pathfinding
             // ------------------
 
             i = 0;
-            Mobs = new List<MappedMob>();
             MappedMob mm;
             string[] parts;
             while (Mobs.Count < 1 && i < 2)
@@ -364,7 +368,6 @@ namespace DCT.Pathfinding
             // -----------------
 
             i = 0;
-            Adventures = new SortedList<string, int>();
             while (Adventures.Count < 1 && i < 2)
             {
                 //map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_RAIDS), KEY_RAIDS, false));
@@ -385,7 +388,6 @@ namespace DCT.Pathfinding
             // Spawns
 
             i = 0;
-            Spawns = new List<MappedMob>();
             while (Spawns.Count < 1 && i < 2)
             {
                 //map = HttpSocket.DefaultInstance.Get(URL_SPAWNS);
