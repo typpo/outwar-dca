@@ -479,11 +479,14 @@ namespace DCT.Outwar.World
             // other outcome handling
             if (src.Contains("found a"))
             {
-                string f = Parser.Parse(src, string.Format("{0} found ", mRoom.Mover.Account.Name), "<br>");
-                CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + (f.Length < MAX_ITEM_LEN ? " found " + f : " found an item"));
-                if (IsSpawn && f.Length < MAX_ITEM_LEN)
+                string[] fs = Parser.MultiParse(src, string.Format("{0} found ", mRoom.Mover.Account.Name), "!<br>");
+                foreach (string f in fs)
                 {
-                    CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
+                    CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + (f.Length < MAX_ITEM_LEN ? " found " + f : " found an item"));
+                    if (IsSpawn && f.Length < MAX_ITEM_LEN)
+                    {
+                        CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
+                    }
                 }
             }
             if (src.Contains("has gained "))

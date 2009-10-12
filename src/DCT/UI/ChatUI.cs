@@ -284,6 +284,7 @@ namespace DCT.UI
             mClient.Disconnect();
         }
 
+        private System.Collections.Hashtable mUsersLast;
         internal void UpdateNames()
         {
             if (InvokeRequired)
@@ -301,17 +302,41 @@ namespace DCT.UI
                 return;
             }
 
-            lstChat.Items.Clear();
+            foreach(System.Collections.DictionaryEntry de in c.Users)
+            {
+                if (mUsersLast != null && mUsersLast.Contains(de.Key))
+                {
+                    // already there
+                    mUsersLast.Remove(de.Key);
+                }
+                else
+                {
+                    // new
+                    lstChat.Items.Add(de.Key);
+                }
+            }
+
+            if (mUsersLast != null)
+            {
+                foreach (System.Collections.DictionaryEntry de in mUsersLast)
+                {
+                    lstChat.Items.Remove(de.Key);
+                }
+            }
+
+            /*
             foreach (ChannelUser u in c.Users.Values)
             {
-                // Not necessary; why bother?
-                //string nick = u.Nick;
-                //if (u.IsOp)
-                //    nick = "@" + nick;
-                //else if (u.IsVoice)
-                //    nick = "+" + nick;
-                lstChat.Items.Add(u.Nick);
+                if (mUsersLast != null)
+                {
+                    if (mUsersLast.ContainsValue(u))
+                    {
+                        
+                    }
+                }
             }
+            */
+            mUsersLast = c.Users;
             lblChatOnline.Text = lstChat.Items.Count + " online";
         }
 
