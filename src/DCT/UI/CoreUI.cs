@@ -24,8 +24,7 @@ namespace DCT.UI
         internal const int TABINDEX_RAIDS = 4;
         internal const int TABINDEX_SPAWNS = 5;
         internal const int TABINDEX_TRAINER = 6;
-        internal const int TABINDEX_QUESTS = 7;
-        internal const int TABINDEX_CHAT = 8;
+        internal const int TABINDEX_CHAT = 7;
 
         private const string TS_ATTACKMODE_PREFIX = "Attack mode: ";
 
@@ -70,7 +69,6 @@ namespace DCT.UI
         private AttackPanel mAttackPanel;
         private FiltersPanel mFiltersPanel;
         private TrainPanel mTrainPanel;
-        private QuestsPanel mQuestsPanel;
 
         public CoreUI()
         {
@@ -115,10 +113,6 @@ namespace DCT.UI
             mTrainPanel = new TrainPanel(this);
             mTrainPanel.Dock = DockStyle.Fill;
             tabs.TabPages[TABINDEX_TRAINER].Controls.Add(mTrainPanel);
-
-            mQuestsPanel = new QuestsPanel(this);
-            mQuestsPanel.Dock = DockStyle.Fill;
-            tabs.TabPages[TABINDEX_QUESTS].Controls.Add(mQuestsPanel);
 
             ChatPanel = new ChatUI(this);
             ChatPanel.Dock = DockStyle.Fill;
@@ -319,15 +313,6 @@ namespace DCT.UI
             MainPanel.InitStopAfter();
 
             SyncAttackMode();
-
-            // Quests panel
-
-            if (Settings.AlertQuests)
-                mQuestsPanel.AlertQuest = true;
-            else if (Settings.AutoQuest)
-                mQuestsPanel.AutoQuest = true;
-            else
-                mQuestsPanel.NothingQuest = true;
 
             // Training panel
 

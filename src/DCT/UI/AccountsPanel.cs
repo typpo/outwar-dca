@@ -240,5 +240,31 @@ namespace DCT.UI
 
             return mEngine.Count - orig;
         }
+
+        private int DoLoginRgSessId()
+        {
+            int orig = mEngine.Count;
+            mEngine.Login(txtUsername.Text, txtPassword.Text);
+
+            return mEngine.Count - orig;
+        }
+
+        private void lnkRgSessid_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            int i = 0;
+            string input = InputBox.Prompt("Session ID Input", "Enter your rg_sess_id.  This will allow you to use multiple DCAs on the same account:");
+            if (string.IsNullOrEmpty(input))
+                return;
+
+            txtUsername.Enabled = false;
+            txtPassword.Enabled = false;
+            btnLogin.Enabled = false;
+            btnLogout.Enabled = false;
+
+            mUI.LogPanel.Log("Logging in with rg_sess_id...");
+
+            LoginHandler d = new LoginHandler(DoLogin);
+            d.BeginInvoke(new AsyncCallback(LoginCallback), d);
+        }
     }
 }

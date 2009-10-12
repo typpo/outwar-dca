@@ -184,12 +184,6 @@
     <Compile Include="UI\MobsPanel.Designer.cs">
       <DependentUpon>MobsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\QuestsPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\QuestsPanel.Designer.cs">
-      <DependentUpon>QuestsPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\RaidsPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -280,10 +274,6 @@
     <EmbeddedResource Include="UI\MobsPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MobsPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\QuestsPanel.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>QuestsPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\RaidsPanel.resx">
       <SubType>Designer</SubType>

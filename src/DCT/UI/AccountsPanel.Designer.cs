@@ -46,6 +46,7 @@ namespace DCT.UI
             this.clmMobs = new System.Windows.Forms.ColumnHeader();
             this.clmEXP = new System.Windows.Forms.ColumnHeader();
             this.clmAvgExp = new System.Windows.Forms.ColumnHeader();
+            this.lnkRgSessid = new System.Windows.Forms.LinkLabel();
             this.grpConnections.SuspendLayout();
             this.pnl.SuspendLayout();
             this.SuspendLayout();
@@ -74,6 +75,7 @@ namespace DCT.UI
             this.pnl.Controls.Add(this.txtUsername);
             this.pnl.Controls.Add(this.label1);
             this.pnl.Controls.Add(this.label2);
+            this.pnl.Controls.Add(this.lnkRgSessid);
             this.pnl.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnl.Location = new System.Drawing.Point(3, 347);
             this.pnl.Name = "pnl";
@@ -225,6 +227,17 @@ namespace DCT.UI
             this.clmAvgExp.Text = "xpAvg";
             this.clmAvgExp.Width = 50;
             // 
+            // lnkRgSessid
+            // 
+            this.lnkRgSessid.AutoSize = true;
+            this.lnkRgSessid.Location = new System.Drawing.Point(146, 95);
+            this.lnkRgSessid.Name = "lnkRgSessid";
+            this.lnkRgSessid.Size = new System.Drawing.Size(84, 13);
+            this.lnkRgSessid.TabIndex = 12;
+            this.lnkRgSessid.TabStop = true;
+            this.lnkRgSessid.Text = "Input rg_sess_id";
+            this.lnkRgSessid.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRgSessid_LinkClicked);
+            // 
             // AccountsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,5 +272,6 @@ namespace DCT.UI
         private System.Windows.Forms.ColumnHeader clmEXP;
         private System.Windows.Forms.Panel pnl;
         private System.Windows.Forms.ColumnHeader clmAvgExp;
+        private System.Windows.Forms.LinkLabel lnkRgSessid;
     }
 }

@@ -74,6 +74,7 @@ namespace DCT.UI
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnStartTimer = new System.Windows.Forms.ToolStripButton();
             this.lblTimeLeft = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cmbAttackMode = new System.Windows.Forms.ToolStripComboBox();
             this.splitLeftRight = new System.Windows.Forms.SplitContainer();
             this.splitTopBottom = new System.Windows.Forms.SplitContainer();
@@ -86,9 +87,7 @@ namespace DCT.UI
             this.tabJoiner = new System.Windows.Forms.TabPage();
             this.tabSpawns = new System.Windows.Forms.TabPage();
             this.tabTrainer = new System.Windows.Forms.TabPage();
-            this.tabQuests = new System.Windows.Forms.TabPage();
             this.tabChat = new System.Windows.Forms.TabPage();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.mNotifyMenu.SuspendLayout();
@@ -460,6 +459,12 @@ namespace DCT.UI
             this.lblTimeLeft.Size = new System.Drawing.Size(73, 22);
             this.lblTimeLeft.Text = "Time left: N/A";
             // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(71, 22);
+            this.toolStripLabel1.Text = "Attack mode:";
+            // 
             // cmbAttackMode
             // 
             this.cmbAttackMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -522,7 +527,6 @@ namespace DCT.UI
             this.tabs.Controls.Add(this.tabJoiner);
             this.tabs.Controls.Add(this.tabSpawns);
             this.tabs.Controls.Add(this.tabTrainer);
-            this.tabs.Controls.Add(this.tabQuests);
             this.tabs.Controls.Add(this.tabChat);
             this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -597,15 +601,6 @@ namespace DCT.UI
             this.tabTrainer.Text = "Trainer";
             this.tabTrainer.UseVisualStyleBackColor = true;
             // 
-            // tabQuests
-            // 
-            this.tabQuests.Location = new System.Drawing.Point(4, 22);
-            this.tabQuests.Name = "tabQuests";
-            this.tabQuests.Size = new System.Drawing.Size(423, 273);
-            this.tabQuests.TabIndex = 8;
-            this.tabQuests.Text = "Quests";
-            this.tabQuests.UseVisualStyleBackColor = true;
-            // 
             // tabChat
             // 
             this.tabChat.Location = new System.Drawing.Point(4, 22);
@@ -614,12 +609,6 @@ namespace DCT.UI
             this.tabChat.TabIndex = 10;
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(71, 22);
-            this.toolStripLabel1.Text = "Attack mode:";
             // 
             // CoreUI
             // 
@@ -712,7 +701,6 @@ namespace DCT.UI
         private System.Windows.Forms.TabPage tabJoiner;
         private System.Windows.Forms.TabPage tabSpawns;
         private System.Windows.Forms.TabPage tabTrainer;
-        private System.Windows.Forms.TabPage tabQuests;
         private System.Windows.Forms.TabPage tabChat;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
         private System.Windows.Forms.ToolStripMenuItem writeSerializeToolStripMenuItem;

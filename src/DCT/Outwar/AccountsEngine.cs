@@ -89,9 +89,29 @@ namespace DCT.Outwar
             string toPost = "login_username=" + user + "&login_password=" + pass;
             HttpSocket.DefaultInstance.Post("http://sigil.outwar.com/myaccount.php", toPost);
 
+            AddCharacters();
+
+            HttpSocket.DefaultInstance.UserAgent = "Typpo DCAA Client";
+        }
+
+        internal void Login(string rgsessid)
+        {
+
+            HttpSocket.DefaultInstance.UserAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:0.9.4) Gecko/20011019 Netscape6/6.2";
+            HttpSocket.DefaultInstance.Cookie = null;
+
+            HttpSocket.DefaultInstance.Get(string.Format("http://sigil.outwar.com/?rg_sess_id={0}", rgsessid));
+
+            AddCharacters();
+
+            HttpSocket.DefaultInstance.UserAgent = "Typpo DCAA Client";
+        }
+
+        private void AddCharacters()
+        {
             for (int i = 1; i <= Server.NUM_SERVERS; i++)
             {
-                string svrlist = HttpSocket.DefaultInstance.Get("http://outwar.com/accounts.php?ac_serverid=" + i);                
+                string svrlist = HttpSocket.DefaultInstance.Get("http://outwar.com/accounts.php?ac_serverid=" + i);
                 AddAccountsFromSource(svrlist);
             }
 
@@ -99,7 +119,6 @@ namespace DCT.Outwar
             {
                 RgSessId = HttpSocket.DefaultInstance.Cookie.Substring(11, HttpSocket.DefaultInstance.Cookie.IndexOf(";") - 11);
             }
-            HttpSocket.DefaultInstance.UserAgent = "Typpo DCAA Client";
         }
 
         private void AddAccountsFromSource(string src)
