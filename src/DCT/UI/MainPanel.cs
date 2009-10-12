@@ -13,21 +13,21 @@ namespace DCT.UI
 {
     public partial class MainPanel : UserControl
     {
-        private const int STOPAFTERTIME_OFFSET = 30;    // in seconds
+        private const int STOPAFTERTIME_OFFSET = 3;    // in seconds
 
         internal int StopAfterCounter { get; set; }
 
-        internal void SetStopAfterCounter()
+        internal void ResetStopAfterCounter()
         {
             StopAfterCounter = 0;
         }
 
         internal bool StopAfterCounterFinished
         {
-            get { return StopAfterCounter > StopAfterVal; }
+            get { return StopAfterCounter >= StopAfterVal; }
         }
 
-        internal void SetStopAfterTime()
+        internal void ResetStopAfterTime()
         {
             StopAfterTime = DateTime.Now;
         }
@@ -40,7 +40,7 @@ namespace DCT.UI
             {
                 TimeSpan ts = DateTime.Now - StopAfterTime.Add(new TimeSpan(0,0,STOPAFTERTIME_OFFSET));
                 int minutes = ts.Days * 24 * 60 + ts.Hours * 60 + ts.Minutes;
-                return minutes > StopAfterVal;
+                return minutes >= StopAfterVal;
             }
         }
 
@@ -127,7 +127,6 @@ namespace DCT.UI
             InitializeComponent();
         }
 
-        // TODO switch to only one global
         private void chkCountdownTimer_CheckedChanged(object sender, EventArgs e)
         {
             mUI.Settings.UseCountdownTimer = chkCountdownTimer.Checked;
@@ -169,6 +168,19 @@ namespace DCT.UI
                 mUI.Settings.StopAfterMode = StopAfterMode;
             }
             mUI.Settings.StopAfterVal = (int)numStopAfter.Value;
+        }
+
+        private void cmbStopAfter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cmbStopAfter.SelectedItem.ToString())
+            {
+                case "runs":
+                    mUI.Settings.StopAfterMode = UserEditable.StopAfterType.Runs;
+                    break;
+                case "minutes":
+                    mUI.Settings.StopAfterMode = UserEditable.StopAfterType.Minutes;
+                    break;
+            }
         }
     }
 }

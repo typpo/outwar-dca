@@ -67,18 +67,14 @@ namespace DCT.UI
             this.mNotifyMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblAttackMode = new System.Windows.Forms.ToolStripSplitButton();
-            this.chkCurrentArea = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkMultiArea = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkMobs = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkRooms = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.btnStart = new System.Windows.Forms.ToolStripButton();
             this.btnStop = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnStartTimer = new System.Windows.Forms.ToolStripButton();
             this.lblTimeLeft = new System.Windows.Forms.ToolStripLabel();
+            this.cmbAttackMode = new System.Windows.Forms.ToolStripComboBox();
             this.splitLeftRight = new System.Windows.Forms.SplitContainer();
             this.splitTopBottom = new System.Windows.Forms.SplitContainer();
             this.splitLeftRight2 = new System.Windows.Forms.SplitContainer();
@@ -92,7 +88,7 @@ namespace DCT.UI
             this.tabTrainer = new System.Windows.Forms.TabPage();
             this.tabQuests = new System.Windows.Forms.TabPage();
             this.tabChat = new System.Windows.Forms.TabPage();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.mNotifyMenu.SuspendLayout();
@@ -399,77 +395,10 @@ namespace DCT.UI
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
-            // lblAttackMode
-            // 
-            this.lblAttackMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.chkCurrentArea,
-            this.chkMultiArea,
-            this.chkMobs,
-            this.chkRooms});
-            this.lblAttackMode.Image = ((System.Drawing.Image)(resources.GetObject("lblAttackMode.Image")));
-            this.lblAttackMode.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblAttackMode.Name = "lblAttackMode";
-            this.lblAttackMode.Size = new System.Drawing.Size(131, 22);
-            this.lblAttackMode.Text = "Attack mode: mobs";
-            // 
-            // chkCurrentArea
-            // 
-            this.chkCurrentArea.CheckOnClick = true;
-            this.chkCurrentArea.Name = "chkCurrentArea";
-            this.chkCurrentArea.Size = new System.Drawing.Size(152, 22);
-            this.chkCurrentArea.Text = "Current area";
-            this.chkCurrentArea.CheckedChanged += new System.EventHandler(this.chkCurrentArea_CheckedChanged);
-            // 
-            // chkMultiArea
-            // 
-            this.chkMultiArea.CheckOnClick = true;
-            this.chkMultiArea.Name = "chkMultiArea";
-            this.chkMultiArea.Size = new System.Drawing.Size(152, 22);
-            this.chkMultiArea.Text = "Multiple areas";
-            this.chkMultiArea.CheckedChanged += new System.EventHandler(this.chkMultiArea_CheckedChanged);
-            // 
-            // chkMobs
-            // 
-            this.chkMobs.Checked = true;
-            this.chkMobs.CheckOnClick = true;
-            this.chkMobs.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMobs.Name = "chkMobs";
-            this.chkMobs.Size = new System.Drawing.Size(152, 22);
-            this.chkMobs.Text = "Mobs";
-            this.chkMobs.CheckedChanged += new System.EventHandler(this.chkMobs_CheckedChanged);
-            // 
-            // chkRooms
-            // 
-            this.chkRooms.CheckOnClick = true;
-            this.chkRooms.Name = "chkRooms";
-            this.chkRooms.Size = new System.Drawing.Size(152, 22);
-            this.chkRooms.Text = "Rooms";
-            this.chkRooms.CheckedChanged += new System.EventHandler(this.chkRooms_CheckedChanged);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnStart
-            // 
-            this.btnStart.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.Image")));
-            this.btnStart.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(56, 22);
-            this.btnStart.Text = "Start";
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // btnStop
-            // 
-            this.btnStop.Enabled = false;
-            this.btnStop.Image = ((System.Drawing.Image)(resources.GetObject("btnStop.Image")));
-            this.btnStop.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(49, 22);
-            this.btnStop.Text = "Stop";
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // toolStrip
             // 
@@ -481,13 +410,33 @@ namespace DCT.UI
             this.btnStartTimer,
             this.lblTimeLeft,
             this.toolStripSeparator1,
-            this.lblAttackMode,
-            this.toolStripComboBox1});
+            this.toolStripLabel1,
+            this.cmbAttackMode});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.ShowItemToolTips = false;
             this.toolStrip.Size = new System.Drawing.Size(664, 25);
             this.toolStrip.TabIndex = 6;
+            // 
+            // btnStart
+            // 
+            this.btnStart.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStart.Image = global::DCT.Properties.Resources.Flag_green;
+            this.btnStart.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(56, 22);
+            this.btnStart.Text = "Start";
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.Enabled = false;
+            this.btnStop.Image = global::DCT.Properties.Resources.Flag_red;
+            this.btnStop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(49, 22);
+            this.btnStop.Text = "Stop";
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // toolStripSeparator2
             // 
@@ -510,6 +459,19 @@ namespace DCT.UI
             this.lblTimeLeft.Name = "lblTimeLeft";
             this.lblTimeLeft.Size = new System.Drawing.Size(73, 22);
             this.lblTimeLeft.Text = "Time left: N/A";
+            // 
+            // cmbAttackMode
+            // 
+            this.cmbAttackMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAttackMode.DropDownWidth = 121;
+            this.cmbAttackMode.Items.AddRange(new object[] {
+            "current area",
+            "multi area",
+            "mobs",
+            "rooms"});
+            this.cmbAttackMode.Name = "cmbAttackMode";
+            this.cmbAttackMode.Size = new System.Drawing.Size(95, 25);
+            this.cmbAttackMode.SelectedIndexChanged += new System.EventHandler(this.cmbAttackMode_SelectedIndexChanged);
             // 
             // splitLeftRight
             // 
@@ -652,11 +614,11 @@ namespace DCT.UI
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
             // 
-            // toolStripComboBox1
+            // toolStripLabel1
             // 
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 25);
-            this.toolStripComboBox1.Text = "Attack mode: mobs";
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(71, 22);
+            this.toolStripLabel1.Text = "Attack mode:";
             // 
             // CoreUI
             // 
@@ -731,11 +693,6 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripMenuItem exportMobsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem clearDatabasesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSplitButton lblAttackMode;
-        private System.Windows.Forms.ToolStripMenuItem chkCurrentArea;
-        private System.Windows.Forms.ToolStripMenuItem chkMultiArea;
-        private System.Windows.Forms.ToolStripMenuItem chkMobs;
-        private System.Windows.Forms.ToolStripMenuItem chkRooms;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnStart;
         private System.Windows.Forms.ToolStripButton btnStop;
@@ -758,6 +715,7 @@ namespace DCT.UI
         private System.Windows.Forms.TabPage tabChat;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
         private System.Windows.Forms.ToolStripMenuItem writeSerializeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripComboBox cmbAttackMode;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
     }
 }

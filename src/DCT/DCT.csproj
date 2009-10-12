@@ -331,6 +331,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Misc\Bad.ico" />
+    <None Include="Resources\Flag_red.bmp" />
+    <None Include="Resources\Flag_green.bmp" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

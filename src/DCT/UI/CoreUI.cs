@@ -363,13 +363,17 @@ namespace DCT.UI
         {
             switch (Settings.AttackMode)
             {
-                case AttackingType.CurrentArea: chkCurrentArea.Checked = true;
+                case AttackingType.CurrentArea:
+                    cmbAttackMode.SelectedIndex = 0;
                     break;
-                case AttackingType.MultiArea: chkMultiArea.Checked = true;
+                case AttackingType.MultiArea:
+                    cmbAttackMode.SelectedIndex = 1;
                     break;
-                case AttackingType.Mobs: chkMobs.Checked = true;
+                case AttackingType.Mobs:
+                    cmbAttackMode.SelectedIndex = 2;
                     break;
-                case AttackingType.Rooms: chkRooms.Checked = true;
+                case AttackingType.Rooms:
+                    cmbAttackMode.SelectedIndex = 3;
                     break;
                 default: throw new Exception("Your settings are corrupt; no such attack mode.");
             }
@@ -596,40 +600,22 @@ namespace DCT.UI
 
         #region TOOLSTRIP
 
-        private void chkCurrentArea_CheckedChanged(object sender, EventArgs e)
+        private void cmbAttackMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (chkCurrentArea.Checked)
+            switch (cmbAttackMode.SelectedItem.ToString())
             {
-                chkRooms.Checked = chkMobs.Checked = chkMultiArea.Checked = false;
-                lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "current area");
-                Settings.AttackMode = AttackingType.CurrentArea;
-            }
-        }
-
-        private void chkMultiArea_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkMultiArea.Checked)
-            {
-                lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "multi area");
-                Settings.AttackMode = AttackingType.MultiArea;
-            }
-        }
-
-        private void chkMobs_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkMobs.Checked)
-            {
-                lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "mobs");
-                Settings.AttackMode = AttackingType.Mobs;
-            }
-        }
-
-        private void chkRooms_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkRooms.Checked)
-            {
-                lblAttackMode.Text = string.Format("{0}{1}", TS_ATTACKMODE_PREFIX, "rooms");
-                Settings.AttackMode = AttackingType.Rooms;
+                case "current area":
+                    Settings.AttackMode = AttackingType.CurrentArea;
+                    break;
+                case "multi area":
+                    Settings.AttackMode = AttackingType.MultiArea;
+                    break;
+                case "mobs":
+                    Settings.AttackMode = AttackingType.Mobs;
+                    break;
+                case "rooms":
+                    Settings.AttackMode = AttackingType.Rooms;
+                    break;
             }
         }
 
@@ -674,10 +660,10 @@ namespace DCT.UI
                 switch (Settings.StopAfterMode)
                 {
                     case UserEditable.StopAfterType.Minutes:
-                        MainPanel.SetStopAfterTime();
+                        MainPanel.ResetStopAfterTime();
                         break;
                     case UserEditable.StopAfterType.Runs:
-                        MainPanel.SetStopAfterCounter();
+                        MainPanel.ResetStopAfterCounter();
                         MainPanel.StopAfterCounter++;
                         break;
                 }
@@ -755,7 +741,32 @@ namespace DCT.UI
                 Invoke(new CountdownHandler(Countdown), type);
                 return;
             }
+            
+            // check stopafter conditions
+            if (Settings.StopAfter)
+            {
+                switch (Settings.StopAfterMode)
+                {
+                    case UserEditable.StopAfterType.Minutes:
+                        if (MainPanel.StopAfterTimeFinished)
+                        {
+                            LogPanel.Log(string.Format("Reached time limit of {0} minutes", Settings.StopAfterVal));
+                            StopAttacking(true);
+                            return;
+                        }
+                        break;
+                    case UserEditable.StopAfterType.Runs:
+                        if (MainPanel.StopAfterCounterFinished)
+                        {
+                            LogPanel.Log(string.Format("Reached {0} runs", Settings.StopAfterVal));
+                            StopAttacking(true);
+                            return;
+                        }
+                        break;
+                }
+            }
 
+            // timer setup
             int countFor;
             if (Settings.UseCountdownTimer)
             {
@@ -802,17 +813,21 @@ namespace DCT.UI
                 switch (Settings.StopAfterMode)
                 {
                     case UserEditable.StopAfterType.Minutes:
+                        // this is here because countdown takes time!
                         if (MainPanel.StopAfterTimeFinished)
                         {
                             LogPanel.Log(string.Format("Reached time limit of {0} minutes", Settings.StopAfterVal));
                             StopAttacking(true);
+                            return;
                         }
                         break;
                     case UserEditable.StopAfterType.Runs:
+                        // this should never happen
                         if (MainPanel.StopAfterCounterFinished)
                         {
                             LogPanel.Log(string.Format("Reached {0} runs", Settings.StopAfterVal));
                             StopAttacking(true);
+                            return;
                         }
                         MainPanel.StopAfterCounter++;
                         break;
