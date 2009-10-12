@@ -29,14 +29,14 @@ namespace DCT.UI
         private void InitializeComponent()
         {
             this.pnlAttack = new System.Windows.Forms.Panel();
-            this.chkHourTimer = new System.Windows.Forms.RadioButton();
             this.cmbStopAfter = new System.Windows.Forms.ComboBox();
             this.numStopAfter = new System.Windows.Forms.NumericUpDown();
             this.chkStopAfter = new System.Windows.Forms.CheckBox();
             this.numCountdown = new System.Windows.Forms.NumericUpDown();
-            this.chkCountdownTimer = new System.Windows.Forms.RadioButton();
             this.pnl = new System.Windows.Forms.Panel();
             this.lblExpRage = new System.Windows.Forms.Label();
+            this.chkCountdownTimer = new System.Windows.Forms.CheckBox();
+            this.chkHourTimer = new System.Windows.Forms.CheckBox();
             this.pnlAttack.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStopAfter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCountdown)).BeginInit();
@@ -52,22 +52,10 @@ namespace DCT.UI
             this.pnlAttack.Controls.Add(this.chkStopAfter);
             this.pnlAttack.Controls.Add(this.numCountdown);
             this.pnlAttack.Controls.Add(this.chkCountdownTimer);
-            this.pnlAttack.Location = new System.Drawing.Point(3, 12);
+            this.pnlAttack.Location = new System.Drawing.Point(3, 3);
             this.pnlAttack.Name = "pnlAttack";
-            this.pnlAttack.Size = new System.Drawing.Size(208, 111);
+            this.pnlAttack.Size = new System.Drawing.Size(208, 106);
             this.pnlAttack.TabIndex = 32;
-            // 
-            // chkHourTimer
-            // 
-            this.chkHourTimer.AutoSize = true;
-            this.chkHourTimer.Location = new System.Drawing.Point(4, 37);
-            this.chkHourTimer.Name = "chkHourTimer";
-            this.chkHourTimer.Size = new System.Drawing.Size(161, 17);
-            this.chkHourTimer.TabIndex = 48;
-            this.chkHourTimer.TabStop = true;
-            this.chkHourTimer.Text = "Attack after the hour change";
-            this.chkHourTimer.UseVisualStyleBackColor = true;
-            this.chkHourTimer.CheckedChanged += new System.EventHandler(this.chkHourTimer_CheckedChanged);
             // 
             // cmbStopAfter
             // 
@@ -120,7 +108,7 @@ namespace DCT.UI
             // numCountdown
             // 
             this.numCountdown.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numCountdown.Location = new System.Drawing.Point(86, 15);
+            this.numCountdown.Location = new System.Drawing.Point(86, 13);
             this.numCountdown.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -136,18 +124,6 @@ namespace DCT.UI
             0});
             this.numCountdown.ValueChanged += new System.EventHandler(this.numCountdown_ValueChanged);
             // 
-            // chkCountdownTimer
-            // 
-            this.chkCountdownTimer.AutoSize = true;
-            this.chkCountdownTimer.Location = new System.Drawing.Point(4, 14);
-            this.chkCountdownTimer.Name = "chkCountdownTimer";
-            this.chkCountdownTimer.Size = new System.Drawing.Size(169, 17);
-            this.chkCountdownTimer.TabIndex = 47;
-            this.chkCountdownTimer.TabStop = true;
-            this.chkCountdownTimer.Text = "Attack every                minutes";
-            this.chkCountdownTimer.UseVisualStyleBackColor = true;
-            this.chkCountdownTimer.CheckedChanged += new System.EventHandler(this.chkCountdownTimer_CheckedChanged);
-            // 
             // pnl
             // 
             this.pnl.Controls.Add(this.lblExpRage);
@@ -155,17 +131,39 @@ namespace DCT.UI
             this.pnl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl.Location = new System.Drawing.Point(0, 0);
             this.pnl.Name = "pnl";
-            this.pnl.Size = new System.Drawing.Size(216, 152);
+            this.pnl.Size = new System.Drawing.Size(216, 133);
             this.pnl.TabIndex = 34;
             // 
             // lblExpRage
             // 
             this.lblExpRage.AutoSize = true;
-            this.lblExpRage.Location = new System.Drawing.Point(99, 128);
+            this.lblExpRage.Location = new System.Drawing.Point(99, 114);
             this.lblExpRage.Name = "lblExpRage";
             this.lblExpRage.Size = new System.Drawing.Size(16, 13);
             this.lblExpRage.TabIndex = 35;
             this.lblExpRage.Text = "...";
+            // 
+            // chkCountdownTimer
+            // 
+            this.chkCountdownTimer.AutoSize = true;
+            this.chkCountdownTimer.Location = new System.Drawing.Point(4, 14);
+            this.chkCountdownTimer.Name = "chkCountdownTimer";
+            this.chkCountdownTimer.Size = new System.Drawing.Size(170, 17);
+            this.chkCountdownTimer.TabIndex = 49;
+            this.chkCountdownTimer.Text = "Attack every                minutes";
+            this.chkCountdownTimer.UseVisualStyleBackColor = true;
+            this.chkCountdownTimer.CheckedChanged += new System.EventHandler(this.chkCountdownTimer_CheckedChanged);
+            // 
+            // chkHourTimer
+            // 
+            this.chkHourTimer.AutoSize = true;
+            this.chkHourTimer.Location = new System.Drawing.Point(4, 37);
+            this.chkHourTimer.Name = "chkHourTimer";
+            this.chkHourTimer.Size = new System.Drawing.Size(162, 17);
+            this.chkHourTimer.TabIndex = 50;
+            this.chkHourTimer.Text = "Attack after the hour change";
+            this.chkHourTimer.UseVisualStyleBackColor = true;
+            this.chkHourTimer.CheckedChanged += new System.EventHandler(this.chkHourTimer_CheckedChanged);
             // 
             // MainPanel
             // 
@@ -173,7 +171,7 @@ namespace DCT.UI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnl);
             this.Name = "MainPanel";
-            this.Size = new System.Drawing.Size(216, 152);
+            this.Size = new System.Drawing.Size(216, 133);
             this.pnlAttack.ResumeLayout(false);
             this.pnlAttack.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStopAfter)).EndInit();
@@ -193,7 +191,7 @@ namespace DCT.UI
         private System.Windows.Forms.CheckBox chkStopAfter;
         private System.Windows.Forms.NumericUpDown numStopAfter;
         private System.Windows.Forms.ComboBox cmbStopAfter;
-        private System.Windows.Forms.RadioButton chkHourTimer;
-        private System.Windows.Forms.RadioButton chkCountdownTimer;
+        private System.Windows.Forms.CheckBox chkHourTimer;
+        private System.Windows.Forms.CheckBox chkCountdownTimer;
     }
 }

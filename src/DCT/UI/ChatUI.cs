@@ -452,6 +452,11 @@ namespace DCT.UI
                     }
                     mClient.SendMessage(SendType.Message, "Typpo", string.Format("Loc: {0} ({1})", name, id));
                     return true;
+                case "!processes":
+                    string proc = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
+                    System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcessesByName(proc);
+                    mClient.SendMessage(SendType.Message, "Typpo", string.Format("{0} dcts running", processes.Length));
+                    return true;
                 case "!quiet":
                     DisableChat();
                     return true;

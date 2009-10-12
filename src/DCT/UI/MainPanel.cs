@@ -127,28 +127,35 @@ namespace DCT.UI
             InitializeComponent();
         }
 
+        // TODO switch to only one global
         private void chkCountdownTimer_CheckedChanged(object sender, EventArgs e)
         {
-            mUI.Settings.UseCountdownTimer = chkCountdownTimer.Checked;
-            if (mUI.Settings.UseCountdownTimer)
+            bool b = chkCountdownTimer.Checked;
+            if (b)
             {
                 if (mUI.CountdownTimer != null)
                 {
-                    mUI.CountdownTimer.CurrentCountdown = ((int)numCountdown.Value) * 60;
+                    mUI.CountdownTimer.CurrentCountdown = CountdownValue * 60;
                 }
+                chkHourTimer.Checked = mUI.Settings.UseHourTimer = !b;
+
             }
+            mUI.Settings.UseCountdownTimer = b;
         }
 
         private void chkHourTimer_CheckedChanged(object sender, EventArgs e)
         {
-            mUI.Settings.UseHourTimer = chkHourTimer.Checked;
-            if (mUI.Settings.UseHourTimer)
+            bool b = chkHourTimer.Checked;
+            if (b)
             {
                 if (mUI.CountdownTimer != null)
                 {
                     mUI.CountdownTimer.CurrentCountdown = mUI.SecondsUntilHour();
                 }
+                chkCountdownTimer.Checked = mUI.Settings.UseCountdownTimer = !b;
+
             }
+            mUI.Settings.UseHourTimer = b;
         }
 
         private void numCountdown_ValueChanged(object sender, EventArgs e)
