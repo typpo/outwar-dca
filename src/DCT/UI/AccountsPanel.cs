@@ -251,8 +251,13 @@ namespace DCT.UI
 
         private void lnkRgSessid_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            ShowRgSessIdDialog();
+        }
+
+        internal void ShowRgSessIdDialog()
+        {
             int i = 0;
-            string input = DCT.Util.InputBox.Prompt("Session ID Input", "Enter your rg_sess_id.  This will allow you to use multiple DCAs on the same account:");
+            string input = DCT.Util.InputBox.Prompt("Session ID Input", "Enter your rg_sess_id instead of logging in.  This will allow you to run multiple DCAs on the same account:");
             if (string.IsNullOrEmpty(input))
                 return;
 

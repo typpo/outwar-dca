@@ -438,7 +438,23 @@ namespace DCT.UI
 
         private void inputRgsessidToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO?  hmm
+            // TODO
+        }
+
+        private void showMyRgsessidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AccountsPanel.Engine.MainAccount == null)
+            {
+                MessageBox.Show("You haven't logged in on an account yet.", "Open In Browser", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (MessageBox.Show(
+                string.Format("Do you want to copy your rg_sess_id to clipboard?\n\n{0}",
+                AccountsPanel.Engine.RgSessId), "rg_sess_id", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Clipboard.SetText(AccountsPanel.Engine.RgSessId);
+            }
         }
 
         private void openInBrowserToolStripMenuItem_Click(object sender, EventArgs e)
@@ -860,7 +876,5 @@ namespace DCT.UI
         }
 
         #endregion
-
-
     }
 }

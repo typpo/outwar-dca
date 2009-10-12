@@ -302,6 +302,8 @@ namespace DCT.UI
                 return;
             }
 
+            lstChat.BeginUpdate();
+
             foreach(System.Collections.DictionaryEntry de in c.Users)
             {
                 if (mUsersLast != null && mUsersLast.Contains(de.Key))
@@ -323,21 +325,10 @@ namespace DCT.UI
                     lstChat.Items.Remove(de.Key);
                 }
             }
-
-            /*
-            foreach (ChannelUser u in c.Users.Values)
-            {
-                if (mUsersLast != null)
-                {
-                    if (mUsersLast.ContainsValue(u))
-                    {
-                        
-                    }
-                }
-            }
-            */
             mUsersLast = c.Users;
             lblChatOnline.Text = lstChat.Items.Count + " online";
+
+            lstChat.EndUpdate();
         }
 
         private void txtChatType_KeyDown(object sender, KeyEventArgs e)

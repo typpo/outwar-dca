@@ -46,6 +46,8 @@ namespace DCT.UI
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inputRgsessidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
             this.minimizeToTrayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.openInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,8 +90,7 @@ namespace DCT.UI
             this.tabSpawns = new System.Windows.Forms.TabPage();
             this.tabTrainer = new System.Windows.Forms.TabPage();
             this.tabChat = new System.Windows.Forms.TabPage();
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
-            this.inputRgsessidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showMyRgsessidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.mNotifyMenu.SuspendLayout();
@@ -226,6 +227,7 @@ namespace DCT.UI
             // 
             this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inputRgsessidToolStripMenuItem,
+            this.showMyRgsessidToolStripMenuItem,
             this.toolStripMenuItem9,
             this.minimizeToTrayToolStripMenuItem,
             this.toolStripMenuItem4,
@@ -235,29 +237,41 @@ namespace DCT.UI
             this.actionsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.actionsToolStripMenuItem.Text = "Actions";
             // 
+            // inputRgsessidToolStripMenuItem
+            // 
+            this.inputRgsessidToolStripMenuItem.Name = "inputRgsessidToolStripMenuItem";
+            this.inputRgsessidToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.inputRgsessidToolStripMenuItem.Text = "Input rg_sess_id";
+            this.inputRgsessidToolStripMenuItem.Click += new System.EventHandler(this.inputRgsessidToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(168, 6);
+            // 
             // minimizeToTrayToolStripMenuItem
             // 
             this.minimizeToTrayToolStripMenuItem.Name = "minimizeToTrayToolStripMenuItem";
-            this.minimizeToTrayToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.minimizeToTrayToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.minimizeToTrayToolStripMenuItem.Text = "Minimize to tray";
             this.minimizeToTrayToolStripMenuItem.Click += new System.EventHandler(this.minimizeToTrayToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(151, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(168, 6);
             // 
             // openInBrowserToolStripMenuItem
             // 
             this.openInBrowserToolStripMenuItem.Name = "openInBrowserToolStripMenuItem";
-            this.openInBrowserToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.openInBrowserToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.openInBrowserToolStripMenuItem.Text = "Open in browser";
             this.openInBrowserToolStripMenuItem.Click += new System.EventHandler(this.openInBrowserToolStripMenuItem_Click);
             // 
             // openTyppousToolStripMenuItem
             // 
             this.openTyppousToolStripMenuItem.Name = "openTyppousToolStripMenuItem";
-            this.openTyppousToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.openTyppousToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.openTyppousToolStripMenuItem.Text = "Open typpo.us";
             this.openTyppousToolStripMenuItem.Click += new System.EventHandler(this.openTyppousToolStripMenuItem_Click);
             // 
@@ -615,17 +629,12 @@ namespace DCT.UI
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
             // 
-            // toolStripMenuItem9
+            // showMyRgsessidToolStripMenuItem
             // 
-            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(151, 6);
-            // 
-            // inputRgsessidToolStripMenuItem
-            // 
-            this.inputRgsessidToolStripMenuItem.Name = "inputRgsessidToolStripMenuItem";
-            this.inputRgsessidToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.inputRgsessidToolStripMenuItem.Text = "Input rg_sess_id";
-            this.inputRgsessidToolStripMenuItem.Click += new System.EventHandler(this.inputRgsessidToolStripMenuItem_Click);
+            this.showMyRgsessidToolStripMenuItem.Name = "showMyRgsessidToolStripMenuItem";
+            this.showMyRgsessidToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.showMyRgsessidToolStripMenuItem.Text = "Show my rg_sess_id";
+            this.showMyRgsessidToolStripMenuItem.Click += new System.EventHandler(this.showMyRgsessidToolStripMenuItem_Click);
             // 
             // CoreUI
             // 
@@ -725,5 +734,6 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripMenuItem inputRgsessidToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
+        private System.Windows.Forms.ToolStripMenuItem showMyRgsessidToolStripMenuItem;
     }
 }

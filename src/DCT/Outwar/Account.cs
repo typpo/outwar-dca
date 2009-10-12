@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DCT.Outwar.World;
 using DCT.Parsing;
 using DCT.Protocols.Http;
@@ -32,6 +33,7 @@ namespace DCT.Outwar
         }
         internal bool NeedsLevel { get; private set; }
 
+        //internal List<DropHandler> DropHandlers { get; private set; }
 
         internal Account(OutwarHttpSocket socket, string name, int id, ServerName server)
         {
@@ -48,6 +50,8 @@ namespace DCT.Outwar
 
             Socket = socket;
             Mover = new Mover(this, Socket);
+
+            //DropHandlers = new List<DropHandler>();
         }
 
         internal void GetStats(string source)
