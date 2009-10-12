@@ -47,6 +47,7 @@ namespace DCT.UI
             this.clmEXP = new System.Windows.Forms.ColumnHeader();
             this.clmAvgExp = new System.Windows.Forms.ColumnHeader();
             this.lnkRgSessid = new System.Windows.Forms.LinkLabel();
+            this.login_rgsessid = new System.ComponentModel.BackgroundWorker();
             this.grpConnections.SuspendLayout();
             this.pnl.SuspendLayout();
             this.SuspendLayout();
@@ -238,6 +239,11 @@ namespace DCT.UI
             this.lnkRgSessid.Text = "Input rg_sess_id";
             this.lnkRgSessid.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRgSessid_LinkClicked);
             // 
+            // login_rgsessid
+            // 
+            this.login_rgsessid.DoWork += new System.ComponentModel.DoWorkEventHandler(this.login_rgsessid_DoWork);
+            this.login_rgsessid.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.login_rgsessid_RunWorkerCompleted);
+            // 
             // AccountsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,5 +279,6 @@ namespace DCT.UI
         private System.Windows.Forms.Panel pnl;
         private System.Windows.Forms.ColumnHeader clmAvgExp;
         private System.Windows.Forms.LinkLabel lnkRgSessid;
+        private System.ComponentModel.BackgroundWorker login_rgsessid;
     }
 }

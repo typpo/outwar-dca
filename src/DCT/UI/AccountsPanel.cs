@@ -252,7 +252,7 @@ namespace DCT.UI
         private void lnkRgSessid_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             int i = 0;
-            string input = InputBox.Prompt("Session ID Input", "Enter your rg_sess_id.  This will allow you to use multiple DCAs on the same account:");
+            string input = DCT.Util.InputBox.Prompt("Session ID Input", "Enter your rg_sess_id.  This will allow you to use multiple DCAs on the same account:");
             if (string.IsNullOrEmpty(input))
                 return;
 
@@ -265,6 +265,16 @@ namespace DCT.UI
 
             LoginHandler d = new LoginHandler(DoLogin);
             d.BeginInvoke(new AsyncCallback(LoginCallback), d);
+        }
+
+        private void login_rgsessid_DoWork(object sender, DoWorkEventArgs e)
+        {
+            e.Result = DoLoginRgSessId();
+        }
+
+        private void login_rgsessid_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //LoginCallback(e.Result);
         }
     }
 }

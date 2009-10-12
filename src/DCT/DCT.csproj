@@ -202,6 +202,7 @@
     <Compile Include="UI\SpawnsPanel.Designer.cs">
       <DependentUpon>SpawnsPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\TanColorTable.cs" />
     <Compile Include="UI\TrainPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>

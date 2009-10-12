@@ -74,6 +74,12 @@ namespace DCT.UI
         {
             InitializeComponent();
 
+            // silver vs2008 toolstrip look
+            TanColorTable colorTable = new TanColorTable();
+            colorTable.UseSystemColors = true;
+            toolStrip.Renderer = new ToolStripProfessionalRenderer(colorTable);
+
+            // fill panels
             AccountsPanel = new AccountsPanel(this);
             AccountsPanel.Dock = DockStyle.Fill;
             splitLeftRight.Panel1.Controls.Add(AccountsPanel);
@@ -428,6 +434,11 @@ namespace DCT.UI
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void inputRgsessidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // TODO?  hmm
         }
 
         private void openInBrowserToolStripMenuItem_Click(object sender, EventArgs e)
@@ -849,6 +860,7 @@ namespace DCT.UI
         }
 
         #endregion
+
 
     }
 }

@@ -88,6 +88,8 @@ namespace DCT.UI
             this.tabSpawns = new System.Windows.Forms.TabPage();
             this.tabTrainer = new System.Windows.Forms.TabPage();
             this.tabChat = new System.Windows.Forms.TabPage();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
+            this.inputRgsessidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.mNotifyMenu.SuspendLayout();
@@ -135,6 +137,7 @@ namespace DCT.UI
             this.debugToolStripMenuItem});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
+            this.mnuMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.mnuMain.Size = new System.Drawing.Size(664, 24);
             this.mnuMain.TabIndex = 4;
             // 
@@ -222,6 +225,8 @@ namespace DCT.UI
             // actionsToolStripMenuItem
             // 
             this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.inputRgsessidToolStripMenuItem,
+            this.toolStripMenuItem9,
             this.minimizeToTrayToolStripMenuItem,
             this.toolStripMenuItem4,
             this.openInBrowserToolStripMenuItem,
@@ -233,26 +238,26 @@ namespace DCT.UI
             // minimizeToTrayToolStripMenuItem
             // 
             this.minimizeToTrayToolStripMenuItem.Name = "minimizeToTrayToolStripMenuItem";
-            this.minimizeToTrayToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.minimizeToTrayToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.minimizeToTrayToolStripMenuItem.Text = "Minimize to tray";
             this.minimizeToTrayToolStripMenuItem.Click += new System.EventHandler(this.minimizeToTrayToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(150, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(151, 6);
             // 
             // openInBrowserToolStripMenuItem
             // 
             this.openInBrowserToolStripMenuItem.Name = "openInBrowserToolStripMenuItem";
-            this.openInBrowserToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.openInBrowserToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.openInBrowserToolStripMenuItem.Text = "Open in browser";
             this.openInBrowserToolStripMenuItem.Click += new System.EventHandler(this.openInBrowserToolStripMenuItem_Click);
             // 
             // openTyppousToolStripMenuItem
             // 
             this.openTyppousToolStripMenuItem.Name = "openTyppousToolStripMenuItem";
-            this.openTyppousToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.openTyppousToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.openTyppousToolStripMenuItem.Text = "Open typpo.us";
             this.openTyppousToolStripMenuItem.Click += new System.EventHandler(this.openTyppousToolStripMenuItem_Click);
             // 
@@ -535,7 +540,7 @@ namespace DCT.UI
             this.tabs.SelectedIndex = 0;
             this.tabs.Size = new System.Drawing.Size(431, 299);
             this.tabs.TabIndex = 6;
-            this.tabs.TabIndexChanged += new System.EventHandler(this.tabs_SelectedIndexChanged);
+            this.tabs.SelectedIndexChanged += new System.EventHandler(this.tabs_SelectedIndexChanged);
             // 
             // tabAttack
             // 
@@ -609,6 +614,18 @@ namespace DCT.UI
             this.tabChat.TabIndex = 10;
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
+            // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(151, 6);
+            // 
+            // inputRgsessidToolStripMenuItem
+            // 
+            this.inputRgsessidToolStripMenuItem.Name = "inputRgsessidToolStripMenuItem";
+            this.inputRgsessidToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.inputRgsessidToolStripMenuItem.Text = "Input rg_sess_id";
+            this.inputRgsessidToolStripMenuItem.Click += new System.EventHandler(this.inputRgsessidToolStripMenuItem_Click);
             // 
             // CoreUI
             // 
@@ -706,5 +723,7 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripMenuItem writeSerializeToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox cmbAttackMode;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripMenuItem inputRgsessidToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
     }
 }
