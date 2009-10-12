@@ -33,7 +33,6 @@ namespace DCT.UI
             this.lnkAccountsCheckAll = new System.Windows.Forms.LinkLabel();
             this.lnkAccountsUncheckAll = new System.Windows.Forms.LinkLabel();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.lnkAccountsInvert = new System.Windows.Forms.LinkLabel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
@@ -48,6 +47,7 @@ namespace DCT.UI
             this.clmAvgExp = new System.Windows.Forms.ColumnHeader();
             this.login_rgsessid = new System.ComponentModel.BackgroundWorker();
             this.login_normal = new System.ComponentModel.BackgroundWorker();
+            this.lnkChkServer = new System.Windows.Forms.LinkLabel();
             this.grpConnections.SuspendLayout();
             this.pnl.SuspendLayout();
             this.SuspendLayout();
@@ -66,10 +66,10 @@ namespace DCT.UI
             // 
             // pnl
             // 
+            this.pnl.Controls.Add(this.lnkChkServer);
             this.pnl.Controls.Add(this.lnkAccountsCheckAll);
             this.pnl.Controls.Add(this.lnkAccountsUncheckAll);
             this.pnl.Controls.Add(this.btnRefresh);
-            this.pnl.Controls.Add(this.lnkAccountsInvert);
             this.pnl.Controls.Add(this.btnLogout);
             this.pnl.Controls.Add(this.btnLogin);
             this.pnl.Controls.Add(this.txtPassword);
@@ -96,7 +96,7 @@ namespace DCT.UI
             // lnkAccountsUncheckAll
             // 
             this.lnkAccountsUncheckAll.AutoSize = true;
-            this.lnkAccountsUncheckAll.Location = new System.Drawing.Point(58, 5);
+            this.lnkAccountsUncheckAll.Location = new System.Drawing.Point(55, 5);
             this.lnkAccountsUncheckAll.Name = "lnkAccountsUncheckAll";
             this.lnkAccountsUncheckAll.Size = new System.Drawing.Size(65, 13);
             this.lnkAccountsUncheckAll.TabIndex = 3;
@@ -114,17 +114,6 @@ namespace DCT.UI
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // lnkAccountsInvert
-            // 
-            this.lnkAccountsInvert.AutoSize = true;
-            this.lnkAccountsInvert.Location = new System.Drawing.Point(131, 5);
-            this.lnkAccountsInvert.Name = "lnkAccountsInvert";
-            this.lnkAccountsInvert.Size = new System.Drawing.Size(68, 13);
-            this.lnkAccountsInvert.TabIndex = 4;
-            this.lnkAccountsInvert.TabStop = true;
-            this.lnkAccountsInvert.Text = "Check Invert";
-            this.lnkAccountsInvert.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAccountsInvert_LinkClicked);
             // 
             // btnLogout
             // 
@@ -237,6 +226,17 @@ namespace DCT.UI
             this.login_normal.DoWork += new System.ComponentModel.DoWorkEventHandler(this.login_normal_DoWork);
             this.login_normal.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.login_normal_RunWorkerCompleted);
             // 
+            // lnkChkServer
+            // 
+            this.lnkChkServer.AutoSize = true;
+            this.lnkChkServer.Location = new System.Drawing.Point(120, 5);
+            this.lnkChkServer.Name = "lnkChkServer";
+            this.lnkChkServer.Size = new System.Drawing.Size(76, 13);
+            this.lnkChkServer.TabIndex = 12;
+            this.lnkChkServer.TabStop = true;
+            this.lnkChkServer.Text = "Check server..";
+            this.lnkChkServer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkChkServer_LinkClicked);
+            // 
             // AccountsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,7 +261,6 @@ namespace DCT.UI
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel lnkAccountsInvert;
         private System.Windows.Forms.LinkLabel lnkAccountsUncheckAll;
         private System.Windows.Forms.LinkLabel lnkAccountsCheckAll;
         internal System.Windows.Forms.ListView lvAccounts;
@@ -273,5 +272,6 @@ namespace DCT.UI
         private System.Windows.Forms.ColumnHeader clmAvgExp;
         private System.ComponentModel.BackgroundWorker login_rgsessid;
         private System.ComponentModel.BackgroundWorker login_normal;
+        private System.Windows.Forms.LinkLabel lnkChkServer;
     }
 }

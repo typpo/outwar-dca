@@ -49,7 +49,7 @@ namespace DCT.Outwar
                 case ServerName.quiver:
                     return 6;
             }
-            throw new ArgumentException("No server id correlates with " + n);
+            return -1;
         }
 
         internal static ServerName IdToName(int id)

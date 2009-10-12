@@ -48,7 +48,7 @@ namespace DCT.UI
                 txtUsername.Enabled = mEnabled;
                 txtPassword.Enabled = mEnabled;
                 lnkAccountsCheckAll.Enabled = mEnabled;
-                lnkAccountsInvert.Enabled = mEnabled;
+                lnkChkServer.Enabled = mEnabled;
                 lnkAccountsUncheckAll.Enabled = mEnabled;
             }
         }
@@ -115,12 +115,20 @@ namespace DCT.UI
             }
         }
 
-        private void lnkAccountsInvert_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lnkChkServer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            foreach (ListViewItem item in lvAccounts.Items)
+            string input = DCT.Util.InputBox.Prompt("Check Server", "Enter server name:");
+            if (string.IsNullOrEmpty(input))
+                return;
+            input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
+            int i = Server.NamesList.IndexOf(input);
+            if (i < 0)
             {
-                item.Checked = !item.Checked;
+                MessageBox.Show("Could not match server, check spelling.", "Check Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            foreach (ListViewItem item in lvAccounts.Groups[i].Items)
+                item.Checked = true;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -282,5 +290,6 @@ namespace DCT.UI
         {
             LoginCallback((int)e.Result);
         }
+
     }
 }
