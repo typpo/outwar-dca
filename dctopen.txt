@@ -6,9 +6,14 @@ Badlands Zhul mobs have been added.  Shadow Crawlers should work.  Moved servers
 
 Release 3.1.16 (?):
 - Moved start/stop, timer, attack mode selection to top toolbar
+- Moved repeat options to Attack tab
 - Added "stop after X minutes" option
 - Added "stop after X runs" option
+- Added "Input rg_sess_id" and "Show rg_sess_id" to allow multiple concurrent dcas/browsers
 - Added "select rooms by name"
+- Added "check all server.." for checking accounts
+- Fixed multiple drop parsing
+- Fixed chat flicker
 - Removed quests tab
 
 Release 3.1.15 (10/8/09):

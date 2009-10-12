@@ -480,12 +480,16 @@ namespace DCT.Outwar.World
             if (src.Contains("found a"))
             {
                 string[] fs = Parser.MultiParse(src, string.Format("{0} found ", mRoom.Mover.Account.Name), "!<br>");
-                foreach (string f in fs)
+                if (fs.Length > 1)
                 {
-                    CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + (f.Length < MAX_ITEM_LEN ? " found " + f : " found an item"));
-                    if (IsSpawn && f.Length < MAX_ITEM_LEN)
+                    for (int i = 1; i < fs.Length; i++)
                     {
-                        CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
+                        string f = fs[i];
+                        CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + (f.Length < MAX_ITEM_LEN ? " found " + f : " found an item"));
+                        if (IsSpawn && f.Length < MAX_ITEM_LEN)
+                        {
+                            CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
+                        }
                     }
                 }
             }
