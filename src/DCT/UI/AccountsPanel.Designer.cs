@@ -59,7 +59,7 @@ namespace DCT.UI
             this.grpConnections.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpConnections.Location = new System.Drawing.Point(0, 0);
             this.grpConnections.Name = "grpConnections";
-            this.grpConnections.Size = new System.Drawing.Size(230, 458);
+            this.grpConnections.Size = new System.Drawing.Size(230, 422);
             this.grpConnections.TabIndex = 12;
             this.grpConnections.TabStop = false;
             this.grpConnections.Text = "Connections";
@@ -77,9 +77,9 @@ namespace DCT.UI
             this.pnl.Controls.Add(this.label1);
             this.pnl.Controls.Add(this.label2);
             this.pnl.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnl.Location = new System.Drawing.Point(3, 347);
+            this.pnl.Location = new System.Drawing.Point(3, 314);
             this.pnl.Name = "pnl";
-            this.pnl.Size = new System.Drawing.Size(230, 108);
+            this.pnl.Size = new System.Drawing.Size(230, 105);
             this.pnl.TabIndex = 13;
             // 
             // lnkAccountsCheckAll
@@ -197,7 +197,7 @@ namespace DCT.UI
             this.lvAccounts.Location = new System.Drawing.Point(3, 16);
             this.lvAccounts.MultiSelect = false;
             this.lvAccounts.Name = "lvAccounts";
-            this.lvAccounts.Size = new System.Drawing.Size(224, 331);
+            this.lvAccounts.Size = new System.Drawing.Size(224, 298);
             this.lvAccounts.TabIndex = 1;
             this.lvAccounts.UseCompatibleStateImageBehavior = false;
             this.lvAccounts.View = System.Windows.Forms.View.Details;
@@ -243,7 +243,7 @@ namespace DCT.UI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.grpConnections);
             this.Name = "AccountsPanel";
-            this.Size = new System.Drawing.Size(230, 458);
+            this.Size = new System.Drawing.Size(230, 422);
             this.grpConnections.ResumeLayout(false);
             this.pnl.ResumeLayout(false);
             this.pnl.PerformLayout();

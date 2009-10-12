@@ -52,12 +52,17 @@ namespace DCT.UI
             set { chkReturnToStart.Checked = value; }
         }
 
+        internal MainPanel MainPanel { get; private set; }
+
         private CoreUI mUI;
 
         internal AttackPanel(CoreUI ui)
         {
             mUI = ui;
             InitializeComponent();
+
+            MainPanel = new MainPanel(mUI);
+            this.pnlMainPanel.Controls.Add(MainPanel);
         }
 
         private void chkReturnToStart_CheckedChanged(object sender, EventArgs e)

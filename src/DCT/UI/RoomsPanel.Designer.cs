@@ -44,7 +44,7 @@ namespace DCT.UI
             // lnkSaveRooms
             // 
             this.lnkSaveRooms.AutoSize = true;
-            this.lnkSaveRooms.Location = new System.Drawing.Point(163, 249);
+            this.lnkSaveRooms.Location = new System.Drawing.Point(162, 268);
             this.lnkSaveRooms.Name = "lnkSaveRooms";
             this.lnkSaveRooms.Size = new System.Drawing.Size(83, 13);
             this.lnkSaveRooms.TabIndex = 16;
@@ -55,7 +55,7 @@ namespace DCT.UI
             // lnkLoadRooms
             // 
             this.lnkLoadRooms.AutoSize = true;
-            this.lnkLoadRooms.Location = new System.Drawing.Point(75, 249);
+            this.lnkLoadRooms.Location = new System.Drawing.Point(74, 268);
             this.lnkLoadRooms.Name = "lnkLoadRooms";
             this.lnkLoadRooms.Size = new System.Drawing.Size(82, 13);
             this.lnkLoadRooms.TabIndex = 15;
@@ -107,7 +107,7 @@ namespace DCT.UI
             this.lvPathfind.Location = new System.Drawing.Point(7, 32);
             this.lvPathfind.MultiSelect = false;
             this.lvPathfind.Name = "lvPathfind";
-            this.lvPathfind.Size = new System.Drawing.Size(412, 214);
+            this.lvPathfind.Size = new System.Drawing.Size(412, 233);
             this.lvPathfind.TabIndex = 13;
             this.lvPathfind.UseCompatibleStateImageBehavior = false;
             this.lvPathfind.View = System.Windows.Forms.View.Details;
@@ -136,7 +136,7 @@ namespace DCT.UI
             // lnkUncheckRooms
             // 
             this.lnkUncheckRooms.AutoSize = true;
-            this.lnkUncheckRooms.Location = new System.Drawing.Point(4, 249);
+            this.lnkUncheckRooms.Location = new System.Drawing.Point(3, 268);
             this.lnkUncheckRooms.Name = "lnkUncheckRooms";
             this.lnkUncheckRooms.Size = new System.Drawing.Size(65, 13);
             this.lnkUncheckRooms.TabIndex = 14;
@@ -147,7 +147,7 @@ namespace DCT.UI
             // lnkRoomsSelect
             // 
             this.lnkRoomsSelect.AutoSize = true;
-            this.lnkRoomsSelect.Location = new System.Drawing.Point(299, 249);
+            this.lnkRoomsSelect.Location = new System.Drawing.Point(298, 268);
             this.lnkRoomsSelect.Name = "lnkRoomsSelect";
             this.lnkRoomsSelect.Size = new System.Drawing.Size(120, 13);
             this.lnkRoomsSelect.TabIndex = 17;
@@ -168,7 +168,7 @@ namespace DCT.UI
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lnkUncheckRooms);
             this.Name = "RoomsPanel";
-            this.Size = new System.Drawing.Size(426, 262);
+            this.Size = new System.Drawing.Size(426, 281);
             ((System.ComponentModel.ISupportInitialize)(this.numPathfindId)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

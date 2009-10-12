@@ -44,11 +44,15 @@ namespace DCT.UI
             get { return tabs; }
         }
 
+        internal string StatusText
+        {
+            get { return lblExpRage.Text; }
+            set { lblExpRage.Text = value; }
+        }
+
         public static CoreUI Instance { get; private set; }
 
         internal string Changes { private get; set; }
-
-        internal MainPanel MainPanel { get; private set; }
 
         internal LogPanel LogPanel { get; private set; }
 
@@ -67,6 +71,10 @@ namespace DCT.UI
         public UserEditable Settings { get; private set; }
 
         private AttackPanel mAttackPanel;
+        internal MainPanel MainPanel
+        {
+            get { return mAttackPanel.MainPanel; }
+        }
         private FiltersPanel mFiltersPanel;
         private TrainPanel mTrainPanel;
 
@@ -86,15 +94,17 @@ namespace DCT.UI
 
             LogPanel = new LogPanel();
             LogPanel.Dock = DockStyle.Fill;
-            splitLeftRight2.Panel2.Controls.Add(LogPanel);
+            splitTopBottom.Panel1.Controls.Add(LogPanel);
 
             mAttackPanel = new AttackPanel(this);
             mAttackPanel.Dock = DockStyle.Fill;
             tabs.TabPages[TABINDEX_ATTACK].Controls.Add(mAttackPanel);
 
+            /*
             MainPanel = new MainPanel(this);
             MainPanel.Dock = DockStyle.Fill;
             splitLeftRight2.Panel1.Controls.Add(MainPanel);
+            */
 
             mFiltersPanel = new FiltersPanel(this);
             mFiltersPanel.Dock = DockStyle.Fill;
@@ -202,7 +212,7 @@ namespace DCT.UI
 
             if (AccountsPanel.Engine.MainAccount != null)
             {
-                MainPanel.StatusText =
+                StatusText =
                     string.Format("Exp: {0:n0}      Rage: {1:n0}", AccountsPanel.Engine.MainAccount.Exp,
                                   AccountsPanel.Engine.MainAccount.Rage);
 

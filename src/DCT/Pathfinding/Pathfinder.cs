@@ -59,6 +59,7 @@ namespace DCT.Pathfinding
             Mobs = new List<MappedMob>();
             Spawns = new List<MappedMob>();
             Adventures = new SortedList<string, int>();
+            return;
 
             /*
             f5b57b6c048faa5bdc468e8caee9eaf2aad0182b0fbd8e44a2891d6b556288976bb09674d50076be64eb5ed78cb7ce

@@ -47,6 +47,7 @@ namespace DCT.UI
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inputRgsessidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showMyRgsessidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
             this.minimizeToTrayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
@@ -80,7 +81,6 @@ namespace DCT.UI
             this.cmbAttackMode = new System.Windows.Forms.ToolStripComboBox();
             this.splitLeftRight = new System.Windows.Forms.SplitContainer();
             this.splitTopBottom = new System.Windows.Forms.SplitContainer();
-            this.splitLeftRight2 = new System.Windows.Forms.SplitContainer();
             this.tabs = new System.Windows.Forms.TabControl();
             this.tabAttack = new System.Windows.Forms.TabPage();
             this.tabFilters = new System.Windows.Forms.TabPage();
@@ -90,17 +90,16 @@ namespace DCT.UI
             this.tabSpawns = new System.Windows.Forms.TabPage();
             this.tabTrainer = new System.Windows.Forms.TabPage();
             this.tabChat = new System.Windows.Forms.TabPage();
-            this.showMyRgsessidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.lblExpRage = new System.Windows.Forms.ToolStripLabel();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.mNotifyMenu.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.splitLeftRight.Panel2.SuspendLayout();
             this.splitLeftRight.SuspendLayout();
-            this.splitTopBottom.Panel1.SuspendLayout();
             this.splitTopBottom.Panel2.SuspendLayout();
             this.splitTopBottom.SuspendLayout();
-            this.splitLeftRight2.SuspendLayout();
             this.tabs.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,7 +109,7 @@ namespace DCT.UI
             this.ss.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblMisc,
             this.pgr});
-            this.ss.Location = new System.Drawing.Point(0, 504);
+            this.ss.Location = new System.Drawing.Point(0, 464);
             this.ss.Name = "ss";
             this.ss.Size = new System.Drawing.Size(664, 22);
             this.ss.SizingGrip = false;
@@ -243,6 +242,13 @@ namespace DCT.UI
             this.inputRgsessidToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.inputRgsessidToolStripMenuItem.Text = "Input rg_sess_id";
             this.inputRgsessidToolStripMenuItem.Click += new System.EventHandler(this.inputRgsessidToolStripMenuItem_Click);
+            // 
+            // showMyRgsessidToolStripMenuItem
+            // 
+            this.showMyRgsessidToolStripMenuItem.Name = "showMyRgsessidToolStripMenuItem";
+            this.showMyRgsessidToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.showMyRgsessidToolStripMenuItem.Text = "Show my rg_sess_id";
+            this.showMyRgsessidToolStripMenuItem.Click += new System.EventHandler(this.showMyRgsessidToolStripMenuItem_Click);
             // 
             // toolStripMenuItem9
             // 
@@ -429,7 +435,9 @@ namespace DCT.UI
             this.lblTimeLeft,
             this.toolStripSeparator1,
             this.toolStripLabel1,
-            this.cmbAttackMode});
+            this.cmbAttackMode,
+            this.toolStripSeparator3,
+            this.lblExpRage});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.ShowItemToolTips = false;
@@ -506,7 +514,7 @@ namespace DCT.UI
             // splitLeftRight.Panel2
             // 
             this.splitLeftRight.Panel2.Controls.Add(this.splitTopBottom);
-            this.splitLeftRight.Size = new System.Drawing.Size(664, 455);
+            this.splitLeftRight.Size = new System.Drawing.Size(664, 415);
             this.splitLeftRight.SplitterDistance = 229;
             this.splitLeftRight.TabIndex = 7;
             // 
@@ -517,25 +525,12 @@ namespace DCT.UI
             this.splitTopBottom.Name = "splitTopBottom";
             this.splitTopBottom.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitTopBottom.Panel1
-            // 
-            this.splitTopBottom.Panel1.Controls.Add(this.splitLeftRight2);
-            // 
             // splitTopBottom.Panel2
             // 
             this.splitTopBottom.Panel2.Controls.Add(this.tabs);
-            this.splitTopBottom.Size = new System.Drawing.Size(431, 455);
-            this.splitTopBottom.SplitterDistance = 152;
+            this.splitTopBottom.Size = new System.Drawing.Size(431, 415);
+            this.splitTopBottom.SplitterDistance = 102;
             this.splitTopBottom.TabIndex = 0;
-            // 
-            // splitLeftRight2
-            // 
-            this.splitLeftRight2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitLeftRight2.Location = new System.Drawing.Point(0, 0);
-            this.splitLeftRight2.Name = "splitLeftRight2";
-            this.splitLeftRight2.Size = new System.Drawing.Size(431, 152);
-            this.splitLeftRight2.SplitterDistance = 213;
-            this.splitLeftRight2.TabIndex = 0;
             // 
             // tabs
             // 
@@ -552,7 +547,7 @@ namespace DCT.UI
             this.tabs.Location = new System.Drawing.Point(0, 0);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
-            this.tabs.Size = new System.Drawing.Size(431, 299);
+            this.tabs.Size = new System.Drawing.Size(431, 309);
             this.tabs.TabIndex = 6;
             this.tabs.SelectedIndexChanged += new System.EventHandler(this.tabs_SelectedIndexChanged);
             // 
@@ -561,7 +556,7 @@ namespace DCT.UI
             this.tabAttack.Location = new System.Drawing.Point(4, 22);
             this.tabAttack.Name = "tabAttack";
             this.tabAttack.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAttack.Size = new System.Drawing.Size(423, 273);
+            this.tabAttack.Size = new System.Drawing.Size(423, 283);
             this.tabAttack.TabIndex = 0;
             this.tabAttack.Text = "Attack";
             this.tabAttack.UseVisualStyleBackColor = true;
@@ -629,18 +624,22 @@ namespace DCT.UI
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
             // 
-            // showMyRgsessidToolStripMenuItem
+            // toolStripSeparator3
             // 
-            this.showMyRgsessidToolStripMenuItem.Name = "showMyRgsessidToolStripMenuItem";
-            this.showMyRgsessidToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.showMyRgsessidToolStripMenuItem.Text = "Show my rg_sess_id";
-            this.showMyRgsessidToolStripMenuItem.Click += new System.EventHandler(this.showMyRgsessidToolStripMenuItem_Click);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // lblExpRage
+            // 
+            this.lblExpRage.Name = "lblExpRage";
+            this.lblExpRage.Size = new System.Drawing.Size(19, 22);
+            this.lblExpRage.Text = "...";
             // 
             // CoreUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(664, 526);
+            this.ClientSize = new System.Drawing.Size(664, 486);
             this.Controls.Add(this.splitLeftRight);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.ss);
@@ -662,10 +661,8 @@ namespace DCT.UI
             this.toolStrip.PerformLayout();
             this.splitLeftRight.Panel2.ResumeLayout(false);
             this.splitLeftRight.ResumeLayout(false);
-            this.splitTopBottom.Panel1.ResumeLayout(false);
             this.splitTopBottom.Panel2.ResumeLayout(false);
             this.splitTopBottom.ResumeLayout(false);
-            this.splitLeftRight2.ResumeLayout(false);
             this.tabs.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -718,7 +715,6 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripLabel lblTimeLeft;
         private System.Windows.Forms.SplitContainer splitLeftRight;
         private System.Windows.Forms.SplitContainer splitTopBottom;
-        private System.Windows.Forms.SplitContainer splitLeftRight2;
         private System.Windows.Forms.TabControl tabs;
         private System.Windows.Forms.TabPage tabAttack;
         private System.Windows.Forms.TabPage tabFilters;
@@ -735,5 +731,7 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripMenuItem inputRgsessidToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
         private System.Windows.Forms.ToolStripMenuItem showMyRgsessidToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripLabel lblExpRage;
     }
 }

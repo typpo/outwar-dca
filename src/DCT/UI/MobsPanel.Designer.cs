@@ -48,7 +48,7 @@ namespace DCT.UI
             // lnkMobSave
             // 
             this.lnkMobSave.AutoSize = true;
-            this.lnkMobSave.Location = new System.Drawing.Point(158, 226);
+            this.lnkMobSave.Location = new System.Drawing.Point(158, 241);
             this.lnkMobSave.Name = "lnkMobSave";
             this.lnkMobSave.Size = new System.Drawing.Size(80, 13);
             this.lnkMobSave.TabIndex = 17;
@@ -59,7 +59,7 @@ namespace DCT.UI
             // lnkMobsSelect
             // 
             this.lnkMobsSelect.AutoSize = true;
-            this.lnkMobsSelect.Location = new System.Drawing.Point(2, 243);
+            this.lnkMobsSelect.Location = new System.Drawing.Point(2, 258);
             this.lnkMobsSelect.Name = "lnkMobsSelect";
             this.lnkMobsSelect.Size = new System.Drawing.Size(117, 13);
             this.lnkMobsSelect.TabIndex = 16;
@@ -88,7 +88,7 @@ namespace DCT.UI
             // 
             // btnPotionMobsSelect
             // 
-            this.btnPotionMobsSelect.Location = new System.Drawing.Point(365, 229);
+            this.btnPotionMobsSelect.Location = new System.Drawing.Point(365, 244);
             this.btnPotionMobsSelect.Name = "btnPotionMobsSelect";
             this.btnPotionMobsSelect.Size = new System.Drawing.Size(54, 22);
             this.btnPotionMobsSelect.TabIndex = 13;
@@ -104,7 +104,7 @@ namespace DCT.UI
             "Holy",
             "Shadow",
             "Arcane"});
-            this.cmbPotionMobs.Location = new System.Drawing.Point(244, 229);
+            this.cmbPotionMobs.Location = new System.Drawing.Point(244, 244);
             this.cmbPotionMobs.Name = "cmbPotionMobs";
             this.cmbPotionMobs.Size = new System.Drawing.Size(115, 21);
             this.cmbPotionMobs.TabIndex = 12;
@@ -113,7 +113,7 @@ namespace DCT.UI
             // lnkMobLoad
             // 
             this.lnkMobLoad.AutoSize = true;
-            this.lnkMobLoad.Location = new System.Drawing.Point(73, 226);
+            this.lnkMobLoad.Location = new System.Drawing.Point(73, 241);
             this.lnkMobLoad.Name = "lnkMobLoad";
             this.lnkMobLoad.Size = new System.Drawing.Size(79, 13);
             this.lnkMobLoad.TabIndex = 11;
@@ -124,7 +124,7 @@ namespace DCT.UI
             // lnkUncheckMobs
             // 
             this.lnkUncheckMobs.AutoSize = true;
-            this.lnkUncheckMobs.Location = new System.Drawing.Point(2, 226);
+            this.lnkUncheckMobs.Location = new System.Drawing.Point(2, 241);
             this.lnkUncheckMobs.Name = "lnkUncheckMobs";
             this.lnkUncheckMobs.Size = new System.Drawing.Size(65, 13);
             this.lnkUncheckMobs.TabIndex = 10;
@@ -145,7 +145,7 @@ namespace DCT.UI
             this.lvMobs.GridLines = true;
             this.lvMobs.Location = new System.Drawing.Point(5, 29);
             this.lvMobs.Name = "lvMobs";
-            this.lvMobs.Size = new System.Drawing.Size(414, 194);
+            this.lvMobs.Size = new System.Drawing.Size(414, 209);
             this.lvMobs.TabIndex = 9;
             this.lvMobs.UseCompatibleStateImageBehavior = false;
             this.lvMobs.View = System.Windows.Forms.View.Details;
@@ -201,7 +201,7 @@ namespace DCT.UI
             this.Controls.Add(this.lnkUncheckMobs);
             this.Controls.Add(this.lvMobs);
             this.Name = "MobsPanel";
-            this.Size = new System.Drawing.Size(426, 256);
+            this.Size = new System.Drawing.Size(426, 278);
             this.ResumeLayout(false);
             this.PerformLayout();
 

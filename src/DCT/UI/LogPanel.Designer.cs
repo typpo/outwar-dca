@@ -41,7 +41,6 @@ namespace DCT.UI
             this.split.Dock = System.Windows.Forms.DockStyle.Fill;
             this.split.Location = new System.Drawing.Point(0, 0);
             this.split.Name = "split";
-            this.split.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // split.Panel1
             // 
@@ -63,7 +62,7 @@ namespace DCT.UI
             this.lstLog.ItemHeight = 12;
             this.lstLog.Location = new System.Drawing.Point(0, 0);
             this.lstLog.Name = "lstLog";
-            this.lstLog.Size = new System.Drawing.Size(214, 112);
+            this.lstLog.Size = new System.Drawing.Size(112, 172);
             this.lstLog.TabIndex = 0;
             // 
             // lstAttacks
@@ -75,7 +74,7 @@ namespace DCT.UI
             this.lstAttacks.ItemHeight = 12;
             this.lstAttacks.Location = new System.Drawing.Point(0, 0);
             this.lstAttacks.Name = "lstAttacks";
-            this.lstAttacks.Size = new System.Drawing.Size(214, 52);
+            this.lstAttacks.Size = new System.Drawing.Size(98, 172);
             this.lstAttacks.TabIndex = 0;
             // 
             // LogPanel

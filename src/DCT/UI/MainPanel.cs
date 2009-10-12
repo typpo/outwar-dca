@@ -131,16 +131,6 @@ namespace DCT.UI
             set { numCountdown.Value = value; }
         }
 
-        internal string StatusText
-        {
-            get { return lblExpRage.Text; }
-            set
-            {
-                lblExpRage.Text = value;
-                lblExpRage.Left = ((pnlAttack.Right - pnlAttack.Left) / 2) - (lblExpRage.Width / 2);
-            }
-        }
-
         private CoreUI mUI;
 
         internal MainPanel(CoreUI ui)

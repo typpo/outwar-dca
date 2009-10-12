@@ -246,11 +246,6 @@ namespace DCT.UI
             return mEngine.Count - orig;
         }
 
-        private void lnkRgSessid_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            ShowRgSessIdDialog();
-        }
-
         internal void ShowRgSessIdDialog()
         {
             int i = 0;
