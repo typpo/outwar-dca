@@ -438,7 +438,7 @@ namespace DCT.UI
 
         private void inputRgsessidToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO
+            AccountsPanel.ShowRgSessIdDialog();
         }
 
         private void showMyRgsessidToolStripMenuItem_Click(object sender, EventArgs e)

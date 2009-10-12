@@ -181,22 +181,19 @@ namespace DCT.UI
 
             mUI.LogPanel.Log("Logging in...");
 
-            LoginHandler d = new LoginHandler(DoLogin);
-            d.BeginInvoke(new AsyncCallback(LoginCallback), d);
+            login_normal.RunWorkerAsync();
         }
 
-        private delegate void LoginCallbackHandler(IAsyncResult ar);
+        private delegate void LoginCallbackHandler(int n);
 
-        private void LoginCallback(IAsyncResult ar)
+        private void LoginCallback(int n)
         {
             if (InvokeRequired)
             {
-                Invoke(new LoginCallbackHandler(LoginCallback), ar);
+                Invoke(new LoginCallbackHandler(LoginCallback), n);
                 return;
             }
 
-            LoginHandler d = (LoginHandler)ar.AsyncState;
-            int n = d.EndInvoke(ar);
             if (n < 1)
             {
                 txtUsername.Text = string.Empty;
@@ -241,10 +238,10 @@ namespace DCT.UI
             return mEngine.Count - orig;
         }
 
-        private int DoLoginRgSessId()
+        private int DoLoginRgSessId(string sessid)
         {
             int orig = mEngine.Count;
-            mEngine.Login(txtUsername.Text, txtPassword.Text);
+            mEngine.Login(sessid);
 
             return mEngine.Count - orig;
         }
@@ -268,18 +265,27 @@ namespace DCT.UI
 
             mUI.LogPanel.Log("Logging in with rg_sess_id...");
 
-            LoginHandler d = new LoginHandler(DoLogin);
-            d.BeginInvoke(new AsyncCallback(LoginCallback), d);
+            login_rgsessid.RunWorkerAsync(input);
+        }
+
+        private void login_normal_DoWork(object sender, DoWorkEventArgs e)
+        {
+            e.Result = DoLogin();
+        }
+
+        private void login_normal_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            LoginCallback((int)e.Result);
         }
 
         private void login_rgsessid_DoWork(object sender, DoWorkEventArgs e)
         {
-            e.Result = DoLoginRgSessId();
+            e.Result = DoLoginRgSessId((string)e.Argument);
         }
 
         private void login_rgsessid_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //LoginCallback(e.Result);
+            LoginCallback((int)e.Result);
         }
     }
 }

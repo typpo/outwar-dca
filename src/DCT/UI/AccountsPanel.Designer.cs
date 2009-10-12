@@ -46,8 +46,8 @@ namespace DCT.UI
             this.clmMobs = new System.Windows.Forms.ColumnHeader();
             this.clmEXP = new System.Windows.Forms.ColumnHeader();
             this.clmAvgExp = new System.Windows.Forms.ColumnHeader();
-            this.lnkRgSessid = new System.Windows.Forms.LinkLabel();
             this.login_rgsessid = new System.ComponentModel.BackgroundWorker();
+            this.login_normal = new System.ComponentModel.BackgroundWorker();
             this.grpConnections.SuspendLayout();
             this.pnl.SuspendLayout();
             this.SuspendLayout();
@@ -76,7 +76,6 @@ namespace DCT.UI
             this.pnl.Controls.Add(this.txtUsername);
             this.pnl.Controls.Add(this.label1);
             this.pnl.Controls.Add(this.label2);
-            this.pnl.Controls.Add(this.lnkRgSessid);
             this.pnl.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnl.Location = new System.Drawing.Point(3, 347);
             this.pnl.Name = "pnl";
@@ -108,7 +107,7 @@ namespace DCT.UI
             // btnRefresh
             // 
             this.btnRefresh.Enabled = false;
-            this.btnRefresh.Location = new System.Drawing.Point(79, 75);
+            this.btnRefresh.Location = new System.Drawing.Point(85, 75);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(61, 23);
             this.btnRefresh.TabIndex = 11;
@@ -130,7 +129,7 @@ namespace DCT.UI
             // btnLogout
             // 
             this.btnLogout.Enabled = false;
-            this.btnLogout.Location = new System.Drawing.Point(146, 75);
+            this.btnLogout.Location = new System.Drawing.Point(152, 75);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(61, 23);
             this.btnLogout.TabIndex = 10;
@@ -140,7 +139,7 @@ namespace DCT.UI
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(12, 75);
+            this.btnLogin.Location = new System.Drawing.Point(18, 75);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(61, 23);
             this.btnLogin.TabIndex = 9;
@@ -150,7 +149,7 @@ namespace DCT.UI
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(103, 45);
+            this.txtPassword.Location = new System.Drawing.Point(107, 45);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(110, 20);
             this.txtPassword.TabIndex = 8;
@@ -159,7 +158,7 @@ namespace DCT.UI
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(103, 24);
+            this.txtUsername.Location = new System.Drawing.Point(107, 24);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(110, 20);
             this.txtUsername.TabIndex = 7;
@@ -167,7 +166,7 @@ namespace DCT.UI
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 27);
+            this.label1.Location = new System.Drawing.Point(13, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 5;
@@ -176,7 +175,7 @@ namespace DCT.UI
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 48);
+            this.label2.Location = new System.Drawing.Point(13, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 13);
             this.label2.TabIndex = 6;
@@ -228,21 +227,15 @@ namespace DCT.UI
             this.clmAvgExp.Text = "xpAvg";
             this.clmAvgExp.Width = 50;
             // 
-            // lnkRgSessid
-            // 
-            this.lnkRgSessid.AutoSize = true;
-            this.lnkRgSessid.Location = new System.Drawing.Point(146, 95);
-            this.lnkRgSessid.Name = "lnkRgSessid";
-            this.lnkRgSessid.Size = new System.Drawing.Size(84, 13);
-            this.lnkRgSessid.TabIndex = 12;
-            this.lnkRgSessid.TabStop = true;
-            this.lnkRgSessid.Text = "Input rg_sess_id";
-            this.lnkRgSessid.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRgSessid_LinkClicked);
-            // 
             // login_rgsessid
             // 
             this.login_rgsessid.DoWork += new System.ComponentModel.DoWorkEventHandler(this.login_rgsessid_DoWork);
             this.login_rgsessid.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.login_rgsessid_RunWorkerCompleted);
+            // 
+            // login_normal
+            // 
+            this.login_normal.DoWork += new System.ComponentModel.DoWorkEventHandler(this.login_normal_DoWork);
+            this.login_normal.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.login_normal_RunWorkerCompleted);
             // 
             // AccountsPanel
             // 
@@ -278,7 +271,7 @@ namespace DCT.UI
         private System.Windows.Forms.ColumnHeader clmEXP;
         private System.Windows.Forms.Panel pnl;
         private System.Windows.Forms.ColumnHeader clmAvgExp;
-        private System.Windows.Forms.LinkLabel lnkRgSessid;
         private System.ComponentModel.BackgroundWorker login_rgsessid;
+        private System.ComponentModel.BackgroundWorker login_normal;
     }
 }
