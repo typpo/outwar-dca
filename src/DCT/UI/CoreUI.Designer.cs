@@ -531,6 +531,7 @@ namespace DCT.UI
             this.tabs.SelectedIndex = 0;
             this.tabs.Size = new System.Drawing.Size(431, 299);
             this.tabs.TabIndex = 6;
+            this.tabs.TabIndexChanged += new System.EventHandler(this.tabs_SelectedIndexChanged);
             // 
             // tabAttack
             // 

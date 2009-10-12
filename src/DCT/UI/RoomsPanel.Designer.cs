@@ -37,6 +37,7 @@ namespace DCT.UI
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.label6 = new System.Windows.Forms.Label();
             this.lnkUncheckRooms = new System.Windows.Forms.LinkLabel();
+            this.lnkRoomsSelect = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.numPathfindId)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,10 +144,22 @@ namespace DCT.UI
             this.lnkUncheckRooms.Text = "Uncheck All";
             this.lnkUncheckRooms.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkUncheckRooms_LinkClicked);
             // 
+            // lnkRoomsSelect
+            // 
+            this.lnkRoomsSelect.AutoSize = true;
+            this.lnkRoomsSelect.Location = new System.Drawing.Point(299, 249);
+            this.lnkRoomsSelect.Name = "lnkRoomsSelect";
+            this.lnkRoomsSelect.Size = new System.Drawing.Size(120, 13);
+            this.lnkRoomsSelect.TabIndex = 17;
+            this.lnkRoomsSelect.TabStop = true;
+            this.lnkRoomsSelect.Text = "Select rooms by name...";
+            this.lnkRoomsSelect.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRoomsSelect_LinkClicked);
+            // 
             // RoomsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lnkRoomsSelect);
             this.Controls.Add(this.lnkSaveRooms);
             this.Controls.Add(this.lnkLoadRooms);
             this.Controls.Add(this.btnPathfind);
@@ -173,5 +186,6 @@ namespace DCT.UI
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.LinkLabel lnkUncheckRooms;
+        private System.Windows.Forms.LinkLabel lnkRoomsSelect;
     }
 }

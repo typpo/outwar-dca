@@ -11,8 +11,13 @@ using DCT.Settings;
 
 namespace DCT.UI
 {
+
     public partial class MainPanel : UserControl
     {
+        // stopafter notes -
+        // must call ResetStopAfterCounter() or ResetStopAfterTime() before running
+        // end with StopAfterFinish()
+
         private const int STOPAFTERTIME_OFFSET = 3;    // in seconds
 
         internal int StopAfterCounter { get; set; }
@@ -20,6 +25,7 @@ namespace DCT.UI
         internal void ResetStopAfterCounter()
         {
             StopAfterCounter = 0;
+            StopAfterRunning = true;
         }
 
         internal bool StopAfterCounterFinished
@@ -30,6 +36,7 @@ namespace DCT.UI
         internal void ResetStopAfterTime()
         {
             StopAfterTime = DateTime.Now;
+            StopAfterRunning = true;
         }
 
         internal DateTime StopAfterTime { get; set; }
@@ -44,6 +51,13 @@ namespace DCT.UI
             }
         }
 
+        internal bool StopAfterRunning { get; private set; }
+
+        internal void StopAfterFinish()
+        {
+            StopAfterRunning = false;
+        }
+
         internal bool StopAfter
         {
             get { return chkStopAfter.Enabled; }
@@ -54,6 +68,14 @@ namespace DCT.UI
         {
             get { return (int)numStopAfter.Value; }
             set { numStopAfter.Value = value; }
+        }
+
+        internal bool StopAfterEnabled
+        {
+            set
+            {
+                cmbStopAfter.Enabled = false;
+            }
         }
 
         internal UserEditable.StopAfterType StopAfterMode
@@ -173,8 +195,35 @@ namespace DCT.UI
             if (mUI.Settings.StopAfter)
             {
                 mUI.Settings.StopAfterMode = StopAfterMode;
+
+                InitStopAfter();
             }
             mUI.Settings.StopAfterVal = (int)numStopAfter.Value;
+        }
+
+        internal void InitStopAfter()
+        {
+            if (mUI.Settings.StopAfter)
+            {
+                // intialize stopafter thing
+                switch (mUI.Settings.StopAfterMode)
+                {
+                    case UserEditable.StopAfterType.Minutes:
+                        ResetStopAfterTime();
+                        break;
+                    case UserEditable.StopAfterType.Runs:
+                        ResetStopAfterCounter();
+                        StopAfterCounter++;
+                        break;
+                }
+
+                // if there is no countdown set, then we set an internal countdown of 0
+                if (!RunCountdown)
+                {
+                    UseCountdownTimer = true;
+                    CountdownValue = 0;
+                }
+            }
         }
 
         private void cmbStopAfter_SelectedIndexChanged(object sender, EventArgs e)

@@ -172,5 +172,18 @@ namespace DCT.UI
                 return;
             numPathfindId.Value = int.Parse(lvPathfind.SelectedItems[0].SubItems[1].Text);
         }
+
+        private void lnkRoomsSelect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            int i = 0;
+            string input = InputBox.Prompt("Room Selection", "Check all rooms with the following names (separated by commas):");
+            if (string.IsNullOrEmpty(input))
+                return;
+            foreach (string s in input.Split(new char[] { ',' }))
+            {
+                i += SelectRoomsByName(s.Trim());
+            }
+            MessageBox.Show("Selected " + i + " rooms.", "Select Rooms", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

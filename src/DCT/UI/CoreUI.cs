@@ -247,6 +247,9 @@ namespace DCT.UI
                 Invoke(new ToggleHandler(Toggle), on);
                 return;
             }
+            // Main Panel
+            MainPanel.StopAfterEnabled = on;
+
             // ACCOUNTS
             AccountsPanel.ChangeAllowed = on;
 
@@ -310,6 +313,10 @@ namespace DCT.UI
             MainPanel.UseCountdownTimer = Settings.UseCountdownTimer;
             MainPanel.UseHourTimer = Settings.UseHourTimer;
             MainPanel.CountdownValue = Settings.CycleInterval;
+            MainPanel.StopAfter = Settings.StopAfter;
+            MainPanel.StopAfterVal = Settings.StopAfterVal;
+            MainPanel.StopAfterMode = Settings.StopAfterMode;
+            MainPanel.InitStopAfter();
 
             SyncAttackMode();
 
@@ -654,27 +661,6 @@ namespace DCT.UI
 
         internal void StartAttacking()
         {
-            if (Settings.StopAfter)
-            {
-                // intialize stopafter thing
-                switch (Settings.StopAfterMode)
-                {
-                    case UserEditable.StopAfterType.Minutes:
-                        MainPanel.ResetStopAfterTime();
-                        break;
-                    case UserEditable.StopAfterType.Runs:
-                        MainPanel.ResetStopAfterCounter();
-                        MainPanel.StopAfterCounter++;
-                        break;
-                }
-
-                // if there is no countdown set, then we set an internal countdown of 0
-                if (!MainPanel.RunCountdown)
-                {
-                    MainPanel.UseCountdownTimer = true;
-                    MainPanel.CountdownValue = 0;
-                }
-            }
             switch (Settings.AttackMode)
             {
                 case AttackingType.CurrentArea: AttackArea(); break;
@@ -728,7 +714,7 @@ namespace DCT.UI
                 return;
             }
 
-            Countdown(mCountdownType);
+            Countdown(Settings.AttackMode);
         }
 
         private delegate void CountdownHandler(AttackingType type);
@@ -751,6 +737,7 @@ namespace DCT.UI
                         if (MainPanel.StopAfterTimeFinished)
                         {
                             LogPanel.Log(string.Format("Reached time limit of {0} minutes", Settings.StopAfterVal));
+                            MainPanel.StopAfterFinish();
                             StopAttacking(true);
                             return;
                         }
@@ -759,6 +746,7 @@ namespace DCT.UI
                         if (MainPanel.StopAfterCounterFinished)
                         {
                             LogPanel.Log(string.Format("Reached {0} runs", Settings.StopAfterVal));
+                            MainPanel.StopAfterFinish();
                             StopAttacking(true);
                             return;
                         }
@@ -817,6 +805,7 @@ namespace DCT.UI
                         if (MainPanel.StopAfterTimeFinished)
                         {
                             LogPanel.Log(string.Format("Reached time limit of {0} minutes", Settings.StopAfterVal));
+                            MainPanel.StopAfterFinish();
                             StopAttacking(true);
                             return;
                         }
@@ -826,6 +815,7 @@ namespace DCT.UI
                         if (MainPanel.StopAfterCounterFinished)
                         {
                             LogPanel.Log(string.Format("Reached {0} runs", Settings.StopAfterVal));
+                            MainPanel.StopAfterFinish();
                             StopAttacking(true);
                             return;
                         }
