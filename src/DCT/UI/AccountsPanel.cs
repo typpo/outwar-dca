@@ -189,7 +189,8 @@ namespace DCT.UI
 
             mUI.LogPanel.Log("Logging in...");
 
-            login_normal.RunWorkerAsync();
+            if(!login_normal.IsBusy)
+                login_normal.RunWorkerAsync();
         }
 
         private delegate void LoginCallbackHandler(int n);
@@ -268,7 +269,8 @@ namespace DCT.UI
 
             mUI.LogPanel.Log("Logging in with rg_sess_id...");
 
-            login_rgsessid.RunWorkerAsync(input);
+            if (!login_rgsessid.IsBusy)
+                login_rgsessid.RunWorkerAsync(input);
         }
 
         private void login_normal_DoWork(object sender, DoWorkEventArgs e)

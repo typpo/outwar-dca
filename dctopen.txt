@@ -1,11 +1,16 @@
- >> Typpo's DC Tool - Latest Version: 3.1.16 << 
+ >> Typpo's DC Tool - Latest Version: 3.1.16a << 
  
 Change History:
 
-Badlands Zhul mobs have been added.  Shadow Crawlers should work.  Moved servers, caused some downtime but should be improved.
+Your settings may have been reset.
 
-Release 3.1.16 (?):
-- Moved start/stop, timer, attack mode selection to top toolbar
+** Timer options are on the attack tab.
+
+Release 3.1.16a (10/23/09):
+- Removed dependency on "contact server"
+
+Release 3.1.16 (10/12/09):
+- Moved start/stop, timer, attack mode selection, exp/rage status to top toolbar
 - Moved repeat options to Attack tab
 - Added "stop after X minutes" option
 - Added "stop after X runs" option
@@ -15,6 +20,7 @@ Release 3.1.16 (?):
 - Fixed multiple drop parsing
 - Fixed chat flicker
 - Removed quests tab
+- Other internal changes
 
 Release 3.1.15 (10/8/09):
 - Added support for user spawns (various Kix quest mobs, Shadow Crawlers)
@@ -63,19 +69,11 @@ Release 3.1.11a (9/17/09):
 - Chat tab has a flag (*) if there are new chat messages
 - Cleaned up a bunch of things (removed flying, map building error checks, scrolling in chat, etc.)
 
-Coming soon: spawn/orb hunting support?
-
-Release 3.1.10 (9/10/09):
-- Small fixes
-
-7/31/09:
-With a lot of help from KeyserSoze, many issues with the map were fixed, including areas such as Subways, Sewers, Kix.  Also, Kix mobs have been added.
-
 End Changes 
 
 Info for the autoupdater: 
-<ver>3.1..16</ver> 
-<url>http://typpo.us/DCT 3.1.16.exe</url>
+<ver>3.1.16a</ver> 
+<url>http://typpo.us/DCT 3.1.16a.exe</url>
  
 <chan>#typpo</chan> 
 <svr>typpo.dyndns.org</svr>

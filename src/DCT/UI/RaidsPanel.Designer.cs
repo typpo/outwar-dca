@@ -55,7 +55,7 @@ namespace DCT.UI
             this.lvAdventures.Location = new System.Drawing.Point(3, 25);
             this.lvAdventures.MultiSelect = false;
             this.lvAdventures.Name = "lvAdventures";
-            this.lvAdventures.Size = new System.Drawing.Size(420, 228);
+            this.lvAdventures.Size = new System.Drawing.Size(420, 254);
             this.lvAdventures.TabIndex = 10;
             this.lvAdventures.UseCompatibleStateImageBehavior = false;
             this.lvAdventures.View = System.Windows.Forms.View.Details;
@@ -87,7 +87,7 @@ namespace DCT.UI
             this.Controls.Add(this.lvAdventures);
             this.Controls.Add(this.label16);
             this.Name = "RaidsPanel";
-            this.Size = new System.Drawing.Size(426, 256);
+            this.Size = new System.Drawing.Size(426, 282);
             this.ResumeLayout(false);
             this.PerformLayout();
 

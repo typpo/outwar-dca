@@ -93,8 +93,8 @@ namespace DCT.Settings
             AttackMode = DCT.Outwar.World.AttackingType.Mobs;
 
             LvlLimitMin = 0;
-            LvlLimit = 35;
-            RageLimit = 30;
+            LvlLimit = 65;
+            RageLimit = 75;
             StopBelowRage = 0;
             Delay = 0;
             Timeout = 15000;

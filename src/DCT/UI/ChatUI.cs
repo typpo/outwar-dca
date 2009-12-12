@@ -70,8 +70,6 @@ namespace DCT.UI
             if (String.IsNullOrEmpty(mChannel) || String.IsNullOrEmpty(mServer))
             {
                 AddText("*** No chat connection.");
-                MessageBox.Show("Couldn't connect to contact server because no contact information was provided.");
-                Application.Exit();
                 return;
             }
 
@@ -130,9 +128,6 @@ namespace DCT.UI
             catch (ConnectionException)
             {
                 AddText("*** Could not connect to server.");
-                MessageBox.Show(
-                    "Couldn't connect to contact server.  Make sure there is nothing blocking the program's connection to the internet.");
-                Application.Exit();
             }
         }
 

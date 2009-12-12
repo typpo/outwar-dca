@@ -572,6 +572,9 @@ namespace DCT.UI
         {
             switch (SelectedTabIndex)
             {
+                case TABINDEX_ATTACK:
+                    Tabs.TabPages[TABINDEX_ATTACK].Text = "Attack";
+                    break;
                 case TABINDEX_SPAWNS:
                     Tabs.TabPages[TABINDEX_SPAWNS].Text = "Spawns";
                     break;
@@ -715,10 +718,15 @@ namespace DCT.UI
                 Globals.AttackOn = false;
                 ToggleAttack(false);
 
-                if (timeroff)
+                if (timeroff && (MainPanel.UseCountdownTimer || MainPanel.UseHourTimer))
                 {
                     MainPanel.UseCountdownTimer = false;
                     MainPanel.UseHourTimer = false;
+
+                    if (tabs.SelectedIndex != TABINDEX_ATTACK)
+                    {
+                        Tabs.TabPages[TABINDEX_ATTACK].Text = "Attack (*)";
+                    }
                 }
             }
         }
