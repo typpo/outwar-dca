@@ -447,7 +447,7 @@ namespace DCT.UI
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Image = global::DCT.Properties.Resources.Flag_green;
+            this.btnStart.Image = global::DCT.Properties.Resources.Flag_green2;
             this.btnStart.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(56, 22);

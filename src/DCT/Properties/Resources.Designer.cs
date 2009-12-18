@@ -67,6 +67,13 @@ namespace DCT.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Flag_green2 {
+            get {
+                object obj = ResourceManager.GetObject("Flag_green2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Flag_red {
             get {
                 object obj = ResourceManager.GetObject("Flag_red", resourceCulture);

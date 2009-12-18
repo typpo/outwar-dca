@@ -322,6 +322,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Misc\Bad.ico" />
+    <None Include="Resources\Flag_red1.bmp" />
     <None Include="Resources\Flag_red.bmp" />
     <None Include="Resources\Flag_green.bmp" />
   </ItemGroup>

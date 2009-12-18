@@ -77,7 +77,7 @@ namespace DCT.UI
             mClient.SendDelay = 200;
             mClient.AutoRetry = true;   // defaults to retry every 30 secs
             mClient.AutoRejoin = true;
-            mClient.AutoReconnect = true;
+            //mClient.AutoReconnect = true;
             mClient.ActiveChannelSyncing = true;
 
             mClient.OnAway += new AwayEventHandler(mClient_OnAway);
@@ -216,7 +216,7 @@ namespace DCT.UI
 
         void mClient_OnDisconnected(object sender, EventArgs e)
         {
-            AddText("*** You have been disconnected");
+            AddText("*** You have been disconnected.  Try /reconnect");
             Connected = false;
         }
 
@@ -328,7 +328,7 @@ namespace DCT.UI
 
         private void txtChatType_KeyDown(object sender, KeyEventArgs e)
         {
-            if (mClient.IsConnected && e.KeyData == Keys.Enter && txtChatType.Text != string.Empty)
+            if (e.KeyData == Keys.Enter && txtChatType.Text != string.Empty)
             {
                 if (mNumMsgs == 0)
                     // set initial time
@@ -370,7 +370,7 @@ namespace DCT.UI
             {
                 InterpUserCommand(txt);
             }
-            else
+            else if (mClient.IsConnected)
             {
                 mClient.SendMessage(SendType.Message, mChannel, txt);
                 AddText(NickTag + txt);
@@ -477,6 +477,18 @@ namespace DCT.UI
 
         private void InterpUserCommand(string txt)
         {
+            if (txt == "/reconnect")
+            {
+                if (!Connected)
+                {
+                    IrcThread();
+                    return;
+                }
+            }
+            if (!mClient.IsConnected)
+            {
+                return;
+            }
             if (txt.StartsWith("/me") && txt.Length > 3)
             {
                 string msg = txt.Substring(4);
