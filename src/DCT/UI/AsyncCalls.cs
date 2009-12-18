@@ -282,15 +282,15 @@ namespace DCT.UI
         }
         private void InvokeBulkMove(int room)
         {
-            if (AccountsPanel.CheckedIndices.Count > 1)
-            {
-                string tmp;
-                int n;
-                do
-                {
-                    tmp = Util.InputBox.Prompt("Bulk Move", "Move up to how many accounts at once?", "2");
-                } while (int.TryParse(tmp, out n));
-            }
+            //if (AccountsPanel.CheckedIndices.Count > 1)
+            //{
+            //    string tmp;
+            //    int n;
+            //    do
+            //    {
+            //        tmp = Util.InputBox.Prompt("Bulk Move", "Move up to how many accounts at once?", "2");
+            //    } while (int.TryParse(tmp, out n));
+            //}
 
             Toggle(false);
             foreach (int index in AccountsPanel.CheckedIndices)
