@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Threading;
 using DCT.Outwar;
 using DCT.Outwar.World;
 using DCT.Pathfinding;
@@ -269,26 +270,34 @@ namespace DCT.UI
             InvokeBulkMove(room);
         }
 
-        //private int mBulkCounter;
+        private class BulkMoveArg
+        {
+            internal int AcccountIndex {get;private set;}
+            internal int Room { get; private set; }
+            public BulkMoveArg(int accountIndex, int room)
+            {
+                AcccountIndex = accountIndex;
+                Room = room;
+            }
+        }
         private void InvokeBulkMove(int room)
         {
-            //if (mAccountsPanel.CheckedIndices.Count > 1)
-            //{
-            //    string tmp;
-            //    int n;
-            //    do
-            //    {
-            //        tmp = Util.InputBox.Prompt("Bulk Move", "Move up to how many accounts at once?", "5");
-            //    }
-            //    while (int.TryParse(tmp, out n));
-            //    mBulkCounter = 0;
-            //}
-            // TODO stagger
+            if (AccountsPanel.CheckedIndices.Count > 1)
+            {
+                string tmp;
+                int n;
+                do
+                {
+                    tmp = Util.InputBox.Prompt("Bulk Move", "Move up to how many accounts at once?", "2");
+                } while (int.TryParse(tmp, out n));
+            }
+
             Toggle(false);
             foreach (int index in AccountsPanel.CheckedIndices)
             {
-                PathfindHandler d = new PathfindHandler(DoPathfind);
-                d.BeginInvoke(index, room, new AsyncCallback(PathfindCallback), d);
+                ThreadPool.QueueUserWorkItem(DoPathfindCallback, new BulkMoveArg(index, room));
+                //PathfindHandler d = new PathfindHandler(DoPathfind);
+                //d.BeginInvoke(index, room, new AsyncCallback(PathfindCallback), d);
             }
         }
 
@@ -300,6 +309,12 @@ namespace DCT.UI
         }
 
         private delegate void PathfindHandler(int accountIndex, int room);
+
+        private void DoPathfindCallback(object context)
+        {
+            BulkMoveArg a = (BulkMoveArg)context;
+            DoPathfind(a.AcccountIndex, a.Room);
+        }
 
         private void DoPathfind(int accountIndex, int room)
         {
