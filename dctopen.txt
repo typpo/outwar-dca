@@ -1,10 +1,14 @@
- >> Typpo's DC Tool - Latest Version: 3.1.16a << 
+ >> Typpo's DC Tool - Latest Version: 3.1.17 << 
  
 Change History:
 
-Your settings may have been reset.
-
-** Timer options are on the attack tab.
+Release 3.1.17 (12/18/09):
+- Removed dependency on map server (maps downloaded once and stored locally)
+- Improved handling of bulk moving (many accounts)
+- Fixed countdown/run # limit bug
+- Fixed chat reconnect thottling problem
+- Added chat /reconnect command
+- Added COES gods
 
 Release 3.1.16a (10/23/09):
 - Removed dependency on "contact server"
@@ -72,8 +76,8 @@ Release 3.1.11a (9/17/09):
 End Changes 
 
 Info for the autoupdater: 
-<ver>3.1.16a</ver> 
-<url>http://typpo.us/DCT 3.1.16a.exe</url>
+<ver>3.1.17</ver> 
+<url>http://typpo.us/DCT 3.1.17.exe</url>
  
 <chan>#typpo</chan> 
 <svr>typpo.dyndns.org</svr>
