@@ -63,11 +63,15 @@ namespace DCT.UI
                 if (url == "ERROR")
                 {
                     SetStatus("Could not access server.");
+                    txtMain.Text = " Could not access startup server.  If you already had map data saved on your computer, the program should work but you will not receive updates automatically.";
                     MessageBox.Show(
-                        "Could not read startup instructions from server, try again.\n\nIf this error persists (and you can get to www.typpo.us), please close or adjust any firewall/router/antivirus/antispyware that is blocking this program's connection to the internet.",
+                        "Could not read startup instructions from server.  If map data has already been saved to your computer, the program should work.\n\nIf this error persists (and you can get to www.typpo.us), please close or adjust any firewall/router/antivirus/antispyware that is blocking this program's connection to the internet.",
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Globals.Terminate = true;
-                    Application.Exit();
+                    SetStatus("Attempting to build map data...");
+                    ThreadEngine.DefaultInstance.Do(Pathfinder.BuildMap);
+                    SetStatus("Could not contact server");
+                    //Globals.Terminate = true;
+                    //Application.Exit();
                     return;
                 }
 

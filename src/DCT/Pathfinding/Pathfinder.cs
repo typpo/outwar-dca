@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Net;
+using System.IO;
 using DCT.Outwar.World;
 using DCT.Protocols.Http;
 using DCT.Security;
@@ -15,20 +17,7 @@ namespace DCT.Pathfinding
     internal static class Pathfinder
     {
         private const string MUTEX_NAME = "DCT_PATHFINDER_MUTEX";
-        // q
-        //private const string URL_ROOMS =
-        //    "f5b57b6c048faa5bdc468e8caef8e0b3becc046212ae840dbadd4f30556b8a9337f2856bc94275ff7bee5d";
-        //private const string KEY_ROOMS = "A6w_d0X_jQ";
 
-        private const string URL_MOBS =
-            "12cafa06a6d89aa2b3cce105d6efb42fb2dd2ae47c631cc7c20da361de1b934c98b8a90fe434d6883383744a9285";
-        private const string KEY_MOBS = "g8Z_k_3ok0";
-
-        private const string URL_RAIDS =
-            "52623494ddc5872f11e2e65ab82fef068a2c9923e489b971a55fb664a25884d0ab516bcaa32b882ff496cb9a5d4c35";
-
-        private const string URL_SPAWNS = "http://typpo.dyndns.org:7012/dct/maps/spawns.php";
-        private const string KEY_RAIDS = "0QR3PT58t0";
         internal static List<MappedRoom> Rooms { get; private set; }
         internal static List<MappedMob> Mobs { get; private set; }
         internal static SortedList<string, int> Adventures { get; private set; }
@@ -60,257 +49,20 @@ namespace DCT.Pathfinding
             Spawns = new List<MappedMob>();
             Adventures = new SortedList<string, int>();
 
-            /*
-            f5b57b6c048faa5bdc468e8caee9eaf2aad0182b0fbd8e44a2891d6b556288976bb09674d50076be64eb5ed78cb7ce
-            12cafa06a6d89aa2b3cce105d6efb42fb2dd2ae47c631cc7c20da361de1b934c98b8a90fe434d6883383744a9285
-            52623494ddc5872f11e2e65ab82fef068a2c9923e489b971a55fb664a25884d0ab516bcaa32b882ff496cb9a5d4c35
-             */
-            //Console.WriteLine(Crypt.BinToHex(Crypt.Get("http://typpo.dyndns.org:7012/dct/maps/rooms.php", KEY_ROOMS, false)));
-            //Console.WriteLine(Crypt.BinToHex(Crypt.Get("http://typpo.dyndns.org:7012/dct/maps/mobs.php", KEY_MOBS, false)));
-            //Console.WriteLine(Crypt.BinToHex(Crypt.Get("http://typpo.dyndns.org:7012/dct/maps/raids.php", KEY_RAIDS, false)));
-
-            #region Encryption
-            Stack<int> stack = new Stack<int>(94);
-            int bCrypt = 0;
-
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x65);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x6);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2C);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x2B);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x1);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xD5);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xFF);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x2D);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xFF);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xD0);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xD3);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x7);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x51);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x2);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x53);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x7);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2C);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x1);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xF9);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x0);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x5);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xD1);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xD0);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x3);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x1);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x3);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xF7);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xCE);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x0);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2C);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x1);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0xE);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x1);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x0);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0xA);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xFC);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x1);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x0);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x57);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xD4);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xD2);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x33);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x8);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xFF);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xFA);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xD1);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2D);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x0);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xCF);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x5D);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x5C);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xFC);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x36);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x32);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xD0);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xFA);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x9);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xFF);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xCC);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x5);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x0);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xD1);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xCC);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xFB);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x4);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xD4);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xD4);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x0);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x4);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x2);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xD5);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x5D);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2D);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xFE);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xD1);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xFF);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x6);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x57);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x2C);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x0);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xFB);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x5E);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x4);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xFC);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x33);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x55);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x2C);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2B);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x2);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x2D);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2D);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x53);
-            stack.Push(bCrypt);
-
-            StringBuilder urlSb = new StringBuilder();
-            while (stack.Count > 0)
-            {
-                urlSb.Append((char)stack.Pop());
-            }
-
-            stack = new Stack<int>(10);
-            bCrypt = 0;
-
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x51);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x19);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xB);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xF9);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x28);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x34);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x3B);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x28);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x41);
-            stack.Push(bCrypt);
-            bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xB);
-            stack.Push(bCrypt);
-
-            StringBuilder keySb = new StringBuilder();
-            while (stack.Count > 0)
-            {
-                keySb.Append((char)stack.Pop());
-            }
-
-            #endregion
-
             string map;
-            int i = 0;
             List<int> nbrs;
             string name;
             int id;
             string[] tmp;
             //*
-            while (Rooms.Count < 1 && i < 2)
+            for (int i = 0; i < 2 && Rooms.Count < 1; i++)
             {
-                //map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(urlSb.ToString()), keySb.ToString(), false));
-                map = HttpSocket.DefaultInstance.Get("http://typpo.us/rooms.php"); //Crypt.Get(Crypt.HexToBin(map), HttpSocket.DefaultInstance.UserAgent, false);
+                if (!File.Exists("rooms.dat"))
+                {
+                    Download("rooms");
+                }
+                if ((map = ReadDecrypt("rooms")) == null)
+                    continue;
 
                 foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
                 {
@@ -332,21 +84,22 @@ namespace DCT.Pathfinding
                         continue;
                     Rooms.Add(new MappedRoom(id, name, nbrs));
                 }
-                i++;
             }
             Rooms.Sort();
             //*/
 
             // ------------------
 
-            i = 0;
             MappedMob mm;
             string[] parts;
-            while (Mobs.Count < 1 && i < 2)
+            for (int i = 0; i < 2 && Mobs.Count < 1; i++)
             {
-                //map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_MOBS), KEY_MOBS, false));
-                //map = Crypt.Get(Crypt.HexToBin(map), HttpSocket.DefaultInstance.UserAgent, false);
-                map = HttpSocket.DefaultInstance.Get("http://typpo.us/mobs.php");
+                if (!File.Exists("mobs.dat"))
+                {
+                    Download("mobs");
+                }
+                if ((map = ReadDecrypt("mobs")) == null)
+                    continue;
                 foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
@@ -366,11 +119,15 @@ namespace DCT.Pathfinding
 
             // -----------------
 
-            i = 0;
-            while (Adventures.Count < 1 && i < 2)
+            for (int i = 0; i < 2 && Adventures.Count < 1; i++)
             {
-                //map = HttpSocket.DefaultInstance.Get(Crypt.Get(Crypt.HexToBin(URL_RAIDS), KEY_RAIDS, false));
-                map = HttpSocket.DefaultInstance.Get("http://typpo.us/raids.php");
+                if (!File.Exists("raids.dat"))
+                {
+                    Download("raids");
+                }
+                if ((map = ReadDecrypt("raids")) == null)
+                    continue;
+
                 foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
@@ -386,11 +143,14 @@ namespace DCT.Pathfinding
             // ------------------
             // Spawns
 
-            i = 0;
-            while (Spawns.Count < 1 && i < 2)
+            for (int i = 0; i < 2 && Spawns.Count < 1; i++)
             {
-                //map = HttpSocket.DefaultInstance.Get(URL_SPAWNS);
-                map = HttpSocket.DefaultInstance.Get("http://typpo.us/spawns.php");
+                if (!File.Exists("spawns.dat"))
+                {
+                    Download("spawns");
+                }
+                if ((map = ReadDecrypt("spawns")) == null)
+                    continue;
                 foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
@@ -407,6 +167,42 @@ namespace DCT.Pathfinding
                 i++;
             }
             Spawns.Sort();
+        }
+
+        internal static void Download(string maptype)
+        {
+            WebClient client = new WebClient();
+            client.Headers.Add("User-Agent", HttpSocket.DefaultInstance.UserAgent);
+            try
+            {
+                client.DownloadFile("http://typpo.us/maps/" + maptype + ".php", maptype + ".dat");
+            }
+            catch (WebException)
+            {
+                // 
+            }
+        }
+
+        internal static string ReadDecrypt(string maptype)
+        {
+            if (!File.Exists(maptype + ".dat"))
+                return null;
+
+            StreamReader sr = new StreamReader(maptype + ".dat");
+            string text;
+            try
+            {
+                text = sr.ReadToEnd();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                sr.Close();
+            }
+            return Crypt.Get(Crypt.HexToBin(text), HttpSocket.DefaultInstance.UserAgent, false);
         }
 
         internal static string BadLinks()
