@@ -195,7 +195,7 @@ namespace DCT.UI
         {
             if (mUI.Settings.StopAfter)
             {
-                // intialize stopafter thing
+                // intialize stopafter options
                 switch (mUI.Settings.StopAfterMode)
                 {
                     case UserEditable.StopAfterType.Minutes:
@@ -203,7 +203,6 @@ namespace DCT.UI
                         break;
                     case UserEditable.StopAfterType.Runs:
                         ResetStopAfterCounter();
-                        StopAfterCounter++;
                         break;
                 }
 

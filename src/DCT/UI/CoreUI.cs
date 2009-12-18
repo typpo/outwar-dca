@@ -841,7 +841,7 @@ namespace DCT.UI
                         }
                         break;
                     case UserEditable.StopAfterType.Runs:
-                        // this should never happen
+                        // this might happen if user started a run with a countdown instead of an attack
                         if (MainPanel.StopAfterCounterFinished)
                         {
                             LogPanel.Log(string.Format("Reached {0} runs", Settings.StopAfterVal));
