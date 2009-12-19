@@ -3,8 +3,9 @@
 Change History:
 
 Release 3.1.17 (12/18/09):
-- Removed dependency on map server (maps downloaded once and stored locally)
-- Improved handling of bulk moving (many accounts)
+- Removed dependency on map server.  Maps are downloaded once and stored locally, and only redownload if they've been updated.
+- Removed dependency on startup notice
+- Bulk moving now moves accounts one at a time, to prevent crashes.  Multi-account moving will be improved later this month.
 - Fixed countdown/run # limit bug
 - Fixed chat reconnect thottling problem
 - Added chat /reconnect command
@@ -34,45 +35,6 @@ Release 3.1.14a (10/6/09):
 - Chat focus problem
 - Raised item name limit
 
-Release 3.1.14 (10/5/09):
-- Fixed drop parsing
-- Program informs you if you've booted it from Outwar
-- Added Sundernian rooms/mobs. More soon.
-- Chat list won't update unless you're chatting
-- A lot of debugging changes, easier mapping, etc.
-
-Whined to hosting company about those short downtimes that last a few minutes, we'll see if anything changes.
-
-Release 3.1.13a (9/23/09):
-- Spawn drops now reported in spawn log
-
-Rage limit issue is caused by you logging in to Outwar with your browser and booting the program.
-
-Release 3.1.13 (9/22/09):
-- Added spawn list in spawn tab
-- Added "Camp Selected" option for selected spawns
-- Program won't shut down if chat is down
-
-Lots of map/mob updates
-
-Release 3.1.12 (9/18/09):
-- Fixed filter issue
-- Timer can be set to 0 (instantly restart)
-- Mob attacking is more efficient (sorted by room ID)
-- Added support for spawns
-- Added spawn tab with options and log
-- Added "Attack Rooms" option.  This will attack ONLY the rooms that are checked, rather than their areas and is more conducive to camping spawns or attacking large areas
-
-Release 3.1.11a (9/17/09):
-- Consolidated room selection and room id#
-- Added "move to mob" button in Mobs tab
-- Stop at rage changed to "Stop below rage" and is smarter now
-- Set up ignore filters by putting a ! in front (eg., a filter of "!mobname" will NOT attack "mobname")
-- Fixed filter load/saving bugs
-- Filters tab has a flag (*) if filters are enabled
-- Chat tab has a flag (*) if there are new chat messages
-- Cleaned up a bunch of things (removed flying, map building error checks, scrolling in chat, etc.)
-
 End Changes 
 
 Info for the autoupdater: 
@@ -81,4 +43,5 @@ Info for the autoupdater:
  
 <chan>#typpo</chan> 
 <svr>typpo.dyndns.org</svr>
-<port>1942</port> 
+<port>1942</port>
+<map>2009-12-19 02:00</map>

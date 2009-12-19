@@ -568,6 +568,24 @@ namespace DCT.UI
             mNotifyIcon.Visible = Settings.NotifyVisible = showSystrayIconWhenOpenToolStripMenuItem.Checked;
         }
 
+        private void reloadMapDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Toggle(false);
+            Pathfinder.Rooms.Clear();
+            Pathfinder.Mobs.Clear();
+            Pathfinder.Spawns.Clear();
+            Pathfinder.Adventures.Clear();
+
+            LogPanel.Log("Downloading map data...");
+            ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, true);
+
+            LogPanel.Log("Rebuilding views...");
+            BuildViews();
+
+            LogPanel.Log("Done.");
+            Toggle(true);
+        }
+
         private void tabs_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (SelectedTabIndex)
@@ -894,5 +912,6 @@ namespace DCT.UI
         }
 
         #endregion
+
     }
 }

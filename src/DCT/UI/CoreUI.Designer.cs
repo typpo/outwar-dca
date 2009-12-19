@@ -92,6 +92,8 @@ namespace DCT.UI
             this.tabSpawns = new System.Windows.Forms.TabPage();
             this.tabTrainer = new System.Windows.Forms.TabPage();
             this.tabChat = new System.Windows.Forms.TabPage();
+            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
+            this.reloadMapDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.mNotifyMenu.SuspendLayout();
@@ -231,7 +233,9 @@ namespace DCT.UI
             this.minimizeToTrayToolStripMenuItem,
             this.toolStripMenuItem4,
             this.openInBrowserToolStripMenuItem,
-            this.openTyppousToolStripMenuItem});
+            this.openTyppousToolStripMenuItem,
+            this.toolStripMenuItem10,
+            this.reloadMapDataToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
             this.actionsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.actionsToolStripMenuItem.Text = "Actions";
@@ -635,6 +639,18 @@ namespace DCT.UI
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
             // 
+            // toolStripMenuItem10
+            // 
+            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(168, 6);
+            // 
+            // reloadMapDataToolStripMenuItem
+            // 
+            this.reloadMapDataToolStripMenuItem.Name = "reloadMapDataToolStripMenuItem";
+            this.reloadMapDataToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.reloadMapDataToolStripMenuItem.Text = "Reload map data";
+            this.reloadMapDataToolStripMenuItem.Click += new System.EventHandler(this.reloadMapDataToolStripMenuItem_Click);
+            // 
             // CoreUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -733,5 +749,7 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripMenuItem showMyRgsessidToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel lblExpRage;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
+        private System.Windows.Forms.ToolStripMenuItem reloadMapDataToolStripMenuItem;
     }
 }
