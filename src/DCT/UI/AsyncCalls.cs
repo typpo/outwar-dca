@@ -115,17 +115,6 @@ namespace DCT.UI
                 LogPanel.Log("E: Choose at least 1 mob to attack");
                 return;
             }
-
-            /*
-            foreach (int i in MobsPanel.CheckedIndices)
-            {
-                int key = int.Parse(MobsPanel.Mobs[i].SubItems[1].Text);
-                if (!mobs.ContainsKey(key))
-                {
-                    mobs.Add(key, int.Parse(MobsPanel.Mobs[i].SubItems[2].Text));
-                }
-            }
-            */
             
             // sort by value - ie., sort by room number
             List<AttackHandler.MobArg> mobs = new List<AttackHandler.MobArg>();
@@ -274,48 +263,83 @@ namespace DCT.UI
         {
             internal int AcccountIndex {get;private set;}
             internal int Room { get; private set; }
-            public BulkMoveArg(int accountIndex, int room)
+            internal ManualResetEvent Handle {get; private set;}
+            public BulkMoveArg(int accountIndex, int room, ManualResetEvent handle)
             {
                 AcccountIndex = accountIndex;
                 Room = room;
+                Handle = handle;
             }
         }
+
         private void InvokeBulkMove(int room)
         {
-            //if (AccountsPanel.CheckedIndices.Count > 1)
-            //{
-            //    string tmp;
-            //    int n;
-            //    do
-            //    {
-            //        tmp = Util.InputBox.Prompt("Bulk Move", "Move up to how many accounts at once?", "2");
-            //    } while (int.TryParse(tmp, out n));
-            //}
-
             Toggle(false);
+
+            int[] indices = new int[AccountsPanel.CheckedIndices.Count];
+            int i = 0;
             foreach (int index in AccountsPanel.CheckedIndices)
             {
-                ThreadPool.QueueUserWorkItem(DoPathfindCallback, new BulkMoveArg(index, room));
-                //PathfindHandler d = new PathfindHandler(DoPathfind);
-                //d.BeginInvoke(index, room, new AsyncCallback(PathfindCallback), d);
+                indices[i] = AccountsPanel.CheckedIndices[i];
+                i++;
             }
+
+            BulkMoveHandler d = new BulkMoveHandler(DoBulkMove);
+            d.BeginInvoke(indices, room, new AsyncCallback(BulkMoveCallback), d);
+        }
+
+        private void BulkMoveCallback(IAsyncResult ar)
+        {
+            BulkMoveHandler d = (BulkMoveHandler)ar.AsyncState;
+            d.EndInvoke(ar);
+
+            Toggle(true);
+        }
+
+        private delegate void BulkMoveHandler(int[] indices, int room);
+        private void DoBulkMove(int[] indices, int room)
+        {
+            //ManualResetEvent[] doneEvents = new ManualResetEvent[AccountsPanel.CheckedIndices.Count];
+            foreach (int index in indices)
+            {
+                //doneEvents[i] = new ManualResetEvent(false);
+                //ThreadPool.QueueUserWorkItem(DoPathfindCallback, new BulkMoveArg(index, room, doneEvents[i]));
+                //i++;
+
+                DoPathfind(index, room);
+            }
+
+            // TODO we need to wait on a different thread...
+
+            //WaitAllHandler d = new WaitAllHandler(WaitAll);
+            //d.BeginInvoke(doneEvents, new AsyncCallback(WaitAllCallback), d);
+        }
+
+        private delegate void WaitAllHandler(ManualResetEvent[] events);
+        private void WaitAll(ManualResetEvent[] events)
+        {
+            WaitHandle.WaitAll(events);
+        }
+
+        private void WaitAllCallback(IAsyncResult ar)
+        {
+            Toggle(true);
         }
 
         private void PathfindCallback(IAsyncResult ar)
         {
             PathfindHandler d = (PathfindHandler) ar.AsyncState;
             d.EndInvoke(ar);
-            Toggle(true);
         }
-
-        private delegate void PathfindHandler(int accountIndex, int room);
 
         private void DoPathfindCallback(object context)
         {
             BulkMoveArg a = (BulkMoveArg)context;
             DoPathfind(a.AcccountIndex, a.Room);
+            a.Handle.Set();
         }
 
+        private delegate void PathfindHandler(int accountIndex, int room);
         private void DoPathfind(int accountIndex, int room)
         {
             AccountsPanel.Engine[accountIndex].Mover.RefreshRoom();

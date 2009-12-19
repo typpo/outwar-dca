@@ -6,6 +6,9 @@ namespace DCT.Settings
     [XmlRoot("UserEditable")]
     public class UserEditable
     {
+        [XmlElement("LastMapUpdate")]
+        public DateTime LastMapUpdate { get; set; }
+
         [XmlArrayItem("Filter", typeof(string))]
         public string[] MobFilters { get; set; }
         [XmlElement("NotifyVisible")]
@@ -72,6 +75,8 @@ namespace DCT.Settings
 
         public UserEditable()
         {
+            LastMapUpdate = DateTime.MinValue;
+
             MobFilters = new string[0];
 
             NotifyVisible = true;
