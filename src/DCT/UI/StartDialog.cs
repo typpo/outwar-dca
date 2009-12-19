@@ -63,12 +63,12 @@ namespace DCT.UI
                 if (url == "ERROR")
                 {
                     SetStatus("Could not access server.");
-                    txtMain.Text = " Could not access startup server.  If you already had map data saved on your computer, the program should work but you will not receive updates automatically.";
+                    txtMain.Text = " Could not access startup server.  If you already had map data saved on your computer, the program should work but you will not receive software or map updates automatically.";
                     MessageBox.Show(
                         "Could not read startup instructions from server.  If map data has already been saved to your computer, the program should work.\n\nIf this error persists (and you can get to www.typpo.us), please close or adjust any firewall/router/antivirus/antispyware that is blocking this program's connection to the internet.",
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     SetStatus("Attempting to build map data...");
-                    ThreadEngine.DefaultInstance.Do(Pathfinder.BuildMap);
+                    ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, false);
                     SetStatus("Could not contact server");
                     //Globals.Terminate = true;
                     //Application.Exit();
@@ -108,10 +108,28 @@ namespace DCT.UI
                 }
             }
 
-            SetStatus("Building latest DC maps from host site...");
-            ThreadEngine.DefaultInstance.Do(Pathfinder.BuildMap);
-
-            SetStatus("Ready...");
+            string mapupdate = p.Parse("<map>", "</map>");
+            if (mapupdate != "ERROR")
+            {
+                DateTime last = DateTime.ParseExact(mapupdate, "yyyy-MM-dd HH:mm", null);
+                if (last > CoreUI.Instance.Settings.LastMapUpdate)
+                {
+                    // new maps
+                    SetStatus("Building latest DC maps from host site...");
+                    ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, true);
+                    SetStatus("Ready with latest maps...");
+                }
+                else
+                {
+                    ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, false);
+                    SetStatus("Ready...");
+                }
+            }
+            else
+            {
+                ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, false);
+                SetStatus("Could not determine new map status");
+            }
         }
 
         private void SetStatus(string txt)

@@ -25,7 +25,12 @@ namespace DCT.Pathfinding
 
         private static List<List<int>> mAllPaths;
 
-        internal static void BuildMap()
+        internal static void BuildMap(object update)
+        {
+            BuildMap((bool)update);
+        }
+
+        internal static void BuildMap(bool update)
         {
             using (System.Threading.Mutex mutex = new System.Threading.Mutex(false, MUTEX_NAME))
             {
@@ -37,12 +42,12 @@ namespace DCT.Pathfinding
                 }
                 else
                 {
-                    DoBuildMap();
+                    DoBuildMap(update);
                 }
             }
         }
 
-        private static void DoBuildMap()
+        private static void DoBuildMap(bool update)
         {
             Rooms = new List<MappedRoom>();
             Mobs = new List<MappedMob>();
@@ -57,7 +62,7 @@ namespace DCT.Pathfinding
             //*
             for (int i = 0; i < 2 && Rooms.Count < 1; i++)
             {
-                if (!File.Exists("rooms.dat"))
+                if (!File.Exists("rooms.dat") || update)
                 {
                     Download("rooms");
                 }
@@ -94,7 +99,7 @@ namespace DCT.Pathfinding
             string[] parts;
             for (int i = 0; i < 2 && Mobs.Count < 1; i++)
             {
-                if (!File.Exists("mobs.dat"))
+                if (!File.Exists("mobs.dat") || update)
                 {
                     Download("mobs");
                 }
@@ -121,7 +126,7 @@ namespace DCT.Pathfinding
 
             for (int i = 0; i < 2 && Adventures.Count < 1; i++)
             {
-                if (!File.Exists("raids.dat"))
+                if (!File.Exists("raids.dat") || update)
                 {
                     Download("raids");
                 }
@@ -145,7 +150,7 @@ namespace DCT.Pathfinding
 
             for (int i = 0; i < 2 && Spawns.Count < 1; i++)
             {
-                if (!File.Exists("spawns.dat"))
+                if (!File.Exists("spawns.dat") || update)
                 {
                     Download("spawns");
                 }
@@ -176,6 +181,7 @@ namespace DCT.Pathfinding
             try
             {
                 client.DownloadFile("http://typpo.us/maps/" + maptype + ".php", maptype + ".dat");
+                CoreUI.Instance.Settings.LastMapUpdate = DateTime.Now.ToUniversalTime();
             }
             catch (WebException)
             {
