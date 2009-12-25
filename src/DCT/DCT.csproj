@@ -303,9 +303,6 @@
     <None Include="DCT_TemporaryKey.pfx" />
     <None Include="key.snk" />
     <None Include="Properties\app.manifest" />
-    <Compile Include="Security\Auth.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Security\Crypt.cs" />
     <Compile Include="Outwar\World\Room.cs" />
     <Compile Include="Settings\IniWriter.cs" />
