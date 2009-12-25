@@ -11,8 +11,7 @@ namespace DCT.Pathfinding
         internal List<MappedRoom> MappedNeighbors { get; private set; }
 
         internal MappedRoom Pi { get; set; }
-        internal int D { get; set; }
-        internal int State { get; set; }    // 1=white, 2=gray, 3=black
+        internal bool Visited { get; set; }
 
         internal MappedRoom(int id, string name, List<int> nbrs)
         {
@@ -21,8 +20,7 @@ namespace DCT.Pathfinding
             Neighbors = nbrs;
             MappedNeighbors = new List<MappedRoom>();
             Pi = null;
-            D = int.MaxValue;
-            State = 1;
+            Visited = false;
         }
 
         public override string ToString()

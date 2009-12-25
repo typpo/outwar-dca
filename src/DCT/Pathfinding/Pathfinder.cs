@@ -266,8 +266,7 @@ namespace DCT.Pathfinding
                 if (srcidx < 0)
                     return null;
                 MappedRoom source = Rooms[srcidx];
-                source.D = 0;
-                source.State = 2;
+                source.Visited = true;
                 Q.Enqueue(source);
 
                 while (Q.Count > 0)
@@ -280,15 +279,13 @@ namespace DCT.Pathfinding
                     }
                     foreach (MappedRoom neighbor in dequeued.MappedNeighbors)
                     {
-                        if (neighbor.State == 1)
+                        if (!neighbor.Visited)
                         {
-                            neighbor.State = 2;
-                            neighbor.D++;
+                            neighbor.Visited = true;
                             neighbor.Pi = dequeued;
                             Q.Enqueue(neighbor);
                         }
                     }
-                    dequeued.State = 3;
                 }
                 return null;
             }
@@ -298,9 +295,8 @@ namespace DCT.Pathfinding
         {
             foreach (MappedRoom r in Rooms)
             {
-                r.D = int.MaxValue;
                 r.Pi = null;
-                r.State = 1;
+                r.Visited = false;
             }
         }
 

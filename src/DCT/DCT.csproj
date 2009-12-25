@@ -11,7 +11,7 @@
     <AssemblyName>DCT</AssemblyName>
     <ApplicationIcon>Misc\Bad.ico</ApplicationIcon>
     <StartupObject>DCT.Program</StartupObject>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
     <SignManifests>false</SignManifests>
     <DelaySign>false</DelaySign>
