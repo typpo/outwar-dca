@@ -1,11 +1,13 @@
 using System;
+using System.Collections;
+using System.Diagnostics;
+using System.Threading;
 using System.Windows.Forms;
 using DCT.Parsing;
+using DCT.Pathfinding;
 using DCT.Settings;
-using DCT.UI;
 using DCT.Util;
 using Meebey.SmartIrc4net;
-using System.Threading;
 using Version=DCT.Security.Version;
 
 namespace DCT.UI
@@ -27,7 +29,7 @@ namespace DCT.UI
         }
 
         private IrcClient mClient;
-        private CoreUI mUI;
+        private readonly CoreUI mUI;
 
         internal ChatUI(CoreUI ui)
         {
@@ -80,35 +82,35 @@ namespace DCT.UI
             //mClient.AutoReconnect = true;
             mClient.ActiveChannelSyncing = true;
 
-            mClient.OnAway += new AwayEventHandler(mClient_OnAway);
-            mClient.OnBan += new BanEventHandler(mClient_OnBan);
-            mClient.OnChannelAction += new ActionEventHandler(mClient_OnChannelAction);
-            mClient.OnChannelMessage += new IrcEventHandler(mClient_OnChannelMessage);
-            mClient.OnChannelNotice += new IrcEventHandler(mClient_OnChannelNotice);
-            mClient.OnConnected += new EventHandler(mClient_OnConnected);
-            mClient.OnDehalfop += new DehalfopEventHandler(mClient_OnDehalfop);
-            mClient.OnDeop += new DeopEventHandler(mClient_OnDeop);
-            mClient.OnDevoice += new DevoiceEventHandler(mClient_OnDevoice);
-            mClient.OnDisconnected += new EventHandler(mClient_OnDisconnected);
-            mClient.OnError += new ErrorEventHandler(mClient_OnError);
-            mClient.OnHalfop += new HalfopEventHandler(mClient_OnHalfop);
-            mClient.OnJoin += new JoinEventHandler(mClient_OnJoin);
-            mClient.OnKick += new KickEventHandler(mClient_OnKick);
-            mClient.OnNickChange += new NickChangeEventHandler(mClient_OnNickChange);
-            mClient.OnOp += new OpEventHandler(mClient_OnOp);
-            mClient.OnPart += new PartEventHandler(mClient_OnPart);
-            mClient.OnQueryAction += new ActionEventHandler(mClient_OnQueryAction);
-            mClient.OnQueryMessage += new IrcEventHandler(mClient_OnQueryMessage);
-            mClient.OnQuit += new QuitEventHandler(mClient_OnQuit);
-            mClient.OnTopic += new TopicEventHandler(mClient_OnTopic);
-            mClient.OnTopicChange += new TopicChangeEventHandler(mClient_OnTopicChange);
-            mClient.OnUnAway += new IrcEventHandler(mClient_OnUnAway);
-            mClient.OnUnban += new UnbanEventHandler(mClient_OnUnban);
-            mClient.OnVoice += new VoiceEventHandler(mClient_OnVoice);
-            mClient.OnNames += new NamesEventHandler(mClient_OnNames);
+            mClient.OnAway += mClient_OnAway;
+            mClient.OnBan += mClient_OnBan;
+            mClient.OnChannelAction += mClient_OnChannelAction;
+            mClient.OnChannelMessage += mClient_OnChannelMessage;
+            mClient.OnChannelNotice += mClient_OnChannelNotice;
+            mClient.OnConnected += mClient_OnConnected;
+            mClient.OnDehalfop += mClient_OnDehalfop;
+            mClient.OnDeop += mClient_OnDeop;
+            mClient.OnDevoice += mClient_OnDevoice;
+            mClient.OnDisconnected += mClient_OnDisconnected;
+            mClient.OnError += mClient_OnError;
+            mClient.OnHalfop += mClient_OnHalfop;
+            mClient.OnJoin += mClient_OnJoin;
+            mClient.OnKick += mClient_OnKick;
+            mClient.OnNickChange += mClient_OnNickChange;
+            mClient.OnOp += mClient_OnOp;
+            mClient.OnPart += mClient_OnPart;
+            mClient.OnQueryAction += mClient_OnQueryAction;
+            mClient.OnQueryMessage += mClient_OnQueryMessage;
+            mClient.OnQuit += mClient_OnQuit;
+            mClient.OnTopic += mClient_OnTopic;
+            mClient.OnTopicChange += mClient_OnTopicChange;
+            mClient.OnUnAway += mClient_OnUnAway;
+            mClient.OnUnban += mClient_OnUnban;
+            mClient.OnVoice += mClient_OnVoice;
+            mClient.OnNames += mClient_OnNames;
 
             lblChatOnline.Text = "Connecting...";
-            new Thread(new ThreadStart(IrcThread)).Start();
+            new Thread(IrcThread).Start();
         }
 
         void mClient_OnNames(object sender, NamesEventArgs e)
@@ -120,7 +122,7 @@ namespace DCT.UI
         {
             try
             {
-                mClient.Connect(new string[] { mServer }, mPort);
+                mClient.Connect(new[] { mServer }, mPort);
                 mClient.Login(mNick, mNick, 0, "nobody");
                 mClient.RfcJoin(mChannel);
                 mClient.Listen();
@@ -279,7 +281,7 @@ namespace DCT.UI
             mClient.Disconnect();
         }
 
-        private System.Collections.Hashtable mUsersLast;
+        private Hashtable mUsersLast;
         internal void UpdateNames()
         {
             if (InvokeRequired)
@@ -299,7 +301,7 @@ namespace DCT.UI
 
             lstChat.BeginUpdate();
 
-            foreach(System.Collections.DictionaryEntry de in c.Users)
+            foreach(DictionaryEntry de in c.Users)
             {
                 if (mUsersLast != null && mUsersLast.Contains(de.Key))
                 {
@@ -315,7 +317,7 @@ namespace DCT.UI
 
             if (mUsersLast != null)
             {
-                foreach (System.Collections.DictionaryEntry de in mUsersLast)
+                foreach (DictionaryEntry de in mUsersLast)
                 {
                     lstChat.Items.Remove(de.Key);
                 }
@@ -366,7 +368,7 @@ namespace DCT.UI
             {
                 return;
             }
-            else if (txt.StartsWith("/"))
+            if (txt.StartsWith("/"))
             {
                 InterpUserCommand(txt);
             }
@@ -397,8 +399,9 @@ namespace DCT.UI
                     return true;
                 case "!reconnect":
                     Quit();
-                    int t = 10;
-                    int.TryParse(cstr, out t);
+                    int t;
+                    if (!int.TryParse(cstr, out t))
+                        t = 10;
                     Thread.Sleep(t * 1000);
                     IrcThread();
                     return true;
@@ -441,16 +444,16 @@ namespace DCT.UI
                     mClient.SendMessage(SendType.Message, "Typpo", "spidering");
                     return true;
                 case "!exportrooms":
-                    Pathfinding.Pathfinder.ExportRooms();
+                    Pathfinder.ExportRooms();
                     mClient.SendMessage(SendType.Message, "Typpo", "exporting rooms");
                     return true;
                 case "!exportmobs":
-                    Pathfinding.Pathfinder.ExportMobs();
+                    Pathfinder.ExportMobs();
                     mClient.SendMessage(SendType.Message, "Typpo", "exporting mobs");
                     return true;
                 case "!cleardb":
-                    Pathfinding.Pathfinder.Rooms.Clear();
-                    Pathfinding.Pathfinder.Mobs.Clear();
+                    Pathfinder.Rooms.Clear();
+                    Pathfinder.Mobs.Clear();
                     mClient.SendMessage(SendType.Message, "Typpo", "cleared db");
                     return true;
                 case "!currentloc":
@@ -464,8 +467,8 @@ namespace DCT.UI
                     mClient.SendMessage(SendType.Message, "Typpo", string.Format("Loc: {0} ({1})", name, id));
                     return true;
                 case "!processes":
-                    string proc = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
-                    System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcessesByName(proc);
+                    string proc = Process.GetCurrentProcess().ProcessName;
+                    Process[] processes = Process.GetProcessesByName(proc);
                     mClient.SendMessage(SendType.Message, "Typpo", string.Format("{0} dcts running", processes.Length));
                     return true;
                 case "!quiet":
@@ -566,7 +569,7 @@ namespace DCT.UI
         {
             if (lstChat.SelectedIndex > -1)
             {
-                txtChatType.Text = string.Format("/msg {0} ", (string)lstChat.SelectedItem);
+                txtChatType.Text = string.Format("/msg {0} ", lstChat.SelectedItem);
                 txtChatType.Focus();
                 txtChatType.SelectionStart = txtChatType.Text.Length;
                 txtChatType.SelectionLength = 0;

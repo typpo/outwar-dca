@@ -55,28 +55,26 @@ namespace DCT.Outwar.World
                 // hash error
                 return 1;
             }
-            else if (mSource.Contains("you must be carrying") || mSource.Contains("cast on you to enter this room."))
+            if (mSource.Contains("you must be carrying") || mSource.Contains("cast on you to enter this room."))
             {
                 // need a key
                 return 2;
             }
-            else if (mSource.Contains("Rampid Gaming Login"))
+            if (mSource.Contains("Rampid Gaming Login"))
             {
                 // logged out
                 return 4;
             }
-            else
+
+            if (mId == 0)
             {
-                if (mId == 0)
+                string tmp = Parser.Parse(mSource, "&lastroom=", "'");
+                if (!int.TryParse(tmp, out mId))
                 {
-                    string tmp = Parser.Parse(mSource, "&lastroom=", "'");
-                    if (!int.TryParse(tmp, out mId))
-                    {
-                        return 3;
-                    }
+                    return 3;
                 }
-                Name = p.Parse("'font-size:9pt;color:black'><b>- ", " -");
             }
+            Name = p.Parse("'font-size:9pt;color:black'><b>- ", " -");
 
             EnumRooms();
 

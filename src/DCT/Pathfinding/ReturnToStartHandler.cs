@@ -10,7 +10,7 @@ namespace DCT.Pathfinding
         private const int NULL_ROOM = -1;
 
         private int mOriginalRoom;
-        private Account mAccount;
+        private readonly Account mAccount;
 
         internal ReturnToStartHandler(Account a)
         {
@@ -32,8 +32,8 @@ namespace DCT.Pathfinding
 
             CoreUI.Instance.LogPanel.Log("Moving back to starting room...");
 
-            Mover.PathfindHandler d = new Mover.PathfindHandler(mAccount.Mover.PathfindTo);
-            d.BeginInvoke(mOriginalRoom, new AsyncCallback(PathfindCallback), d);
+            Mover.PathfindHandler d = mAccount.Mover.PathfindTo;
+            d.BeginInvoke(mOriginalRoom, PathfindCallback, d);
 
             mOriginalRoom = NULL_ROOM;
         }

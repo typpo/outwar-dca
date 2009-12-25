@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using DCT.Outwar;
 using DCT.Outwar.World;
 using DCT.Pathfinding;
-using DCT.Protocols.Http;
 using DCT.Settings;
 using DCT.Threading;
 using DCT.Util;
@@ -70,13 +70,13 @@ namespace DCT.UI
 
         public UserEditable Settings { get; private set; }
 
-        private AttackPanel mAttackPanel;
+        private readonly AttackPanel mAttackPanel;
         internal MainPanel MainPanel
         {
             get { return mAttackPanel.MainPanel; }
         }
-        private FiltersPanel mFiltersPanel;
-        private TrainPanel mTrainPanel;
+        private readonly FiltersPanel mFiltersPanel;
+        private readonly TrainPanel mTrainPanel;
 
         public CoreUI()
         {
@@ -395,7 +395,7 @@ namespace DCT.UI
             if (AccountsPanel.Engine.MainAccount != null && AccountsPanel.Engine.MainAccount.Mover.MobsAttacked > 1)
             {
                 sb.AppendFormat("\n\n{0} has been attacking mobs for an average of {1} exp per attack.",
-                    AccountsPanel.Engine.MainAccount.Name, (AccountsPanel.Engine.MainAccount.Mover.ExpGained / AccountsPanel.Engine.MainAccount.Mover.MobsAttacked).ToString());
+                    AccountsPanel.Engine.MainAccount.Name, (AccountsPanel.Engine.MainAccount.Mover.ExpGained / AccountsPanel.Engine.MainAccount.Mover.MobsAttacked));
             }
             MessageBox.Show(sb.ToString(), "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -492,7 +492,7 @@ namespace DCT.UI
 
         private void clearLogsPeriodicallyToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-            CoreUI.Instance.Settings.ClearLogs = clearLogsPeriodicallyToolStripMenuItem.Checked;
+            Instance.Settings.ClearLogs = clearLogsPeriodicallyToolStripMenuItem.Checked;
         }
 
         private void CoreUI_ResizeBegin(object sender, EventArgs e)
@@ -558,7 +558,7 @@ namespace DCT.UI
             Close();
         }
 
-        private void mNotifyMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void mNotifyMenu_Opening(object sender, CancelEventArgs e)
         {
             openToolStripMenuItem.Enabled = !Visible;
         }
@@ -616,14 +616,14 @@ namespace DCT.UI
             ThreadEngine.DefaultInstance.DoParameterized(new ThreadEngine.ParameterizedThreadHandler(
                 AccountsPanel.Engine.MainAccount.Mover.Spider), str);
 
-            CoreUI.Instance.BuildViews();
+            Instance.BuildViews();
 
             ToggleAttack(false);
         }
 
         private void benchmarkToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(Pathfinder.Benchmark));
+            Thread t = new Thread(Pathfinder.Benchmark);
             t.Start(1000);
         }
 
@@ -641,7 +641,7 @@ namespace DCT.UI
             }
             if (MessageBox.Show(
      string.Format("Do you want to copy to clipboard?\n\n{0}",
-     sb.ToString()), "Path test", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+     sb), "Path test", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Clipboard.SetText(sb.ToString());
             }
@@ -826,7 +826,7 @@ namespace DCT.UI
             int countFor;
             if (Settings.UseCountdownTimer)
             {
-                countFor = ((int)MainPanel.CountdownValue) * 60;
+                countFor = (MainPanel.CountdownValue) * 60;
             }
             else
             {
@@ -836,9 +836,9 @@ namespace DCT.UI
             mCountdownTimer = new CountDownTimer(countFor);
 
             mCountdownTimer.Interval = 1000;
-            mCountdownTimer.Tick += new EventHandler(t_Tick);
-            mCountdownTimer.Started += new EventHandler(t_Started);
-            mCountdownTimer.Stopped += new EventHandler(t_Stopped);
+            mCountdownTimer.Tick += t_Tick;
+            mCountdownTimer.Started += t_Started;
+            mCountdownTimer.Stopped += t_Stopped;
             mCountdownType = type;
 
             mCountdownTimer.Start();

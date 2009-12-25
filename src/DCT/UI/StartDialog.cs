@@ -44,9 +44,13 @@ namespace DCT.UI
             Parser p = new Parser(src);
             CoreUI.Instance.ChatPanel.Channel = p.Parse("<chan>", "</chan>");
             CoreUI.Instance.ChatPanel.Server = p.Parse("<svr>", "</svr>");
-            int tmp = 6667;
+            int tmp;
             if (int.TryParse(p.Parse("<port>", "</port>"), out tmp))
                 CoreUI.Instance.ChatPanel.Port = tmp;
+            else
+            {
+                CoreUI.Instance.ChatPanel.Port = 6667;
+            }
             CoreUI.Instance.Changes = p.Parse("Change History:", "End Changes").Replace("\r", "").Trim();
 
             if (src.Contains("<msg>"))
@@ -111,10 +115,9 @@ namespace DCT.UI
             string mapupdate = p.Parse("<map>", "</map>");
             if (mapupdate != "ERROR")
             {
-                DateTime last;
                 try
                 {
-                    last = DateTime.ParseExact(mapupdate, "yyyy-MM-dd HH:mm", null);
+                    DateTime last = DateTime.ParseExact(mapupdate, "yyyy-MM-dd HH:mm", null);
 
                     if (last > CoreUI.Instance.Settings.LastMapUpdate)
                     {

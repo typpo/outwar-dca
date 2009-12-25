@@ -1,16 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DCT.UI
 {
     internal partial class TrainPanel : UserControl
     {
-        private CoreUI mUI;
+        private readonly CoreUI mUI;
 
         internal bool TrainEnabled
         {

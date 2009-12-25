@@ -1,16 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Net;
 using System.IO;
-using DCT.Outwar.World;
+using System.Net;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 using DCT.Protocols.Http;
 using DCT.Security;
-using DCT.Settings;
-using DCT.Threading;
-using DCT.Util;
 using DCT.UI;
+using DCT.Util;
 
 namespace DCT.Pathfinding
 {
@@ -30,12 +28,12 @@ namespace DCT.Pathfinding
 
         internal static void BuildMap(bool update)
         {
-            using (System.Threading.Mutex mutex = new System.Threading.Mutex(false, MUTEX_NAME))
+            using (Mutex mutex = new Mutex(false, MUTEX_NAME))
             {
                 if (!mutex.WaitOne(0, true))
                 {
-                    System.Windows.Forms.MessageBox.Show("Can't build multiple maps at once.", "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-                    System.Windows.Forms.Application.Exit();
+                    MessageBox.Show("Can't build multiple maps at once.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
                     return;
                 }
                 else
@@ -68,12 +66,12 @@ namespace DCT.Pathfinding
                 if ((map = ReadDecrypt("rooms")) == null)
                     continue;
 
-                foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (string token in map.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
                         continue;
 
-                    tmp = token.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    tmp = token.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                     if (!int.TryParse(tmp[0], out id))
                     {
                         continue;
@@ -105,11 +103,11 @@ namespace DCT.Pathfinding
                 }
                 if ((map = ReadDecrypt("mobs")) == null)
                     continue;
-                foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (string token in map.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
                         continue;
-                    parts = token.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    parts = token.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                     if (parts.Length != 5)
                     {
                         // not good input
@@ -133,7 +131,7 @@ namespace DCT.Pathfinding
                 if ((map = ReadDecrypt("raids")) == null)
                     continue;
 
-                foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (string token in map.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
                         continue;
@@ -156,11 +154,11 @@ namespace DCT.Pathfinding
                 }
                 if ((map = ReadDecrypt("spawns")) == null)
                     continue;
-                foreach (string token in map.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (string token in map.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     if (string.IsNullOrEmpty(token.Trim()) || token.StartsWith("#"))
                         continue;
-                    parts = token.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    parts = token.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                     if (parts.Length != 3)
                     {
                         // not good input
@@ -341,8 +339,7 @@ namespace DCT.Pathfinding
                 }
             }
 
-            List<int> ret = new List<int>();
-            ret = BFS(start, idList[0]);
+            List<int> ret = BFS(start, idList[0]);
             if (ret == null)
             {
                 return null;
@@ -377,7 +374,7 @@ namespace DCT.Pathfinding
                 TimeSpan duration = stopTime - startTime;
                 total += duration.Milliseconds;
             }
-            Console.WriteLine(string.Format("Ran {0} tests, average {1} ms", j, total / (double)j));
+            Console.WriteLine(string.Format("Ran {0} tests, average {1} ms", j, total / j));
         }
 
         /// <summary>
@@ -399,7 +396,7 @@ namespace DCT.Pathfinding
         {
             StringBuilder sb = new StringBuilder();
             foreach(MappedRoom rm in Rooms)
-                sb.AppendFormat("{0}\n", rm.ToString());
+                sb.AppendFormat("{0}\n", rm);
 
             FileIO.SaveFileFromString("Export Rooms", "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
                                       "DCT Rooms " + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second, sb.ToString());
@@ -409,7 +406,7 @@ namespace DCT.Pathfinding
         {
             StringBuilder sb = new StringBuilder();
             foreach (MappedMob mb in Mobs)
-                sb.AppendFormat("{0}\n", mb.ToString());
+                sb.AppendFormat("{0}\n", mb);
  
             FileIO.SaveFileFromString("Export Mobs", "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
                                       "DCT Mobs " + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second, sb.ToString());

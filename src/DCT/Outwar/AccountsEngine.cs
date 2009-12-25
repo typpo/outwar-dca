@@ -19,10 +19,7 @@ namespace DCT.Outwar
                 {
                     return null;
                 }
-                else
-                {
-                    return Accounts[mMainIndex];
-                }
+                return Accounts[mMainIndex];
             }
         }
 

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Threading;
 using DCT.Outwar;
 using DCT.Outwar.World;
 using DCT.Pathfinding;
 using DCT.Settings;
+using DCT.Threading;
 
 namespace DCT.UI
 {
@@ -85,8 +85,8 @@ namespace DCT.UI
 
                 if (done.Contains(rooms[rm]))
                     continue;
-                else
-                    done.Add(rooms[rm]);
+
+                done.Add(rooms[rm]);
 
                 Globals.AttackOn = false;
 
@@ -250,7 +250,7 @@ namespace DCT.UI
                 LogPanel.Log("E: Check the accounts you want to move.");
                 return;
             }
-            else if (RaidsPanel.FocusedRaid == null)
+            if (RaidsPanel.FocusedRaid == null)
             {
                 LogPanel.Log("E: Choose an adventure to move to.");
                 return;
@@ -277,15 +277,13 @@ namespace DCT.UI
             Toggle(false);
 
             int[] indices = new int[AccountsPanel.CheckedIndices.Count];
-            int i = 0;
-            foreach (int index in AccountsPanel.CheckedIndices)
+            for (int i = 0; i < indices.Length; i++)
             {
                 indices[i] = AccountsPanel.CheckedIndices[i];
-                i++;
             }
 
-            BulkMoveHandler d = new BulkMoveHandler(DoBulkMove);
-            d.BeginInvoke(indices, room, new AsyncCallback(BulkMoveCallback), d);
+            BulkMoveHandler d = DoBulkMove;
+            d.BeginInvoke(indices, room, BulkMoveCallback, d);
         }
 
         private void BulkMoveCallback(IAsyncResult ar)
@@ -321,7 +319,6 @@ namespace DCT.UI
             a.Handle.Set();
         }
 
-        private delegate void PathfindHandler(int accountIndex, int room);
         private void DoPathfind(int accountIndex, int room)
         {
             AccountsPanel.Engine[accountIndex].Mover.RefreshRoom();
@@ -346,11 +343,11 @@ namespace DCT.UI
             {
                 AccountsPanel.Engine[index].Mover.RefreshRoom();
                 AccountsPanel.Engine[index].Mover.ReturnToStartHandler.SetOriginal();
-                DCT.Threading.ThreadEngine.DefaultInstance.Enqueue(AccountsPanel.Engine[index].Mover.Train);
+                ThreadEngine.DefaultInstance.Enqueue(AccountsPanel.Engine[index].Mover.Train);
             }
 
-            // TODO this needs to go
-            DCT.Threading.ThreadEngine.DefaultInstance.ProcessAll();
+            // TODO this needs to go - convert to ThreadPool
+            ThreadEngine.DefaultInstance.ProcessAll();
 
             if (returnToStart)
             {
@@ -362,17 +359,6 @@ namespace DCT.UI
                 }
             }
 
-            Toggle(true);
-        }
-
-        private void InvokeReturn(int index)
-        {
-            //MethodInvoker d = new MethodInvoker(mAccountsPanel.Engine[index].Mover.ReturnToStartHandler.Return);
-            //d.BeginInvoke(new AsyncCallback(TrainingReturnCallback), d);
-        }
-
-        private void TrainingReturnCallback(IAsyncResult ar)
-        {
             Toggle(true);
         }
 

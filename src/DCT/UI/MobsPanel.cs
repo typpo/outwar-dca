@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Text;
 using System.Windows.Forms;
-using DCT.Util;
 using DCT.Pathfinding;
+using DCT.Util;
 
 namespace DCT.UI
 {
@@ -38,7 +35,7 @@ namespace DCT.UI
             set { btnMobGo.Enabled = value; }
         }
 
-        private CoreUI mUI;
+        private readonly CoreUI mUI;
 
         internal MobsPanel(CoreUI ui)
         {
@@ -54,7 +51,7 @@ namespace DCT.UI
                 if (mb != null)
                 {
                     ListViewItem tmp = new ListViewItem(
-                            new string[]
+                            new[]
                                 {
                                     mb.Name, mb.Id.ToString(), mb.Room.ToString(),
                                     mb.Level.ToString(), mb.Rage.ToString()
@@ -105,7 +102,7 @@ namespace DCT.UI
                 return;
             }
             int i = 0;
-            foreach (string l in s.Split(new char[] { ',', '\n', '\r', ';', '\t' }))
+            foreach (string l in s.Split(new[] { ',', '\n', '\r', ';', '\t' }))
             {
                 i += SelectMobsByName(l);
             }
@@ -148,7 +145,7 @@ namespace DCT.UI
             string input = InputBox.Prompt("Mob Selection", "Check all mobs with the following names (separated by commas):");
             if (string.IsNullOrEmpty(input))
                 return;
-            foreach (string s in input.Split(new char[] { ',' }))
+            foreach (string s in input.Split(new[] { ',' }))
             {
                 i += SelectMobsByName(s.Trim());
             }

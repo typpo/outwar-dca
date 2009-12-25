@@ -1,11 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
 
 namespace DCT.UI
 {
@@ -23,7 +18,7 @@ namespace DCT.UI
             set { chkFilter.Checked = value; }
         }
 
-        private CoreUI mUI;
+        private readonly CoreUI mUI;
 
         internal FiltersPanel(CoreUI ui)
         {
@@ -41,19 +36,12 @@ namespace DCT.UI
 
         internal void UpdateTab()
         {
-            if (CoreUI.Instance.Settings.FilterMobs)
-            {
-                mUI.Tabs.TabPages[CoreUI.TABINDEX_FILTERS].Text = "Filters (*)";
-            }
-            else
-            {
-                mUI.Tabs.TabPages[CoreUI.TABINDEX_FILTERS].Text = "Filters";
-            }
+            mUI.Tabs.TabPages[CoreUI.TABINDEX_FILTERS].Text = CoreUI.Instance.Settings.FilterMobs ? "Filters (*)" : "Filters";
         }
 
         private void txtFilters_TextChanged(object sender, EventArgs e)
         {
-            string[] ss = txtFilters.Text.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] ss = txtFilters.Text.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             // trim spaces
             for(int i = 0; i < ss.Length; i++)
             {
@@ -74,16 +62,14 @@ namespace DCT.UI
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                if ((myStream = saveFileDialog1.OpenFile()) != null)
-                {
-                    StreamWriter wText = new StreamWriter(myStream);
+                myStream = saveFileDialog1.OpenFile();
+                StreamWriter wText = new StreamWriter(myStream);
 
-                    wText.Write(FiltersText);
+                wText.Write(FiltersText);
 
-                    wText.Flush();
-                    wText.Close();
-                    myStream.Close();
-                }
+                wText.Flush();
+                wText.Close();
+                myStream.Close();
             }
 
             mUI.Toggle(true);

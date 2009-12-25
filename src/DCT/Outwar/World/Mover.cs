@@ -1,16 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net;
 using System.Windows.Forms;
-using System.Text;
 using DCT.Pathfinding;
 using DCT.Protocols.Http;
-using DCT.Security;
 using DCT.Settings;
 using DCT.UI;
-using DCT.Parsing;
-using Version=DCT.Security.Version;
 
 namespace DCT.Outwar.World
 {
@@ -335,10 +329,7 @@ namespace DCT.Outwar.World
                 {
                     CoreUI.Instance.LogPanel.Log(Account.Name + " teleporting...");
 
-                    string tmp = Account.Socket.Get("world.php?teleport=1");
-                    //Parser p = new Parser(tmp);
-                    //string url = p.Parse("window.location=\"http://" + Account.Server + ".outwar.com/", "\"");
-                    //LoadRoom(url);
+                    Account.Socket.Get("world.php?teleport=1");
                     RefreshRoom();
                     nodes = Pathfinder.BFS(Location.Id, roomid);
                 }
@@ -418,6 +409,7 @@ namespace DCT.Outwar.World
         /// Attempts to move to a room as per specific id#
         /// </summary>
         /// <param name="id">Room id to move to</param>
+        /// <param name="tries">Try # that it's on - will call recursively til limit is met</param>
         private bool TryRoom(int id, int tries)
         {
             if (id == Location.Id)

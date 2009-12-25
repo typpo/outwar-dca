@@ -37,7 +37,6 @@ namespace DCT.Outwar.World
                 bool ignorefilter = false;
                 bool passedignore = true;
                 bool normalfilter = false;
-                bool passednormal = true;
 
                 foreach (string str in CoreUI.Instance.Settings.MobFilters)
                 {
@@ -52,20 +51,18 @@ namespace DCT.Outwar.World
                         normalfilter = true;
                         if (mName.ToLower().Contains(str))
                             return true;    // matches, so return true unconditionally
-                        else
-                            passednormal = false;
                     }
                 }
 
                 if (ignorefilter && normalfilter)
                 {
-                    return passednormal;
+                    return false;
                 }
-                else if (ignorefilter)
+                if (ignorefilter)
                 {
                     return passedignore;
                 }
-                else if (normalfilter)
+                if (normalfilter)
                 {
                     // this should never happen
                 }
@@ -145,7 +142,8 @@ namespace DCT.Outwar.World
                 {
                     return false;
                 }
-                else if (mRoom.Mover.Account.Rage > -1 && mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
+
+                if (mRoom.Mover.Account.Rage > -1 && mRoom.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
                 {
                     // TODO this all needs cleaning
                     // go to next account
@@ -347,8 +345,8 @@ namespace DCT.Outwar.World
             }
 
             // Launch attack thread
-            MethodInvoker d = new MethodInvoker(SendAttack);
-            d.BeginInvoke(new AsyncCallback(AttackCallback), d);
+            MethodInvoker d = SendAttack;
+            d.BeginInvoke(AttackCallback, d);
 
             return true;
         }
@@ -432,13 +430,13 @@ namespace DCT.Outwar.World
                 SendAttack();
                 return;
             }
-            else if (src.Contains("an existing connection was forcibly closed by the remote host"))
+            if (src.Contains("an existing connection was forcibly closed by the remote host"))
             {
                 CoreUI.Instance.LogPanel.Log("Attack on " + mName + " failed - connection forcibly closed by server");
                 SendAttack();
                 return;
             }
-            else if (src.Contains("underlying connection was closed"))
+            if (src.Contains("underlying connection was closed"))
             {
                 CoreUI.Instance.LogPanel.Log("Attack on " + mName + " failed - underlying connection closed by server");
                 SendAttack();

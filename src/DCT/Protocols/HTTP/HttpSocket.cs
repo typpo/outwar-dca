@@ -1,10 +1,9 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Net.Cache;
 using System.Text;
-using DCT.Util;
 using DCT.UI;
+using DCT.Util;
 
 namespace DCT.Protocols.Http
 {
@@ -33,10 +32,8 @@ namespace DCT.Protocols.Http
                 if (mIP == null)
                 {
                     mIP = DefaultInstance.Get("http://typpo.dyndns.org:7012/auth/ip.php");
-                    return mIP;
                 }
-                else
-                    return mIP;
+                return mIP;
             }
         }
         internal bool Redirect { get; set; }

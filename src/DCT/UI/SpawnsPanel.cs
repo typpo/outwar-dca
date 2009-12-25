@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using DCT.Util;
@@ -12,7 +9,7 @@ namespace DCT.UI
 {
     public partial class SpawnsPanel : UserControl
     {
-        CoreUI mUI = null;
+        private readonly CoreUI mUI;
 
         internal ListView.ListViewItemCollection Spawns
         {
@@ -215,7 +212,7 @@ namespace DCT.UI
             string id = InputBox.Prompt("Add Spawn", "Enter spawn's room id# (this is important):");
             if (string.IsNullOrEmpty(id))
                 return;
-            int roomid = -1;
+            int roomid;
             if (!int.TryParse(id, out roomid) || Pathfinder.FindRoom(roomid) < 0)
             {
                 MessageBox.Show("Invalid room id#", "Add Spawn", MessageBoxButtons.OK, MessageBoxIcon.Error);

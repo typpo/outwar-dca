@@ -1,9 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using DCT.Pathfinding;
 
@@ -37,7 +33,7 @@ namespace DCT.UI
             set { btnAdventuresGo.Enabled = value; }
         }
 
-        private CoreUI mUI;
+        private readonly CoreUI mUI;
 
         internal RaidsPanel(CoreUI ui)
         {

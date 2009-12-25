@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using DCT.Util;
@@ -38,7 +35,7 @@ namespace DCT.UI
             set { btnPathfind.Enabled = value; }
         }
 
-        private CoreUI mUI;
+        private readonly CoreUI mUI;
 
         internal RoomsPanel(CoreUI ui)
         {

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using DCT.Outwar.World;
 using DCT.Parsing;
 using DCT.Protocols.Http;
@@ -63,10 +62,7 @@ namespace DCT.Outwar
 
             long.TryParse(mm.Parse("EXP:</b> ", "</div>").Trim().Replace(",", ""), out mExp);
 
-            if (source.Contains("LEVEL!"))
-                NeedsLevel = true;
-            else
-                NeedsLevel = false;
+            NeedsLevel = source.Contains("LEVEL!");
         }
     }
 }

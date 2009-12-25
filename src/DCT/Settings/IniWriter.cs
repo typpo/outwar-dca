@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using DCT.UI;
 
@@ -53,12 +50,10 @@ namespace DCT.Settings
 
         internal static void Get()
         {
-            FileStream fs = null;
-
+            StreamReader sr = null;
             try
             {
                 string input;
-                StreamReader sr;
 
                 if (File.Exists(STR_SavedRoomsini))
                 {
@@ -130,8 +125,8 @@ namespace DCT.Settings
             }
             finally
             {
-                if (fs != null)
-                    fs.Close();
+                if (sr != null)
+                    sr.Close();
             }
         }
     }

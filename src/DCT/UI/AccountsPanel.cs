@@ -1,18 +1,27 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using DCT.Outwar;
 using DCT.Pathfinding;
 using DCT.Protocols.Http;
+using DCT.Util;
 
 namespace DCT.UI
 {
     public partial class AccountsPanel : UserControl
     {
+        private readonly AccountsEngine mEngine;
+        private readonly CoreUI mUI;
+        private bool mEnabled;
+
+        internal AccountsPanel(CoreUI ui)
+        {
+            mUI = ui;
+            mEngine = new AccountsEngine();
+
+            InitializeComponent();
+        }
+
         internal ListView.ListViewItemCollection Accounts
         {
             get { return lvAccounts.Items; }
@@ -38,7 +47,6 @@ namespace DCT.UI
             get { return lvAccounts.FocusedItem; }
         }
 
-        private bool mEnabled;
         internal bool ChangeAllowed
         {
             get { return mEnabled; }
@@ -65,20 +73,9 @@ namespace DCT.UI
             set { txtPassword.Text = value; }
         }
 
-        private AccountsEngine mEngine;
         internal AccountsEngine Engine
         {
             get { return mEngine; }
-        }
-
-        private CoreUI mUI;
-
-        internal AccountsPanel(CoreUI ui)
-        {
-            mUI = ui;
-            mEngine = new AccountsEngine();
-
-            InitializeComponent();
         }
 
         private void lvAccounts_SelectedIndexChanged(object sender, EventArgs e)
@@ -117,14 +114,15 @@ namespace DCT.UI
 
         private void lnkChkServer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string input = DCT.Util.InputBox.Prompt("Check Server", "Enter server name:");
+            string input = InputBox.Prompt("Check Server", "Enter server name:");
             if (string.IsNullOrEmpty(input))
                 return;
             input = char.ToUpper(input[0]) + input.Substring(1).ToLower();
             int i = Server.NamesList.IndexOf(input);
             if (i < 0)
             {
-                MessageBox.Show("Could not match server, check spelling.", "Check Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Could not match server, check spelling.", "Check Server", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
                 return;
             }
             foreach (ListViewItem item in lvAccounts.Groups[i].Items)
@@ -142,7 +140,6 @@ namespace DCT.UI
                 Login();
         }
 
-        private delegate void ButtonClickHandler(object sender, EventArgs e);
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             if (InvokeRequired)
@@ -188,7 +185,8 @@ namespace DCT.UI
         {
             if (Pathfinder.Rooms.Count == 0)
             {
-                mUI.LogPanel.Log("E: You are either using an incorrect version of the program or the program was unable to reach the map server.  Make sure your antivirus, antispyware, firewall, router, etc. are not blocking the program's connection to the internet.");
+                mUI.LogPanel.Log(
+                    "E: You are either using an incorrect version of the program or the program was unable to reach the map server.  Make sure your antivirus, antispyware, firewall, router, etc. are not blocking the program's connection to the internet.");
                 //return;
             }
 
@@ -199,11 +197,9 @@ namespace DCT.UI
 
             mUI.LogPanel.Log("Logging in...");
 
-            if(!login_normal.IsBusy)
+            if (!login_normal.IsBusy)
                 login_normal.RunWorkerAsync();
         }
-
-        private delegate void LoginCallbackHandler(int n);
 
         private void LoginCallback(int n)
         {
@@ -220,14 +216,15 @@ namespace DCT.UI
                 btnLogin.Enabled = true;
                 btnLogout.Enabled = false;
                 btnRefresh.Enabled = false;
-                mUI.LogPanel.Log("E: Outwar rejected your login.  Make sure you're putting in the correct Rampid Gaming Account information.");
+                mUI.LogPanel.Log(
+                    "E: Outwar rejected your login.  Make sure you're putting in the correct Rampid Gaming Account information.");
             }
             else
             {
                 for (int i = mEngine.Count - n; i < mEngine.Count; i++)
                 {
                     Account a = mEngine.Accounts[i];
-                    ListViewItem item = new ListViewItem(new string[] { a.Name, "Loaded", "-", "0", "0", "0" });
+                    var item = new ListViewItem(new[] {a.Name, "Loaded", "-", "0", "0", "0"});
                     lvAccounts.Groups[Server.NameToId(a.Server) - 1].Items.Add(item);
                     lvAccounts.Items.Add(item);
                 }
@@ -242,8 +239,6 @@ namespace DCT.UI
             btnLogout.Enabled = true;
             btnRefresh.Enabled = true;
         }
-
-        private delegate int LoginHandler();
 
         /// <summary>
         /// 
@@ -267,8 +262,8 @@ namespace DCT.UI
 
         internal void ShowRgSessIdDialog()
         {
-            int i = 0;
-            string input = DCT.Util.InputBox.Prompt("Session ID Input", "Enter your rg_sess_id instead of logging in.  This will allow you to run multiple DCAs on the same account:");
+            string input = InputBox.Prompt("Session ID Input",
+                                           "Enter your rg_sess_id instead of logging in.  This will allow you to run multiple DCAs on the same account:");
             if (string.IsNullOrEmpty(input))
                 return;
 
@@ -290,18 +285,29 @@ namespace DCT.UI
 
         private void login_normal_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            LoginCallback((int)e.Result);
+            LoginCallback((int) e.Result);
         }
 
         private void login_rgsessid_DoWork(object sender, DoWorkEventArgs e)
         {
-            e.Result = DoLoginRgSessId((string)e.Argument);
+            e.Result = DoLoginRgSessId((string) e.Argument);
         }
 
         private void login_rgsessid_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            LoginCallback((int)e.Result);
+            LoginCallback((int) e.Result);
         }
 
+        #region Nested type: ButtonClickHandler
+
+        private delegate void ButtonClickHandler(object sender, EventArgs e);
+
+        #endregion
+
+        #region Nested type: LoginCallbackHandler
+
+        private delegate void LoginCallbackHandler(int n);
+
+        #endregion
     }
 }

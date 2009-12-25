@@ -1,9 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DCT.UI
@@ -54,7 +49,7 @@ namespace DCT.UI
 
         internal MainPanel MainPanel { get; private set; }
 
-        private CoreUI mUI;
+        private readonly CoreUI mUI;
 
         internal AttackPanel(CoreUI ui)
         {

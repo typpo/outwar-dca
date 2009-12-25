@@ -1,12 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using DCT.Outwar.World;
-using DCT.Util;
 using DCT.Settings;
 
 namespace DCT.UI
@@ -132,7 +125,7 @@ namespace DCT.UI
             set { numCountdown.Value = value; }
         }
 
-        private CoreUI mUI;
+        private readonly CoreUI mUI;
 
         internal MainPanel(CoreUI ui)
         {
@@ -150,7 +143,7 @@ namespace DCT.UI
                 {
                     mUI.CountdownTimer.CurrentCountdown = CountdownValue * 60;
                 }
-                chkHourTimer.Checked = mUI.Settings.UseHourTimer = !b;
+                chkHourTimer.Checked = mUI.Settings.UseHourTimer = false;
 
             }
             mUI.Settings.UseCountdownTimer = b;
@@ -165,7 +158,7 @@ namespace DCT.UI
                 {
                     mUI.CountdownTimer.CurrentCountdown = mUI.SecondsUntilHour();
                 }
-                chkCountdownTimer.Checked = mUI.Settings.UseCountdownTimer = !b;
+                chkCountdownTimer.Checked = mUI.Settings.UseCountdownTimer = false;
 
             }
             mUI.Settings.UseHourTimer = b;
