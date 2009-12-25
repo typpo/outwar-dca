@@ -299,40 +299,21 @@ namespace DCT.UI
         private delegate void BulkMoveHandler(int[] indices, int room);
         private void DoBulkMove(int[] indices, int room)
         {
-            //ManualResetEvent[] doneEvents = new ManualResetEvent[AccountsPanel.CheckedIndices.Count];
+            ManualResetEvent[] doneEvents = new ManualResetEvent[AccountsPanel.CheckedIndices.Count];
+            int i = 0;
             foreach (int index in indices)
             {
-                //doneEvents[i] = new ManualResetEvent(false);
-                //ThreadPool.QueueUserWorkItem(DoPathfindCallback, new BulkMoveArg(index, room, doneEvents[i]));
-                //i++;
+                doneEvents[i] = new ManualResetEvent(false);
+                ThreadPool.QueueUserWorkItem(DoBulkMoveCallback, new BulkMoveArg(index, room, doneEvents[i]));
+                i++;
 
-                DoPathfind(index, room);
+                //DoPathfind(index, room);
             }
 
-            // TODO we need to wait on a different thread...
-
-            //WaitAllHandler d = new WaitAllHandler(WaitAll);
-            //d.BeginInvoke(doneEvents, new AsyncCallback(WaitAllCallback), d);
+            WaitHandle.WaitAll(doneEvents);
         }
 
-        private delegate void WaitAllHandler(ManualResetEvent[] events);
-        private void WaitAll(ManualResetEvent[] events)
-        {
-            WaitHandle.WaitAll(events);
-        }
-
-        private void WaitAllCallback(IAsyncResult ar)
-        {
-            Toggle(true);
-        }
-
-        private void PathfindCallback(IAsyncResult ar)
-        {
-            PathfindHandler d = (PathfindHandler) ar.AsyncState;
-            d.EndInvoke(ar);
-        }
-
-        private void DoPathfindCallback(object context)
+        private void DoBulkMoveCallback(object context)
         {
             BulkMoveArg a = (BulkMoveArg)context;
             DoPathfind(a.AcccountIndex, a.Room);

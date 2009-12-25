@@ -23,8 +23,6 @@ namespace DCT.Pathfinding
         internal static SortedList<string, int> Adventures { get; private set; }
         internal static List<MappedMob> Spawns { get; private set; }
 
-        private static List<List<int>> mAllPaths;
-
         internal static void BuildMap(object update)
         {
             BuildMap((bool)update);
@@ -264,44 +262,40 @@ namespace DCT.Pathfinding
 
         internal static List<int> BFS(int s, int d)
         {
-            InitBFSVertices();
-            Queue<MappedRoom> Q = new Queue<MappedRoom>();
-            int srcidx = FindRoom(s);    // logn
-            if (srcidx < 0)
-                return null;
-            MappedRoom source = Rooms[srcidx];
-            source.D = 0;
-            source.State = 2;
-            Q.Enqueue(source);
-
-            while (Q.Count > 0)
+            lock (Rooms)
             {
-                MappedRoom dequeued = Q.Dequeue();
-                if (dequeued.Id == d)
+                InitBFSVertices();
+                Queue<MappedRoom> Q = new Queue<MappedRoom>();
+                int srcidx = FindRoom(s);    // logn
+                if (srcidx < 0)
+                    return null;
+                MappedRoom source = Rooms[srcidx];
+                source.D = 0;
+                source.State = 2;
+                Q.Enqueue(source);
+
+                while (Q.Count > 0)
                 {
-                    // return a result
-                    return BFSPath(source, dequeued);
-                }
-                //foreach (int nbr in dequeued.Neighbors)
-                foreach (MappedRoom neighbor in dequeued.MappedNeighbors)
-                {
-                    /*
-                    int nbridx = FindRoom(nbr);     // bummer O(logV).  which brings it to O(V+ElogV), no?
-                    if (nbridx < 0)
-                        continue;
-                    MappedRoom neighbor = Rooms[nbridx];
-                    */
-                    if (neighbor.State == 1)
+                    MappedRoom dequeued = Q.Dequeue();
+                    if (dequeued.Id == d)
                     {
-                        neighbor.State = 2;
-                        neighbor.D++;
-                        neighbor.Pi = dequeued;
-                        Q.Enqueue(neighbor);
+                        // return a result
+                        return BFSPath(source, dequeued);
                     }
+                    foreach (MappedRoom neighbor in dequeued.MappedNeighbors)
+                    {
+                        if (neighbor.State == 1)
+                        {
+                            neighbor.State = 2;
+                            neighbor.D++;
+                            neighbor.Pi = dequeued;
+                            Q.Enqueue(neighbor);
+                        }
+                    }
+                    dequeued.State = 3;
                 }
-                dequeued.State = 3;
+                return null;
             }
-            return null;
         }
 
         private static void InitBFSVertices()
@@ -356,7 +350,7 @@ namespace DCT.Pathfinding
             }
 
             List<int> ret = new List<int>();
-            ret = GetSolution(start, idList[0]);
+            ret = BFS(start, idList[0]);
             if (ret == null)
             {
                 return null;
@@ -364,9 +358,7 @@ namespace DCT.Pathfinding
 
             for(int i = 1; i < idList.Count; i++)
             {
-                List<int> tmp = GetPath(idList[i - 1], idList[i]);
-                //if(CoreUI.Instance.Settings.Fly)
-                //    tmp = savedRooms.Optimize(tmp);
+                List<int> tmp = BFS(idList[i - 1], idList[i]);
                 if (tmp != null)
                 {
                     ret.AddRange(tmp);
@@ -378,7 +370,7 @@ namespace DCT.Pathfinding
 
         internal static void Benchmark(object n)
         {
-            long total = 0;
+            double total = 0.0;
             int j = (int)n;
             Console.WriteLine("Running...");
             for (int i = 0; i < j; i++)
@@ -393,127 +385,7 @@ namespace DCT.Pathfinding
                 TimeSpan duration = stopTime - startTime;
                 total += duration.Milliseconds;
             }
-            Console.WriteLine(string.Format("Ran {0} tests, average {1}", j, total / j));
-        }
-
-        internal static List<int> GetSolution(int start, int finish)
-        {
-            return BFS(start, finish);
-
-            /*
-
-            mAllPaths = new List<List<int>>();
-
-            mAllPaths.Add(GetPath(start, finish));
-
-            List<int> bestPath = mAllPaths[0];
-            for (int i = 0; i < mAllPaths.Count; i++)
-            {
-                List<int> tmpPath = mAllPaths[i];
-                if (tmpPath == null)
-                {
-                    continue;
-                }
-                if (bestPath == null || (tmpPath.Count < bestPath.Count && tmpPath.Count != 0))
-                {
-                    bestPath = tmpPath;
-                }
-            }
-
-            // remove starting room id
-            if (bestPath != null && bestPath.Count > 0)
-                bestPath.RemoveAt(0);
-
-            //if (CoreUI.Instance.Settings.Fly)
-            //    return savedRooms.Optimize(bestPath);
-            //else
-            return bestPath;
-             */
-        }
-
-        private static Hashtable mShortest;
-        private delegate List<int> PathfindHandler(int from, int to);
-        private static List<int> GetPath(int start, int finish)
-        {
-            List<int> roomList = new List<int>();
-
-            if (start == finish)
-            {
-                return roomList;
-            }
-
-            Queue<List<int>> paths = new Queue<List<int>>();
-
-            roomList.Add(start);
-            paths.Enqueue(roomList);
-
-            mShortest = new Hashtable();
-
-            // Best First Search
-            do
-            {
-                roomList = paths.Dequeue();
-                int rm = roomList[roomList.Count - 1];
-
-                foreach (int nbr in GetNeighbors(rm))
-                {
-                    if (roomList.Contains(nbr))
-                    {
-                        continue;
-                    }
-
-                    List<int> tmpList = new List<int>(roomList);
-                    tmpList.Add(nbr);
-
-                    if (nbr == finish)
-                    {
-                        return tmpList;
-                    }
-                    else if(Shortest(tmpList))
-                    {
-                        paths.Enqueue(tmpList);
-                    }
-                }
-            }
-            while (paths.Count > 0);
-
-            return null;
-        }
-
-        private static bool Shortest(List<int> path)
-        {
-            int last = path[path.Count - 1];
-            if (!mShortest.Contains(last))
-            {
-                mShortest.Add(last, path.Count);
-                return true;
-            }
-            if ((int)mShortest[last] > path.Count)
-            {
-                mShortest[last] = path.Count;
-                return true;
-            }
-            return false;
-        }
-
-        private static List<int> GetNeighbors(int id)
-        {
-            int tmp = FindRoom(id);
-            if (tmp > -1)
-            {
-                return Rooms[tmp].Neighbors;
-            }
-            else
-            {
-                return new List<int>();
-            }
-        }
-
-        private static void PathfindCallback(IAsyncResult ar)
-        {
-            PathfindHandler d = (PathfindHandler)ar.AsyncState;
-            List<int> ret = d.EndInvoke(ar);
-            mAllPaths.Add(ret);
+            Console.WriteLine(string.Format("Ran {0} tests, average {1} ms", j, total / (double)j));
         }
 
         /// <summary>

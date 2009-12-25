@@ -325,7 +325,7 @@ namespace DCT.Outwar.World
             CoreUI.Instance.LogPanel.Log("Constructing path for " + Account.Name + " to " + roomid);
 
             List<int> nodes = new List<int>();
-            nodes = Pathfinder.GetSolution(Location.Id, roomid);
+            nodes = Pathfinder.BFS(Location.Id, roomid);
 
             if (nodes == null)
             {
@@ -340,7 +340,7 @@ namespace DCT.Outwar.World
                     //string url = p.Parse("window.location=\"http://" + Account.Server + ".outwar.com/", "\"");
                     //LoadRoom(url);
                     RefreshRoom();
-                    nodes = Pathfinder.GetSolution(Location.Id, roomid);
+                    nodes = Pathfinder.BFS(Location.Id, roomid);
                 }
                 else
                 {
@@ -600,10 +600,10 @@ namespace DCT.Outwar.World
             mTrainRoomStart = Location.Id;
 
             List<List<int>> paths = new List<List<int>>();
-            paths.Add(Pathfinder.GetSolution(Location.Id, 258)); // dustglass
-            paths.Add(Pathfinder.GetSolution(Location.Id, 241)); // drunkenclam
-            paths.Add(Pathfinder.GetSolution(Location.Id, 403)); //hardiron
-            paths.Add(Pathfinder.GetSolution(Location.Id, 299)); //chuggers
+            paths.Add(Pathfinder.BFS(Location.Id, 258)); // dustglass
+            paths.Add(Pathfinder.BFS(Location.Id, 241)); // drunkenclam
+            paths.Add(Pathfinder.BFS(Location.Id, 403)); //hardiron
+            paths.Add(Pathfinder.BFS(Location.Id, 299)); //chuggers
 
             bool tmp = CoreUI.Instance.Settings.AutoTrain;
             CoreUI.Instance.Settings.AutoTrain = true;
