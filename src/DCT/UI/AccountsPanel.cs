@@ -151,8 +151,18 @@ namespace DCT.UI
                 return;
             }
 
+            // save checks
+            ListView.CheckedIndexCollection chk = lvAccounts.CheckedIndices;
+
+            // do refresh
             btnLogout_Click("refresh", null);
             btnLogin_Click(null, null);
+
+            // restore checks
+            foreach (int i in chk)
+            {
+                lvAccounts.Items[i].Checked = true;
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
