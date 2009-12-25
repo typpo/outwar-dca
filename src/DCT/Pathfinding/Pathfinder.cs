@@ -59,6 +59,8 @@ namespace DCT.Pathfinding
             string name;
             int id;
             string[] tmp;
+
+            int maxid = -1;
             //*
             for (int i = 0; i < 2 && Rooms.Count < 1; i++)
             {
@@ -79,6 +81,9 @@ namespace DCT.Pathfinding
                     {
                         continue;
                     }
+                    // testing
+                    if (id > maxid)
+                        maxid = id;
                     name = tmp[tmp.Length - 1];
                     nbrs = new List<int>();
                     for (int j = 1; j < tmp.Length - 1; j++)
@@ -91,6 +96,7 @@ namespace DCT.Pathfinding
                 }
             }
             Rooms.Sort();
+            LinkRooms();
             //*/
 
             // ------------------
@@ -174,6 +180,25 @@ namespace DCT.Pathfinding
             Spawns.Sort();
         }
 
+        private static void LinkRooms()
+        {
+            // Rooms must be sorted
+            foreach (MappedRoom r in Rooms)
+            {
+                foreach (int i in r.Neighbors)
+                {
+                    int idx = FindRoom(i);
+                    if (idx < 0)
+                    {
+                        // shouldn't happen - broken link!
+                        //Console.WriteLine("Broken link {0} to {1}", r.Id, i);
+                        continue;
+                    }
+                    r.MappedNeighbors.Add(Rooms[idx]);
+                }
+            }
+        }
+
         internal static void Download(string maptype)
         {
             WebClient client = new WebClient();
@@ -237,6 +262,75 @@ namespace DCT.Pathfinding
             return sb.ToString();
         }
 
+        internal static List<int> BFS(int s, int d)
+        {
+            InitBFSVertices();
+            Queue<MappedRoom> Q = new Queue<MappedRoom>();
+            int srcidx = FindRoom(s);    // logn
+            if (srcidx < 0)
+                return null;
+            MappedRoom source = Rooms[srcidx];
+            source.D = 0;
+            source.State = 2;
+            Q.Enqueue(source);
+
+            while (Q.Count > 0)
+            {
+                MappedRoom dequeued = Q.Dequeue();
+                if (dequeued.Id == d)
+                {
+                    // return a result
+                    return BFSPath(source, dequeued);
+                }
+                //foreach (int nbr in dequeued.Neighbors)
+                foreach (MappedRoom neighbor in dequeued.MappedNeighbors)
+                {
+                    /*
+                    int nbridx = FindRoom(nbr);     // bummer O(logV).  which brings it to O(V+ElogV), no?
+                    if (nbridx < 0)
+                        continue;
+                    MappedRoom neighbor = Rooms[nbridx];
+                    */
+                    if (neighbor.State == 1)
+                    {
+                        neighbor.State = 2;
+                        neighbor.D++;
+                        neighbor.Pi = dequeued;
+                        Q.Enqueue(neighbor);
+                    }
+                }
+                dequeued.State = 3;
+            }
+            return null;
+        }
+
+        private static void InitBFSVertices()
+        {
+            foreach (MappedRoom r in Rooms)
+            {
+                r.D = int.MaxValue;
+                r.Pi = null;
+                r.State = 1;
+            }
+        }
+
+        private static List<int> BFSPath(MappedRoom s, MappedRoom v)
+        {
+            // assume BFS has just been run
+
+            List<int> ret = new List<int>();
+            while (s.Id != v.Id)
+            {
+                if (v.Pi == null)
+                    return null;    // no path
+
+                ret.Add(v.Id);
+                v = v.Pi;
+            }
+            ret.Reverse();
+            return ret;
+        }
+
         internal static List<int> CoverArea(int start)
         {
             List<int> idList = new List<int>();
@@ -294,7 +388,7 @@ namespace DCT.Pathfinding
                 while (!Exists(a = Randomizer.Random.Next(1, Rooms.Count)));
 
                 DateTime startTime = DateTime.Now;
-                GetPath(a, b);
+                BFS(a, b);
                 DateTime stopTime = DateTime.Now;
                 TimeSpan duration = stopTime - startTime;
                 total += duration.Milliseconds;
@@ -304,6 +398,10 @@ namespace DCT.Pathfinding
 
         internal static List<int> GetSolution(int start, int finish)
         {
+            return BFS(start, finish);
+
+            /*
+
             mAllPaths = new List<List<int>>();
 
             mAllPaths.Add(GetPath(start, finish));
@@ -330,6 +428,7 @@ namespace DCT.Pathfinding
             //    return savedRooms.Optimize(bestPath);
             //else
             return bestPath;
+             */
         }
 
         private static Hashtable mShortest;

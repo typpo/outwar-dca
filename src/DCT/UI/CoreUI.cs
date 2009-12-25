@@ -627,6 +627,26 @@ namespace DCT.UI
             t.Start(1000);
         }
 
+
+        private void getPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int s = int.Parse(InputBox.Prompt("Path test", "Source"));
+            int d = int.Parse(InputBox.Prompt("Path test", "Dest"));
+            List<int> res = Pathfinder.BFS(s, d);
+
+            StringBuilder sb = new StringBuilder();
+            foreach (int i in res)
+            {
+                sb.AppendFormat("{0} ", i);
+            }
+            if (MessageBox.Show(
+     string.Format("Do you want to copy to clipboard?\n\n{0}",
+     sb.ToString()), "Path test", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Clipboard.SetText(sb.ToString());
+            }
+        }
+
         private void exportRoomsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Pathfinder.ExportRooms();
@@ -912,6 +932,5 @@ namespace DCT.UI
         }
 
         #endregion
-
     }
 }

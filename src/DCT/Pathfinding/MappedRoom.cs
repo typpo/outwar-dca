@@ -5,15 +5,24 @@ namespace DCT.Pathfinding
 {
     internal class MappedRoom : IComparable
     {
-        internal int Id { get; set; }
-        internal string Name { get; set; }
-        internal List<int> Neighbors { get; set; }
+        internal int Id { get; private set; }
+        internal string Name { get; set; }  // no private set because spider needs it
+        internal List<int> Neighbors { get; private set; }
+        internal List<MappedRoom> MappedNeighbors { get; private set; }
+
+        internal MappedRoom Pi { get; set; }
+        internal int D { get; set; }
+        internal int State { get; set; }    // 1=white, 2=gray, 3=black
 
         internal MappedRoom(int id, string name, List<int> nbrs)
         {
             Id = id;
             Name = name;
             Neighbors = nbrs;
+            MappedNeighbors = new List<MappedRoom>();
+            Pi = null;
+            D = int.MaxValue;
+            State = 1;
         }
 
         public override string ToString()

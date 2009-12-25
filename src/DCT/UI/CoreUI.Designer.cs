@@ -53,6 +53,8 @@ namespace DCT.UI
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.openInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openTyppousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
+            this.reloadMapDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearLogsPeriodicallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSystrayIconWhenOpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,8 +94,7 @@ namespace DCT.UI
             this.tabSpawns = new System.Windows.Forms.TabPage();
             this.tabTrainer = new System.Windows.Forms.TabPage();
             this.tabChat = new System.Windows.Forms.TabPage();
-            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
-            this.reloadMapDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.mNotifyMenu.SuspendLayout();
@@ -285,6 +286,18 @@ namespace DCT.UI
             this.openTyppousToolStripMenuItem.Text = "Open typpo.us";
             this.openTyppousToolStripMenuItem.Click += new System.EventHandler(this.openTyppousToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem10
+            // 
+            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(168, 6);
+            // 
+            // reloadMapDataToolStripMenuItem
+            // 
+            this.reloadMapDataToolStripMenuItem.Name = "reloadMapDataToolStripMenuItem";
+            this.reloadMapDataToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.reloadMapDataToolStripMenuItem.Text = "Reload map data";
+            this.reloadMapDataToolStripMenuItem.Click += new System.EventHandler(this.reloadMapDataToolStripMenuItem_Click);
+            // 
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -319,6 +332,7 @@ namespace DCT.UI
             this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.spiderToolStripMenuItem,
             this.benchmarkToolStripMenuItem,
+            this.getPathToolStripMenuItem,
             this.toolStripMenuItem6,
             this.exportRoomsToolStripMenuItem,
             this.exportMobsToolStripMenuItem,
@@ -639,17 +653,12 @@ namespace DCT.UI
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
             // 
-            // toolStripMenuItem10
+            // getPathToolStripMenuItem
             // 
-            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(168, 6);
-            // 
-            // reloadMapDataToolStripMenuItem
-            // 
-            this.reloadMapDataToolStripMenuItem.Name = "reloadMapDataToolStripMenuItem";
-            this.reloadMapDataToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.reloadMapDataToolStripMenuItem.Text = "Reload map data";
-            this.reloadMapDataToolStripMenuItem.Click += new System.EventHandler(this.reloadMapDataToolStripMenuItem_Click);
+            this.getPathToolStripMenuItem.Name = "getPathToolStripMenuItem";
+            this.getPathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.getPathToolStripMenuItem.Text = "Get path";
+            this.getPathToolStripMenuItem.Click += new System.EventHandler(this.getPathToolStripMenuItem_Click);
             // 
             // CoreUI
             // 
@@ -751,5 +760,6 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripLabel lblExpRage;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
         private System.Windows.Forms.ToolStripMenuItem reloadMapDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem getPathToolStripMenuItem;
     }
 }
