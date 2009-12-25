@@ -1,12 +1,17 @@
- >> Typpo's DC Tool - Latest Version: 3.1.17 << 
+ >> Typpo's DC Tool - Latest Version: 3.1.18 << 
  
 Change History:
+
+Release 3.1.18 (12/25/09):
+- Improved pathfinding efficiency
+- Readded multi-account moving
+- More #runs count fixes
+- Fixed FormatException when reading map date
 
 Release 3.1.17 (12/18/09):
 - Removed dependency on map server.  Maps are downloaded once and stored locally, and only redownload if they've been updated.
 - Removed dependency on startup notice
 - Bulk moving now moves accounts one at a time, to prevent crashes.  Multi-account moving will be improved later this month.
-- Fixed countdown/run # limit bug
 - Fixed chat reconnect thottling problem
 - Added chat /reconnect command
 - Added COES gods
@@ -38,8 +43,8 @@ Release 3.1.14a (10/6/09):
 End Changes 
 
 Info for the autoupdater: 
-<ver>3.1.17</ver> 
-<url>http://typpo.us/DCT 3.1.17.exe</url>
+<ver>3.1.18</ver> 
+<url>http://typpo.us/DCT 3.1.18.exe</url>
  
 <chan>#typpo</chan> 
 <svr>typpo.dyndns.org</svr>

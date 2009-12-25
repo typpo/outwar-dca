@@ -132,13 +132,13 @@ namespace DCT.UI
                 catch (FormatException)
                 {
                     ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, false);
-                    SetStatus("Could not read new map status");
+                    SetStatus("Could not read new map status, update maps manually");
                 }
             }
             else
             {
                 ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, false);
-                SetStatus("Could not read new map status");
+                SetStatus("Could not read new map status, update maps manually");
             }
         }
 
