@@ -313,6 +313,7 @@ namespace DCT.UI
             WaitHandle.WaitAll(doneEvents);
         }
 
+        // callback for threadpool
         private void DoBulkMoveCallback(object context)
         {
             BulkMoveArg a = (BulkMoveArg)context;

@@ -111,24 +111,34 @@ namespace DCT.UI
             string mapupdate = p.Parse("<map>", "</map>");
             if (mapupdate != "ERROR")
             {
-                DateTime last = DateTime.ParseExact(mapupdate, "yyyy-MM-dd HH:mm", null);
-                if (last > CoreUI.Instance.Settings.LastMapUpdate)
+                DateTime last;
+                try
                 {
-                    // new maps
-                    SetStatus("Building latest DC maps from host site...");
-                    ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, true);
-                    SetStatus("Ready with latest maps...");
+                    last = DateTime.ParseExact(mapupdate, "yyyy-MM-dd HH:mm", null);
+
+                    if (last > CoreUI.Instance.Settings.LastMapUpdate)
+                    {
+                        // new maps
+                        SetStatus("Building latest DC maps from host site...");
+                        ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, true);
+                        SetStatus("Ready with latest maps...");
+                    }
+                    else
+                    {
+                        ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, false);
+                        SetStatus("Ready...");
+                    }
                 }
-                else
+                catch (FormatException)
                 {
                     ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, false);
-                    SetStatus("Ready...");
+                    SetStatus("Could not read new map status");
                 }
             }
             else
             {
                 ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, false);
-                SetStatus("Could not determine new map status");
+                SetStatus("Could not read new map status");
             }
         }
 
