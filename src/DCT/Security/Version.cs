@@ -4,7 +4,7 @@ namespace DCT.Security
     {
         internal const string Id = "3.1";
         internal const string mini = "17";
-        internal const string beta = "";
+        internal const string beta = "a";
 
         internal static string Full
         {

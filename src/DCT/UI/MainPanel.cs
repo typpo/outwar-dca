@@ -56,6 +56,7 @@ namespace DCT.UI
         internal void StopAfterFinish()
         {
             StopAfterRunning = false;
+            StopAfterCounter = 0;
         }
 
         internal bool StopAfter
