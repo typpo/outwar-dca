@@ -58,7 +58,6 @@ namespace DCT.Pathfinding
             int id;
             string[] tmp;
 
-            int maxid = -1;
             //*
             for (int i = 0; i < 2 && Rooms.Count < 1; i++)
             {
@@ -79,9 +78,6 @@ namespace DCT.Pathfinding
                     {
                         continue;
                     }
-                    // testing
-                    if (id > maxid)
-                        maxid = id;
                     name = tmp[tmp.Length - 1];
                     nbrs = new List<int>();
                     for (int j = 1; j < tmp.Length - 1; j++)

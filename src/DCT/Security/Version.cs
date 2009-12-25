@@ -15,6 +15,5 @@ namespace DCT.Security
         {
             get { return beta; }
         }
-        // 86.161.107.15
     }
 }

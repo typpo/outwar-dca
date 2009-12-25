@@ -299,7 +299,7 @@ namespace DCT.UI
         private delegate void BulkMoveHandler(int[] indices, int room);
         private void DoBulkMove(int[] indices, int room)
         {
-            ManualResetEvent[] doneEvents = new ManualResetEvent[AccountsPanel.CheckedIndices.Count];
+            ManualResetEvent[] doneEvents = new ManualResetEvent[indices.Length];
             int i = 0;
             foreach (int index in indices)
             {
