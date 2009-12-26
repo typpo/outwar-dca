@@ -44,7 +44,7 @@ namespace DCT.UI
             get { return "<" + mNick + "> "; }
         }
 
-        private string GenerateNick()
+        private static string GenerateNick()
         {
             return "DCT_" + Randomizer.Random.Next(5000);
         }
@@ -484,7 +484,7 @@ namespace DCT.UI
             {
                 if (!Connected)
                 {
-                    IrcThread();
+                    new Thread(IrcThread).Start();
                     return;
                 }
             }
