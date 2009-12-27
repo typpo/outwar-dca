@@ -211,6 +211,10 @@ namespace DCT.UI
                 login_normal.RunWorkerAsync();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="n">Number of accounts added</param>
         private void LoginCallback(int n)
         {
             if (InvokeRequired)

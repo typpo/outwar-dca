@@ -290,7 +290,7 @@ namespace DCT.UI
                 return;
             }
 
-            if (mUI.Tabs.SelectedIndex != CoreUI.TABINDEX_CHAT)
+            if (mUI.Tabs.SelectedIndex != CoreUI.TABINDEX_CHAT) // not viewing chat
                 return;
 
             Channel c = mClient.GetChannel(mChannel);

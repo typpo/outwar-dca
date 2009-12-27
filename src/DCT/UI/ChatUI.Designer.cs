@@ -70,9 +70,9 @@ namespace DCT.UI
             this.lstChat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lstChat.FormattingEnabled = true;
             this.lstChat.HorizontalScrollbar = true;
-            this.lstChat.Location = new System.Drawing.Point(0, 24);
+            this.lstChat.Location = new System.Drawing.Point(0, 11);
             this.lstChat.Name = "lstChat";
-            this.lstChat.Size = new System.Drawing.Size(89, 238);
+            this.lstChat.Size = new System.Drawing.Size(89, 251);
             this.lstChat.TabIndex = 5;
             this.lstChat.Click += new System.EventHandler(this.lstChat_Click);
             // 

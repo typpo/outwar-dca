@@ -59,9 +59,17 @@ namespace DCT.UI
 
         private void btnAdventuresGo_Click(object sender, EventArgs e)
         {
-            int room = int.Parse(lvAdventures.FocusedItem.SubItems[1].Text);
-
-            mUI.InvokeAdventures(room);
+            if (mUI.AccountsPanel.CheckedIndices.Count < 1)
+            {
+                mUI.LogPanel.Log("E: Check the accounts you want to move.");
+                return;
+            }
+            if (FocusedRaid == null)
+            {
+                mUI.LogPanel.Log("E: Choose an adventure to move to.");
+                return;
+            }
+            mUI.InvokeBulkMove(int.Parse(FocusedRaid.SubItems[1].Text));
         }
     }
 }

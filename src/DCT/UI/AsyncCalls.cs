@@ -243,22 +243,6 @@ namespace DCT.UI
             InvokeBulkMove(room);
         }
 
-        internal void InvokeAdventures(int room)
-        {
-            if (AccountsPanel.CheckedIndices.Count < 1)
-            {
-                LogPanel.Log("E: Check the accounts you want to move.");
-                return;
-            }
-            if (RaidsPanel.FocusedRaid == null)
-            {
-                LogPanel.Log("E: Choose an adventure to move to.");
-                return;
-            }
-
-            InvokeBulkMove(room);
-        }
-
         private class BulkMoveArg
         {
             internal int AcccountIndex {get;private set;}
@@ -272,7 +256,7 @@ namespace DCT.UI
             }
         }
 
-        private void InvokeBulkMove(int room)
+        internal void InvokeBulkMove(int room)
         {
             Toggle(false);
 

@@ -59,12 +59,6 @@ namespace DCT.UI
             MainPanel = new MainPanel(mUI);
             this.pnlMainPanel.Controls.Add(MainPanel);
         }
-
-        private void chkReturnToStart_CheckedChanged(object sender, EventArgs e)
-        {
-            mUI.Settings.ReturnToStart = ReturnToStart;
-        }
-
         private void numLevel_ValueChanged(object sender, EventArgs e)
         {
             int tmp = (int)numLevel.Value;
@@ -120,7 +114,7 @@ namespace DCT.UI
         private void chkReturnToStart_CheckedChanged_1(object sender, EventArgs e)
         {
 
-            CoreUI.Instance.Settings.ReturnToStart = chkReturnToStart.Checked;
+            mUI.Settings.ReturnToStart = ReturnToStart;
         }
     }
 }
