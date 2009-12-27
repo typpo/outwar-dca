@@ -14,6 +14,9 @@ namespace DCT.UI
         private readonly CoreUI mUI;
         private bool mEnabled;
 
+        private int[] mSavedChecks; // indices of checked items
+        private bool mRestoreChecks;
+
         internal AccountsPanel(CoreUI ui)
         {
             mUI = ui;
@@ -131,6 +134,7 @@ namespace DCT.UI
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            mRestoreChecks = false;
             Login();
         }
 
@@ -149,17 +153,17 @@ namespace DCT.UI
             }
 
             // save checks
-            ListView.CheckedIndexCollection chk = lvAccounts.CheckedIndices;
+            mSavedChecks = new int[lvAccounts.CheckedIndices.Count];
 
-            // do refresh
-            btnLogout_Click("refresh", null);
-            btnLogin_Click(null, null);
-
-            // restore checks
-            foreach (int i in chk)
+            for(int i=0; i < lvAccounts.CheckedIndices.Count; i++)
             {
-                lvAccounts.Items[i].Checked = true;
+                mSavedChecks[i] = lvAccounts.CheckedIndices[i];
             }
+
+            mRestoreChecks = true;
+            // do refresh
+            Logout();
+            Login();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -170,6 +174,11 @@ namespace DCT.UI
                 return;
             }
 
+            Logout();
+        }
+
+        private void Logout()
+        {
             mUI.LogPanel.Log("Logging out...");
             mUI.StopAttacking(false);
             HttpSocket.DefaultInstance.Get("http://outwar.com/index.php?cmd=logout");
@@ -194,6 +203,7 @@ namespace DCT.UI
             txtPassword.Enabled = false;
             btnLogin.Enabled = false;
             btnLogout.Enabled = false;
+            btnRefresh.Enabled = false;
 
             mUI.LogPanel.Log("Logging in...");
 
@@ -227,6 +237,14 @@ namespace DCT.UI
                     var item = new ListViewItem(new[] {a.Name, "Loaded", "-", "0", "0", "0"});
                     lvAccounts.Groups[Server.NameToId(a.Server) - 1].Items.Add(item);
                     lvAccounts.Items.Add(item);
+                }
+                if(mRestoreChecks)
+                {
+                    foreach(int i in mSavedChecks)
+                    {
+                        if (i < lvAccounts.Items.Count)
+                            lvAccounts.Items[i].Checked = true;
+                    }
                 }
                 mUI.LogPanel.Log("Loaded " + n + " characters.");
             }
