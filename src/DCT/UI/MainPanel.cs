@@ -182,7 +182,6 @@ namespace DCT.UI
 
                 InitStopAfter();
             }
-            mUI.Settings.StopAfterVal = (int)numStopAfter.Value;
         }
 
         internal void InitStopAfter()
