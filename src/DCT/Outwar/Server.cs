@@ -71,5 +71,17 @@ namespace DCT.Outwar
             }
             throw new ArgumentException("No server name correlates with " + id);
         }
+
+        internal static string IdToString(int id)
+        {
+            try
+            {
+                return NamesList[id - 1];
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("No server name correlates with " + id);
+            }
+        }
     }
 }

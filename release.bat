@@ -1,10 +1,20 @@
+:: Compilation file by Typpo
+:: Last modified 4/18/2010
+
 @ECHO OFF
 :BEGIN
 
-SET orig="C:\Documents and Settings\Administrator\My Documents\DCT\src\DCT\bin\Release\DCT.exe"
-SET obfusc="C:\Documents and Settings\Administrator\My Documents\DCT\DCT release.exe"
+:: Target path for compiled program
+SET orig="C:\Documents and Settings\i\My Documents\DCT\src\DCT\bin\Release\DCT.exe"
+
+:: Target path for obfuscated program
+SET obfusc="C:\Documents and Settings\i\My Documents\DCT\DCT release.exe"
+
+:: Path to directory containg Babel executable
 SET babel="C:\Program Files\Babel"
-SET snkey="C:\Documents and Settings\Administrator\My Documents\DCT\src\DCT\key.snk"
+
+:: Path to strong name key used to sign/resign executable
+SET snkey="C:\Documents and Settings\i\My Documents\DCT\src\DCT\key.snk"
 
 ECHO Obfuscating...
 CD %babel%

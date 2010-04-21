@@ -30,6 +30,7 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.btnGo = new System.Windows.Forms.Button();
             this.lnkAdd = new System.Windows.Forms.LinkLabel();
             this.linkUncheckAll = new System.Windows.Forms.LinkLabel();
             this.lnkCheckAll = new System.Windows.Forms.LinkLabel();
@@ -79,6 +80,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.btnGo);
             this.splitContainer2.Panel1.Controls.Add(this.lnkAdd);
             this.splitContainer2.Panel1.Controls.Add(this.linkUncheckAll);
             this.splitContainer2.Panel1.Controls.Add(this.lnkCheckAll);
@@ -93,6 +95,17 @@
             this.splitContainer2.Size = new System.Drawing.Size(417, 215);
             this.splitContainer2.SplitterDistance = 70;
             this.splitContainer2.TabIndex = 4;
+            // 
+            // btnGo
+            // 
+            this.btnGo.Location = new System.Drawing.Point(306, 4);
+            this.btnGo.Name = "btnGo";
+            this.btnGo.Size = new System.Drawing.Size(75, 23);
+            this.btnGo.TabIndex = 9;
+            this.btnGo.Text = "Move to ...";
+            this.btnGo.UseVisualStyleBackColor = true;
+            this.btnGo.Visible = false;
+            this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
             // lnkAdd
             // 
@@ -263,6 +276,7 @@
         private System.Windows.Forms.LinkLabel lnkCheckAll;
         private System.Windows.Forms.LinkLabel lnkAdd;
         private System.Windows.Forms.LinkLabel linkUncheckAll;
+        private System.Windows.Forms.Button btnGo;
 
     }
 }

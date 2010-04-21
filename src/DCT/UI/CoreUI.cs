@@ -257,6 +257,8 @@ namespace DCT.UI
                 Invoke(new ToggleHandler(Toggle), on);
                 return;
             }
+            loginThroughToolStripMenuItem.Enabled = on;
+
             // Main Panel
             MainPanel.StopAfterEnabled = on;
 
@@ -668,6 +670,11 @@ namespace DCT.UI
             ConfigSerializer.WriteFile("config.xml", Settings);
         }
 
+        private void loginThroughToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmLoginServer(this).ShowDialog();
+        }
+
         #region TOOLSTRIP
 
         private void cmbAttackMode_SelectedIndexChanged(object sender, EventArgs e)
@@ -932,5 +939,6 @@ namespace DCT.UI
         }
 
         #endregion
+
     }
 }

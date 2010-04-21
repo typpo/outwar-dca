@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DCT.Parsing;
 using DCT.Protocols.Http;
@@ -72,7 +73,7 @@ namespace DCT.Outwar
             Accounts.RemoveAt(index);
         }
 
-        internal void Login(string user, string pass)
+        internal int Login(string server, string user, string pass)
         {
             HttpSocket.DefaultInstance.UserAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:0.9.4) Gecko/20011019 Netscape6/6.2";
             HttpSocket.DefaultInstance.Cookie = null;
@@ -84,54 +85,62 @@ namespace DCT.Outwar
             //    toPost += "&tempSec=" + tmp;
             //}
             string toPost = "login_username=" + user + "&login_password=" + pass;
-            HttpSocket.DefaultInstance.Post("http://sigil.outwar.com/myaccount.php", toPost);
+            HttpSocket.DefaultInstance.Post(string.Format("http://{0}.outwar.com/myaccount.php", server), toPost);
 
-            AddCharacters();
+            int ret = AddCharacters();
 
             HttpSocket.DefaultInstance.UserAgent = "Typpo DCAA Client";
+            return ret;
         }
 
-        internal void Login(string rgsessid)
+        internal int Login(string server, string rgsessid)
         {
 
             HttpSocket.DefaultInstance.UserAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:0.9.4) Gecko/20011019 Netscape6/6.2";
             HttpSocket.DefaultInstance.Cookie = null;
 
-            HttpSocket.DefaultInstance.Get(string.Format("http://sigil.outwar.com/?rg_sess_id={0}", rgsessid));
+            HttpSocket.DefaultInstance.Get(string.Format("http://{0}.outwar.com/?rg_sess_id={1}", server, rgsessid));
 
-            AddCharacters();
+            int ret = AddCharacters();
 
             HttpSocket.DefaultInstance.UserAgent = "Typpo DCAA Client";
+            return ret;
         }
 
-        private void AddCharacters()
+        private int AddCharacters()
         {
+            int ret = 0;
             for (int i = 1; i <= Server.NUM_SERVERS; i++)
             {
-                string svrlist = HttpSocket.DefaultInstance.Get("http://outwar.com/accounts.php?ac_serverid=" + i);
-                AddAccountsFromSource(svrlist);
+                string s = string.Format("http://{0}.outwar.com/accounts.php?ac_serverid={1}",
+                                         Server.IdToName(i), i);
+                string svrlist = HttpSocket.DefaultInstance.Get(s);
+                ret += AddAccountsFromSource(svrlist);
             }
 
             if (HttpSocket.DefaultInstance.HasCookie)
             {
                 RgSessId = HttpSocket.DefaultInstance.Cookie.Substring(11, HttpSocket.DefaultInstance.Cookie.IndexOf(";") - 11);
             }
+            return ret;
         }
 
-        private void AddAccountsFromSource(string src)
+        private int AddAccountsFromSource(string src)
         {
             // No accounts
             if (!src.Contains("PLAY!"))
             {
-                return;
+                return 0;
             }
 
             Parser m1 = new Parser(src);
             int serverid;
             if (!int.TryParse(m1.Parse("serverid=", "\""), out serverid))
             {
-                return;
+                return 0;
             }
+
+            int ret = 0;
             foreach (
                 string t in
                     m1.MultiParse("<font color=\"#FFFF00\" face=\"Verdana, Arial, Helvetica, sans-serif\" size=\"1\">",
@@ -146,9 +155,11 @@ namespace DCT.Outwar
                 }
 
                 Add(name, id, Server.IdToName(serverid));
+                ret++;
                 Last.Socket.Cookie = HttpSocket.DefaultInstance.Cookie + " ow_userid=" + id
                                      + "; ow_serverid=" + serverid;
             }
+            return ret;
         }
     }
 }

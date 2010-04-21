@@ -60,6 +60,10 @@ namespace DCT.Settings
         [XmlElement("LastPassword")]
         public string LastPassword { get; set; }
 
+
+        [XmlElement("LoginThrough")]
+        public int Server { get; set; }
+
         public enum StopAfterType
         {
             Runs,
@@ -114,6 +118,8 @@ namespace DCT.Settings
             StopAfter = false;
             StopAfterVal = 1;
             StopAfterMode = StopAfterType.Runs;
+
+            Server = 1;
         }
     }
 }

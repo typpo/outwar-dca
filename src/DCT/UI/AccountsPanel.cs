@@ -268,18 +268,12 @@ namespace DCT.UI
         /// <returns>Number of accounts added</returns>
         private int DoLogin()
         {
-            int orig = mEngine.Count;
-            mEngine.Login(txtUsername.Text, txtPassword.Text);
-
-            return mEngine.Count - orig;
+            return mEngine.Login(Server.IdToString(mUI.Settings.Server), txtUsername.Text, txtPassword.Text);
         }
 
         private int DoLoginRgSessId(string sessid)
         {
-            int orig = mEngine.Count;
-            mEngine.Login(sessid);
-
-            return mEngine.Count - orig;
+            return mEngine.Login(Server.IdToString(mUI.Settings.Server), sessid);
         }
 
         internal void ShowRgSessIdDialog()

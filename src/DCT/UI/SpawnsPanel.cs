@@ -253,5 +253,10 @@ namespace DCT.UI
             // Call the sort method to manually sort.
             lvSpawns.Sort();
         }
+
+        private void btnGo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

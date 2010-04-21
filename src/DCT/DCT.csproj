@@ -165,6 +165,12 @@
     <Compile Include="UI\FiltersPanel.Designer.cs">
       <DependentUpon>FiltersPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\fmrLoginServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\fmrLoginServer.Designer.cs">
+      <DependentUpon>fmrLoginServer.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ListViewComparers.cs" />
     <Compile Include="UI\LogPanel.cs">
       <SubType>UserControl</SubType>
@@ -263,6 +269,10 @@
     <EmbeddedResource Include="UI\FiltersPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FiltersPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\fmrLoginServer.resx">
+      <DependentUpon>fmrLoginServer.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\LogPanel.resx">
       <SubType>Designer</SubType>
