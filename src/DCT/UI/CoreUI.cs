@@ -257,7 +257,6 @@ namespace DCT.UI
                 Invoke(new ToggleHandler(Toggle), on);
                 return;
             }
-            loginThroughToolStripMenuItem.Enabled = on;
 
             // Main Panel
             MainPanel.StopAfterEnabled = on;
