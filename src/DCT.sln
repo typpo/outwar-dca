@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCT", "DCT\DCT.csproj", "{AC24DB62-B169-4418-9029-A49308BAD649}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCT.Deployment", "DCT.Deployment\DCT.Deployment.csproj", "{CBABE95F-64B0-407C-87FB-795FB52A9E7C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCT.Polyengine", "DCT.Polyengine\DCT.Polyengine.csproj", "{F953BE7B-09A2-4559-9B63-54E9BAA6FF73}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,14 +13,6 @@ Global
 		{AC24DB62-B169-4418-9029-A49308BAD649}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC24DB62-B169-4418-9029-A49308BAD649}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC24DB62-B169-4418-9029-A49308BAD649}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CBABE95F-64B0-407C-87FB-795FB52A9E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CBABE95F-64B0-407C-87FB-795FB52A9E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CBABE95F-64B0-407C-87FB-795FB52A9E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CBABE95F-64B0-407C-87FB-795FB52A9E7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F953BE7B-09A2-4559-9B63-54E9BAA6FF73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F953BE7B-09A2-4559-9B63-54E9BAA6FF73}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F953BE7B-09A2-4559-9B63-54E9BAA6FF73}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F953BE7B-09A2-4559-9B63-54E9BAA6FF73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
