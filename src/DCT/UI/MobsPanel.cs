@@ -251,7 +251,6 @@ namespace DCT.UI
             if (txt.StartsWith("A "))
                 txt = txt.Substring(2);
             btnMobGo.Text = string.Format("Go to {0}", txt);
-
         }
     }
 }

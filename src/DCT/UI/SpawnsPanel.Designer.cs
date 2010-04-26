@@ -98,13 +98,12 @@
             // 
             // btnGo
             // 
-            this.btnGo.Location = new System.Drawing.Point(306, 4);
+            this.btnGo.Location = new System.Drawing.Point(291, 4);
             this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(75, 23);
+            this.btnGo.Size = new System.Drawing.Size(110, 23);
             this.btnGo.TabIndex = 9;
-            this.btnGo.Text = "Move to ...";
+            this.btnGo.Text = "Go to selection";
             this.btnGo.UseVisualStyleBackColor = true;
-            this.btnGo.Visible = false;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
             // lnkAdd
@@ -143,7 +142,7 @@
             // lnkCampSelected
             // 
             this.lnkCampSelected.AutoSize = true;
-            this.lnkCampSelected.Location = new System.Drawing.Point(401, 40);
+            this.lnkCampSelected.Location = new System.Drawing.Point(393, 40);
             this.lnkCampSelected.Name = "lnkCampSelected";
             this.lnkCampSelected.Size = new System.Drawing.Size(13, 13);
             this.lnkCampSelected.TabIndex = 5;
@@ -153,7 +152,7 @@
             // 
             // btnCamp
             // 
-            this.btnCamp.Location = new System.Drawing.Point(306, 33);
+            this.btnCamp.Location = new System.Drawing.Point(291, 33);
             this.btnCamp.Name = "btnCamp";
             this.btnCamp.Size = new System.Drawing.Size(96, 26);
             this.btnCamp.TabIndex = 4;
@@ -204,6 +203,7 @@
             this.lvSpawns.TabIndex = 0;
             this.lvSpawns.UseCompatibleStateImageBehavior = false;
             this.lvSpawns.View = System.Windows.Forms.View.Details;
+            this.lvSpawns.SelectedIndexChanged += new System.EventHandler(this.lvSpawns_SelectedIndexChanged);
             this.lvSpawns.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvSpawns_ColumnClick);
             // 
             // columnHeader1
