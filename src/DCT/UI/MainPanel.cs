@@ -173,6 +173,11 @@ namespace DCT.UI
             }
         }
 
+        private void numStopAfter_ValueChanged(object sender, EventArgs e)
+        {
+            mUI.Settings.StopAfterVal = (int)numStopAfter.Value;
+        }
+
         private void chkStopAfter_CheckedChanged(object sender, EventArgs e)
         {
             mUI.Settings.StopAfter = numStopAfter.Enabled = cmbStopAfter.Enabled = chkStopAfter.Checked;

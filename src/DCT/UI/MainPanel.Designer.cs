@@ -89,6 +89,7 @@ namespace DCT.UI
             0,
             0,
             0});
+            this.numStopAfter.ValueChanged += new System.EventHandler(this.numStopAfter_ValueChanged);
             // 
             // chkStopAfter
             // 
