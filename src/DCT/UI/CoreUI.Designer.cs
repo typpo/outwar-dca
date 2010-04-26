@@ -58,6 +58,7 @@ namespace DCT.UI
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearLogsPeriodicallyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSystrayIconWhenOpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loginThroughToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spiderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.benchmarkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,7 +76,10 @@ namespace DCT.UI
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.btnStart = new System.Windows.Forms.ToolStripButton();
+            this.btnStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnStartTimer = new System.Windows.Forms.ToolStripButton();
             this.lblTimeLeft = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cmbAttackMode = new System.Windows.Forms.ToolStripComboBox();
@@ -92,10 +96,8 @@ namespace DCT.UI
             this.tabSpawns = new System.Windows.Forms.TabPage();
             this.tabTrainer = new System.Windows.Forms.TabPage();
             this.tabChat = new System.Windows.Forms.TabPage();
-            this.loginThroughToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnStart = new System.Windows.Forms.ToolStripButton();
-            this.btnStop = new System.Windows.Forms.ToolStripButton();
-            this.btnStartTimer = new System.Windows.Forms.ToolStripButton();
+            this.reportABugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripSeparator();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.mNotifyMenu.SuspendLayout();
@@ -229,6 +231,8 @@ namespace DCT.UI
             // actionsToolStripMenuItem
             // 
             this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reportABugToolStripMenuItem,
+            this.toolStripMenuItem11,
             this.inputRgsessidToolStripMenuItem,
             this.showMyRgsessidToolStripMenuItem,
             this.toolStripMenuItem9,
@@ -328,6 +332,13 @@ namespace DCT.UI
             this.showSystrayIconWhenOpenToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.showSystrayIconWhenOpenToolStripMenuItem.Text = "Show systray icon when open";
             this.showSystrayIconWhenOpenToolStripMenuItem.Click += new System.EventHandler(this.showSystrayIconWhenOpenToolStripMenuItem_Click);
+            // 
+            // loginThroughToolStripMenuItem
+            // 
+            this.loginThroughToolStripMenuItem.Name = "loginThroughToolStripMenuItem";
+            this.loginThroughToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.loginThroughToolStripMenuItem.Text = "Configure login server";
+            this.loginThroughToolStripMenuItem.Click += new System.EventHandler(this.loginThroughToolStripMenuItem_Click);
             // 
             // debugToolStripMenuItem
             // 
@@ -471,10 +482,41 @@ namespace DCT.UI
             this.toolStrip.Size = new System.Drawing.Size(664, 25);
             this.toolStrip.TabIndex = 6;
             // 
+            // btnStart
+            // 
+            this.btnStart.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStart.Image = global::DCT.Properties.Resources.Flag_green2;
+            this.btnStart.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(56, 22);
+            this.btnStart.Text = "Start";
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.Enabled = false;
+            this.btnStop.Image = global::DCT.Properties.Resources.Flag_red;
+            this.btnStop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(49, 22);
+            this.btnStop.Text = "Stop";
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnStartTimer
+            // 
+            this.btnStartTimer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnStartTimer.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStartTimer.Image = ((System.Drawing.Image)(resources.GetObject("btnStartTimer.Image")));
+            this.btnStartTimer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStartTimer.Name = "btnStartTimer";
+            this.btnStartTimer.Size = new System.Drawing.Size(62, 22);
+            this.btnStartTimer.Text = "Start timer";
+            this.btnStartTimer.Click += new System.EventHandler(this.btnStartTimer_Click);
             // 
             // lblTimeLeft
             // 
@@ -631,43 +673,17 @@ namespace DCT.UI
             this.tabChat.Text = "Chat";
             this.tabChat.UseVisualStyleBackColor = true;
             // 
-            // loginThroughToolStripMenuItem
+            // reportABugToolStripMenuItem
             // 
-            this.loginThroughToolStripMenuItem.Name = "loginThroughToolStripMenuItem";
-            this.loginThroughToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.loginThroughToolStripMenuItem.Text = "Configure login server";
-            this.loginThroughToolStripMenuItem.Click += new System.EventHandler(this.loginThroughToolStripMenuItem_Click);
+            this.reportABugToolStripMenuItem.Name = "reportABugToolStripMenuItem";
+            this.reportABugToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.reportABugToolStripMenuItem.Text = "Report a bug";
+            this.reportABugToolStripMenuItem.Click += new System.EventHandler(this.reportABugToolStripMenuItem_Click);
             // 
-            // btnStart
+            // toolStripMenuItem11
             // 
-            this.btnStart.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Image = global::DCT.Properties.Resources.Flag_green2;
-            this.btnStart.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(56, 22);
-            this.btnStart.Text = "Start";
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // btnStop
-            // 
-            this.btnStop.Enabled = false;
-            this.btnStop.Image = global::DCT.Properties.Resources.Flag_red;
-            this.btnStop.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(49, 22);
-            this.btnStop.Text = "Stop";
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-            // 
-            // btnStartTimer
-            // 
-            this.btnStartTimer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnStartTimer.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStartTimer.Image = ((System.Drawing.Image)(resources.GetObject("btnStartTimer.Image")));
-            this.btnStartTimer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnStartTimer.Name = "btnStartTimer";
-            this.btnStartTimer.Size = new System.Drawing.Size(62, 22);
-            this.btnStartTimer.Text = "Start timer";
-            this.btnStartTimer.Click += new System.EventHandler(this.btnStartTimer_Click);
+            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(179, 6);
             // 
             // CoreUI
             // 
@@ -771,5 +787,7 @@ namespace DCT.UI
         private System.Windows.Forms.ToolStripMenuItem reloadMapDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getPathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loginThroughToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportABugToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem11;
     }
 }

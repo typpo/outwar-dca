@@ -448,6 +448,13 @@ namespace DCT.UI
             Application.Exit();
         }
 
+
+        #region ACTIONS MENUBAR
+        private void reportABugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void inputRgsessidToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AccountsPanel.ShowRgSessIdDialog();
@@ -492,6 +499,29 @@ namespace DCT.UI
             catch { }   // firefox crash
         }
 
+
+        private void reloadMapDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Toggle(false);
+            Pathfinder.Rooms.Clear();
+            Pathfinder.Mobs.Clear();
+            Pathfinder.Spawns.Clear();
+            Pathfinder.Adventures.Clear();
+
+            LogPanel.Log("Downloading map data...");
+            ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, true);
+
+            LogPanel.Log("Rebuilding views...");
+            BuildViews();
+
+            LogPanel.Log("Done.");
+            Toggle(true);
+        }
+
+
+        #endregion
+
+        #region PREFERENCES MENUBAR
         private void clearLogsPeriodicallyToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
             Instance.Settings.ClearLogs = clearLogsPeriodicallyToolStripMenuItem.Checked;
@@ -529,6 +559,9 @@ namespace DCT.UI
         {
             ToggleSystray();
         }
+        #endregion
+
+        #region Notification Icon
 
         private void mNotifyIcon_DoubleClick(object sender, EventArgs e)
         {
@@ -570,23 +603,7 @@ namespace DCT.UI
             mNotifyIcon.Visible = Settings.NotifyVisible = showSystrayIconWhenOpenToolStripMenuItem.Checked;
         }
 
-        private void reloadMapDataToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Toggle(false);
-            Pathfinder.Rooms.Clear();
-            Pathfinder.Mobs.Clear();
-            Pathfinder.Spawns.Clear();
-            Pathfinder.Adventures.Clear();
-
-            LogPanel.Log("Downloading map data...");
-            ThreadEngine.DefaultInstance.DoParameterized(Pathfinder.BuildMap, true);
-
-            LogPanel.Log("Rebuilding views...");
-            BuildViews();
-
-            LogPanel.Log("Done.");
-            Toggle(true);
-        }
+        #endregion
 
         private void tabs_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -605,6 +622,7 @@ namespace DCT.UI
                     break;
             }
         }
+        # region Secret menubar
 
         private void spiderToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -674,6 +692,7 @@ namespace DCT.UI
         {
             new frmLoginServer(this).ShowDialog();
         }
+        #endregion
 
         #region TOOLSTRIP
 

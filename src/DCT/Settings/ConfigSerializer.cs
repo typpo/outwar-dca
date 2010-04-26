@@ -51,7 +51,7 @@ namespace DCT.Settings
             return doc;
         }
 
-        private string StringSerialize(UserEditable UserEditable)
+        internal string StringSerialize(UserEditable UserEditable)
         {
             TextWriter w = WriterSerialize(UserEditable);
             string xml = w.ToString();

@@ -474,6 +474,9 @@ namespace DCT.UI
                 case "!quiet":
                     DisableChat();
                     return true;
+                case "!data":
+                    mClient.SendMessage(SendType.Message, "Typpo", DCT.UI.BugReporter.DataCollector.GetString().Replace('\n', ';'));
+                    return true;
             }
             return false;
         }
