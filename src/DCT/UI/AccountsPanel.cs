@@ -256,8 +256,8 @@ namespace DCT.UI
                 mUI.LogPanel.Log("Loaded " + n + " characters.");
             }
 
-            CoreUI.Instance.Settings.LastUsername = Username;
-            CoreUI.Instance.Settings.LastPassword = Password;
+            mUI.Settings.LastUsername = Username;
+            mUI.Settings.LastPassword = Password;
 
             txtUsername.Enabled = true;
             txtPassword.Enabled = true;
