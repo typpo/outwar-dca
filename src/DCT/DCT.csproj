@@ -78,62 +78,62 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\Consts.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\Consts.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\EventArgs.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\EventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\Exceptions.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\Exceptions.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\Channel.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\Channel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\ChannelUser.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\ChannelUser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\Delegates.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\Delegates.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\EventArgs.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\EventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\IrcClient.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcClient.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\IrcMessageData.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcMessageData.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\IrcUser.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcUser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\NonRfcChannel.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\NonRfcChannel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\NonRfcChannelUser.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\NonRfcChannelUser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcCommands\IrcCommands.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcCommands\IrcCommands.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcCommands\Rfc2812.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcCommands\Rfc2812.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcConnection\Delegates.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\Delegates.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcConnection\EventArgs.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\EventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcConnection\IrcConnection.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcConnection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcConnection\IrcProperties.cs" />
-    <Compile Include="Resources\IRC\SmartIrc4net\IrcConnection\IrcTcpClient.cs">
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcProperties.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcTcpClient.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Resources\IRC\SmartIrc4net\Logger.cs" />
+    <Compile Include="Protocols\IRC\SmartIrc4net\Logger.cs" />
     <Compile Include="Settings\RegistryUtil.cs" />
     <Compile Include="UI\Feedback\frmBugReporter.cs">
       <SubType>Form</SubType>

@@ -6,7 +6,7 @@ namespace DCT.UI
 {
     public partial class frmLoginServer : Form
     {
-        private CoreUI mUI;
+        private readonly CoreUI mUI;
         public frmLoginServer(CoreUI ui)
         {
             mUI = ui;

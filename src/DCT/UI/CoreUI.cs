@@ -982,7 +982,7 @@ namespace DCT.UI
 
             sb.AppendFormat("{0} mobs loaded\n", MobsPanel.Mobs.Count);
             sb.AppendFormat("{0} mobs checked:\n", MobsPanel.CheckedMobs.Count);
-            foreach (ListViewItem i in MobsPanel.CheckedRooms)
+            foreach (ListViewItem i in MobsPanel.CheckedMobs)
             {
                 // name, id, roomid
                 sb.AppendFormat("\t{0} ({1}, {2})", i.SubItems[0].Text, i.SubItems[1].Text, i.SubItems[2].Text);
@@ -991,7 +991,7 @@ namespace DCT.UI
 
             sb.AppendFormat("{0} spawns loaded\n", SpawnsPanel.Spawns.Count);
             sb.AppendFormat("{0} spawns checked:\n", SpawnsPanel.CheckedSpawns.Count);
-            foreach (ListViewItem i in SpawnsPanel.CheckedRooms)
+            foreach (ListViewItem i in SpawnsPanel.CheckedSpawns)
             {
                 // name, roomid
                 sb.AppendFormat("\t{0} ({1})", i.SubItems[0].Text, i.SubItems[2].Text);
