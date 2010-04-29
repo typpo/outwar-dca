@@ -452,7 +452,7 @@ namespace DCT.UI
         #region ACTIONS MENUBAR
         private void reportABugToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            new Feedback.frmBugReporter(this).Show();
         }
 
         private void inputRgsessidToolStripMenuItem_Click(object sender, EventArgs e)
@@ -959,5 +959,50 @@ namespace DCT.UI
 
         #endregion
 
+        /// <summary>
+        /// Collects debugging data about the current state of the program.
+        /// </summary>
+        /// <returns></returns>
+        internal string CollectData()
+        {
+            StringBuilder sb = new StringBuilder("State summary:\n\n");
+
+            sb.AppendFormat("{0} accounts loaded\n", AccountsPanel.Engine.Count);
+            sb.AppendFormat("{0} accounts selected\n", AccountsPanel.lvAccounts.SelectedIndices.Count);
+            sb.AppendFormat("{0} accounts checked\n\n", AccountsPanel.lvAccounts.CheckedIndices.Count);
+
+            sb.AppendFormat("{0} rooms loaded\n", RoomsPanel.Rooms.Count);
+            sb.AppendFormat("{0} rooms checked:\n", RoomsPanel.CheckedRooms.Count);
+            foreach (ListViewItem i in RoomsPanel.CheckedRooms)
+            {
+                // name, id
+                sb.AppendFormat("\t{0} ({1})", i.SubItems[0].Text, i.SubItems[1].Text);
+            }
+            sb.Append("\n\n");
+
+            sb.AppendFormat("{0} mobs loaded\n", MobsPanel.Mobs.Count);
+            sb.AppendFormat("{0} mobs checked:\n", MobsPanel.CheckedMobs.Count);
+            foreach (ListViewItem i in MobsPanel.CheckedRooms)
+            {
+                // name, id, roomid
+                sb.AppendFormat("\t{0} ({1}, {2})", i.SubItems[0].Text, i.SubItems[1].Text, i.SubItems[2].Text);
+            }
+            sb.Append("\n\n");
+
+            sb.AppendFormat("{0} spawns loaded\n", SpawnsPanel.Spawns.Count);
+            sb.AppendFormat("{0} spawns checked:\n", SpawnsPanel.CheckedSpawns.Count);
+            foreach (ListViewItem i in SpawnsPanel.CheckedRooms)
+            {
+                // name, roomid
+                sb.AppendFormat("\t{0} ({1})", i.SubItems[0].Text, i.SubItems[2].Text);
+            }
+            sb.Append("\n\n");
+
+            // settings data
+            sb.Append("Settings serialization:\n\n");
+            sb.Append(new ConfigSerializer().StringSerialize(Settings));
+
+            return sb.ToString();
+        }
     }
 }

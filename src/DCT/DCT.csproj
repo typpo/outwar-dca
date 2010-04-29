@@ -78,68 +78,67 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\Consts.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\Consts.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\EventArgs.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\EventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\Exceptions.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\Exceptions.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\Channel.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\Channel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\ChannelUser.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\ChannelUser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\Delegates.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\Delegates.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\EventArgs.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\EventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcClient.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\IrcClient.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcMessageData.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\IrcMessageData.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\IrcUser.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\IrcUser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\NonRfcChannel.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\NonRfcChannel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcClient\NonRfcChannelUser.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcClient\NonRfcChannelUser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcCommands\IrcCommands.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcCommands\IrcCommands.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcCommands\Rfc2812.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcCommands\Rfc2812.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\Delegates.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcConnection\Delegates.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\EventArgs.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcConnection\EventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcConnection.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcConnection\IrcConnection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcProperties.cs" />
-    <Compile Include="Protocols\IRC\SmartIrc4net\IrcConnection\IrcTcpClient.cs">
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcConnection\IrcProperties.cs" />
+    <Compile Include="Resources\IRC\SmartIrc4net\IrcConnection\IrcTcpClient.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Protocols\IRC\SmartIrc4net\Logger.cs" />
+    <Compile Include="Resources\IRC\SmartIrc4net\Logger.cs" />
     <Compile Include="Settings\RegistryUtil.cs" />
-    <Compile Include="UI\BugReporter\DataCollector.cs" />
-    <Compile Include="UI\BugReporter\frmBugReporter.cs">
+    <Compile Include="UI\Feedback\frmBugReporter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\BugReporter\frmBugReporter.Designer.cs">
+    <Compile Include="UI\Feedback\frmBugReporter.Designer.cs">
       <DependentUpon>frmBugReporter.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ChatUI.cs">
@@ -259,7 +258,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\BugReporter\frmBugReporter.resx">
+    <EmbeddedResource Include="UI\Feedback\frmBugReporter.resx">
       <DependentUpon>frmBugReporter.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
