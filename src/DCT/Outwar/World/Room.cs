@@ -32,6 +32,12 @@ namespace DCT.Outwar.World
         /// <returns>0 on success, 1 on hash error, 2 on key, 3 on anything else</returns>
         internal int Load()
         {
+            if (Mover.Location == null)
+            {
+                // error in dc
+                CoreUI.Instance.LogPanel.Log("E: Could not read DC; maybe there is a problem with Outwar.");
+                return 3;
+            }
             // create url
             string url = string.Format("ajax_changeroom.php?room={0}&lastroom={1}", Id, Mover.Location.Id);
             string src = Mover.Socket.Get(url);

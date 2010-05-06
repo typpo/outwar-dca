@@ -279,7 +279,7 @@ namespace DCT.UI
             string txt = lvSpawns.SelectedItems[0].SubItems[0].Text;
             if (txt.StartsWith("A "))
                 txt = txt.Substring(2);
-            lvSpawns.Text = string.Format("Go to {0}", txt);
+            btnGo.Text = string.Format("Go to {0}", txt);
         }
     }
 }

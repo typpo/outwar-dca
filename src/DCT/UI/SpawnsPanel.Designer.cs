@@ -98,6 +98,7 @@
             // 
             // btnGo
             // 
+            this.btnGo.AutoEllipsis = true;
             this.btnGo.Location = new System.Drawing.Point(291, 4);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(110, 23);
