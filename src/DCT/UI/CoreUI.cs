@@ -485,7 +485,11 @@ namespace DCT.UI
             }
             try
             {
-                Process.Start("http://" + AccountsPanel.Engine.MainAccount.Server + ".outwar.com/?rg_sess_id=" + AccountsPanel.Engine.RgSessId);
+                // http://sigil.outwar.com/?rg_sess_id=256s55neyav04p8wz6hny6jbcgqe9ht0&serverid=1&suid=830713
+
+                Process.Start(string.Format("http://{0}.outwar.com/?rg_sess_id={1}&serverid={2}&suid={3}",
+                    AccountsPanel.Engine.MainAccount.Server, AccountsPanel.Engine.RgSessId,
+                    Server.NameToId(AccountsPanel.Engine.MainAccount.Server), AccountsPanel.Engine.MainAccount.Id));
             }
             catch { }   // firefox crash
         }

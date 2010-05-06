@@ -39,6 +39,11 @@ namespace DCT.Outwar.World
 
             Parser p = new Parser(src);
             // TODO look how error messages changed
+            string error = p.Parse("\"error\":\"", "\"");
+            if (!string.IsNullOrEmpty(error))
+            {
+                // do something
+            }
             if (src.Contains("Error #301"))
             {
                 // hash error
