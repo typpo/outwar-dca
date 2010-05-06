@@ -42,240 +42,7 @@ namespace DCT.Outwar.World
 
         internal bool RefreshRoom()
         {
-            Account.Ret = Account.Name;
-            /*
-            try
-            {
-                #region ENCRYPTED URL
-                Stack<int> stack = new Stack<int>(96);
-                int bCrypt = 0;
-
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x33);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x51);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x32);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xCE);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x29);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xD3);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xD1);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x5);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xFB);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x2A);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x57);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xD5);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x54);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xD2);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xFE);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xCF);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x6);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x3);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x0);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x0);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x32);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x53);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x2F);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x4);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x33);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x4);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x30);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xFF);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xD2);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0xF);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x5D);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x1);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x54);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x2);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xD1);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xD7);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x0);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xD7);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x55);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x3);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x2);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xCD);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x4);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x51);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x5);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xFB);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x7);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x5);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x52);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x57);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xFB);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xFC);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x57);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xD5);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0xB);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x4);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x2C);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xFC);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xCC);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x7);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x5);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x5);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x3);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x57);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x5);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x7);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x55);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x54);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2F);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x56);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x4);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x7);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x1);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xFF);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x32);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x1);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x3);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x5);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0xF);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x5);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x6);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0x0);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x7);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x5);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xFF);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0xF);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 2, 0x5A);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2D);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xD4);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 1, 0xCF);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0xCE);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x1);
-                stack.Push(bCrypt);
-                bCrypt = Crypt.StackDecrypt(bCrypt, 0, 0x2D);
-                stack.Push(bCrypt);
-
-                StringBuilder sb = new StringBuilder();
-                while (stack.Count > 0)
-                {
-                    sb.Append((char)stack.Pop());
-                }
-                #endregion
-
-                //Console.WriteLine(DCT.Security.Crypt.BinToHex(DCT.Security.Crypt.Get("http://typpo.dyndns.org:7012/dct/auth/verify.php", DCT.Security.Auth.KEY, false)));
-
-                string text1 = Crypt.Get(Crypt.HexToBin(sb.ToString()), Auth.KEY, false);
-                string text2 = Crypt.BinToHex(Crypt.Get(Account.Name, Version.Id, false));
-                string idtag = Crypt.BinToHex(Crypt.Get(Account.Id.ToString(), Version.Id, false));
-                string text3 = Crypt.RandomString(10, true);
-                //string pass = Crypt.bin2hex(Crypt.Encrypt(Globals.Pass, mAccount.Name, false));
-
-                string text4 =
-                    HttpSocket.DefaultInstance.Post(text1, "tag=" + text2 + "&tag2=" + idtag + "&str=" + text3);
-
-                if ((Account.Ret = Crypt.Get(Crypt.HexToBin(text4), Account.Id + text3, false))
-                    != Account.Name)
-                {
-                    throw new Exception();
-                    return false;
-                }
-            }
-            catch
-            {
-                CoreUI.Instance.LogPanel.Log("E: " + Account.Name + " can't explore DC because the account is not authorized.  This is probably because there is a new version out.\n\nIf you are sure you are running the latest version, you may be reading this because your internet connection cut out or the authorization server is down.");
-                Application.Exit();
-                return false;
-            }
-            */
-            if (LoadRoom("world.php") == 4)
+            if (LoadRoom(0) == 4)
             {
                 MessageBox.Show("You logged onto Outwar and booted the program.  Hitting the \"Refresh\" button may solve this.\n\nTo correctly access your account while the program is running, go to Actions > Open in browser after logging in here.",
                     "Account Booted", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -289,23 +56,13 @@ namespace DCT.Outwar.World
         /// </summary>
         /// <param name="url"></param>
         /// <returns>0 if good, 1 if error with retry, 2 if error with override</returns>
-        private int LoadRoom(string url)
+        private int LoadRoom(int id)
         {
-            if (string.IsNullOrEmpty(url))
-            {
-                CoreUI.Instance.LogPanel.Log("Move E: that room doesn't exist");
-                return 1;
-            }
-            if (Account.Ret == Account.Name)
-            {
-                Room tmp = new Room(this, url);
-                int r = tmp.Load();
-                if (r == 0)
-                    Location = tmp;
-                return r;
-            }
-
-            return 2;
+            Room tmp = new Room(this, id);
+            int r = tmp.Load();
+            if (r == 0)
+                Location = tmp;
+            return r;
         }
 
         internal delegate void PathfindHandler(int roomid);
@@ -370,7 +127,7 @@ namespace DCT.Outwar.World
             for (int i = 0; i < nodes.Count; i++)
             {
                 int node = nodes[i];
-                if (Globals.Terminate || Account.Ret != Account.Name)
+                if (Globals.Terminate)
                 {
                     return;
                 }
@@ -418,7 +175,7 @@ namespace DCT.Outwar.World
             }
 
             string url;
-            if (string.IsNullOrEmpty(url = Location[id]))
+            if (!Location.Links.Contains(id))
             {
                 return false;
             }
@@ -431,7 +188,7 @@ namespace DCT.Outwar.World
             //    CoreUI.Instance.LogPanel.Log(Account.Name + " moving to room " + id);
             //}
             
-            switch (LoadRoom(url))
+            switch (LoadRoom(id))
             {
                 case 3:
                 case 1:
@@ -468,6 +225,7 @@ namespace DCT.Outwar.World
 
         internal void Spider(object p_bound)
         {
+            /*
             string bound = p_bound == null ? string.Empty : ((string)p_bound).ToLower();
             // should probably update UI as well
             CoreUI.Instance.Settings.AutoTeleport = false;
@@ -576,6 +334,7 @@ namespace DCT.Outwar.World
             } while (Globals.AttackMode);
 
             MessageBox.Show("Done spidering");
+            */
         }
 
         internal void Train()

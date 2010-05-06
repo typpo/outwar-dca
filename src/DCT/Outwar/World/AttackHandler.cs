@@ -126,7 +126,7 @@ namespace DCT.Outwar.World
                     }
                     CoreUI.Instance.LogPanel.Log(a.Name + " attack coverage complete");
 
-                    if (!Globals.AttackMode || a.Ret != a.Name)
+                    if (!Globals.AttackMode)
                     {
                         return;
                     }
