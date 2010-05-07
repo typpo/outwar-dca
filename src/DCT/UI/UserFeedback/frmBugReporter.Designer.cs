@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txt = new System.Windows.Forms.RichTextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.lblEmail = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
-            this.txt = new System.Windows.Forms.RichTextBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -59,6 +59,15 @@
             this.splitContainer1.Size = new System.Drawing.Size(384, 271);
             this.splitContainer1.SplitterDistance = 236;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // txt
+            // 
+            this.txt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt.Location = new System.Drawing.Point(0, 0);
+            this.txt.Name = "txt";
+            this.txt.Size = new System.Drawing.Size(384, 236);
+            this.txt.TabIndex = 0;
+            this.txt.Text = "";
             // 
             // txtEmail
             // 
@@ -97,15 +106,6 @@
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // txt
-            // 
-            this.txt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txt.Location = new System.Drawing.Point(0, 0);
-            this.txt.Name = "txt";
-            this.txt.Size = new System.Drawing.Size(384, 236);
-            this.txt.TabIndex = 0;
-            this.txt.Text = "";
-            // 
             // frmBugReporter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,7 +114,7 @@
             this.ClientSize = new System.Drawing.Size(384, 271);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmBugReporter";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report a bug or suggestion...";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

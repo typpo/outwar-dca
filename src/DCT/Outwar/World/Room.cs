@@ -29,7 +29,7 @@ namespace DCT.Outwar.World
         /// <summary>
         /// 
         /// </summary>
-        /// <returns>0 on success, 1 on hash error, 2 on key, 3 on anything else</returns>
+        /// <returns>0 on success, 1 on hash error, 2 on key, 3 on DC broken.  4 to stop all attacking</returns>
         internal int Load()
         {
             if (Mover.Location == null)
@@ -101,10 +101,6 @@ namespace DCT.Outwar.World
         internal void EnumMobs(string src)
         {
             // TODO this should really just throw an exception
-            if (string.IsNullOrEmpty(src))
-            {
-                Load();
-            }
             Mobs = new List<Mob>();
 
             foreach (string s in Parser.MultiParse(src, "<div style=\"border-bottom:1px solid black;\"", "</div>"))

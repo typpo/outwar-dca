@@ -42,13 +42,20 @@ namespace DCT.Outwar.World
 
         internal bool RefreshRoom()
         {
-            if (LoadRoom(0) == 4)
+
+            switch (LoadRoom(0))
             {
-                MessageBox.Show("You logged onto Outwar and booted the program.  Hitting the \"Refresh\" button may solve this.\n\nTo correctly access your account while the program is running, go to Actions > Open in browser after logging in here.",
-                    "Account Booted", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                case 3:
+                    // broken dc
+                    return false;
+                case 4:
+                    // booted to login
+                    MessageBox.Show("You logged onto Outwar and booted the program.  Hitting the \"Refresh\" button may solve this.\n\nTo correctly access your account while the program is running, go to Actions > Open in browser after logging in here.",
+                        "Account Booted", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                default:
+                    return true;
             }
-            return true;
         }
 
         /// <summary>
