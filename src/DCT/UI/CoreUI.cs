@@ -979,7 +979,7 @@ namespace DCT.UI
             foreach (ListViewItem i in RoomsPanel.CheckedRooms)
             {
                 // name, id
-                sb.AppendFormat("\t{0} ({1})", i.SubItems[0].Text, i.SubItems[1].Text);
+                sb.AppendFormat("\t{0} ({1})\n", i.SubItems[0].Text, i.SubItems[1].Text);
             }
             sb.Append("\n\n");
 
@@ -988,7 +988,7 @@ namespace DCT.UI
             foreach (ListViewItem i in MobsPanel.CheckedMobs)
             {
                 // name, id, roomid
-                sb.AppendFormat("\t{0} ({1}, {2})", i.SubItems[0].Text, i.SubItems[1].Text, i.SubItems[2].Text);
+                sb.AppendFormat("\t{0} ({1}, {2})\n", i.SubItems[0].Text, i.SubItems[1].Text, i.SubItems[2].Text);
             }
             sb.Append("\n\n");
 
@@ -997,7 +997,7 @@ namespace DCT.UI
             foreach (ListViewItem i in SpawnsPanel.CheckedSpawns)
             {
                 // name, roomid
-                sb.AppendFormat("\t{0} ({1})", i.SubItems[0].Text, i.SubItems[2].Text);
+                sb.AppendFormat("\t{0} ({1})\n", i.SubItems[0].Text, i.SubItems[2].Text);
             }
             sb.Append("\n\n");
 

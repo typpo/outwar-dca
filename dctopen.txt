@@ -1,6 +1,26 @@
- >> Typpo's DC Tool - Latest Version: 3.1.18 << 
- 
+ >> Typpo's DC Tool - Latest Version: 3.1.20 << 
+
+ (Update coming soon to fix 'open in browser' change)
+
+***Note: send bug reports/suggestions at www.typpo.us/submit.php
+
 Change History:
+
+5/7/10:
+- Updated 'open in browser' for Outwar login changes.
+- Added 'Report a Bug/Suggestion' under Actions menu.
+- Added 'Go to' button for spawns.
+
+4/21/10:
+- ** Fixed login problems some people were having: Added server login configuration.  If you are having problems logging in, point this to your main server (sets the server the program tries to login to).
+- Checked accounts now saved in refresh.
+- Internal code refactoring.
+
+3/31/10:
+Added Skybrine and Windstrike.
+
+1/23/10:
+- Warehouse in CoES changed to "Warehouse (CoES)" in database.
 
 Release 3.1.18 (12/25/09):
 - Improved pathfinding efficiency
@@ -43,10 +63,10 @@ Release 3.1.14a (10/6/09):
 End Changes 
 
 Info for the autoupdater: 
-<ver>3.1.18</ver> 
-<url>http://typpo.us/DCT 3.1.18.exe</url>
+<ver>3.1.20</ver> 
+<url>http://typpo.us/DCT 3.1.20.exe</url>
  
 <chan>#typpo</chan> 
-<svr>typpo.dyndns.org</svr>
-<port>1942</port>
-<map>2009-12-19 02:00</map>
+<svr>typpo.us</svr>
+<port>6667</port>
+<map>2010-03-31 16:20</map>
