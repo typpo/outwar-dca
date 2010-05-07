@@ -10,20 +10,34 @@ namespace DCT.Outwar.World
     internal class Room
     {
         internal Mover Mover { get; private set; }
-        internal int Id { get; private set; }
+        private int mId;
+        internal int Id
+        {
+            get { return mId; }
+        }
         internal string Name { get; set; }
         internal bool Trained { get; private set; }
+        internal string Url { get; private set; }
         // TODO this should not be here
-        internal List<int> Links { get; private set; }
+        private string mSource;
+        internal SortedList<int, string> Links { get; private set; }
         internal List<Mob> Mobs { get; private set; }
 
-        internal Room(Mover mover, int id)
+        internal Room(Mover mover, string url)
         {
-            Id = id;
+            if (url != "world.php")
+            {
+                string tmp = Parser.Parse(url, "id=", "&");
+                if (tmp != Parser.ERR_CONST)
+                {
+                    int.TryParse(tmp, out mId);
+                }
+            }
+            Url = url;
             Mover = mover;
 
             Trained = false;
-            Links = new List<int>();
+            Links = new SortedList<int, string>();
         }
 
         /// <summary>
@@ -32,62 +46,45 @@ namespace DCT.Outwar.World
         /// <returns>0 on success, 1 on hash error, 2 on key, 3 on DC broken.  4 to stop all attacking</returns>
         internal int Load()
         {
-            if (Mover.Location == null)
-            {
-                // error in dc
-                CoreUI.Instance.LogPanel.Log("E: Could not read DC; maybe there is a problem with Outwar.");
-                return 3;
-            }
-            // create url
-            string url = string.Format("ajax_changeroom.php?room={0}&lastroom={1}", Id, Mover.Location.Id);
-            string src = Mover.Socket.Get(url);
-            src = System.Text.RegularExpressions.Regex.Unescape(src);
+            // load source from url
+            mSource = Mover.Socket.Get(Url);
 
-            Parser p = new Parser(src);
-            // TODO look how error messages changed
-            string error = p.Parse("\"error\":\"", "\"");
-            if (!string.IsNullOrEmpty(error))
-            {
-                // do something
-            }
-            if (src.Contains("Error #301"))
+            Parser p = new Parser(mSource);
+            if (mSource.Contains("Error #301"))
             {
                 // hash error
                 return 1;
             }
-            if (src.Contains("you must be carrying") || src.Contains("cast on you to enter this room."))
+            if (mSource.Contains("you must be carrying") || mSource.Contains("cast on you to enter this room."))
             {
                 // need a key
                 return 2;
             }
-            if (src.Contains("Rampid Gaming Login"))
+            if (mSource.Contains("Rampid Gaming Login"))
             {
                 // logged out
                 return 4;
             }
 
-            if (Id == 0)
+            if (mId == 0)
             {
-                // loading world.php; figure out where we are
-                string tmp = Parser.Parse(src, "\"curRoom\":\"", "\"");
-                int tmpid;
-                if (!int.TryParse(tmp, out tmpid))
+                string tmp = Parser.Parse(mSource, "&lastroom=", "'");
+                if (!int.TryParse(tmp, out mId))
                 {
                     return 3;
                 }
-                Id = tmpid;
             }
-            Name = p.Parse("\"name\":\"", "\"");
+            Name = p.Parse("'font-size:9pt;color:black'><b>- ", " -");
 
-            EnumRooms(src);
+            EnumRooms();
 
             if (Globals.AttackMode)
             {
-                EnumMobs(src);
+                EnumMobs();
             }
             else if (CoreUI.Instance.Settings.AutoTrain || CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests)
             {
-                EnumMobs(src);
+                EnumMobs();
 
                 if (CoreUI.Instance.Settings.AutoTrain)
                     Trained = Train();
@@ -98,12 +95,31 @@ namespace DCT.Outwar.World
             return 0;
         }
 
-        internal void EnumMobs(string src)
+        /// <summary>
+        /// Returns the URL for a connecting room, given an id#
+        /// </summary>
+        /// <param name="id">Room id to get connecting link to</param>
+        /// <returns>A URL; null if no such link exists</returns>
+        internal string this[int id]
+        {
+            get
+            {
+                if (Links.ContainsKey(id))
+                    return Links[id];
+                return null;
+            }
+        }
+
+        internal void EnumMobs()
         {
             // TODO this should really just throw an exception
+            if (string.IsNullOrEmpty(mSource))
+            {
+                Load();
+            }
             Mobs = new List<Mob>();
 
-            foreach (string s in Parser.MultiParse(src, "<div style=\"border-bottom:1px solid black;\"", "</div>"))
+            foreach (string s in Parser.MultiParse(mSource, "<div style=\"border-bottom:1px solid black;\"", "</div>"))
             {
                 Parser p = new Parser(s);
 
@@ -126,8 +142,8 @@ namespace DCT.Outwar.World
                     // log spawn sighting, but don't attack it if we shouldn't
                     if (Globals.AttackOn)
                     {
-                        CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} sighted {1} in room {2}", Mover.Account.Name, name, Id));
-                        CoreUI.Instance.SpawnsPanel.Sighted(Id);
+                        CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} sighted {1} in room {2}", Mover.Account.Name, name, mId));
+                        CoreUI.Instance.SpawnsPanel.Sighted(mId);
                         if (!CoreUI.Instance.Settings.AttackSpawns)
                             continue;
                     }
@@ -150,6 +166,19 @@ namespace DCT.Outwar.World
                     trainer = true;
                 }
 
+                if (s.Contains("raidz") && s.Contains("Form new raid"))
+                {
+                    // create raidformmob
+                    //string formurl = "formraid.php" + Parser.Parse(s, "formraid.php", "\"");
+                    //mRaid = new RaidFormMob(name, url, formurl, this);
+                    // TODO: logic could be nicer
+                    continue;
+                }
+                //else
+                //{
+                //    mRaid = null;
+                //}
+
                 if (string.IsNullOrEmpty(attackurl) && !quest && !trainer)
                 {
                     continue;
@@ -159,18 +188,23 @@ namespace DCT.Outwar.World
             }
         }
 
-        internal void EnumRooms(string src)
+        internal void EnumRooms()
         {
-            // TODO what about mysterious portal?
-            int n, s, e, w;
-            int.TryParse(Parser.Parse(src, "\"north\":\"", "\""), out n);
-            int.TryParse(Parser.Parse(src, "\"south\":\"", "\""), out s);
-            int.TryParse(Parser.Parse(src, "\"east\":\"", "\""), out e);
-            int.TryParse(Parser.Parse(src, "\"west\":\"", "\""), out w);
-            Links.Add(n);
-            Links.Add(s);
-            Links.Add(e);
-            Links.Add(w);
+            // TODO just parse all world links...
+            string[] tokens = Parser.MultiParse(mSource, "<a href=\"", "\"");
+            string url;
+            int id;
+            for (int i = 0; i < tokens.Length; i++)
+            {
+                url = tokens[i].Replace("\">", "").Replace(" ", "").Replace("/", "").ToLower().Trim();
+                if (url.StartsWith("world.php"))
+                {
+                    if (!int.TryParse(Parser.Parse(url, "room=", "&"), out id))
+                        continue;
+                    if (!Links.ContainsKey(id))
+                        Links.Add(id, url);
+                }
+            }
         }
         
         /// <summary>
@@ -180,8 +214,7 @@ namespace DCT.Outwar.World
         {
             if (Mobs == null)
             {
-                // TODO when does this happen?
-                System.Windows.Forms.MessageBox.Show("Enum mobs has not occured before attack; report this error");
+                EnumMobs();
             }
             if (Mobs.Count < 1)
             {

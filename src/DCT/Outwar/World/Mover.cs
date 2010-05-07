@@ -42,20 +42,14 @@ namespace DCT.Outwar.World
 
         internal bool RefreshRoom()
         {
-
-            switch (LoadRoom(0))
+            Account.Ret = Account.Name;
+            if (LoadRoom("world.php") == 4)
             {
-                case 3:
-                    // broken dc
-                    return false;
-                case 4:
-                    // booted to login
-                    MessageBox.Show("You logged onto Outwar and booted the program.  Hitting the \"Refresh\" button may solve this.\n\nTo correctly access your account while the program is running, go to Actions > Open in browser after logging in here.",
-                        "Account Booted", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                default:
-                    return true;
+                MessageBox.Show("You logged onto Outwar and booted the program.  Hitting the \"Refresh\" button may solve this.\n\nTo correctly access your account while the program is running, go to Actions > Open in browser after logging in here.",
+                    "Account Booted", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
+            return true;
         }
 
         /// <summary>
@@ -63,13 +57,23 @@ namespace DCT.Outwar.World
         /// </summary>
         /// <param name="url"></param>
         /// <returns>0 if good, 1 if error with retry, 2 if error with override</returns>
-        private int LoadRoom(int id)
+        private int LoadRoom(string url)
         {
-            Room tmp = new Room(this, id);
-            int r = tmp.Load();
-            if (r == 0)
-                Location = tmp;
-            return r;
+            if (string.IsNullOrEmpty(url))
+            {
+                CoreUI.Instance.LogPanel.Log("Move E: that room doesn't exist");
+                return 1;
+            }
+            if (Account.Ret == Account.Name)
+            {
+                Room tmp = new Room(this, url);
+                int r = tmp.Load();
+                if (r == 0)
+                    Location = tmp;
+                return r;
+            }
+
+            return 2;
         }
 
         internal delegate void PathfindHandler(int roomid);
@@ -134,7 +138,7 @@ namespace DCT.Outwar.World
             for (int i = 0; i < nodes.Count; i++)
             {
                 int node = nodes[i];
-                if (Globals.Terminate)
+                if (Globals.Terminate || Account.Ret != Account.Name)
                 {
                     return;
                 }
@@ -182,7 +186,7 @@ namespace DCT.Outwar.World
             }
 
             string url;
-            if (!Location.Links.Contains(id))
+            if (string.IsNullOrEmpty(url = Location[id]))
             {
                 return false;
             }
@@ -195,7 +199,7 @@ namespace DCT.Outwar.World
             //    CoreUI.Instance.LogPanel.Log(Account.Name + " moving to room " + id);
             //}
             
-            switch (LoadRoom(id))
+            switch (LoadRoom(url))
             {
                 case 3:
                 case 1:
@@ -232,7 +236,6 @@ namespace DCT.Outwar.World
 
         internal void Spider(object p_bound)
         {
-            /*
             string bound = p_bound == null ? string.Empty : ((string)p_bound).ToLower();
             // should probably update UI as well
             CoreUI.Instance.Settings.AutoTeleport = false;
@@ -341,7 +344,6 @@ namespace DCT.Outwar.World
             } while (Globals.AttackMode);
 
             MessageBox.Show("Done spidering");
-            */
         }
 
         internal void Train()
