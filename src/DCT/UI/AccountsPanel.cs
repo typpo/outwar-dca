@@ -61,9 +61,6 @@ namespace DCT.UI
                 lnkAccountsCheckAll.Enabled = mEnabled;
                 lnkChkServer.Enabled = mEnabled;
                 lnkAccountsUncheckAll.Enabled = mEnabled;
-                btnLogin.Enabled = mEnabled;
-                btnLogout.Enabled = mEnabled;
-                btnRefresh.Enabled = mEnabled;
             }
         }
 

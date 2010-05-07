@@ -289,7 +289,6 @@ namespace DCT.UI
 
             Toggle(!on);
 
-            AccountsPanel.ChangeAllowed = on;
             AttackingOn = on;
             Globals.AttackMode = on;
 
