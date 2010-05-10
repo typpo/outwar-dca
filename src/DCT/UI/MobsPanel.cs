@@ -157,6 +157,11 @@ namespace DCT.UI
             List<string> check = new List<string>();
             switch (cmbPotionMobs.Text.ToLower())
             {
+                case "kix":
+                    check.Add("Kix Oak Tree");
+                    check.Add("Kix Spider");
+                    check.Add("Mountain Weeds");
+                    break;
                 case "kinetic":
                     check.Add("Deadly Ripscale");
                     check.Add("Poison Drake");

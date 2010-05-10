@@ -99,6 +99,7 @@ namespace DCT.UI
             // cmbPotionMobs
             // 
             this.cmbPotionMobs.Items.AddRange(new object[] {
+            "Kix",
             "Kinetic",
             "Fire",
             "Holy",
