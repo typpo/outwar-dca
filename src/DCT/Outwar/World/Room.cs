@@ -229,17 +229,7 @@ namespace DCT.Outwar.World
                     return;
                 }
 
-                if (mob.Attack() && CoreUI.Instance.Settings.Delay != 0)
-                {
-                    int delay = CoreUI.Instance.Settings.Delay
-                                +
-                                (CoreUI.Instance.Settings.Variance
-                                     ? (CoreUI.Instance.Settings.Delay/100)*Randomizer.Random.Next(51)*Randomizer.RandomPosNeg()
-                                     : 0);
-
-                    CoreUI.Instance.LogPanel.Log("Waiting for delay: " + delay + " ms");
-                    ThreadEngine.Sleep(delay);
-                }
+                mob.Attack();
             }
             // TODO should be done with callback
             CoreUI.Instance.LogPanel.Log("Waiting for Outwar to respond...");
@@ -297,17 +287,7 @@ namespace DCT.Outwar.World
 
         private static void AttackMob(Mob mb)
         {
-            if (mb.Attack(false) && CoreUI.Instance.Settings.Delay != 0)
-            {
-                int delay = CoreUI.Instance.Settings.Delay
-                    +
-                    (CoreUI.Instance.Settings.Variance
-                         ? (CoreUI.Instance.Settings.Delay / 100) * Randomizer.Random.Next(51) * Randomizer.RandomPosNeg()
-                         : 0);
-
-                CoreUI.Instance.LogPanel.Log("Waiting for delay: " + delay + " ms");
-                ThreadEngine.Sleep(delay);
-            }
+            mb.Attack(false);
         }
 
         internal bool Train()

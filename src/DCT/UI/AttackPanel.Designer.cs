@@ -29,10 +29,9 @@ namespace DCT.UI
         private void InitializeComponent()
         {
             this.grpSettings = new System.Windows.Forms.GroupBox();
+            this.pnlMainPanel = new System.Windows.Forms.Panel();
             this.chkReturnToStart = new System.Windows.Forms.CheckBox();
-            this.chkVariance = new System.Windows.Forms.CheckBox();
-            this.numThreadDelay = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.numTimeout = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.numRageLimit = new System.Windows.Forms.NumericUpDown();
@@ -45,10 +44,7 @@ namespace DCT.UI
             this.label4 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.chkAutoTeleport = new System.Windows.Forms.CheckBox();
-            this.pnlMainPanel = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
             this.grpSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numThreadDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRageLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLevelMin)).BeginInit();
@@ -60,9 +56,6 @@ namespace DCT.UI
             // 
             this.grpSettings.Controls.Add(this.pnlMainPanel);
             this.grpSettings.Controls.Add(this.chkReturnToStart);
-            this.grpSettings.Controls.Add(this.chkVariance);
-            this.grpSettings.Controls.Add(this.numThreadDelay);
-            this.grpSettings.Controls.Add(this.label9);
             this.grpSettings.Controls.Add(this.label8);
             this.grpSettings.Controls.Add(this.numTimeout);
             this.grpSettings.Controls.Add(this.label5);
@@ -84,6 +77,13 @@ namespace DCT.UI
             this.grpSettings.TabStop = false;
             this.grpSettings.Text = "Settings";
             // 
+            // pnlMainPanel
+            // 
+            this.pnlMainPanel.Location = new System.Drawing.Point(192, 10);
+            this.pnlMainPanel.Name = "pnlMainPanel";
+            this.pnlMainPanel.Size = new System.Drawing.Size(216, 130);
+            this.pnlMainPanel.TabIndex = 38;
+            // 
             // chkReturnToStart
             // 
             this.chkReturnToStart.AutoSize = true;
@@ -97,41 +97,15 @@ namespace DCT.UI
             this.chkReturnToStart.UseVisualStyleBackColor = true;
             this.chkReturnToStart.CheckedChanged += new System.EventHandler(this.chkReturnToStart_CheckedChanged_1);
             // 
-            // chkVariance
+            // label8
             // 
-            this.chkVariance.AutoSize = true;
-            this.chkVariance.Checked = true;
-            this.chkVariance.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkVariance.Location = new System.Drawing.Point(213, 227);
-            this.chkVariance.Name = "chkVariance";
-            this.chkVariance.Size = new System.Drawing.Size(154, 17);
-            this.chkVariance.TabIndex = 8;
-            this.chkVariance.Text = "Global timing randomization";
-            this.chkVariance.UseVisualStyleBackColor = true;
-            this.chkVariance.CheckedChanged += new System.EventHandler(this.chkVariance_CheckedChanged);
-            // 
-            // numThreadDelay
-            // 
-            this.numThreadDelay.Location = new System.Drawing.Point(281, 165);
-            this.numThreadDelay.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numThreadDelay.Name = "numThreadDelay";
-            this.numThreadDelay.Size = new System.Drawing.Size(82, 20);
-            this.numThreadDelay.TabIndex = 6;
-            this.numThreadDelay.ThousandsSeparator = true;
-            this.numThreadDelay.ValueChanged += new System.EventHandler(this.numThreadDelay_ValueChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(210, 167);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 13);
-            this.label9.TabIndex = 35;
-            this.label9.Text = "Thread delay:";
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(188, 148);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(68, 13);
+            this.label8.TabIndex = 33;
+            this.label8.Text = "Advanced:";
             // 
             // numTimeout
             // 
@@ -140,7 +114,7 @@ namespace DCT.UI
             0,
             0,
             0});
-            this.numTimeout.Location = new System.Drawing.Point(294, 191);
+            this.numTimeout.Location = new System.Drawing.Point(294, 165);
             this.numTimeout.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -165,7 +139,7 @@ namespace DCT.UI
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(210, 193);
+            this.label5.Location = new System.Drawing.Point(210, 167);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(87, 13);
             this.label5.TabIndex = 29;
@@ -300,23 +274,6 @@ namespace DCT.UI
             this.chkAutoTeleport.UseVisualStyleBackColor = true;
             this.chkAutoTeleport.CheckedChanged += new System.EventHandler(this.chkAutoTeleport_CheckedChanged);
             // 
-            // pnlMainPanel
-            // 
-            this.pnlMainPanel.Location = new System.Drawing.Point(192, 10);
-            this.pnlMainPanel.Name = "pnlMainPanel";
-            this.pnlMainPanel.Size = new System.Drawing.Size(216, 130);
-            this.pnlMainPanel.TabIndex = 38;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(188, 148);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(68, 13);
-            this.label8.TabIndex = 33;
-            this.label8.Text = "Advanced:";
-            // 
             // AttackPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -326,7 +283,6 @@ namespace DCT.UI
             this.Size = new System.Drawing.Size(414, 255);
             this.grpSettings.ResumeLayout(false);
             this.grpSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numThreadDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRageLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLevelMin)).EndInit();
@@ -339,9 +295,6 @@ namespace DCT.UI
         #endregion
 
         private System.Windows.Forms.GroupBox grpSettings;
-        private System.Windows.Forms.CheckBox chkVariance;
-        private System.Windows.Forms.NumericUpDown numThreadDelay;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown numTimeout;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numRageLimit;

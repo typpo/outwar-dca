@@ -347,18 +347,6 @@ namespace DCT.UI
             mAttackPanel.RageLimit = Settings.RageLimit;
             mAttackPanel.ReturnToStart = Settings.ReturnToStart;
 
-            try
-            {
-                mAttackPanel.ThreadDelay = Settings.Delay;
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                Settings.Delay = 0;
-                mAttackPanel.ThreadDelay = Settings.Delay;
-            }
-
-            mAttackPanel.Variance = Settings.Variance;
-
             // Spawns panel
             SpawnsPanel.AttackSpawns = Settings.AttackSpawns;
             SpawnsPanel.IgnoreSpawnRage = Settings.IgnoreSpawnRage;

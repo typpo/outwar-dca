@@ -29,14 +29,10 @@ namespace DCT.Settings
         public bool UseCountdownTimer { get; set; }
         [XmlElement("UseHourTimer")]
         public bool UseHourTimer { get; set; }
-        [XmlElement("Variance")]
-        public bool Variance { get; set; }
         [XmlElement("ReturnToStart")]
         public bool ReturnToStart { get; set; }
         [XmlElement("AttackMode")]
         public DCT.Outwar.World.AttackingType AttackMode { get; set; }
-        [XmlElement("Delay")]
-        public int Delay { get; set; }
         [XmlIgnore()]
         public int MaxThreads { get; set; }
         [XmlElement("RageLimit")]
@@ -89,7 +85,6 @@ namespace DCT.Settings
 
             ClearLogs = true;
             AutoTrain = false;
-            Variance = true;
 
             AlertQuests = false;
             AutoQuest = false;
@@ -105,7 +100,6 @@ namespace DCT.Settings
             LvlLimit = 65;
             RageLimit = 75;
             StopBelowRage = 0;
-            Delay = 0;
             Timeout = 15000;
             MaxThreads = 5;
             CycleInterval = 40;

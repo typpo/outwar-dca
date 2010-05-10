@@ -17,12 +17,6 @@ namespace DCT.UI
             set { numRageLimit.Value = value; }
         }
 
-        internal int ThreadDelay
-        {
-            get { return (int)numThreadDelay.Value; }
-            set { numThreadDelay.Value = value; }
-        }
-
         internal long LevelMin
         {
             get { return (int)numLevelMin.Value; }
@@ -33,12 +27,6 @@ namespace DCT.UI
         {
             get { return (int)numLevel.Value; }
             set { numLevel.Value = value; }
-        }
-
-        internal bool Variance
-        {
-            get { return chkVariance.Checked; }
-            set { chkVariance.Checked = value; }
         }
 
         internal bool ReturnToStart
@@ -94,16 +82,6 @@ namespace DCT.UI
         private void numTimeout_ValueChanged(object sender, EventArgs e)
         {
             mUI.Settings.Timeout = (int)numTimeout.Value;
-        }
-
-        private void numThreadDelay_ValueChanged(object sender, EventArgs e)
-        {
-            mUI.Settings.Delay = (int)numThreadDelay.Value;
-        }
-
-        private void chkVariance_CheckedChanged(object sender, EventArgs e)
-        {
-            mUI.Settings.Variance = chkVariance.Checked;
         }
 
         private void chkAutoTeleport_CheckedChanged(object sender, EventArgs e)
