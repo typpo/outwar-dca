@@ -216,6 +216,7 @@ namespace DCT.UI
 
         private void cmbStopAfter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            numStopAfter.Enabled = true;
             switch (cmbStopAfter.SelectedItem.ToString())
             {
                 case "runs":
@@ -223,6 +224,12 @@ namespace DCT.UI
                     break;
                 case "minutes":
                     mUI.Settings.StopAfterMode = UserEditable.StopAfterType.Minutes;
+                    break;
+                case "items":
+                    // stopafter num becomes irrelevant
+                    numStopAfter.Enabled = false;
+                    // show item setup dialog
+                    new frmItemSettings(mUI).ShowDialog();
                     break;
             }
         }

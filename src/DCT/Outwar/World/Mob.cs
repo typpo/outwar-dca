@@ -28,7 +28,6 @@ namespace DCT.Outwar.World
                     return true;
                 }
 
-
                 // a mob should get through:
                 // If there are only normal filters, then ONLY if it matches
                 // If there are only ignore filters, then ONLY if it doesn't match
