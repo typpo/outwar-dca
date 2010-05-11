@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using DCT.Protocols.Http;
+using System.Threading;
 
 namespace DCT.Util
 {
@@ -10,8 +11,6 @@ namespace DCT.Util
         internal bool ReportBug(string msg, string email)
         {
             HttpSocket s = new HttpSocket();
-
-            // url encode
 
             // send data
             string resp = s.Post(URL, string.Format("message={0}&email={1}", HttpUtility.UrlEncode(msg), HttpUtility.UrlEncode(email)));

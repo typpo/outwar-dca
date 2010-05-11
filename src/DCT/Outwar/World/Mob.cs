@@ -499,6 +499,7 @@ namespace DCT.Outwar.World
                         {
                             // temporary - report this so I can fix item errors!
                             DCT.Util.BugReporter br = new DCT.Util.BugReporter();
+                            CoreUI.Instance.LogPanel.Log("Reporting item drop error...");
                             br.ReportBug("The following source code was autoreported (problem - item drop parse exceeded max length:\n\n" + src, "autoreported@typpo.us");
                             reported = true;
                         }
@@ -538,6 +539,10 @@ namespace DCT.Outwar.World
                 else
                 {
                     CoreUI.Instance.LogPanel.LogAttack("Attack E (server-side)");
+                    CoreUI.Instance.LogPanel.Log("Reporting server-side error...");
+                    DCT.Util.BugReporter br = new DCT.Util.BugReporter();
+                    CoreUI.Instance.LogPanel.Log("Reporting item drop error...");
+                    br.ReportBug("The following source code was autoreported (problem - attack E - server side:\n\n" + src, "autoreported@typpo.us");
                 }
             }
 

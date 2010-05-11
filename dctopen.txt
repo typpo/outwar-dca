@@ -1,10 +1,14 @@
- >> Typpo's DC Tool - Latest Version: 3.1.20 << 
+ >> Typpo's DC Tool - Latest Version: 3.1.21 << 
 
- (Update coming soon to fix 'open in browser' change)
-
-***Note: send bug reports/suggestions at www.typpo.us/submit.php
+*** Send bug reports/suggestions by going to Actions > Report
 
 Change History:
+
+5/11/10:
+- Added Kix Potion.
+- Fixed bug in 'Go to' spawns button.
+- Removed thread delay and random delay.
+- Errors encountered with item drops and server-side errors are now automatically reported in order to gather data for some features in progress.  If this is causes problems, please let me know.
 
 5/7/10:
 - Updated 'open in browser' for Outwar login changes.
@@ -63,8 +67,8 @@ Release 3.1.14a (10/6/09):
 End Changes 
 
 Info for the autoupdater: 
-<ver>3.1.20</ver> 
-<url>http://typpo.us/DCT 3.1.20.exe</url>
+<ver>3.1.21</ver> 
+<url>http://typpo.us/DCT 3.1.21.exe</url>
  
 <chan>#typpo</chan> 
 <svr>typpo.us</svr>
