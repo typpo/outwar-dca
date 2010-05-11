@@ -344,8 +344,10 @@ namespace DCT.Outwar.World
             }
 
             // Launch attack thread
-            MethodInvoker d = SendAttack;
-            d.BeginInvoke(AttackCallback, d);
+            //MethodInvoker d = SendAttack;
+            //d.BeginInvoke(AttackCallback, d);
+
+            SendAttack();
 
             return true;
         }
@@ -480,7 +482,7 @@ namespace DCT.Outwar.World
                 {
                     CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found an item, but your backpack is full", mRoom.Mover.Account.Name));
                 }
-                string[] fs = Parser.MultiParse(src, string.Format("{0} found ", mRoom.Mover.Account.Name), "!<br>");
+                string[] fs = Parser.MultiParse(src.ToLower(), string.Format("{0} found ", mRoom.Mover.Account.Name), "!<br>");
                 if (fs.Length > 1)
                 {
                     bool reported = false;  // flag to keep track of whether this bug has been reported
@@ -523,6 +525,10 @@ namespace DCT.Outwar.World
             {
                 CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} beat {1}", mRoom.Mover.Account.Name, mName));
             }
+            else if (src.Contains("You are not in the room with that mob"))
+            {
+                CoreUI.Instance.LogPanel.LogAttack("Attack E  - mob not in room");
+            }
             else
             {
                 //string tmp;
@@ -530,12 +536,12 @@ namespace DCT.Outwar.World
                 {
                     CoreUI.Instance.LogPanel.LogAttack("Attack E occurred in Connection: " + src);
                 }
-                    /*
-                else if ((tmp = Parser.Parse(src, "ERROR:</b></font> ", "<br>")) == "ERROR")
-                {
-                    CoreUI.Instance.LogPanel.LogAttack("Attack E: An unknown error occurred");
-                }
-                    */
+                /*
+            else if ((tmp = Parser.Parse(src, "ERROR:</b></font> ", "<br>")) == "ERROR")
+            {
+                CoreUI.Instance.LogPanel.LogAttack("Attack E: An unknown error occurred");
+            }
+                */
                 else
                 {
                     CoreUI.Instance.LogPanel.LogAttack("Attack E (server-side)");
