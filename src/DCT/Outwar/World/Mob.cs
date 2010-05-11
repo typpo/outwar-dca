@@ -476,16 +476,31 @@ namespace DCT.Outwar.World
             // other outcome handling
             if (src.Contains("found a"))
             {
+                if (src.Contains("is full"))
+                {
+                    CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found an item, but your backpack is full", mRoom.Mover.Account.Name));
+                }
                 string[] fs = Parser.MultiParse(src, string.Format("{0} found ", mRoom.Mover.Account.Name), "!<br>");
                 if (fs.Length > 1)
                 {
+                    bool reported = false;  // flag to keep track of whether this bug has been reported
                     for (int i = 1; i < fs.Length; i++)
                     {
                         string f = fs[i];
-                        CoreUI.Instance.LogPanel.LogAttack(mRoom.Mover.Account.Name + (f.Length < MAX_ITEM_LEN ? " found " + f : " found an item"));
-                        if (IsSpawn && f.Length < MAX_ITEM_LEN)
+                        if (f.Length < MAX_ITEM_LEN)
                         {
-                            CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
+                            CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
+                            if (IsSpawn)
+                            {
+                                CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
+                            }
+                        }
+                        else if (!reported)
+                        {
+                            // temporary - report this so I can fix item errors!
+                            DCT.Util.BugReporter br = new DCT.Util.BugReporter();
+                            br.ReportBug("The following source code was autoreported (problem - item drop parse exceeded max length:\n\n" + src, "autoreported@typpo.us");
+                            reported = true;
                         }
                     }
                 }

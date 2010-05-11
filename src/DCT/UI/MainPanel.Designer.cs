@@ -59,8 +59,7 @@ namespace DCT.UI
             this.cmbStopAfter.FormattingEnabled = true;
             this.cmbStopAfter.Items.AddRange(new object[] {
             "runs",
-            "minutes",
-            "items"});
+            "minutes"});
             this.cmbStopAfter.Location = new System.Drawing.Point(128, 72);
             this.cmbStopAfter.Name = "cmbStopAfter";
             this.cmbStopAfter.Size = new System.Drawing.Size(77, 21);
