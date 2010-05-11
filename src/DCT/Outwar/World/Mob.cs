@@ -9,7 +9,7 @@ namespace DCT.Outwar.World
 {
     internal class Mob : Occupier
     {
-        private const int MAX_ITEM_LEN = 45;
+        private const int MAX_ITEM_LEN = 60;
 
         private bool mAttacked;
         private bool mInitialized;
@@ -478,7 +478,7 @@ namespace DCT.Outwar.World
             // other outcome handling
             if (src.Contains("found a"))
             {
-                if (src.Contains("is full"))
+                if (src.Contains("has no backpack space"))
                 {
                     CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found an item, but your backpack is full", mRoom.Mover.Account.Name));
                 }
@@ -502,7 +502,8 @@ namespace DCT.Outwar.World
                             // temporary - report this so I can fix item errors!
                             DCT.Util.BugReporter br = new DCT.Util.BugReporter();
                             CoreUI.Instance.LogPanel.Log("Reporting item drop error...");
-                            br.ReportBug("The following source code was autoreported (problem - item drop parse exceeded max length:\n\n" + src, "autoreported@typpo.us");
+                            br.ReportBug(string.Format("The following source code was autoreported (problem - item drop parse exceeded max length) - v.{0}:\n\n{1}",
+                                DCT.Security.Version.Full, src), "autoreported@typpo.us");
                             reported = true;
                         }
                     }
@@ -547,8 +548,8 @@ namespace DCT.Outwar.World
                     CoreUI.Instance.LogPanel.LogAttack("Attack E (server-side)");
                     CoreUI.Instance.LogPanel.Log("Reporting server-side error...");
                     DCT.Util.BugReporter br = new DCT.Util.BugReporter();
-                    CoreUI.Instance.LogPanel.Log("Reporting item drop error...");
-                    br.ReportBug("The following source code was autoreported (problem - attack E - server side:\n\n" + src, "autoreported@typpo.us");
+                    br.ReportBug(string.Format("The following source code was autoreported (problem - attack E - server side) - v.{0}:\n\n{1}",
+                        DCT.Security.Version.Full, src), "autoreported@typpo.us");
                 }
             }
 
