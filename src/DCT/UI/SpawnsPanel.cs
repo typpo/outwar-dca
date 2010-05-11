@@ -53,7 +53,7 @@ namespace DCT.UI
             {
                 if (mb != null)
                 {
-                    ListViewItem tmp = new ListViewItem(new string[] { mb.Name, mb.Room.ToString(), mb.Level.ToString(), "0", "0" });
+                    ListViewItem tmp = new ListViewItem(new string[] { mb.Name, mb.Level.ToString(), mb.Room.ToString(), "0", "0" });
                     tmp.Name = mb.Name;
                     lvSpawns.Items.Add(tmp);
                 }

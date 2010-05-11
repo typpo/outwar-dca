@@ -38,13 +38,13 @@
             this.btnCamp = new System.Windows.Forms.Button();
             this.chkIgnoreRage = new System.Windows.Forms.CheckBox();
             this.chkAttackSpawns = new System.Windows.Forms.CheckBox();
+            this.lstLog = new System.Windows.Forms.ListBox();
             this.lvSpawns = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.lstLog = new System.Windows.Forms.ListBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -186,13 +186,22 @@
             this.chkAttackSpawns.UseVisualStyleBackColor = true;
             this.chkAttackSpawns.CheckedChanged += new System.EventHandler(this.chkAttackSpawns_CheckedChanged);
             // 
+            // lstLog
+            // 
+            this.lstLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstLog.FormattingEnabled = true;
+            this.lstLog.Location = new System.Drawing.Point(0, 0);
+            this.lstLog.Name = "lstLog";
+            this.lstLog.Size = new System.Drawing.Size(417, 69);
+            this.lstLog.TabIndex = 0;
+            // 
             // lvSpawns
             // 
             this.lvSpawns.CheckBoxes = true;
             this.lvSpawns.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader3,
             this.columnHeader2,
+            this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
             this.lvSpawns.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -205,24 +214,19 @@
             this.lvSpawns.UseCompatibleStateImageBehavior = false;
             this.lvSpawns.View = System.Windows.Forms.View.Details;
             this.lvSpawns.SelectedIndexChanged += new System.EventHandler(this.lvSpawns_SelectedIndexChanged);
-            this.lvSpawns.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvSpawns_ColumnClick);
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 175;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.DisplayIndex = 2;
-            this.columnHeader3.Text = "Room";
-            this.columnHeader3.Width = 50;
+            this.columnHeader1.Width = 150;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.DisplayIndex = 1;
             this.columnHeader2.Text = "Level";
-            this.columnHeader2.Width = 50;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Room";
             // 
             // columnHeader4
             // 
@@ -231,15 +235,6 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Attacks";
-            // 
-            // lstLog
-            // 
-            this.lstLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstLog.FormattingEnabled = true;
-            this.lstLog.Location = new System.Drawing.Point(0, 0);
-            this.lstLog.Name = "lstLog";
-            this.lstLog.Size = new System.Drawing.Size(417, 69);
-            this.lstLog.TabIndex = 0;
             // 
             // SpawnsPanel
             // 
@@ -266,18 +261,18 @@
         private System.Windows.Forms.CheckBox chkAttackSpawns;
         private System.Windows.Forms.ListBox lstLog;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.ListView lvSpawns;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.Button btnCamp;
         private System.Windows.Forms.LinkLabel lnkCampSelected;
         private System.Windows.Forms.LinkLabel lnkCheckAll;
         private System.Windows.Forms.LinkLabel lnkAdd;
         private System.Windows.Forms.LinkLabel linkUncheckAll;
         private System.Windows.Forms.Button btnGo;
+        private System.Windows.Forms.ListView lvSpawns;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
 
     }
 }
