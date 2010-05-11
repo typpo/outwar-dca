@@ -261,7 +261,7 @@ namespace DCT.UI
             MainPanel.StopAfterEnabled = on;
 
             // ACCOUNTS
-            AccountsPanel.ChangeAllowed = on;
+            AccountsPanel.AccountsEnabled = on;
 
             // ADVENTURES
             RaidsPanel.MoveEnabled = on;
@@ -273,7 +273,7 @@ namespace DCT.UI
             mTrainPanel.TrainEnabled = on;
 
             // SPAWN TAB
-            SpawnsPanel.CampEnabled = on;
+            SpawnsPanel.SpawnsEnabled = on;
 
             // MOB TAB
             MobsPanel.MobsEnabled = on;

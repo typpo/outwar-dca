@@ -50,7 +50,7 @@ namespace DCT.UI
             get { return lvAccounts.FocusedItem; }
         }
 
-        internal bool ChangeAllowed
+        internal bool AccountsEnabled
         {
             get { return mEnabled; }
             set

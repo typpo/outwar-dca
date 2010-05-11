@@ -33,10 +33,10 @@ namespace DCT.UI
             set { chkIgnoreRage.Checked = value; }
         }
 
-        internal bool CampEnabled
+        internal bool SpawnsEnabled
         {
-            get { return btnCamp.Enabled; }
-            set{btnCamp.Enabled = value;}
+            get { return btnCamp.Enabled && btnGo.Enabled; }
+            set{btnCamp.Enabled = btnGo.Enabled = value;}
         }
 
         public SpawnsPanel(CoreUI ui)
