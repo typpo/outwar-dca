@@ -503,30 +503,34 @@ namespace DCT.Outwar.World
                     if (src.Contains("has no backpack space"))
                     {
                         CoreUI.Instance.LogPanel.Log(string.Format("{0} found an item, but your backpack is full", mRoom.Mover.Account.Name));
+                        // TODO what if we get one item, then the rest is full?
                     }
-                    string[] fs = Parser.MultiParse(src.ToLower(), string.Format("{0} found ", mRoom.Mover.Account.Name), "!<br>");
-                    if (fs.Length > 1)
+                    else
                     {
-                        bool reported = false;  // flag to keep track of whether this bug has been reported
-                        for (int i = 1; i < fs.Length; i++)
+                        string[] fs = Parser.MultiParse(src.ToLower(), string.Format("{0} found ", mRoom.Mover.Account.Name), "!<br>");
+                        if (fs.Length > 1)
                         {
-                            string f = fs[i];
-                            if (f.Length < MAX_ITEM_LEN)
+                            bool reported = false;  // flag to keep track of whether this bug has been reported
+                            for (int i = 1; i < fs.Length; i++)
                             {
-                                CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
-                                if (IsSpawn)
+                                string f = fs[i];
+                                if (f.Length < MAX_ITEM_LEN)
                                 {
-                                    CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
+                                    CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
+                                    if (IsSpawn)
+                                    {
+                                        CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
+                                    }
                                 }
-                            }
-                            else if (!reported)
-                            {
-                                // temporary - report this so I can fix item errors!
-                                //DCT.Util.BugReporter br = new DCT.Util.BugReporter();
-                                //CoreUI.Instance.LogPanel.Log("Reporting item drop error...");
-                                //br.ReportBug(string.Format("The following source code was autoreported (problem - item drop parse exceeded max length) - v.{0}:\n\n{1}",
-                                //    DCT.Security.Version.Full, src), "autoreported@typpo.us");
-                                //reported = true;
+                                else if (!reported)
+                                {
+                                    // temporary - report this so I can fix item errors!
+                                    DCT.Util.BugReporter br = new DCT.Util.BugReporter();
+                                    CoreUI.Instance.LogPanel.Log("Reporting item drop error...");
+                                    br.ReportBug(string.Format("The following source code was autoreported (problem - item drop parse exceeded max length) - v.{0}:\n\n{1}",
+                                        DCT.Security.Version.Full, src), "autoreported@typpo.us");
+                                    reported = true;
+                                }
                             }
                         }
                     }
@@ -543,11 +547,12 @@ namespace DCT.Outwar.World
             else if (src.Contains("to recover rage automatically"))
             {
                 // not enough rage
+                // TODO consider putting in a stop
                 CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} doesn't have rage to attack {1}", mRoom.Mover.Account.Name, this.Name));
             }
             else if (src.Contains("You are not in the room with that mob"))
             {
-                CoreUI.Instance.LogPanel.LogAttack("Attack E  - mob not in room");
+                CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} is not in the room", this.Name));
             }
             else
             {
@@ -556,12 +561,6 @@ namespace DCT.Outwar.World
                 {
                     CoreUI.Instance.LogPanel.LogAttack("Attack E occurred in Connection: " + src);
                 }
-                /*
-            else if ((tmp = Parser.Parse(src, "ERROR:</b></font> ", "<br>")) == "ERROR")
-            {
-                CoreUI.Instance.LogPanel.LogAttack("Attack E: An unknown error occurred");
-            }
-                */
                 else
                 {
                     CoreUI.Instance.LogPanel.LogAttack("Attack E (server-side)");
