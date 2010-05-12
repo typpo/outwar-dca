@@ -476,55 +476,74 @@ namespace DCT.Outwar.World
             }
 
             // other outcome handling
-            if (src.Contains("found a"))
-            {
-                if (src.Contains("has no backpack space"))
-                {
-                    CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found an item, but your backpack is full", mRoom.Mover.Account.Name));
-                }
-                string[] fs = Parser.MultiParse(src.ToLower(), string.Format("{0} found ", mRoom.Mover.Account.Name), "!<br>");
-                if (fs.Length > 1)
-                {
-                    bool reported = false;  // flag to keep track of whether this bug has been reported
-                    for (int i = 1; i < fs.Length; i++)
-                    {
-                        string f = fs[i];
-                        if (f.Length < MAX_ITEM_LEN)
-                        {
-                            CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
-                            if (IsSpawn)
-                            {
-                                CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
-                            }
-                        }
-                        else if (!reported)
-                        {
-                            // temporary - report this so I can fix item errors!
-                            DCT.Util.BugReporter br = new DCT.Util.BugReporter();
-                            CoreUI.Instance.LogPanel.Log("Reporting item drop error...");
-                            br.ReportBug(string.Format("The following source code was autoreported (problem - item drop parse exceeded max length) - v.{0}:\n\n{1}",
-                                DCT.Security.Version.Full, src), "autoreported@typpo.us");
-                            reported = true;
-                        }
-                    }
-                }
-            }
-            if (src.Contains("has gained "))
-            {
-                if (int.TryParse(Parser.Parse(src, "has gained ", " experience!"), out mExpGained))
-                {
-                    Globals.ExpGained += mExpGained;
-                    mRoom.Mover.ExpGained += mExpGained;
-                    CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} beat {1}, gained {2} exp", mRoom.Mover.Account.Name, mName, mExpGained));
-                }
-            }
-            else if (src.Contains("has weakened"))
+            if (src.Contains("has weakened"))
             {
                 CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} lost to {1}", mRoom.Mover.Account.Name, mName));
             }
             else if (src.Contains("var battle_result"))
             {
-                CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} beat {1}", mRoom.Mover.Account.Name, mName));
+                // xp gain
+                if (src.Contains("has gained "))
+                {
+                    if (int.TryParse(Parser.Parse(src, "has gained ", " experience!"), out mExpGained))
+                    {
+                        Globals.ExpGained += mExpGained;
+                        mRoom.Mover.ExpGained += mExpGained;
+                        CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} beat {1}, gained {2} exp", mRoom.Mover.Account.Name, mName, mExpGained));
+                    }
+                }
+                else
+                {
+                    CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} beat {1}", mRoom.Mover.Account.Name, mName));
+                }
+
+                // item dropped
+                if (src.Contains("found a"))
+                {
+                    if (src.Contains("has no backpack space"))
+                    {
+                        CoreUI.Instance.LogPanel.Log(string.Format("{0} found an item, but your backpack is full", mRoom.Mover.Account.Name));
+                    }
+                    string[] fs = Parser.MultiParse(src.ToLower(), string.Format("{0} found ", mRoom.Mover.Account.Name), "!<br>");
+                    if (fs.Length > 1)
+                    {
+                        bool reported = false;  // flag to keep track of whether this bug has been reported
+                        for (int i = 1; i < fs.Length; i++)
+                        {
+                            string f = fs[i];
+                            if (f.Length < MAX_ITEM_LEN)
+                            {
+                                CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
+                                if (IsSpawn)
+                                {
+                                    CoreUI.Instance.SpawnsPanel.Log(string.Format("{0} found {1}", mRoom.Mover.Account.Name, f));
+                                }
+                            }
+                            else if (!reported)
+                            {
+                                // temporary - report this so I can fix item errors!
+                                //DCT.Util.BugReporter br = new DCT.Util.BugReporter();
+                                //CoreUI.Instance.LogPanel.Log("Reporting item drop error...");
+                                //br.ReportBug(string.Format("The following source code was autoreported (problem - item drop parse exceeded max length) - v.{0}:\n\n{1}",
+                                //    DCT.Security.Version.Full, src), "autoreported@typpo.us");
+                                //reported = true;
+                            }
+                        }
+                    }
+                }
+            }
+            else if (src.Contains("looming over"))
+            {
+                CoreUI.Instance.LogPanel.LogAttack(string.Format("Someone is looming over {0}", this.Name));
+            }
+            else if (src.Contains("That mob is already dead!") || src.Contains("Someone has already killed this mob"))
+            {
+                CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} is already dead", this.Name));
+            }
+            else if (src.Contains("to recover rage automatically"))
+            {
+                // not enough rage
+                CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} doesn't have rage to attack {1}", mRoom.Mover.Account.Name, this.Name));
             }
             else if (src.Contains("You are not in the room with that mob"))
             {
