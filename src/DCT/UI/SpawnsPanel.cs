@@ -72,7 +72,7 @@ namespace DCT.UI
 
             foreach (ListViewItem item in lvSpawns.Items)
             {
-                if (int.Parse(item.SubItems[1].Text) == roomid)
+                if (int.Parse(item.SubItems[2].Text) == roomid)
                 {
                     item.SubItems[3].Text = ((int.Parse(item.SubItems[3].Text) + 1)).ToString();
                     item.BackColor = Color.Red;
@@ -91,7 +91,7 @@ namespace DCT.UI
 
             foreach (ListViewItem item in lvSpawns.Items)
             {
-                if (int.Parse(item.SubItems[1].Text) == roomid)
+                if (int.Parse(item.SubItems[2].Text) == roomid)
                 {
                     item.SubItems[4].Text = ((int.Parse(item.SubItems[4].Text) + 1)).ToString();
                     item.BackColor = Color.Green;
@@ -164,7 +164,7 @@ namespace DCT.UI
             foreach (ListViewItem lvi in CheckedSpawns)
             {
                 // note that this assumes the rooms listview is exactly the rooms list
-                int i = Pathfinder.FindRoom(int.Parse(lvi.SubItems[1].Text));
+                int i = Pathfinder.FindRoom(int.Parse(lvi.SubItems[2].Text));
                 mUI.RoomsPanel.CheckRoom(i);
             }
 

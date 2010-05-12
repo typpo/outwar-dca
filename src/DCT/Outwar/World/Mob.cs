@@ -9,7 +9,7 @@ namespace DCT.Outwar.World
 {
     internal class Mob : Occupier
     {
-        private const int MAX_ITEM_LEN = 60;
+        private const int MAX_ITEM_LEN = 80;
 
         private bool mAttacked;
         private bool mInitialized;
@@ -500,13 +500,13 @@ namespace DCT.Outwar.World
                 // item dropped
                 if (src.Contains("found a"))
                 {
-                    if (src.Contains("has no backpack space"))
-                    {
-                        CoreUI.Instance.LogPanel.Log(string.Format("{0} found an item, but your backpack is full", mRoom.Mover.Account.Name));
-                        // TODO what if we get one item, then the rest is full?
-                    }
-                    else
-                    {
+                    //if (src.Contains("has no backpack space"))
+                    //{
+                    //    CoreUI.Instance.LogPanel.Log(string.Format("{0} found an item, but your backpack is full", mRoom.Mover.Account.Name));
+                    //    // TODO what if we get one item, then the rest is full?
+                    //}
+                    //else
+                    //{
                         string[] fs = Parser.MultiParse(src.ToLower(), string.Format("{0} found ", mRoom.Mover.Account.Name), "!<br>");
                         if (fs.Length > 1)
                         {
@@ -533,7 +533,7 @@ namespace DCT.Outwar.World
                                 }
                             }
                         }
-                    }
+                    //}
                 }
             }
             else if (src.Contains("looming over"))
@@ -564,10 +564,6 @@ namespace DCT.Outwar.World
                 else
                 {
                     CoreUI.Instance.LogPanel.LogAttack("Attack E (server-side)");
-                    CoreUI.Instance.LogPanel.Log("Reporting server-side error...");
-                    DCT.Util.BugReporter br = new DCT.Util.BugReporter();
-                    br.ReportBug(string.Format("The following source code was autoreported (problem - attack E - server side) - v.{0}:\n\n{1}",
-                        DCT.Security.Version.Full, src), "autoreported@typpo.us");
                 }
             }
 

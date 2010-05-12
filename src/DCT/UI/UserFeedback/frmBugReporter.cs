@@ -29,7 +29,7 @@ namespace DCT.UI.Feedback
 
             BugReporter r = new BugReporter();
             btnSubmit.Enabled = false;
-            bool result = r.ReportBug(string.Format("{0}\n\n{1}", txt.Text, mUI.CollectData()), txtEmail.Text);
+            bool result = r.ReportBug(string.Format("v.{0}\n{1}\n\n{2}", Security.Version.Full, txt.Text, mUI.CollectData()), txtEmail.Text);
             if (!result)
                 MessageBox.Show("An error occured; try submitting content manually to http://typpo.us/submit.php", "Not submitted", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else

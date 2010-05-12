@@ -38,13 +38,13 @@
             this.btnCamp = new System.Windows.Forms.Button();
             this.chkIgnoreRage = new System.Windows.Forms.CheckBox();
             this.chkAttackSpawns = new System.Windows.Forms.CheckBox();
-            this.lstLog = new System.Windows.Forms.ListBox();
             this.lvSpawns = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.lstLog = new System.Windows.Forms.ListBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -101,7 +101,7 @@
             this.btnGo.AutoEllipsis = true;
             this.btnGo.Location = new System.Drawing.Point(291, 4);
             this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(110, 23);
+            this.btnGo.Size = new System.Drawing.Size(110, 26);
             this.btnGo.TabIndex = 9;
             this.btnGo.Text = "Go to selection";
             this.btnGo.UseVisualStyleBackColor = true;
@@ -186,15 +186,6 @@
             this.chkAttackSpawns.UseVisualStyleBackColor = true;
             this.chkAttackSpawns.CheckedChanged += new System.EventHandler(this.chkAttackSpawns_CheckedChanged);
             // 
-            // lstLog
-            // 
-            this.lstLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstLog.FormattingEnabled = true;
-            this.lstLog.Location = new System.Drawing.Point(0, 0);
-            this.lstLog.Name = "lstLog";
-            this.lstLog.Size = new System.Drawing.Size(417, 69);
-            this.lstLog.TabIndex = 0;
-            // 
             // lvSpawns
             // 
             this.lvSpawns.CheckBoxes = true;
@@ -235,6 +226,15 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Attacks";
+            // 
+            // lstLog
+            // 
+            this.lstLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstLog.FormattingEnabled = true;
+            this.lstLog.Location = new System.Drawing.Point(0, 0);
+            this.lstLog.Name = "lstLog";
+            this.lstLog.Size = new System.Drawing.Size(417, 69);
+            this.lstLog.TabIndex = 0;
             // 
             // SpawnsPanel
             // 
