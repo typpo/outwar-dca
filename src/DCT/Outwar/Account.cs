@@ -6,7 +6,6 @@ namespace DCT.Outwar
 {
     internal class Account
     {
-        internal string Ret { get; set; }
         internal OutwarHttpSocket Socket { get; private set; }
         internal Mover Mover { get; private set; }
         internal ServerName Server { get; private set; }

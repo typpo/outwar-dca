@@ -42,7 +42,6 @@ namespace DCT.Outwar.World
 
         internal bool RefreshRoom()
         {
-            Account.Ret = Account.Name;
             if (LoadRoom("world.php") == 4)
             {
                 MessageBox.Show("You logged onto Outwar and booted the program.  Hitting the \"Refresh\" button may solve this.\n\nTo correctly access your account while the program is running, go to Actions > Open in browser after logging in here.",
@@ -64,16 +63,11 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.LogPanel.Log("Move E: that room doesn't exist");
                 return 1;
             }
-            if (Account.Ret == Account.Name)
-            {
-                Room tmp = new Room(this, url);
-                int r = tmp.Load();
-                if (r == 0)
-                    Location = tmp;
-                return r;
-            }
-
-            return 2;
+            Room tmp = new Room(this, url);
+            int r = tmp.Load();
+            if (r == 0)
+                Location = tmp;
+            return r;
         }
 
         internal delegate void PathfindHandler(int roomid);
@@ -138,7 +132,7 @@ namespace DCT.Outwar.World
             for (int i = 0; i < nodes.Count; i++)
             {
                 int node = nodes[i];
-                if (Globals.Terminate || Account.Ret != Account.Name)
+                if (Globals.Terminate)
                 {
                     return;
                 }

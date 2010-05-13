@@ -28,7 +28,7 @@ namespace DCT.Outwar.World
             mURL = url;
             mRoom = room;
 
-            if (mURL.Contains("ONMOUSEOVER") || mRoom.Mover.Account.Ret != mRoom.Mover.Account.Name)
+            if (mURL.Contains("ONMOUSEOVER"))
             {
                 // spawn mob
                 mURL = mURL.Substring(0, mURL.IndexOf("\""));
