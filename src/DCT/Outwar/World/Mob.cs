@@ -507,7 +507,7 @@ namespace DCT.Outwar.World
                     //}
                     //else
                     //{
-                        string[] fs = Parser.MultiParse(src.ToLower(), string.Format("{0} found ", mRoom.Mover.Account.Name), "!<br>");
+                        string[] fs = Parser.MultiParse(src.ToLower(), string.Format("{0} found ", mRoom.Mover.Account.Name).ToLower(), "!<br>");
                         if (fs.Length > 1)
                         {
                             bool reported = false;  // flag to keep track of whether this bug has been reported
