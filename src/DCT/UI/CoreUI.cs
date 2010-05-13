@@ -24,7 +24,8 @@ namespace DCT.UI
         internal const int TABINDEX_RAIDS = 4;
         internal const int TABINDEX_SPAWNS = 5;
         internal const int TABINDEX_TRAINER = 6;
-        internal const int TABINDEX_CHAT = 7;
+        internal const int TABINDEX_TALK = 7;
+        internal const int TABINDEX_CHAT = 8;
 
         private const string TS_ATTACKMODE_PREFIX = "Attack mode: ";
 
@@ -78,6 +79,12 @@ namespace DCT.UI
         private readonly FiltersPanel mFiltersPanel;
         private readonly TrainPanel mTrainPanel;
 
+        private readonly TalkPanel mTalkPanel;
+        internal TalkPanel TalkPanel
+        {
+            get { return mTalkPanel; }
+        }
+
         public CoreUI()
         {
             InitializeComponent();
@@ -129,6 +136,10 @@ namespace DCT.UI
             mTrainPanel = new TrainPanel(this);
             mTrainPanel.Dock = DockStyle.Fill;
             tabs.TabPages[TABINDEX_TRAINER].Controls.Add(mTrainPanel);
+
+            mTalkPanel = new TalkPanel(this);
+            mTalkPanel.Dock = DockStyle.Fill;
+            tabs.TabPages[TABINDEX_TALK].Controls.Add(mTalkPanel);
 
             ChatPanel = new ChatUI(this);
             ChatPanel.Dock = DockStyle.Fill;
@@ -274,6 +285,9 @@ namespace DCT.UI
 
             // SPAWN TAB
             SpawnsPanel.SpawnsEnabled = on;
+
+            // TALK TAB
+            TalkPanel.TalkEnabled = on;
 
             // MOB TAB
             MobsPanel.MobsEnabled = on;
@@ -604,6 +618,9 @@ namespace DCT.UI
                     break;
                 case TABINDEX_SPAWNS:
                     Tabs.TabPages[TABINDEX_SPAWNS].Text = "Spawns";
+                    break;
+                case TABINDEX_TALK:
+                    mTalkPanel.Refresh();
                     break;
                 case TABINDEX_CHAT:
                     Tabs.TabPages[TABINDEX_CHAT].Text = "Chat";

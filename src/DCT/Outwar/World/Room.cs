@@ -78,13 +78,14 @@ namespace DCT.Outwar.World
 
             EnumRooms();
 
-            if (Globals.AttackMode)
-            {
+            //if (Globals.AttackMode)
+            //{
+            // we now enum mobs all the time to find talk links
                 EnumMobs();
-            }
-            else if (CoreUI.Instance.Settings.AutoTrain || CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests)
+            //}
+            if (CoreUI.Instance.Settings.AutoTrain || CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests)
             {
-                EnumMobs();
+                //EnumMobs();
 
                 if (CoreUI.Instance.Settings.AutoTrain)
                     Trained = Train();
@@ -157,7 +158,7 @@ namespace DCT.Outwar.World
                 {
                     attackurl = "newattack.php" + p.Parse("newattack.php", "\"");
                 }
-                if (s.Contains("Talk to"))
+                if (s.Contains("talk_icon.jpg"))
                 {
                     quest = true;
                 }
@@ -165,19 +166,6 @@ namespace DCT.Outwar.World
                 {
                     trainer = true;
                 }
-
-                if (s.Contains("raidz") && s.Contains("Form new raid"))
-                {
-                    // create raidformmob
-                    //string formurl = "formraid.php" + Parser.Parse(s, "formraid.php", "\"");
-                    //mRaid = new RaidFormMob(name, url, formurl, this);
-                    // TODO: logic could be nicer
-                    continue;
-                }
-                //else
-                //{
-                //    mRaid = null;
-                //}
 
                 if (string.IsNullOrEmpty(attackurl) && !quest && !trainer)
                 {
@@ -314,7 +302,7 @@ namespace DCT.Outwar.World
             {
                 if (mb.IsTalkable)
                 {
-                    mb.Talk();
+                    //mb.Talk();
                 }
             }
         }

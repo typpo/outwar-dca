@@ -182,40 +182,6 @@ namespace DCT.Outwar.World
             return m.Name.Equals(mName);
         }
 
-        internal void Talk()
-        {
-            string talk =
-                mRoom.Mover.Socket.Get("mob_talk.php?id=" + mId + "&userspawn=");
-            CoreUI.Instance.LogPanel.Log("Checking " + mName + "'s talk page in room " + mRoom.Mover.Location.Id + "...");
-
-            if (talk.Contains("acceptquest="))
-            {
-                if (CoreUI.Instance.Settings.AlertQuests)
-                {
-                    if (
-                        MessageBox.Show(
-                            "Accept quest from " + mName + " in room " + mRoom.Mover.Location.Id + "?\n\n\""
-                            +
-                            talk.Substring(talk.IndexOf("<p>") + 3,
-                                           talk.IndexOf("</p>") - talk.IndexOf("<p>") - 3).Trim() + "\"",
-                            "Quest Mob", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
-                        != DialogResult.Yes)
-                    {
-                        return;
-                    }
-                }
-
-                CoreUI.Instance.LogPanel.Log("Accepting " + mName + "'s quest in room " + mRoom.Mover.Location.Id + "...");
-                mRoom.Mover.Socket.Get("mob_talk.php?acceptquest="
-                                       + Parser.Parse(talk, "mob_talk.php?acceptquest=", "\""));
-                CoreUI.Instance.LogPanel.Log("Quest accepted");
-            }
-            else
-            {
-                CoreUI.Instance.LogPanel.Log("Already accepted " + mName + "'s task");
-            }
-        }
-
         internal void Train()
         {
             if (mRoom.Mover.Account.NeedsLevel)
@@ -307,7 +273,7 @@ namespace DCT.Outwar.World
             }
             if (IsTalkable && (CoreUI.Instance.Settings.AutoQuest || CoreUI.Instance.Settings.AlertQuests))
             {
-                Talk();
+                //Talk();
             }
 
             if (
