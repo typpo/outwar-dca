@@ -96,6 +96,10 @@ namespace DCT.UI
             else if (FocusedAccount != null)
             {
                 mEngine.SetMain(FocusedAccount.Index);
+                if (CheckedIndices.Count < 1)
+                {
+                    FocusedAccount.Checked = true;
+                }
             }
         }
 

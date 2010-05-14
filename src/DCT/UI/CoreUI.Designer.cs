@@ -97,8 +97,8 @@ namespace DCT.UI
             this.tabJoiner = new System.Windows.Forms.TabPage();
             this.tabSpawns = new System.Windows.Forms.TabPage();
             this.tabTrainer = new System.Windows.Forms.TabPage();
-            this.tabChat = new System.Windows.Forms.TabPage();
             this.tabTalk = new System.Windows.Forms.TabPage();
+            this.tabChat = new System.Windows.Forms.TabPage();
             this.ss.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.mNotifyMenu.SuspendLayout();
@@ -678,15 +678,6 @@ namespace DCT.UI
             this.tabTrainer.Text = "Trainer";
             this.tabTrainer.UseVisualStyleBackColor = true;
             // 
-            // tabChat
-            // 
-            this.tabChat.Location = new System.Drawing.Point(4, 22);
-            this.tabChat.Name = "tabChat";
-            this.tabChat.Size = new System.Drawing.Size(423, 283);
-            this.tabChat.TabIndex = 10;
-            this.tabChat.Text = "Chat";
-            this.tabChat.UseVisualStyleBackColor = true;
-            // 
             // tabTalk
             // 
             this.tabTalk.Location = new System.Drawing.Point(4, 22);
@@ -695,6 +686,15 @@ namespace DCT.UI
             this.tabTalk.TabIndex = 13;
             this.tabTalk.Text = "Talk";
             this.tabTalk.UseVisualStyleBackColor = true;
+            // 
+            // tabChat
+            // 
+            this.tabChat.Location = new System.Drawing.Point(4, 22);
+            this.tabChat.Name = "tabChat";
+            this.tabChat.Size = new System.Drawing.Size(423, 283);
+            this.tabChat.TabIndex = 10;
+            this.tabChat.Text = "Chat";
+            this.tabChat.UseVisualStyleBackColor = true;
             // 
             // CoreUI
             // 
