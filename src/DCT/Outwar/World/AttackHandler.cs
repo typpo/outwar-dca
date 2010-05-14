@@ -90,13 +90,18 @@ namespace DCT.Outwar.World
             IniWriter.Save();
             ConfigSerializer.WriteFile("config.xml", CoreUI.Instance.Settings);
 
+            CoreUI.Instance.ToggleNotifyIcon(true);
+
             lock (mAccounts)
             {
                 foreach (Account a in mAccounts)
                 {
                     CoreUI.Instance.LogPanel.Log("Refreshing " + a.Name + "'s position...");
                     if (!a.Mover.RefreshRoom())
+                    {
+                        CoreUI.Instance.ToggleNotifyIcon(false);
                         return;
+                    }
 
                     // no point in moving if we don't have rage
                     if (a.Mover.Account.Rage > -1 && a.Mover.Account.Rage < Math.Max(1, CoreUI.Instance.Settings.StopBelowRage))
@@ -128,10 +133,12 @@ namespace DCT.Outwar.World
 
                     if (!Globals.AttackMode)
                     {
-                        return;
+                        break;
                     }
                 }
             }
+
+            CoreUI.Instance.ToggleNotifyIcon(false);
 
             // submit any newfound mobs to pathfinding database
             if (Pathfinding.MobCollector.Count > 0)

@@ -306,6 +306,28 @@ namespace DCT.UI
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="on">True if program is 'running'</param>
+        internal void ToggleNotifyIcon(bool on)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new ToggleHandler(ToggleNotifyIcon), on);
+                return;
+            }
+
+            if (on)
+            {
+                this.Icon = mNotifyIcon.Icon = DCT.Properties.Resources.Running;
+            }
+            else
+            {
+                this.Icon = mNotifyIcon.Icon = DCT.Properties.Resources.Default;
+            }
+        }
+
         internal void SyncSettings()
         {
             // Menu bar
@@ -809,6 +831,10 @@ namespace DCT.UI
                 return;
             }
 
+            // adjust stop after counter so that the user doesn't get docked one run
+            if (Settings.StopAfter)
+                MainPanel.StopAfterCounter--;
+
             Countdown(Settings.AttackMode);
         }
 
@@ -838,6 +864,7 @@ namespace DCT.UI
                         }
                         break;
                     case UserEditable.StopAfterType.Runs:
+                        MainPanel.StopAfterCounter++;
                         if (MainPanel.StopAfterCounterFinished)
                         {
                             LogPanel.Log(string.Format("Reached {0} runs", Settings.StopAfterVal));
@@ -905,17 +932,17 @@ namespace DCT.UI
                             return;
                         }
                         break;
-                    case UserEditable.StopAfterType.Runs:
-                        // this might happen if user started a run with a countdown instead of an attack
-                        if (MainPanel.StopAfterCounterFinished)
-                        {
-                            LogPanel.Log(string.Format("Reached {0} runs", Settings.StopAfterVal));
-                            MainPanel.StopAfterFinish();
-                            StopAttacking(true);
-                            return;
-                        }
-                        MainPanel.StopAfterCounter++;
-                        break;
+                    //case UserEditable.StopAfterType.Runs:
+                    //    // this might happen if user started a run with a countdown instead of an attack
+                    //    MainPanel.StopAfterCounter++;
+                    //    if (MainPanel.StopAfterCounterFinished)
+                    //    {
+                    //        LogPanel.Log(string.Format("Reached {0} runs", Settings.StopAfterVal));
+                    //        MainPanel.StopAfterFinish();
+                    //        StopAttacking(true);
+                    //        return;
+                    //    }
+                    //    break;
                 }
             }
 

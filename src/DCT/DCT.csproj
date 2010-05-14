@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DCT</RootNamespace>
     <AssemblyName>DCT</AssemblyName>
-    <ApplicationIcon>Misc\Bad.ico</ApplicationIcon>
+    <ApplicationIcon>Default.ico</ApplicationIcon>
     <StartupObject>DCT.Program</StartupObject>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
@@ -289,6 +289,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Questing\frmMobTalk.resx">
       <DependentUpon>frmMobTalk.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Questing\MobTalkPanel.resx">
       <DependentUpon>MobTalkPanel.cs</DependentUpon>
@@ -380,7 +381,10 @@
     <Compile Include="Settings\ConfigSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Default.ico" />
     <Content Include="Misc\Bad.ico" />
+    <None Include="Misc\Default.ico" />
+    <None Include="Misc\Running.ico" />
     <None Include="Resources\Flag_red1.bmp" />
     <None Include="Resources\Flag_red.bmp" />
     <None Include="Resources\Flag_green.bmp" />

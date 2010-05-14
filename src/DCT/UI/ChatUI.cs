@@ -242,7 +242,7 @@ namespace DCT.UI
 
         void mClient_OnConnected(object sender, EventArgs e)
         {
-            AddText("*** Contacted server");
+            AddText("*** Connected");
             UpdateNames();
             Connected = true;
         }
