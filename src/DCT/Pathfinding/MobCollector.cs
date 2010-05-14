@@ -25,6 +25,7 @@ namespace DCT.Pathfinding
         static MobCollector()
         {
             mMobs = new List<MappedMob>();
+            mSubmitted = new List<MappedMob>();
         }
 
         internal static void Add(Mob mb)
