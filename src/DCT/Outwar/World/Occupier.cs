@@ -15,6 +15,10 @@ namespace DCT.Outwar.World
             get { return (mRoom.Mover.Location != null && mRoom.Id == mRoom.Mover.Location.Id); }
         }
         protected Room mRoom;
+        internal Room Room
+        {
+            get { return mRoom; }
+        }
         protected string mLoadSrc;
         protected long mId;
         internal long Id

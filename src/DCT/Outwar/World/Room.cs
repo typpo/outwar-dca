@@ -172,7 +172,8 @@ namespace DCT.Outwar.World
                     continue;
                 }
 
-                Mobs.Add(new Mob(name, url, attackurl, quest, trainer, spawn, this));
+                Mob mb = new Mob(name, url, attackurl, quest, trainer, spawn, this);
+                Mobs.Add(mb);
             }
         }
 

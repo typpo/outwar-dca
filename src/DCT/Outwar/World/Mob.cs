@@ -94,6 +94,13 @@ namespace DCT.Outwar.World
             IsTalkable = isQuest;
             IsTrainer = isTrainer;
             IsSpawn = isSpawn;
+
+            // add it to collector if we don't already have it in the database, excluding spawns
+            if (Pathfinding.Pathfinder.Mobs.Find(delegate(Pathfinding.MappedMob m) { return m.Name.Equals(name) && (m.Id == mId || mId > 60000); }) == null)
+            {
+                // it's new
+                Pathfinding.MobCollector.Add(this);
+            }
         }
 
         internal void Initialize()

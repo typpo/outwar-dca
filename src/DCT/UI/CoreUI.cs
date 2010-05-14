@@ -620,7 +620,7 @@ namespace DCT.UI
                     Tabs.TabPages[TABINDEX_SPAWNS].Text = "Spawns";
                     break;
                 case TABINDEX_TALK:
-                    mTalkPanel.Refresh();
+                    mTalkPanel.RefreshMobs();
                     break;
                 case TABINDEX_CHAT:
                     Tabs.TabPages[TABINDEX_CHAT].Text = "Chat";

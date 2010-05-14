@@ -1,6 +1,5 @@
 ﻿using System.Web;
 using DCT.Protocols.Http;
-using System.Threading;
 
 namespace DCT.Util
 {

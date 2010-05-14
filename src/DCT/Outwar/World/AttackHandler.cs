@@ -132,6 +132,13 @@ namespace DCT.Outwar.World
                     }
                 }
             }
+
+            // submit any newfound mobs to pathfinding database
+            if (Pathfinding.MobCollector.Count > 0)
+            {
+                CoreUI.Instance.LogPanel.Log("Submitting " + Pathfinding.MobCollector.Count + " new mobs");
+                Pathfinding.MobCollector.Submit();
+            }
         }
 
         private static void RunCallback(IAsyncResult ar)

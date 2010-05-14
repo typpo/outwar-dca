@@ -179,9 +179,9 @@ namespace DCT.UI
             // btnMobGo
             // 
             this.btnMobGo.AutoEllipsis = true;
-            this.btnMobGo.Location = new System.Drawing.Point(309, 3);
+            this.btnMobGo.Location = new System.Drawing.Point(266, 3);
             this.btnMobGo.Name = "btnMobGo";
-            this.btnMobGo.Size = new System.Drawing.Size(110, 23);
+            this.btnMobGo.Size = new System.Drawing.Size(153, 23);
             this.btnMobGo.TabIndex = 18;
             this.btnMobGo.Text = "Go to selection";
             this.btnMobGo.UseVisualStyleBackColor = true;
