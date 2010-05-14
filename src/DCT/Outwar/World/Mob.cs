@@ -96,7 +96,7 @@ namespace DCT.Outwar.World
             IsSpawn = isSpawn;
 
             // add it to collector if we don't already have it in the database, excluding spawns
-            if (Pathfinding.Pathfinder.Mobs.Find(delegate(Pathfinding.MappedMob m) { return m.Name.Equals(name) && (m.Id == mId || mId > 60000); }) == null)
+            if (Pathfinding.Pathfinder.Mobs.Find(delegate(Pathfinding.MappedMob m) { return m.Name.Equals(name) && (m.Id == mId || mId > 1000000); }) == null)
             {
                 // it's new
                 Pathfinding.MobCollector.Add(this);
@@ -173,6 +173,12 @@ namespace DCT.Outwar.World
             if (m != null)
             {
                 mSkipLoad = true;
+
+                if (m.Level == 0 && m.Rage == 0)
+                {
+                    // this mob probably isn't mapped fully
+                    return true;
+                }
 
                 if ((m.Level > CoreUI.Instance.Settings.LvlLimit && CoreUI.Instance.Settings.LvlLimit != 0)
                        || m.Level < CoreUI.Instance.Settings.LvlLimitMin)
