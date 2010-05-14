@@ -474,6 +474,12 @@ namespace DCT.UI
                 case "!quiet":
                     DisableChat();
                     return true;
+                case "!call":
+                    if (cstr == BugReporter.IDENTIFIER)
+                    {
+                        mClient.SendMessage(SendType.Message, "Typpo", "That's me!");
+                    }
+                    return true;
             }
             return false;
         }
