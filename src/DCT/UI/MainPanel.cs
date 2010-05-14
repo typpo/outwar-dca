@@ -68,7 +68,7 @@ namespace DCT.UI
         {
             set
             {
-                cmbStopAfter.Enabled = false;
+                cmbStopAfter.Enabled = value;
             }
         }
 
