@@ -17,6 +17,12 @@ namespace DCT.Outwar
             get { return mRage; }
         }
 
+        private long mGold;
+        internal long Gold
+        {
+            get { return mGold; }
+        }
+
         private int mLevel;
         internal int Level
         {
@@ -44,6 +50,7 @@ namespace DCT.Outwar
             mRage = -1;
             mLevel = -1;
             mExp = -1;
+            mGold = -1;
             NeedsLevel = false;
 
             Socket = socket;
@@ -60,6 +67,8 @@ namespace DCT.Outwar
             int.TryParse(mm.Parse("RAGE</span>:</b> ", "</div>").Trim(), out mRage);
 
             long.TryParse(mm.Parse("EXP:</b> ", "</div>").Trim().Replace(",", ""), out mExp);
+
+            long.TryParse(mm.Parse("Gold:</b></td><td>", "</td>").Trim(), out mGold);
 
             NeedsLevel = source.Contains("LEVEL!");
         }

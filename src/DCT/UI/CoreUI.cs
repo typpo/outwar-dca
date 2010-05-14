@@ -45,12 +45,6 @@ namespace DCT.UI
             get { return tabs; }
         }
 
-        internal string StatusText
-        {
-            get { return lblExpRage.Text; }
-            set { lblExpRage.Text = value; }
-        }
-
         public static CoreUI Instance { get; private set; }
 
         internal string Changes { private get; set; }
@@ -223,9 +217,9 @@ namespace DCT.UI
 
             if (AccountsPanel.Engine.MainAccount != null)
             {
-                StatusText =
-                    string.Format("Exp: {0:n0}      Rage: {1:n0}", AccountsPanel.Engine.MainAccount.Exp,
-                                  AccountsPanel.Engine.MainAccount.Rage);
+                lblExp.Text = string.Format("{0:n0}", AccountsPanel.Engine.MainAccount.Exp);
+                lblRage.Text = string.Format("{0:n0}", AccountsPanel.Engine.MainAccount.Rage);
+                lblGold.Text = string.Format("{0:n0}", AccountsPanel.Engine.MainAccount.Gold);
 
                 Account a = AccountsPanel.Engine.MainAccount;
                 int i = AccountsPanel.Engine.Accounts.IndexOf(a);
