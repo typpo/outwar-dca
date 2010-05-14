@@ -99,7 +99,7 @@ namespace DCT.UI
             // 
             this.split1.Panel2.Controls.Add(this.txtChatType);
             this.split1.Size = new System.Drawing.Size(333, 262);
-            this.split1.SplitterDistance = 232;
+            this.split1.SplitterDistance = 233;
             this.split1.TabIndex = 7;
             // 
             // txtChat
@@ -111,7 +111,7 @@ namespace DCT.UI
             this.txtChat.Name = "txtChat";
             this.txtChat.ReadOnly = true;
             this.txtChat.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtChat.Size = new System.Drawing.Size(333, 232);
+            this.txtChat.Size = new System.Drawing.Size(333, 233);
             this.txtChat.TabIndex = 0;
             // 
             // txtChatType
@@ -121,7 +121,7 @@ namespace DCT.UI
             this.txtChatType.Location = new System.Drawing.Point(0, 0);
             this.txtChatType.Multiline = false;
             this.txtChatType.Name = "txtChatType";
-            this.txtChatType.Size = new System.Drawing.Size(333, 26);
+            this.txtChatType.Size = new System.Drawing.Size(333, 25);
             this.txtChatType.TabIndex = 0;
             this.txtChatType.Text = "";
             this.txtChatType.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChatType_KeyDown);

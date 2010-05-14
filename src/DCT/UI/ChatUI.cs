@@ -46,10 +46,10 @@ namespace DCT.UI
 
         private static string GenerateNick()
         {
-            return "DCT_" + Randomizer.Random.Next(5000);
+            return "DCT_" + Randomizer.Random.Next(10000);
         }
 
-        private string mChannel = "#typpo", mServer = "typpo.dyndns.org";
+        private string mChannel = "#typpo", mServer = "typpo.us";
 
         internal string Server
         {
@@ -513,6 +513,12 @@ namespace DCT.UI
             else if (txt.StartsWith("/nick") && txt.Length > 5)
             {
                 string newnick = txt.Substring(6);
+                if (mUsersLast.ContainsKey(newnick))
+                {
+                    AddText("* Nick already taken");
+                    return;
+                }
+
                 mClient.Login(newnick, mNick);
                 mNick = newnick;
             }
