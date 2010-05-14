@@ -103,7 +103,8 @@ namespace DCT.UI
                 }
             }
 
-            lbl.Text = n + " talkable mobs in room " + r.Name;
+            lbl.Text = n + " talkable mobs in room " + r.Name + "(" + r.Id + ")";
+            btnTalk.Enabled = n != 0;
         }
 
         private void lvMobs_SelectedIndexChanged(object sender, EventArgs e)
