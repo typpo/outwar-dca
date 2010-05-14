@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.talkpanel = new DCT.UI.Questing.MobTalkPanel();
+            this.talkpanel = new DCT.UI.Questing.MobTalkControl();
             this.SuspendLayout();
             // 
             // talkpanel
@@ -54,6 +54,6 @@
 
         #endregion
 
-        private MobTalkPanel talkpanel;
+        private MobTalkControl talkpanel;
     }
 }

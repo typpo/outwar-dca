@@ -9,7 +9,7 @@ using DCT.Outwar;
 
 namespace DCT.UI.Questing
 {
-    public partial class MobTalkPanel : UserControl
+    public partial class MobTalkControl : UserControl
     {
         private bool loggedIn;
         private bool failed;
@@ -17,7 +17,7 @@ namespace DCT.UI.Questing
         private Account mAccount;
         private long mMobId;
 
-        internal MobTalkPanel()
+        internal MobTalkControl()
         {
             loggedIn = false;
             failed = false;

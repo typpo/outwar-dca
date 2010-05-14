@@ -1,6 +1,6 @@
 ﻿namespace DCT.UI.Questing
 {
-    partial class MobTalkPanel
+    partial class MobTalkControl
     {
         /// <summary> 
         /// Required designer variable.
