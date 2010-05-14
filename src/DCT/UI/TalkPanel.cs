@@ -119,5 +119,25 @@ namespace DCT.UI
                 txt = txt.Substring(2);
             btnTalk.Text = string.Format("Talk to {0}", txt);
         }
+
+        private void lnkQuests_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // http://sigil.outwar.com/backpack.php?quest=1
+        }
+
+        private void lnkOrbs_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // http://sigil.outwar.com/backpack.php?orb=1
+        }
+
+        private void lnkPotions_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // http://sigil.outwar.com/backpack.php?potion=1
+        }
+
+        private void lnkKeys_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // http://sigil.outwar.com/backpack.php?key=1
+        }
     }
 }

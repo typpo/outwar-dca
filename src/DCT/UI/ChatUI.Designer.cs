@@ -29,11 +29,11 @@ namespace DCT.UI
         private void InitializeComponent()
         {
             this.lblChatOnline = new System.Windows.Forms.Label();
-            this.txtChatType = new System.Windows.Forms.TextBox();
             this.lstChat = new System.Windows.Forms.ListBox();
             this.split = new System.Windows.Forms.SplitContainer();
             this.split1 = new System.Windows.Forms.SplitContainer();
             this.txtChat = new System.Windows.Forms.TextBox();
+            this.txtChatType = new System.Windows.Forms.RichTextBox();
             this.split.Panel1.SuspendLayout();
             this.split.Panel2.SuspendLayout();
             this.split.SuspendLayout();
@@ -52,17 +52,6 @@ namespace DCT.UI
             this.lblChatOnline.Size = new System.Drawing.Size(65, 12);
             this.lblChatOnline.TabIndex = 7;
             this.lblChatOnline.Text = "Not connected";
-            // 
-            // txtChatType
-            // 
-            this.txtChatType.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtChatType.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtChatType.Location = new System.Drawing.Point(0, 0);
-            this.txtChatType.MaxLength = 250;
-            this.txtChatType.Name = "txtChatType";
-            this.txtChatType.Size = new System.Drawing.Size(333, 21);
-            this.txtChatType.TabIndex = 6;
-            this.txtChatType.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChatType_KeyDown);
             // 
             // lstChat
             // 
@@ -125,6 +114,18 @@ namespace DCT.UI
             this.txtChat.Size = new System.Drawing.Size(333, 232);
             this.txtChat.TabIndex = 0;
             // 
+            // txtChatType
+            // 
+            this.txtChatType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtChatType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtChatType.Location = new System.Drawing.Point(0, 0);
+            this.txtChatType.Multiline = false;
+            this.txtChatType.Name = "txtChatType";
+            this.txtChatType.Size = new System.Drawing.Size(333, 26);
+            this.txtChatType.TabIndex = 0;
+            this.txtChatType.Text = "";
+            this.txtChatType.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChatType_KeyDown);
+            // 
             // ChatUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -139,7 +140,6 @@ namespace DCT.UI
             this.split1.Panel1.ResumeLayout(false);
             this.split1.Panel1.PerformLayout();
             this.split1.Panel2.ResumeLayout(false);
-            this.split1.Panel2.PerformLayout();
             this.split1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -148,10 +148,10 @@ namespace DCT.UI
         #endregion
 
         private System.Windows.Forms.Label lblChatOnline;
-        private System.Windows.Forms.TextBox txtChatType;
         private System.Windows.Forms.ListBox lstChat;
         private System.Windows.Forms.SplitContainer split;
         private System.Windows.Forms.SplitContainer split1;
         private System.Windows.Forms.TextBox txtChat;
+        private System.Windows.Forms.RichTextBox txtChatType;
     }
 }
