@@ -141,6 +141,12 @@ namespace DCT.Outwar.World
             MappedMob m = Pathfinder.Mobs.Find(PreeliminationPredicate);
             if (m != null)
             {
+                if (m.Level == 0 && m.Rage == 0)
+                {
+                    // this mob probably isn't mapped fully
+                    return true;
+                }
+
                 mSkipLoad = true;
 
                 if ((useRageLimit && CoreUI.Instance.Settings.RageLimit != 0 && m.Rage > CoreUI.Instance.Settings.RageLimit)
@@ -172,13 +178,13 @@ namespace DCT.Outwar.World
             MappedMob m = Pathfinder.Mobs.Find(PreeliminationPredicate);
             if (m != null)
             {
-                mSkipLoad = true;
-
                 if (m.Level == 0 && m.Rage == 0)
                 {
                     // this mob probably isn't mapped fully
                     return true;
                 }
+
+                mSkipLoad = true;
 
                 if ((m.Level > CoreUI.Instance.Settings.LvlLimit && CoreUI.Instance.Settings.LvlLimit != 0)
                        || m.Level < CoreUI.Instance.Settings.LvlLimitMin)
