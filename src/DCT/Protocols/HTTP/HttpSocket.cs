@@ -112,7 +112,12 @@ namespace DCT.Protocols.Http
                         if (cookieA != null)
                         {
                             for (int j = 0; j < cookieA.Length; j++)
-                                full.Append(cookieA[j].Substring(0, cookieA[j].IndexOf(";") + 1));
+                            {
+                                string append = cookieA[j].Substring(0, cookieA[j].IndexOf(";") + 1);
+                                if (append.Contains("deleted"))
+                                    continue;
+                                full.Append(append);
+                            }
                         }
 
                         Cookie = full.ToString();
