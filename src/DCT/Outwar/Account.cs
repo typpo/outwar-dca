@@ -37,8 +37,6 @@ namespace DCT.Outwar
         }
         internal bool NeedsLevel { get; private set; }
 
-        //internal List<DropHandler> DropHandlers { get; private set; }
-
         internal Account(OutwarHttpSocket socket, string name, int id, ServerName server)
         {
             Socket = socket;

@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using DCT.Parsing;
 using DCT.Pathfinding;
@@ -466,23 +467,36 @@ namespace DCT.Outwar.World
             }
             else if (src.Contains("var battle_result"))
             {
-                // xp gain
+                // quest kill count
+                String killProgress = string.Empty;
+                Regex killregex = new Regex(@"\d+/\d+ killed");
+                Match m = killregex.Match(src);
+                if (m.Groups.Count > 0)
+                {
+                    killProgress = m.Groups[0].Value;
+                }
+
+                // Build string to add to attack log.
+                String attackLogString = "";
                 if (src.Contains("has gained "))
                 {
+                    // xp gain
                     if (int.TryParse(Parser.Parse(src, "has gained ", " experience!"), out mExpGained))
                     {
                         Globals.ExpGained += mExpGained;
                         mRoom.Mover.ExpGained += mExpGained;
-                        CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} beat {1}, gained {2} exp", mRoom.Mover.Account.Name, mName, mExpGained));
+                        attackLogString = string.Format("{0} beat {1}, gained {2} exp", mRoom.Mover.Account.Name, mName, mExpGained);
                     }
                 }
                 else
                 {
-                    CoreUI.Instance.LogPanel.LogAttack(string.Format("{0} beat {1}", mRoom.Mover.Account.Name, mName));
+                    attackLogString = string.Format("{0} beat {1}", mRoom.Mover.Account.Name, mName);
                 }
+                attackLogString += killProgress;
+                CoreUI.Instance.LogPanel.LogAttack(attackLogString);
 
                 // item dropped
-                if (src.Contains("found a"))
+                if (src.Contains("Found "))
                 {
                     //if (src.Contains("has no backpack space"))
                     //{
