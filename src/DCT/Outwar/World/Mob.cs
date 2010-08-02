@@ -139,6 +139,12 @@ namespace DCT.Outwar.World
                 return false;
             }
 
+            if (mRoom.Mover.Account.Rage < 0)
+            {
+                // Rage level is -1 because it's not yet initialized, so we can't tell.
+                return true;
+            }
+
             MappedMob m = Pathfinder.Mobs.Find(PreeliminationPredicate);
             if (m != null)
             {

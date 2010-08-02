@@ -20,7 +20,8 @@ namespace DCT.Pathfinding
 
         internal void SetOriginal()
         {
-            mOriginalRoom = mAccount.Mover.Location.Id;
+            if (mAccount.Mover.Location != null)
+                mOriginalRoom = mAccount.Mover.Location.Id;
         }
 
         internal void InvokeReturn()
