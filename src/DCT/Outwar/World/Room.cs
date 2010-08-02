@@ -16,10 +16,16 @@ namespace DCT.Outwar.World
         internal List<int> Links { get; private set; }
         internal List<Mob> Mobs { get; private set; }
 
+        // Door handling
+        internal int DoorId { get; private set; }
+        private string mDoorUrl;
+
         internal Room(Mover mover, int id)
         {
             Id = id;
             Mover = mover;
+            DoorId = -1;
+            mDoorUrl = null;
 
             Trained = false;
             Links = new List<int>();
@@ -84,6 +90,12 @@ namespace DCT.Outwar.World
             }
 
             return 0;
+        }
+
+        internal void LoadDoor()
+        {
+            CoreUI.Instance.LogPanel.Log("Loading door " + DoorId + "...");
+            string src = Mover.Socket.Get("world.php?room=" + mDoorUrl + "&door=1");
         }
 
         internal void EnumMobs(string src)
@@ -154,7 +166,7 @@ namespace DCT.Outwar.World
 
         internal void EnumRooms(string src)
         {
-            // TODO what about mysterious portal type stuff?
+            // normal rooms
             int n, s, e, w;
             int.TryParse(Parser.Parse(src, "\"north\":\"", "\""), out n);
             int.TryParse(Parser.Parse(src, "\"south\":\"", "\""), out s);
@@ -164,8 +176,28 @@ namespace DCT.Outwar.World
             Links.Add(s);
             Links.Add(e);
             Links.Add(w);
+
+            // doors
+            if (src.Contains("door=1"))
+            {
+                mDoorUrl = Parser.Parse(src, "world.php?room=", "&door");
+                int tmpDoorId;
+                string doorIdStr = mDoorUrl.Substring(0, mDoorUrl.IndexOf("&"));
+                if (!int.TryParse(doorIdStr, out tmpDoorId))
+                {
+                    CoreUI.Instance.LogPanel.Log("E: Couldn't read door for room " + Id + " from " + doorIdStr);
+                    return;
+                }
+                DoorId = tmpDoorId;
+                Links.Add(DoorId);
+            }
+            else
+            {
+                mDoorUrl = null;
+                DoorId = -1;
+            }
         }
-        
+
         /// <summary>
         /// Attack all the mobs in this room
         /// </summary>

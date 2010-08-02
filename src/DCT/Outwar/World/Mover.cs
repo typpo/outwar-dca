@@ -42,6 +42,10 @@ namespace DCT.Outwar.World
 
         internal bool RefreshRoom()
         {
+            // Load privacy.php just to update current stats...
+            Socket.Get("privacy.php");
+
+            // Now load the actual room info
             if (LoadRoom(0) == 4)
             {
                 MessageBox.Show("You logged onto Outwar and booted the program.  Hitting the \"Refresh\" button may solve this.\n\nTo correctly access your account while the program is running, go to Actions > Open in browser after logging in here.",
@@ -174,20 +178,20 @@ namespace DCT.Outwar.World
                 return true;
             }
 
-            string url;
             if (!Location.Links.Contains(id))
             {
                 return false;
             }
-            //else if (!string.IsNullOrEmpty(url = mSavedRooms.GetRoom(id)))
-            //{
-            //    CoreUI.Instance.LogPanel.Log(mAccount.Name + " flying to room " + id);
-            //}
-            //else
-            //{
-            //    CoreUI.Instance.LogPanel.Log(Account.Name + " moving to room " + id);
-            //}
-            
+
+            if (id == Location.DoorId)
+            {
+                // Load door
+                Location.LoadDoor();
+                // Refresh location
+                RefreshRoom();
+                return true;
+            }
+
             switch (LoadRoom(id))
             {
                 case 3:
