@@ -129,6 +129,12 @@ namespace DCT.Outwar.World
                             CoreUI.Instance.DoAttackRooms(mRooms);
                             break;
                     }
+
+
+                    // update account state
+                    a.RefreshState();
+
+                    // Finished
                     CoreUI.Instance.LogPanel.Log(a.Name + " attack coverage complete");
 
                     if (!Globals.AttackMode)

@@ -70,5 +70,15 @@ namespace DCT.Outwar
 
             NeedsLevel = source.Contains("LEVEL!");
         }
+
+        /// <summary>
+        /// Loads a proper Outwar page to update rage, xp, stats, etc.
+        /// Because Ajax DC movement doesn't update that.
+        /// </summary>
+        internal void RefreshState()
+        {
+            // Load privacy.php, quickest loading page...
+            Socket.Get("privacy.php");
+        }
     }
 }

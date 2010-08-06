@@ -15,6 +15,7 @@ namespace DCT.Outwar.World
         internal bool Trained { get; private set; }
         internal List<int> Links { get; private set; }
         internal List<Mob> Mobs { get; private set; }
+        internal bool IsDoor { get; set; }
 
         // Door handling
         internal int DoorId { get; private set; }
@@ -29,6 +30,7 @@ namespace DCT.Outwar.World
 
             Trained = false;
             Links = new List<int>();
+            IsDoor = false;
         }
 
         /// <summary>
@@ -39,6 +41,10 @@ namespace DCT.Outwar.World
         {
             // create url
             string url = string.Format("ajax_changeroom.php?room={0}&lastroom={1}", Id, Mover.Location.Id);
+            if (IsDoor)
+            {
+                url += "&door=1";
+            }
             string src = Mover.Socket.Get(url);
             src = System.Text.RegularExpressions.Regex.Unescape(src);
 
@@ -90,12 +96,6 @@ namespace DCT.Outwar.World
             }
 
             return 0;
-        }
-
-        internal void LoadDoor()
-        {
-            CoreUI.Instance.LogPanel.Log("Loading door " + DoorId + "...");
-            string src = Mover.Socket.Get("world.php?room=" + mDoorUrl + "&door=1");
         }
 
         internal void EnumMobs(string src)

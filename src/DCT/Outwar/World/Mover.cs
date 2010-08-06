@@ -42,11 +42,11 @@ namespace DCT.Outwar.World
 
         internal bool RefreshRoom()
         {
-            // Load privacy.php just to update current stats...
-            Socket.Get("privacy.php");
+            Account.RefreshState();
 
             // Now load the actual room info
-            if (LoadRoom(0) == 4)
+            int r = LoadRoom(0);
+            if (r == 4)
             {
                 MessageBox.Show("You logged onto Outwar and booted the program.  Hitting the \"Refresh\" button may solve this.\n\nTo correctly access your account while the program is running, go to Actions > Open in browser after logging in here.",
                     "Account Booted", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -55,14 +55,20 @@ namespace DCT.Outwar.World
             return true;
         }
 
+        private int LoadRoom(int id)
+        {
+            return LoadRoom(id, false);
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="url"></param>
         /// <returns>0 if good, 1 if error with retry, 2 if error with override</returns>
-        private int LoadRoom(int id)
+        private int LoadRoom(int id, bool isDoor)
         {
             Room tmp = new Room(this, id);
+            tmp.IsDoor = isDoor;
             int r = tmp.Load();
             if (r == 0)
                 Location = tmp;
@@ -183,16 +189,9 @@ namespace DCT.Outwar.World
                 return false;
             }
 
-            if (id == Location.DoorId)
-            {
-                // Load door
-                Location.LoadDoor();
-                // Refresh location
-                RefreshRoom();
-                return true;
-            }
+            bool isDoor = id == Location.DoorId;
 
-            switch (LoadRoom(id))
+            switch (LoadRoom(id, isDoor))
             {
                 case 3:
                 case 1:
