@@ -145,6 +145,11 @@ namespace DCT.Outwar.World
                 {
                     attackurl = "newattack.php" + p.Parse("newattack.php", "\"");
                 }
+                else
+                {
+                    continue;
+                }
+
                 if (s.Contains("talk_icon.jpg"))
                 {
                     quest = true;
@@ -154,10 +159,11 @@ namespace DCT.Outwar.World
                     trainer = true;
                 }
 
+                /*
                 if (string.IsNullOrEmpty(attackurl) && !quest && !trainer)
                 {
                     continue;
-                }
+                }*/
 
                 Mob mb = new Mob(name, url, attackurl, quest, trainer, spawn, this);
                 Mobs.Add(mb);
