@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DCT.Parsing;
 using DCT.Protocols.Http;
@@ -99,7 +98,10 @@ namespace DCT.Outwar
             HttpSocket.DefaultInstance.UserAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:0.9.4) Gecko/20011019 Netscape6/6.2";
             HttpSocket.DefaultInstance.Cookie = null;
 
-            HttpSocket.DefaultInstance.Get(string.Format("http://{0}.outwar.com/?rg_sess_id={1}", server, rgsessid));
+            HttpSocket.DefaultInstance.Get(string.Format("http://www.outwar.com/myaccount.php?rg_sess_id={0}&serverid={1}&suid={2}",
+                    RgSessId,
+                    Server.NameToId(MainAccount.Server),
+                    MainAccount.Id));
 
             int ret = AddCharacters();
 

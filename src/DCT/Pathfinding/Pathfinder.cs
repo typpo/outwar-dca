@@ -32,14 +32,13 @@ namespace DCT.Pathfinding
             {
                 if (!mutex.WaitOne(0, true))
                 {
-                    MessageBox.Show("Can't build multiple maps at once.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        "Can't build multiple maps at once - wait until the other program is done opening.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.Exit();
                     return;
                 }
-                else
-                {
-                    DoBuildMap(update);
-                }
+                DoBuildMap(update);
             }
         }
 
@@ -172,7 +171,7 @@ namespace DCT.Pathfinding
             Spawns.Sort();
         }
 
-        private static void LinkRooms()
+        internal static void LinkRooms()
         {
             // Rooms must be sorted
             foreach (MappedRoom r in Rooms)

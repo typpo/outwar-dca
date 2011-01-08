@@ -81,7 +81,7 @@ namespace DCT.Outwar.World
 
             EnumRooms(src);
 
-            if (Globals.AttackMode)
+            if (Globals.AttackMode || Globals.Spidering)
             {
                 EnumMobs(src);
             }

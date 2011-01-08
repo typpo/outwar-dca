@@ -29,7 +29,7 @@ namespace DCT.UI.Questing
             mAccount = a;
             mMobId = mobid;
 
-            wb.Navigate(string.Format("http://{0}.outwar.com/?rg_sess_id={1}&serverid={2}&suid={3}",
+            wb.Navigate(string.Format("http://www.outwar.com/myaccount.php?rg_sess_id={1}&serverid={2}&suid={3}",
                   a.Server, sessid, Server.NameToId(a.Server), a.Id));
         }
 

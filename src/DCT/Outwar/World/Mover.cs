@@ -228,7 +228,6 @@ namespace DCT.Outwar.World
 
         internal void Spider(object p_bound)
         {
-            /*
                 string bound = p_bound == null ? string.Empty : ((string)p_bound).ToLower();
                 // should probably update UI as well
                 CoreUI.Instance.Settings.AutoTeleport = false;
@@ -240,7 +239,7 @@ namespace DCT.Outwar.World
                 List<int> completed = new List<int>();
 
                 // start spidering
-
+                Globals.Spidering = true;
                 do
                 {
                     if (bound != string.Empty && bound == Location.Name.ToLower())
@@ -260,7 +259,7 @@ namespace DCT.Outwar.World
                     {
                         // new room
                         List<int> l = new List<int>();
-                        foreach (int k in Location.Links.Keys)
+                        foreach (int k in Location.Links)
                             l.Add(k);
                         MappedRoom mr = new MappedRoom(Location.Id, Location.Name, l);
                         Pathfinder.Rooms.Add(mr);
@@ -282,7 +281,7 @@ namespace DCT.Outwar.World
                         foreach (MappedRoom rm in rooms)
                         {
                             rm.Name = Location.Name;
-                            foreach (int id in Location.Links.Keys)
+                            foreach (int id in Location.Links)
                             {
                                 if (!rm.Neighbors.Contains(id))
                                 {
@@ -296,34 +295,29 @@ namespace DCT.Outwar.World
                     // bookkeeping
                     if (!completed.Contains(Location.Id))
                         completed.Add(Location.Id);
-                    foreach (int id in Location.Links.Keys)
+                    foreach (int id in Location.Links)
                     {
                         if (!s.Contains(id) && !completed.Contains(id))
                         {
                             Console.WriteLine("Adding link {0}->{1}", Location.Id, id);
-                            List<int> nbrslist = new List<int>();
-                            nbrslist.Add(Location.Id);
+                            List<int> nbrslist = new List<int> {Location.Id};
                             MappedRoom mr = new MappedRoom(id, string.Empty, nbrslist);
                             Pathfinder.Rooms.Add(mr);
                             s.Push(id);
                         }
                     }
-
-                    // add mobs
-                    Location.EnumMobs();
-                    foreach (Mob mb in Location.Mobs)
-                    {
-                        if (mb.Name.Contains("Crawler"))
-                        {
-                            mb.Initialize();
-                            Pathfinder.Mobs.Add(new MappedMob(mb.Name, mb.Id, Location.Id, mb.Level, mb.Rage));
-                        }
-                    }
-
                     // sort for pathfinding search
                     Pathfinder.Rooms.Sort();
+                    Pathfinder.LinkRooms();
 
-                prep:
+                    // add mobs
+                    foreach (Mob mb in Location.Mobs)
+                    {
+                        mb.Initialize();
+                        Pathfinder.Mobs.Add(new MappedMob(mb.Name, mb.Id, Location.Id, mb.Level, mb.Rage));
+                    }
+
+                    prep:
 
                     if (s.Count < 1)
                         // done
@@ -331,13 +325,14 @@ namespace DCT.Outwar.World
 
                     // move to top of stack
                     int next = s.Pop();
+                    Console.WriteLine("Pathing from {0} to {1}", Location.Id, next);
                     PathfindTo(next);
                     if(!completed.Contains(next))
                         completed.Add(next);
                 } while (Globals.AttackMode);
 
+                Globals.Spidering = false;
                 MessageBox.Show("Done spidering");
-             */
         }
 
         internal void Train()
