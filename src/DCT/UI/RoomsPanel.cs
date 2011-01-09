@@ -167,7 +167,13 @@ namespace DCT.UI
         {
             if (lvPathfind.SelectedItems.Count < 1)
                 return;
-            numPathfindId.Value = int.Parse(lvPathfind.SelectedItems[0].SubItems[1].Text);
+            try
+            {
+                numPathfindId.Value = int.Parse(lvPathfind.SelectedItems[0].SubItems[1].Text);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
         }
 
         private void lnkRoomsSelect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

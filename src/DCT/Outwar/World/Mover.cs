@@ -233,7 +233,7 @@ namespace DCT.Outwar.World
                 CoreUI.Instance.Settings.AutoTeleport = false;
 
                 // start in this room
-                this.RefreshRoom();
+                RefreshRoom();
 
                 Stack<int> s = new Stack<int>();
                 List<int> completed = new List<int>();
@@ -283,7 +283,7 @@ namespace DCT.Outwar.World
                             rm.Name = Location.Name;
                             foreach (int id in Location.Links)
                             {
-                                if (!rm.Neighbors.Contains(id))
+                                if (!rm.Neighbors.Contains(id) && id > 0)
                                 {
                                     rm.Neighbors.Add(id);
                                     CoreUI.Instance.LogPanel.Log(string.Format("Added link {0} from {1}", id, Location.Id));
@@ -297,7 +297,7 @@ namespace DCT.Outwar.World
                         completed.Add(Location.Id);
                     foreach (int id in Location.Links)
                     {
-                        if (!s.Contains(id) && !completed.Contains(id))
+                        if (id > 0 && !s.Contains(id) && !completed.Contains(id))
                         {
                             Console.WriteLine("Adding link {0}->{1}", Location.Id, id);
                             List<int> nbrslist = new List<int> {Location.Id};

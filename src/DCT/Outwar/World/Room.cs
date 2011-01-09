@@ -174,6 +174,7 @@ namespace DCT.Outwar.World
         {
             // normal rooms
             int n, s, e, w;
+            n = s = e = w = -1;
             int.TryParse(Parser.Parse(src, "\"north\":\"", "\""), out n);
             int.TryParse(Parser.Parse(src, "\"south\":\"", "\""), out s);
             int.TryParse(Parser.Parse(src, "\"east\":\"", "\""), out e);
@@ -213,6 +214,7 @@ namespace DCT.Outwar.World
             {
                 // TODO when does this happen?
                 System.Windows.Forms.MessageBox.Show("Enum mobs has not occured before attack; report this error");
+                return;
             }
             if (Mobs.Count < 1)
             {
