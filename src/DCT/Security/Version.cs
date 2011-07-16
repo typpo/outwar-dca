@@ -3,7 +3,7 @@ namespace DCT.Security
     static internal class Version
     {
         internal const string Id = "3.1";
-        internal const string mini = "36";
+        internal const string mini = "37";
         internal const string beta = "";
 
         internal static string Full

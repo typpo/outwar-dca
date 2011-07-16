@@ -678,6 +678,12 @@ namespace DCT.UI
             int d = int.Parse(InputBox.Prompt("Path test", "Dest"));
             List<int> res = Pathfinder.BFS(s, d);
 
+            if (res == null)
+            {
+                MessageBox.Show("Path does not exist");
+                return;
+            }
+
             StringBuilder sb = new StringBuilder();
             foreach (int i in res)
             {

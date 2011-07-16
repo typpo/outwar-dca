@@ -40,7 +40,7 @@ namespace DCT.Outwar.World
         internal int Load()
         {
             // create url
-            string url = string.Format("ajax_changeroom.php?room={0}&lastroom={1}", Id, Mover.Location.Id);
+            string url = string.Format("ajax_changeroomb.php?room={0}&lastroom={1}", Id, Mover.Location.Id);
             if (IsDoor)
             {
                 url += "&door=1";
