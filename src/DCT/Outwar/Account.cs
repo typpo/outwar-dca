@@ -61,10 +61,10 @@ namespace DCT.Outwar
         {
             Parser mm = new Parser(source);
 
-            int.TryParse(mm.Parse("LEVEL:</b> ", "</div>").Trim(), out mLevel);
-            int.TryParse(mm.Parse("RAGE</span>:</b> ", "</div>").Trim(), out mRage);
+            int.TryParse(mm.Parse("<b>LEVEL:</b><span id=\"level\">", "</span>").Trim(), out mLevel);
+            int.TryParse(mm.Parse(">RAGE</span>:</b><span id=\"rage\">", "</span>").Trim(), out mRage);
 
-            long.TryParse(mm.Parse("EXP:</b> ", "</div>").Trim().Replace(",", ""), out mExp);
+            long.TryParse(mm.Parse("EXP:</b><span id=\"exp\">", "</span>").Trim().Replace(",", ""), out mExp);
 
             long.TryParse(mm.Parse("Gold:</b></td><td>", "</td>").Trim(), out mGold);
 

@@ -107,7 +107,8 @@ namespace DCT.Outwar.World
             }
             Mobs = new List<Mob>();
 
-            foreach (string s in Parser.MultiParse(src, "<div style=\"border-bottom:1px solid black;\"", "</div>"))
+
+            foreach (string s in Parser.MultiParse(src, "images//", "spacer.gif"))
             {
                 Parser p = new Parser(s);
 
