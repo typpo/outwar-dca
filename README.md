@@ -13,3 +13,18 @@ Setup and Usage
 You'll find everything you need to run your own server in `server/`.  With authentication stripped away, the server side is very simple and mostly just serves up map info when the client requests it.
 
 You should easily be able to import `src/` into Visual Studio.  From there I wish you luck.  The program is mostly updated for the August 2011 changes, but mob parsing needs to be fixed.
+
+License
+-----
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
