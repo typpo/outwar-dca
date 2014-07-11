@@ -14,7 +14,7 @@ You'll find everything you need to run your own server in `server/`.  With authe
 
 You should easily be able to import `src/` into Visual Studio.  From there I wish you luck.  The program is mostly updated for the August 2011 changes, but mob parsing needs to be fixed.
 
-License
+License (GPL v3)
 -----
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
